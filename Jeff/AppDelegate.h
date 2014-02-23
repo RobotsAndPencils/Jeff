@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "DrawMouseBoxView.h"
+#import "SelectionView.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, DrawMouseBoxViewDelegate>
 

@@ -114,12 +114,7 @@
     }];
 }
 
-- (void)stopRecording:(id)sender {
-    [Recorder finishRecording];
-    [self setStatusItemActionRecord:YES];
-}
-
-- (void)setDisplayAndCropRect:(id)sender {
+- (void)recordSelection:(id)sender {
     [self closePopover:nil];
 
 	for (NSScreen* screen in [NSScreen screens]) {
@@ -129,7 +124,7 @@
         [window setOpaque:NO];
 		[window setLevel:kShadyWindowLevel];
 		[window setReleasedWhenClosed:NO];
-		DrawMouseBoxView* drawMouseBoxView = [[DrawMouseBoxView alloc] initWithFrame:frame];
+		SelectionView * drawMouseBoxView = [[SelectionView alloc] initWithFrame:frame];
 		drawMouseBoxView.delegate = self;
 		[window setContentView:drawMouseBoxView];
 		[window makeKeyAndOrderFront:self];
@@ -140,9 +135,14 @@
 	[[NSCursor crosshairCursor] push];
 }
 
+- (void)stopRecording:(id)sender {
+    [Recorder finishRecording];
+    [self setStatusItemActionRecord:YES];
+}
+
 #pragma mark - DrawMouseBoxViewDelegate
 
-- (void)drawMouseBoxView:(DrawMouseBoxView*)view didSelectRect:(NSRect)rect {
+- (void)selectionView:(SelectionView *)view didSelectRect:(NSRect)rect {
     [self setStatusItemActionRecord:NO];
 
     for (NSWindow* window in self.overlayWindows) {

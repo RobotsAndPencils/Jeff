@@ -27,7 +27,7 @@
 		CA455B7B18B882DB00F9A541 /* NSFileManager+Temporary.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B7A18B882DB00F9A541 /* NSFileManager+Temporary.m */; };
 		CA455B7F18B9143800F9A541 /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = CA455B7E18B9143800F9A541 /* ffmpeg */; };
 		CA47840418B923A400A5246D /* ImageMagick in Resources */ = {isa = PBXBuildFile; fileRef = CA47840318B923A400A5246D /* ImageMagick */; };
-		CA875EFC18B9974C009FC997 /* DrawMouseBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA875EFB18B9974C009FC997 /* DrawMouseBoxView.m */; };
+		CA875EFC18B9974C009FC997 /* SelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA875EFB18B9974C009FC997 /* SelectionView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,8 +74,8 @@
 		CA455B7A18B882DB00F9A541 /* NSFileManager+Temporary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileManager+Temporary.m"; path = "Categories/NSFileManager+Temporary.m"; sourceTree = "<group>"; };
 		CA455B7E18B9143800F9A541 /* ffmpeg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ffmpeg; sourceTree = "<group>"; };
 		CA47840318B923A400A5246D /* ImageMagick */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ImageMagick; sourceTree = "<group>"; };
-		CA875EFA18B9974C009FC997 /* DrawMouseBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawMouseBoxView.h; sourceTree = "<group>"; };
-		CA875EFB18B9974C009FC997 /* DrawMouseBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawMouseBoxView.m; sourceTree = "<group>"; };
+		CA875EFA18B9974C009FC997 /* SelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionView.h; sourceTree = "<group>"; };
+		CA875EFB18B9974C009FC997 /* SelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,8 +153,8 @@
 				CA455B6818B848B700F9A541 /* PopoverContentViewController.h */,
 				CA455B6918B848B700F9A541 /* PopoverContentViewController.m */,
 				CA455B6A18B848B700F9A541 /* PopoverContentView.xib */,
-				CA875EFA18B9974C009FC997 /* DrawMouseBoxView.h */,
-				CA875EFB18B9974C009FC997 /* DrawMouseBoxView.m */,
+				CA875EFA18B9974C009FC997 /* SelectionView.h */,
+				CA875EFB18B9974C009FC997 /* SelectionView.m */,
 				CA455B6D18B84A1700F9A541 /* Recorder.h */,
 				CA455B6E18B84A1700F9A541 /* Recorder.m */,
 				CA455B7518B84ED200F9A541 /* Converter.h */,
@@ -314,7 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA875EFC18B9974C009FC997 /* DrawMouseBoxView.m in Sources */,
+				CA875EFC18B9974C009FC997 /* SelectionView.m in Sources */,
 				CA455B7718B84ED200F9A541 /* Converter.m in Sources */,
 				CA455B6718B8467000F9A541 /* StatusItemView.m in Sources */,
 				CA455B7B18B882DB00F9A541 /* NSFileManager+Temporary.m in Sources */,

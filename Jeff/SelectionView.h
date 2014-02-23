@@ -1,6 +1,6 @@
 
 /*
-     File: DrawMouseBoxView.h
+     File: SelectionView.h
  Abstract: Dims the screen and allows user to select a rectangle with a cross-hairs cursor
   Version: 2.0
  
@@ -48,14 +48,14 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class DrawMouseBoxView;
+@class SelectionView;
 
 @protocol DrawMouseBoxViewDelegate<NSObject>
-- (void)drawMouseBoxView:(DrawMouseBoxView*)view didSelectRect:(NSRect)rect;
+- (void)selectionView:(SelectionView *)view didSelectRect:(NSRect)rect;
 @end
 
 
-@interface DrawMouseBoxView : NSView
+@interface SelectionView : NSView
 
 @property(readwrite, weak) id <DrawMouseBoxViewDelegate> delegate;
 

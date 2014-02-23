@@ -45,7 +45,7 @@
  
  */
 
-#import "DrawMouseBoxView.h"
+#import "SelectionView.h"
 #import <QuartzCore/QuartzCore.h>
 
 const CGFloat HandleSize = 5.0;
@@ -62,7 +62,7 @@ NS_ENUM(NSInteger, HandleIndex) {
     BottomMiddleHandleIndex
 };
 
-@interface DrawMouseBoxView ()
+@interface SelectionView ()
 
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
 @property (nonatomic, assign) NSPoint mouseDownPoint;
@@ -76,7 +76,7 @@ NS_ENUM(NSInteger, HandleIndex) {
 @property (nonatomic, strong) NSButton *confirmRectButton;
 @end
 
-@implementation DrawMouseBoxView
+@implementation SelectionView
 
 #pragma mark - NSView
 
@@ -154,7 +154,7 @@ NS_ENUM(NSInteger, HandleIndex) {
 
     [self setNeedsDisplay:YES];
 
-    [self.delegate drawMouseBoxView:self didSelectRect:self.selectionRect];
+    [self.delegate selectionView:self didSelectRect:self.selectionRect];
 }
 
 #pragma mark - Mouse events

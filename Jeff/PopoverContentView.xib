@@ -34,7 +34,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="setDisplayAndCropRect:" target="-1" id="Ug2-oM-lMU"/>
+                        <action selector="recordSelection:" target="-1" id="Ug2-oM-lMU"/>
                     </connections>
                 </button>
             </subviews>
