@@ -194,28 +194,14 @@ NS_ENUM(NSInteger, HandleIndex) {
         newPoint.y = mousePoint.y - self.anchor.y;
         self.anchor = mousePoint;
 
+        // Dragging the selection
         if (self.clickedHandle == NoHandleIndex) {
-            // dragging the object
-            [self offsetLocationByX:newPoint.x byY:newPoint.y];
+            [self offsetSelectionRectLocationByX:newPoint.x y:newPoint.y];
         }
+        // Dragging a selection handle
         else if (self.clickedHandle >= 0 && self.clickedHandle < 8) {
             NSRect newBounds = [self newBoundsFromBounds:self.selectionRect forHandle:self.clickedHandle withDelta:newPoint];
             self.selectionRect = newBounds;
-
-            CGMutablePathRef path = CGPathCreateMutable();
-            CGPathAddRect(path, NULL, self.selectionRect);
-            self.shapeLayer.path = path;
-            CGPathRelease(path);
-
-            self.confirmRectButton.frame = ({
-                CGRect centeredRect = CGRectZero;
-                centeredRect.size = self.confirmRectButton.frame.size;
-                CGPoint origin = CGPointZero;
-                origin.x = CGRectGetMinX(self.selectionRect) + CGRectGetWidth(self.selectionRect) / 2 - CGRectGetWidth(centeredRect) / 2;
-                origin.y = CGRectGetMinY(self.selectionRect) + CGRectGetHeight(self.selectionRect) / 2 - CGRectGetHeight(centeredRect) / 2;
-                centeredRect.origin = origin;
-                centeredRect;
-            });
         }
     } else {
         NSPoint curPoint = [theEvent locationInWindow];
@@ -224,13 +210,10 @@ NS_ENUM(NSInteger, HandleIndex) {
                 MIN(self.mouseDownPoint.y, curPoint.y),
                 MAX(self.mouseDownPoint.x, curPoint.x) - MIN(self.mouseDownPoint.x, curPoint.x),
                 MAX(self.mouseDownPoint.y, curPoint.y) - MIN(self.mouseDownPoint.y, curPoint.y));
-
-        CGMutablePathRef path = CGPathCreateMutable();
-        CGPathAddRect(path, NULL, self.selectionRect);
-        self.shapeLayer.path = path;
-        CGPathRelease(path);
-
     }
+
+    [self updateConfirmRectButtonFrame];
+    [self updateMarchingAntsPath];
     [self setNeedsDisplayInRect:[self bounds]];
 }
 
@@ -255,6 +238,38 @@ NS_ENUM(NSInteger, HandleIndex) {
 }
 
 #pragma mark - Private
+
+- (void)updateConfirmRectButtonFrame {
+    self.confirmRectButton.frame = ({
+        CGRect centeredRect = CGRectZero;
+        centeredRect.size = self.confirmRectButton.frame.size;
+        CGPoint origin = CGPointZero;
+        origin.x = CGRectGetMinX(self.selectionRect) + CGRectGetWidth(self.selectionRect) / 2 - CGRectGetWidth(centeredRect) / 2;
+        origin.y = CGRectGetMinY(self.selectionRect) + CGRectGetHeight(self.selectionRect) / 2 - CGRectGetHeight(centeredRect) / 2;
+        centeredRect.origin = origin;
+        centeredRect;
+    });
+}
+
+- (void)updateMarchingAntsPath {
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathAddRect(path, NULL, self.selectionRect);
+    self.shapeLayer.path = path;
+    CGPathRelease(path);
+}
+
+- (void)offsetSelectionRectLocationByX:(CGFloat)x y:(CGFloat)y {
+    self.selectionRect = ({
+        CGRect selectionRect = self.selectionRect;
+        CGPoint origin = self.selectionRect.origin;
+        origin.x += x;
+        origin.y += y;
+        selectionRect.origin = origin;
+        selectionRect;
+    });
+}
+
+#pragma mark - Handles
 
 - (NSRect)rectForHandleAtIndex:(enum HandleIndex)handleIndex {
     NSPoint handleCenter;
@@ -361,17 +376,6 @@ NS_ENUM(NSInteger, HandleIndex) {
     }
 
     return newBounds;
-}
-
-- (void)offsetLocationByX:(CGFloat)x byY:(CGFloat)y {
-    self.selectionRect = ({
-        CGRect selectionRect = self.selectionRect;
-        CGPoint origin = self.selectionRect.origin;
-        origin.x += x;
-        origin.y += y;
-        selectionRect.origin = origin;
-        selectionRect;
-    });
 }
 
 - (NSInteger)handleAtPoint:(NSPoint)point {
