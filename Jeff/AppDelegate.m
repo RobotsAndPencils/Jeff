@@ -110,7 +110,7 @@
     [Recorder screenRecordingWithCompletion:^(NSURL *movieURL) {
         [Converter convertMOVAtURLToGIF:movieURL completion:^(NSURL *gifURL) {
             [[NSFileManager defaultManager] removeItemAtPath:[movieURL path] error:nil];
-            [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[ gifURL ]];
+            [self uploadGIFAtURL:gifURL];
         }];
     }];
 }
@@ -150,43 +150,47 @@
         [window setIgnoresMouseEvents:YES];
     }
 
-	/* Map point into global coordinates. */
+	// Map point into global coordinates.
     NSRect globalRect = rect;
     NSRect windowRect = [[view window] frame];
     globalRect = NSOffsetRect(globalRect, windowRect.origin.x, windowRect.origin.y);
 	globalRect.origin.y = CGDisplayPixelsHigh(CGMainDisplayID()) - globalRect.origin.y;
+
+    // Get a list of online displays with bounds that include the specified point.
 	CGDirectDisplayID displayID = CGMainDisplayID();
 	uint32_t matchingDisplayCount = 0;
-    /* Get a list of online displays with bounds that include the specified point. */
 	CGError error = CGGetDisplaysWithPoint(NSPointToCGPoint(globalRect.origin), 1, &displayID, &matchingDisplayCount);
 	if ((error == kCGErrorSuccess) && (matchingDisplayCount == 1)) {
-        /* Add the display as a capture input. */
         [Recorder recordRect:rect display:displayID completion:^(NSURL *movieURL) {
             [self.overlayWindows makeObjectsPerformSelector:@selector(close)];
             [self.overlayWindows removeAllObjects];
 
             [Converter convertMOVAtURLToGIF:movieURL completion:^(NSURL *gifURL) {
                 [[NSFileManager defaultManager] removeItemAtPath:[movieURL path] error:nil];
-                [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[ gifURL ]];
-
-                NSString *uuid = [[NSUUID UUID] UUIDString];
-                [[RBKDepositBoxManager sharedManager] uploadFileAtPath:[gifURL path] mimeType:@"image/gif" toDepositBoxWithUUID:uuid fileExistsOnDepositBox:NO completionHandler:^(BOOL suceeded) {
-                    NSURL *webURL = [NSURL URLWithString:uuid relativeToURL:[NSURL URLWithString:@"https://deposit-box.rnp.io/api/documents/"]];
-
-                    NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
-                    [pasteboard clearContents];
-                    [pasteboard setString:[webURL absoluteString] forType:NSStringPboardType];
-
-                    NSUserNotification *publishedNotification = [[NSUserNotification alloc] init];
-                    publishedNotification.title = NSLocalizedString(@"GIFSharedSuccessNotificationTitle", nil);
-                    publishedNotification.informativeText = NSLocalizedString(@"GIFSharedSuccessNotificationBody", nil);
-                    [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:publishedNotification];
-                }];
+                [self uploadGIFAtURL:gifURL];
             }];
         }];
     }
 
 	[[NSCursor currentCursor] pop];
+}
+
+- (void)uploadGIFAtURL:(NSURL *)gifURL {
+    NSString *uuid = [[NSUUID UUID] UUIDString];
+    [[RBKDepositBoxManager sharedManager] uploadFileAtPath:[gifURL path] mimeType:@"image/gif" toDepositBoxWithUUID:uuid fileExistsOnDepositBox:NO completionHandler:^(BOOL suceeded) {
+        [[NSFileManager defaultManager] removeItemAtPath:[gifURL path] error:nil];
+
+        NSURL *webURL = [NSURL URLWithString:uuid relativeToURL:[NSURL URLWithString:@"https://deposit-box.rnp.io/api/documents/"]];
+
+        NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+        [pasteboard clearContents];
+        [pasteboard setString:[webURL absoluteString] forType:NSStringPboardType];
+
+        NSUserNotification *publishedNotification = [[NSUserNotification alloc] init];
+        publishedNotification.title = NSLocalizedString(@"GIFSharedSuccessNotificationTitle", nil);
+        publishedNotification.informativeText = NSLocalizedString(@"GIFSharedSuccessNotificationBody", nil);
+        [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:publishedNotification];
+    }];
 }
 
 @end
