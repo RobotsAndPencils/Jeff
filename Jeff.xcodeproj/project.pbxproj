@@ -180,7 +180,6 @@
 				CA455B4018B83EBA00F9A541 /* MainMenu.xib */,
 				CA455B4318B83EBA00F9A541 /* Images.xcassets */,
 				CA455B3218B83EB900F9A541 /* Supporting Files */,
-				83593BD28BA68D2EAD12CF1C /* Localizable.strings */,
 			);
 			path = Jeff;
 			sourceTree = "<group>";
@@ -218,6 +217,7 @@
 		CA455B7018B84E7700F9A541 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CADF57B018C6DE4D006512E3 /* Strings */,
 				CA47840318B923A400A5246D /* ImageMagick */,
 				CA455B7E18B9143800F9A541 /* ffmpeg */,
 				CA455B7318B84EC100F9A541 /* gifsicle */,
@@ -232,6 +232,14 @@
 				CA455B7A18B882DB00F9A541 /* NSFileManager+Temporary.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		CADF57B018C6DE4D006512E3 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				83593BD28BA68D2EAD12CF1C /* Localizable.strings */,
+			);
+			name = Strings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -409,6 +417,7 @@
 				83593BB07DFAFBD9106DD41E /* en */,
 			);
 			name = Localizable.strings;
+			path = Jeff;
 			sourceTree = "<group>";
 		};
 		CA455B3418B83EB900F9A541 /* InfoPlist.strings */ = {

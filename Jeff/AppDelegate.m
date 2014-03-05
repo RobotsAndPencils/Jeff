@@ -11,6 +11,7 @@
 #import "PopoverContentViewController.h"
 #import "Recorder.h"
 #import "Converter.h"
+#import "RBKDepositBoxManager.h"
 
 #define kShadyWindowLevel (NSDockWindowLevel + 1000)
 
@@ -167,6 +168,20 @@
             [Converter convertMOVAtURLToGIF:movieURL completion:^(NSURL *gifURL) {
                 [[NSFileManager defaultManager] removeItemAtPath:[movieURL path] error:nil];
                 [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[ gifURL ]];
+
+                NSString *uuid = [[NSUUID UUID] UUIDString];
+                [[RBKDepositBoxManager sharedManager] uploadFileAtPath:[gifURL path] mimeType:@"image/gif" toDepositBoxWithUUID:uuid fileExistsOnDepositBox:NO completionHandler:^(BOOL suceeded) {
+                    NSURL *webURL = [NSURL URLWithString:uuid relativeToURL:[NSURL URLWithString:@"https://deposit-box.rnp.io/api/documents/"]];
+
+                    NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+                    [pasteboard clearContents];
+                    [pasteboard setString:[webURL absoluteString] forType:NSStringPboardType];
+
+                    NSUserNotification *publishedNotification = [[NSUserNotification alloc] init];
+                    publishedNotification.title = NSLocalizedString(@"GIFSharedSuccessNotificationTitle", nil);
+                    publishedNotification.informativeText = NSLocalizedString(@"GIFSharedSuccessNotificationBody", nil);
+                    [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:publishedNotification];
+                }];
             }];
         }];
     }
