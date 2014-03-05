@@ -1,3 +1,3 @@
 platform :osx, '10.9'
 
-pod 'AFNetworking'
+pod 'AFNetworking', '~> 1.3'
