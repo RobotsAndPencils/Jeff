@@ -29,6 +29,8 @@
 		CA455B7B18B882DB00F9A541 /* NSFileManager+Temporary.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B7A18B882DB00F9A541 /* NSFileManager+Temporary.m */; };
 		CA455B7F18B9143800F9A541 /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = CA455B7E18B9143800F9A541 /* ffmpeg */; };
 		CA47840418B923A400A5246D /* ImageMagick in Resources */ = {isa = PBXBuildFile; fileRef = CA47840318B923A400A5246D /* ImageMagick */; };
+		CA4C528918C8289C00C5EAE4 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA4C528818C8289C00C5EAE4 /* HockeySDK.framework */; };
+		CA4C528B18C828D900C5EAE4 /* HockeySDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CA4C528818C8289C00C5EAE4 /* HockeySDK.framework */; };
 		CA875EFC18B9974C009FC997 /* SelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA875EFB18B9974C009FC997 /* SelectionView.m */; };
 		CADF57B418C6F432006512E3 /* JEFRecording.m in Sources */ = {isa = PBXBuildFile; fileRef = CADF57B318C6F432006512E3 /* JEFRecording.m */; };
 		E0C4A7F96812441E8DA95076 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 552FC149DE814638B883B810 /* libPods.a */; };
@@ -43,6 +45,19 @@
 			remoteInfo = Jeff;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CA4C528A18C828CC00C5EAE4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CA4C528B18C828D900C5EAE4 /* HockeySDK.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		552FC149DE814638B883B810 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +97,7 @@
 		CA455B7A18B882DB00F9A541 /* NSFileManager+Temporary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileManager+Temporary.m"; path = "Categories/NSFileManager+Temporary.m"; sourceTree = "<group>"; };
 		CA455B7E18B9143800F9A541 /* ffmpeg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = ffmpeg; path = Jeff/Resources/ffmpeg; sourceTree = "<group>"; };
 		CA47840318B923A400A5246D /* ImageMagick */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ImageMagick; path = Jeff/Resources/ImageMagick; sourceTree = "<group>"; };
+		CA4C528818C8289C00C5EAE4 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = Jeff/Frameworks/HockeySDK.framework; sourceTree = "<group>"; };
 		CA875EFA18B9974C009FC997 /* SelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionView.h; sourceTree = "<group>"; };
 		CA875EFB18B9974C009FC997 /* SelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionView.m; sourceTree = "<group>"; };
 		CADF57B218C6F432006512E3 /* JEFRecording.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecording.h; path = Models/JEFRecording.h; sourceTree = "<group>"; };
@@ -97,6 +113,7 @@
 			files = (
 				CA455B2C18B83EB900F9A541 /* Cocoa.framework in Frameworks */,
 				E0C4A7F96812441E8DA95076 /* libPods.a in Frameworks */,
+				CA4C528918C8289C00C5EAE4 /* HockeySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +162,7 @@
 		CA455B2A18B83EB900F9A541 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CA4C528818C8289C00C5EAE4 /* HockeySDK.framework */,
 				CA455B2B18B83EB900F9A541 /* Cocoa.framework */,
 				CA455B4A18B83EBA00F9A541 /* XCTest.framework */,
 				CA455B2D18B83EB900F9A541 /* Other Frameworks */,
@@ -269,6 +287,7 @@
 				CA455B2518B83EB900F9A541 /* Frameworks */,
 				CA455B2618B83EB900F9A541 /* Resources */,
 				6AF62D2B5DAE422889FA4895 /* Copy Pods Resources */,
+				CA4C528A18C828CC00C5EAE4 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -557,6 +576,10 @@
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/**",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jeff/Jeff-Prefix.pch";
 				INFOPLIST_FILE = "Jeff/Jeff-Info.plist";
@@ -573,6 +596,10 @@
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/**",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jeff/Jeff-Prefix.pch";
 				INFOPLIST_FILE = "Jeff/Jeff-Info.plist";

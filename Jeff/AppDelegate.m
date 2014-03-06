@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
+#import <HockeySDK/HockeySDK.h>
+
 #import "AppDelegate.h"
 #import "StatusItemView.h"
 #import "PopoverContentViewController.h"
@@ -16,7 +18,7 @@
 
 #define kShadyWindowLevel (NSDockWindowLevel + 1000)
 
-@interface AppDelegate ()
+@interface AppDelegate () <BITHockeyManagerDelegate>
 
 @property (strong, nonatomic) StatusItemView *statusItemView;
 @property (strong, nonatomic) NSPopover *popover;
@@ -37,6 +39,10 @@
 
     [self setupStatusItem];
     [self setupPopover];
+
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"8937bcd0d2b85a5ebe3ae3c924af1efb" companyName:@"Brandon Evans" delegate:self];
+    [[BITHockeyManager sharedHockeyManager] startManager];
+    [[BITHockeyManager sharedHockeyManager].crashManager setAutoSubmitCrashReport: YES];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
