@@ -2,5 +2,5 @@
 /* Localization file */
 
 
-"GIFSharedSuccessNotificationTitle" = "GIF Shared";
-"GIFSharedSuccessNotificationBody" = "The URL is ready to be pasted.";
+"GIFSharedSuccessNotificationTitle" = "Jeff shared your GIF";
+"GIFSharedSuccessNotificationBody" = "The direct URL is ready to be pasted.";
