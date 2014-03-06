@@ -83,6 +83,7 @@
 		CA47840318B923A400A5246D /* ImageMagick */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ImageMagick; path = Jeff/Resources/ImageMagick; sourceTree = "<group>"; };
 		CA875EFA18B9974C009FC997 /* SelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionView.h; sourceTree = "<group>"; };
 		CA875EFB18B9974C009FC997 /* SelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionView.m; sourceTree = "<group>"; };
+		CADF57B518C70081006512E3 /* Jeff.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Jeff.entitlements; sourceTree = "<group>"; };
 		F38F4DBF5A4643F2A390622E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,6 +163,7 @@
 		CA455B3118B83EB900F9A541 /* Jeff */ = {
 			isa = PBXGroup;
 			children = (
+				CADF57B518C70081006512E3 /* Jeff.entitlements */,
 				CA455B7818B882A900F9A541 /* Categories */,
 				CA413BDD18BA8A250090A1A7 /* RBKDepositBoxManager */,
 				CA455B3D18B83EB900F9A541 /* AppDelegate.h */,
@@ -291,6 +293,14 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Brandon Evans";
 				TargetAttributes = {
+					CA455B2718B83EB900F9A541 = {
+						DevelopmentTeam = Z2R9WCWER2;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
+					};
 					CA455B4818B83EBA00F9A541 = {
 						TestTargetID = CA455B2718B83EB900F9A541;
 					};
@@ -530,6 +540,8 @@
 			baseConfigurationReference = F38F4DBF5A4643F2A390622E /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jeff/Jeff-Prefix.pch";
@@ -544,6 +556,8 @@
 			baseConfigurationReference = F38F4DBF5A4643F2A390622E /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jeff/Jeff-Prefix.pch";
