@@ -18,7 +18,7 @@
 
 #define kShadyWindowLevel (NSDockWindowLevel + 1000)
 
-@interface AppDelegate () <BITHockeyManagerDelegate>
+@interface AppDelegate () <BITHockeyManagerDelegate, NSUserNotificationCenterDelegate>
 
 @property (strong, nonatomic) StatusItemView *statusItemView;
 @property (strong, nonatomic) NSPopover *popover;
@@ -43,6 +43,8 @@
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"8937bcd0d2b85a5ebe3ae3c924af1efb" companyName:@"Brandon Evans" delegate:self];
     [[BITHockeyManager sharedHockeyManager] startManager];
     [[BITHockeyManager sharedHockeyManager].crashManager setAutoSubmitCrashReport: YES];
+
+    [NSUserNotificationCenter defaultUserNotificationCenter].delegate = self;
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -253,6 +255,12 @@
 
 - (void)removeRecentClipsAtIndexes:(NSIndexSet *)indexes {
     [self.recentRecordings removeObjectsAtIndexes:indexes];
+}
+
+#pragma mark - NSUserNotificationCenterDelegate
+
+- (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification {
+    return YES;
 }
 
 @end
