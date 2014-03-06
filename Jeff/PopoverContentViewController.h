@@ -10,4 +10,6 @@
 
 @interface PopoverContentViewController : NSViewController
 
+@property (nonatomic, weak) NSMutableArray *recentRecordings;
+
 @end

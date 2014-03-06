@@ -8,7 +8,9 @@
 
 #import "PopoverContentViewController.h"
 
-@interface PopoverContentViewController ()
+@interface PopoverContentViewController () <NSTableViewDelegate>
+
+@property (nonatomic, weak) IBOutlet NSTableView *tableView;
 
 @end
 

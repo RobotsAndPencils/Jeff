@@ -12,6 +12,7 @@
 #import "Recorder.h"
 #import "Converter.h"
 #import "RBKDepositBoxManager.h"
+#import "JEFRecording.h"
 
 #define kShadyWindowLevel (NSDockWindowLevel + 1000)
 
@@ -22,6 +23,8 @@
 @property (strong, nonatomic) id popoverTransiencyMonitor;
 @property (strong, nonatomic) NSMutableArray *overlayWindows;
 
+@property (strong, nonatomic) NSMutableArray *recentRecordings;
+
 @end
 
 @implementation AppDelegate
@@ -30,6 +33,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     self.overlayWindows = [NSMutableArray array];
+    self.recentRecordings = [self loadRecentRecordings];
 
     [self setupStatusItem];
     [self setupPopover];
@@ -58,7 +62,9 @@
 - (void)setupPopover {
     self.popover = [[NSPopover alloc] init];
     self.popover.behavior = NSPopoverBehaviorTransient;
-    self.popover.contentViewController = [[PopoverContentViewController alloc] initWithNibName:@"PopoverContentView" bundle:nil];
+    PopoverContentViewController *popoverController = [[PopoverContentViewController alloc] initWithNibName:@"PopoverContentView" bundle:nil];
+    popoverController.recentRecordings = self.recentRecordings;
+    self.popover.contentViewController = popoverController;
     self.popover.animates = NO;
 }
 
@@ -182,15 +188,65 @@
 
         NSURL *webURL = [NSURL URLWithString:uuid relativeToURL:[NSURL URLWithString:@"https://deposit-box.rnp.io/api/documents/"]];
 
+        JEFRecording *newRecording = [JEFRecording recordingWithURL:webURL];
+        [self insertObject:newRecording inRecentClipsAtIndex:[self countOfRecentClips]];
+        [self saveRecentRecordings];
+
         NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
         [pasteboard clearContents];
-        [pasteboard setString:[webURL absoluteString] forType:NSStringPboardType];
+        [pasteboard setString:[newRecording.url absoluteString] forType:NSStringPboardType];
 
         NSUserNotification *publishedNotification = [[NSUserNotification alloc] init];
         publishedNotification.title = NSLocalizedString(@"GIFSharedSuccessNotificationTitle", nil);
         publishedNotification.informativeText = NSLocalizedString(@"GIFSharedSuccessNotificationBody", nil);
         [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:publishedNotification];
     }];
+}
+
+#pragma mark - Saving recent recordings
+
+- (NSString *)userDataFilePathForUserID:(NSString *)userID {
+    return [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/userID"] stringByAppendingPathExtension:@"plist"];
+}
+
+- (NSMutableArray *)loadRecentRecordings {
+    NSString *filePath = [self userDataFilePathForUserID:nil];
+    NSMutableDictionary *userData = [NSMutableDictionary dictionaryWithContentsOfFile:filePath];
+    if (!userData) {
+        userData = [@{} mutableCopy];
+        userData[@"recentRecordings"] = [NSKeyedArchiver archivedDataWithRootObject:[@[] mutableCopy]];
+        [userData writeToFile:filePath atomically:YES];
+    }
+    return [NSKeyedUnarchiver unarchiveObjectWithData:userData[@"recentRecordings"]];
+}
+
+- (void)saveRecentRecordings {
+    NSString *filePath = [self userDataFilePathForUserID:nil];
+    NSMutableDictionary *userData = [NSMutableDictionary dictionaryWithContentsOfFile:filePath];
+    userData[@"recentRecordings"] = [NSKeyedArchiver archivedDataWithRootObject:self.recentRecordings];
+    [userData writeToFile:filePath atomically:YES];
+}
+
+#pragma mark - Recent Clips KVO
+
+- (NSUInteger)countOfRecentClips {
+    return [self.recentRecordings count];
+}
+
+- (void)insertObject:(JEFRecording *)recording inRecentClipsAtIndex:(NSUInteger)index {
+    [self.recentRecordings insertObject:recording atIndex:index];
+}
+
+- (void)insertRecentClips:(NSArray *)array atIndexes:(NSIndexSet *)indexes {
+    [self.recentRecordings insertObjects:array atIndexes:indexes];
+}
+
+- (void)removeObjectFromRecentClipsAtIndex:(NSUInteger)index {
+    [self.recentRecordings removeObjectAtIndex:index];
+}
+
+- (void)removeRecentClipsAtIndexes:(NSIndexSet *)indexes {
+    [self.recentRecordings removeObjectsAtIndexes:indexes];
 }
 
 @end
