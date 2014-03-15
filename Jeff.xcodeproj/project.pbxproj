@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8359316EB0FC2DB3A978A67C /* JEFDepositBoxUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 835937AA85B94A9524F73CBD /* JEFDepositBoxUploader.m */; };
+		8359322E52C5BFFB013B4AC7 /* JEFDropboxUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 835935E41B797539819CFB36 /* JEFDropboxUploader.m */; };
 		83593BA6023A48A43B1002E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83593BD28BA68D2EAD12CF1C /* Localizable.strings */; };
 		CA413BE018BA8A720090A1A7 /* RBKDepositBoxManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CA413BDF18BA8A720090A1A7 /* RBKDepositBoxManager.m */; };
 		CA455B2C18B83EB900F9A541 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA455B2B18B83EB900F9A541 /* Cocoa.framework */; };
@@ -33,6 +35,9 @@
 		CA4C528B18C828D900C5EAE4 /* HockeySDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CA4C528818C8289C00C5EAE4 /* HockeySDK.framework */; };
 		CA875EFC18B9974C009FC997 /* SelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA875EFB18B9974C009FC997 /* SelectionView.m */; };
 		CADF57B418C6F432006512E3 /* JEFRecording.m in Sources */ = {isa = PBXBuildFile; fileRef = CADF57B318C6F432006512E3 /* JEFRecording.m */; };
+		CAF30B3C18D3CAD800D7BC9D /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF30B3B18D3CAD800D7BC9D /* DropboxOSX.framework */; };
+		CAF30B3D18D3CAF300D7BC9D /* DropboxOSX.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAF30B3B18D3CAD800D7BC9D /* DropboxOSX.framework */; };
+		CAF30B3F18D3CAFD00D7BC9D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF30B3E18D3CAFD00D7BC9D /* Security.framework */; };
 		E0C4A7F96812441E8DA95076 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 552FC149DE814638B883B810 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +58,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				CAF30B3D18D3CAF300D7BC9D /* DropboxOSX.framework in CopyFiles */,
 				CA4C528B18C828D900C5EAE4 /* HockeySDK.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -61,7 +67,12 @@
 
 /* Begin PBXFileReference section */
 		552FC149DE814638B883B810 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8359306491D20C6F17E98D8B /* JEFDepositBoxUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFDepositBoxUploader.h; sourceTree = "<group>"; };
+		835935E41B797539819CFB36 /* JEFDropboxUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFDropboxUploader.m; sourceTree = "<group>"; };
+		835937AA85B94A9524F73CBD /* JEFDepositBoxUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFDepositBoxUploader.m; sourceTree = "<group>"; };
 		83593BB07DFAFBD9106DD41E /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		83593E3E69C23122FB40765D /* JEFUploaderProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFUploaderProtocol.h; sourceTree = "<group>"; };
+		83593F946B55E6E3610A19A4 /* JEFDropboxUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFDropboxUploader.h; sourceTree = "<group>"; };
 		CA413BDE18BA8A720090A1A7 /* RBKDepositBoxManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBKDepositBoxManager.h; sourceTree = "<group>"; };
 		CA413BDF18BA8A720090A1A7 /* RBKDepositBoxManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBKDepositBoxManager.m; sourceTree = "<group>"; };
 		CA455B2818B83EB900F9A541 /* Jeff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jeff.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +114,8 @@
 		CADF57B218C6F432006512E3 /* JEFRecording.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecording.h; path = Models/JEFRecording.h; sourceTree = "<group>"; };
 		CADF57B318C6F432006512E3 /* JEFRecording.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFRecording.m; path = Models/JEFRecording.m; sourceTree = "<group>"; };
 		CADF57B518C70081006512E3 /* Jeff.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Jeff.entitlements; sourceTree = "<group>"; };
+		CAF30B3B18D3CAD800D7BC9D /* DropboxOSX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxOSX.framework; path = Jeff/Frameworks/DropboxOSX.framework; sourceTree = "<group>"; };
+		CAF30B3E18D3CAFD00D7BC9D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F38F4DBF5A4643F2A390622E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +124,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAF30B3F18D3CAFD00D7BC9D /* Security.framework in Frameworks */,
+				CAF30B3C18D3CAD800D7BC9D /* DropboxOSX.framework in Frameworks */,
 				CA455B2C18B83EB900F9A541 /* Cocoa.framework in Frameworks */,
 				E0C4A7F96812441E8DA95076 /* libPods.a in Frameworks */,
 				CA4C528918C8289C00C5EAE4 /* HockeySDK.framework in Frameworks */,
@@ -129,6 +144,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		83593406A410EF88B08D5442 /* Uploaders */ = {
+			isa = PBXGroup;
+			children = (
+				835935E41B797539819CFB36 /* JEFDropboxUploader.m */,
+				83593F946B55E6E3610A19A4 /* JEFDropboxUploader.h */,
+				835937AA85B94A9524F73CBD /* JEFDepositBoxUploader.m */,
+				8359306491D20C6F17E98D8B /* JEFDepositBoxUploader.h */,
+			);
+			path = Uploaders;
+			sourceTree = "<group>";
+		};
 		CA413BDD18BA8A250090A1A7 /* RBKDepositBoxManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +188,8 @@
 		CA455B2A18B83EB900F9A541 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CAF30B3E18D3CAFD00D7BC9D /* Security.framework */,
+				CAF30B3B18D3CAD800D7BC9D /* DropboxOSX.framework */,
 				CA4C528818C8289C00C5EAE4 /* HockeySDK.framework */,
 				CA455B2B18B83EB900F9A541 /* Cocoa.framework */,
 				CA455B4A18B83EBA00F9A541 /* XCTest.framework */,
@@ -204,6 +232,8 @@
 				CA455B4018B83EBA00F9A541 /* MainMenu.xib */,
 				CA455B4318B83EBA00F9A541 /* Images.xcassets */,
 				CA455B3218B83EB900F9A541 /* Supporting Files */,
+				83593E3E69C23122FB40765D /* JEFUploaderProtocol.h */,
+				83593406A410EF88B08D5442 /* Uploaders */,
 			);
 			path = Jeff;
 			sourceTree = "<group>";
@@ -288,6 +318,7 @@
 				CA455B2618B83EB900F9A541 /* Resources */,
 				6AF62D2B5DAE422889FA4895 /* Copy Pods Resources */,
 				CA4C528A18C828CC00C5EAE4 /* CopyFiles */,
+				CAF30B4018D3CF4A00D7BC9D /* Sign Dropbox */,
 			);
 			buildRules = (
 			);
@@ -415,6 +446,20 @@
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CAF30B4018D3CF4A00D7BC9D /* Sign Dropbox */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Sign Dropbox";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "LOCATION=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\nIDENTITY=\"Developer ID Application: Brandon Evans\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$LOCATION/DropboxOSX.framework/Versions/A\"";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -432,6 +477,8 @@
 				CA455B6B18B848B700F9A541 /* PopoverContentViewController.m in Sources */,
 				CA455B6F18B84A1700F9A541 /* Recorder.m in Sources */,
 				CA455B3818B83EB900F9A541 /* main.m in Sources */,
+				8359322E52C5BFFB013B4AC7 /* JEFDropboxUploader.m in Sources */,
+				8359316EB0FC2DB3A978A67C /* JEFDepositBoxUploader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,6 +626,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Jeff/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jeff/Jeff-Prefix.pch";
@@ -599,6 +648,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Jeff/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jeff/Jeff-Prefix.pch";

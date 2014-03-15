@@ -15,6 +15,9 @@
 #import "Converter.h"
 #import "RBKDepositBoxManager.h"
 #import "JEFRecording.h"
+#import "JEFUploaderProtocol.h"
+#import "JEFDropboxUploader.h"
+#import "JEFDepositBoxUploader.h"
 
 #define kShadyWindowLevel (NSDockWindowLevel + 1000)
 
@@ -191,12 +194,10 @@
 
 - (void)uploadGIFAtURL:(NSURL *)gifURL {
     NSString *uuid = [[NSUUID UUID] UUIDString];
-    [[RBKDepositBoxManager sharedManager] uploadFileAtPath:[gifURL path] mimeType:@"image/gif" toDepositBoxWithUUID:uuid fileExistsOnDepositBox:NO completionHandler:^(BOOL suceeded) {
+    [[self uploader] uploadGIF:gifURL withName:uuid completion:^(BOOL succeeded, NSURL *publicURL, NSError *error){
         [[NSFileManager defaultManager] removeItemAtPath:[gifURL path] error:nil];
 
-        NSURL *webURL = [NSURL URLWithString:uuid relativeToURL:[NSURL URLWithString:@"https://deposit-box.rnp.io/api/documents/"]];
-
-        JEFRecording *newRecording = [JEFRecording recordingWithURL:webURL];
+        JEFRecording *newRecording = [JEFRecording recordingWithURL:publicURL];
         [self insertObject:newRecording inRecentClipsAtIndex:[self countOfRecentClips]];
         [self saveRecentRecordings];
 
@@ -209,6 +210,10 @@
         publishedNotification.informativeText = NSLocalizedString(@"GIFSharedSuccessNotificationBody", nil);
         [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:publishedNotification];
     }];
+}
+
+- (id <JEFUploaderProtocol>)uploader {
+    return [JEFDepositBoxUploader uploader];
 }
 
 #pragma mark - Saving recent recordings
