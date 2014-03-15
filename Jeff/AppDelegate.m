@@ -6,9 +6,11 @@
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-#import <HockeySDK/HockeySDK.h>
-
 #import "AppDelegate.h"
+
+#import <HockeySDK/HockeySDK.h>
+#import <DropboxOSX/DropboxOSX.h>
+
 #import "StatusItemView.h"
 #import "PopoverContentViewController.h"
 #import "Recorder.h"
@@ -40,6 +42,8 @@
     self.overlayWindows = [NSMutableArray array];
     self.recentRecordings = [self loadRecentRecordings];
 
+    [self setupDropbox];
+
     [self setupStatusItem];
     [self setupPopover];
 
@@ -48,6 +52,10 @@
     [[BITHockeyManager sharedHockeyManager].crashManager setAutoSubmitCrashReport: YES];
 
     [NSUserNotificationCenter defaultUserNotificationCenter].delegate = self;
+
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"ClosePopover" object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification *note) {
+        [self closePopover:nil];
+    }];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -62,7 +70,21 @@
     [self closePopover:nil];
 }
 
+- (void)getUrl:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
+}
+
 #pragma mark - Setup
+
+- (void)setupDropbox {
+    NSString *appKey = @"***REMOVED***";
+    NSString *appSecret = @"***REMOVED***";
+    NSString *root = kDBRootAppFolder;
+    DBSession *session = [[DBSession alloc] initWithAppKey:appKey appSecret:appSecret root:root];
+    [DBSession setSharedSession:session];
+
+    NSAppleEventManager *eventManager = [NSAppleEventManager sharedAppleEventManager];
+    [eventManager setEventHandler:self andSelector:@selector(getUrl:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
+}
 
 - (void)setupStatusItem {
     NSStatusItem *statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
@@ -193,8 +215,7 @@
 }
 
 - (void)uploadGIFAtURL:(NSURL *)gifURL {
-    NSString *uuid = [[NSUUID UUID] UUIDString];
-    [[self uploader] uploadGIF:gifURL withName:uuid completion:^(BOOL succeeded, NSURL *publicURL, NSError *error){
+    [[self uploader] uploadGIF:gifURL withName:[[gifURL path] lastPathComponent] completion:^(BOOL succeeded, NSURL *publicURL, NSError *error){
         [[NSFileManager defaultManager] removeItemAtPath:[gifURL path] error:nil];
 
         JEFRecording *newRecording = [JEFRecording recordingWithURL:publicURL];
@@ -213,7 +234,16 @@
 }
 
 - (id <JEFUploaderProtocol>)uploader {
-    return [JEFDepositBoxUploader uploader];
+    enum JEFUploaderType uploaderType = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUploader"];
+    switch (uploaderType) {
+        case JEFUploaderTypeDropbox:
+            return [JEFDropboxUploader uploader];
+            break;
+        case JEFUploaderTypeDepositBox:
+        default:
+            return [JEFDepositBoxUploader uploader];
+            break;
+    }
 }
 
 #pragma mark - Saving recent recordings
