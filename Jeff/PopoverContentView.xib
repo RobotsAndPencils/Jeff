@@ -6,6 +6,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PopoverContentViewController">
             <connections>
+                <outlet property="recentRecordingsArrayController" destination="wgD-kZ-8HX" id="ztB-Zy-s9S"/>
                 <outlet property="tableView" destination="B5q-Mr-u3z" id="Geu-08-u1J"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -136,7 +137,7 @@
                 <constraint firstItem="GIu-4z-OTd" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="upr-iV-txE"/>
             </constraints>
         </customView>
-        <arrayController objectClassName="JEFRecording" id="wgD-kZ-8HX" userLabel="Recent Recordings">
+        <arrayController objectClassName="JEFRecording" automaticallyRearrangesObjects="YES" id="wgD-kZ-8HX" userLabel="Recent Recordings">
             <connections>
                 <binding destination="-3" name="contentArray" keyPath="delegate.recentRecordings" id="gXw-WL-EOE"/>
             </connections>
