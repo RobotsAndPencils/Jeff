@@ -17,9 +17,18 @@
     return recording;
 }
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _createdAt = [NSDate date];
+    }
+    return self;
+}
+
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeObject:self.url forKey:@"url"];
     [encoder encodeObject:self.name forKey:@"name"];
+    [encoder encodeObject:self.createdAt forKey:@"createdAt"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -27,6 +36,7 @@
     if (self) {
         self.url = [decoder decodeObjectForKey:@"url"];
         self.name = [decoder decodeObjectForKey:@"name"];
+        _createdAt = [decoder decodeObjectForKey:@"createdAt"];
     }
     return self;
 }

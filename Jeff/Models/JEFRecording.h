@@ -10,6 +10,7 @@
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, strong) NSURL *url;
+@property (nonatomic, strong, readonly) NSDate *createdAt;
 
 + (instancetype)recordingWithURL:(NSURL *)url;
 

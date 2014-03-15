@@ -14,6 +14,7 @@
 
 @interface PopoverContentViewController () <NSTableViewDelegate>
 
+@property (strong, nonatomic) IBOutlet NSArrayController *recentRecordingsArrayController;
 @property (nonatomic, weak) IBOutlet NSTableView *tableView;
 
 @property (nonatomic, strong) MASPreferencesWindowController *preferencesWindowController;
@@ -21,6 +22,13 @@
 @end
 
 @implementation PopoverContentViewController
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:YES];
+    [self.recentRecordingsArrayController setSortDescriptors:@[ sortDescriptor ]];
+}
 
 - (IBAction)showMenu:(NSButton *)sender {
     NSMenu *actionMenu = [[NSMenu alloc] initWithTitle:@""];
