@@ -8,6 +8,11 @@
 
 typedef void (^JEFUploaderCompletionBlock)(BOOL, NSURL *, NSError *);
 
+NS_ENUM(NSInteger, JEFUploaderType) {
+    JEFUploaderTypeDepositBox = 0,
+    JEFUploaderTypeDropbox
+};
+
 @protocol JEFUploaderProtocol <NSObject>
 
 + (id <JEFUploaderProtocol>)uploader;
