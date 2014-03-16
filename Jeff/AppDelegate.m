@@ -20,13 +20,14 @@
 #import "JEFUploaderProtocol.h"
 #import "JEFDropboxUploader.h"
 #import "JEFDepositBoxUploader.h"
+#import "INPopoverController.h"
 
 #define kShadyWindowLevel (NSDockWindowLevel + 1000)
 
 @interface AppDelegate () <BITHockeyManagerDelegate, NSUserNotificationCenterDelegate>
 
 @property (strong, nonatomic) StatusItemView *statusItemView;
-@property (strong, nonatomic) NSPopover *popover;
+@property (strong, nonatomic) INPopoverController *popover;
 @property (strong, nonatomic) id popoverTransiencyMonitor;
 @property (strong, nonatomic) NSMutableArray *overlayWindows;
 
@@ -93,8 +94,8 @@
 }
 
 - (void)setupPopover {
-    self.popover = [[NSPopover alloc] init];
-    self.popover.behavior = NSPopoverBehaviorTransient;
+    self.popover = [[INPopoverController alloc] init];
+    self.popover.closesWhenApplicationBecomesInactive = YES;
     PopoverContentViewController *popoverController = [[PopoverContentViewController alloc] initWithNibName:@"PopoverContentView" bundle:nil];
     popoverController.recentRecordings = self.recentRecordings;
     self.popover.contentViewController = popoverController;
@@ -105,9 +106,12 @@
 
 - (void)showPopover:(StatusItemView *)sender {
     [self.statusItemView setHighlighted:YES];
-    if (self.popover.shown) return;
+    if (self.popover.popoverIsVisible) {
+        [self closePopover:nil];
+        return;
+    }
 
-    [self.popover showRelativeToRect:sender.frame ofView:sender preferredEdge:NSMinYEdge];
+    [self.popover presentPopoverFromRect:sender.frame inView:sender preferredArrowDirection:INPopoverArrowDirectionUp anchorsToPositionView:YES];
 
     if (!self.popoverTransiencyMonitor) {
         __weak __typeof(self) weakSelf = self;
@@ -124,7 +128,7 @@
     if (self.popoverTransiencyMonitor) {
         [NSEvent removeMonitor:self.popoverTransiencyMonitor];
         self.popoverTransiencyMonitor = nil;
-        [self.popover close];
+        [self.popover closePopover:nil];
     }
 }
 
