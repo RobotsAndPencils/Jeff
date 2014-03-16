@@ -11,6 +11,7 @@
 #import "PopoverContentViewController.h"
 #import "JEFUploaderPreferencesViewController.h"
 #import "JEFAboutPreferencesViewController.h"
+#import "JEFRecording.h"
 
 @interface PopoverContentViewController () <NSTableViewDelegate>
 
@@ -28,6 +29,9 @@
 
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:YES];
     [self.recentRecordingsArrayController setSortDescriptors:@[ sortDescriptor ]];
+
+    [self.tableView setTarget:self];
+    [self.tableView setDoubleAction:@selector(didDoubleClickRow:)];
 }
 
 - (IBAction)showMenu:(NSButton *)sender {
@@ -56,6 +60,14 @@
 
 - (void)quit:(id)sender {
     [NSApp terminate:self];
+}
+
+#pragma mark - NSTableViewDelegate
+
+- (void)didDoubleClickRow:(NSTableView *)sender {
+    NSInteger clickedRow = [sender selectedRow];
+    JEFRecording *recording = self.recentRecordings[clickedRow];
+    [[NSWorkspace sharedWorkspace] openURL:recording.url];
 }
 
 #pragma mark - Private
