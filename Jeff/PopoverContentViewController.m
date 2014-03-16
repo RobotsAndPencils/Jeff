@@ -12,6 +12,7 @@
 #import "JEFUploaderPreferencesViewController.h"
 #import "JEFAboutPreferencesViewController.h"
 #import "JEFRecording.h"
+#import "AppDelegate.h"
 
 @interface PopoverContentViewController () <NSTableViewDelegate>
 
@@ -59,7 +60,7 @@
 #pragma mark - Actions
 
 - (void)showPreferencesMenu:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ClosePopover" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:JEFClosePopoverNotification object:self];
     [self.preferencesWindowController showWindow:sender];
 }
 
@@ -78,6 +79,7 @@
     NSButton *button = (NSButton *)sender;
     JEFRecording *recording = [(NSTableCellView *)[button superview] objectValue];
     [recording copyURLStringToPasteboard];
+    [[NSNotificationCenter defaultCenter] postNotificationName:JEFDisplayPasteboardNotificationNotification object:self];
 }
 
 #pragma mark - NSTableViewDelegate

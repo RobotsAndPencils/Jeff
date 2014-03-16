@@ -24,6 +24,9 @@
 
 #define kShadyWindowLevel (NSDockWindowLevel + 1000)
 
+NSString *const JEFClosePopoverNotification = @"JEFClosePopoverNotification";
+NSString *const JEFDisplayPasteboardNotificationNotification = @"JEFDisplayPasteboardNotificationNotification";
+
 @interface AppDelegate () <BITHockeyManagerDelegate, NSUserNotificationCenterDelegate>
 
 @property (strong, nonatomic) StatusItemView *statusItemView;
@@ -54,8 +57,12 @@
 
     [NSUserNotificationCenter defaultUserNotificationCenter].delegate = self;
 
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"ClosePopover" object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification *note) {
-        [self closePopover:nil];
+    __weak typeof(self) weakSelf = self;
+    [[NSNotificationCenter defaultCenter] addObserverForName:JEFClosePopoverNotification object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification *note) {
+        [weakSelf closePopover:nil];
+    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:JEFDisplayPasteboardNotificationNotification object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification *note) {
+        [weakSelf displayPasteboardUserNotification];
     }];
 }
 
