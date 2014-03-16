@@ -222,27 +222,19 @@
         [self insertObject:newRecording inRecentClipsAtIndex:[self countOfRecentClips]];
         [self saveRecentRecordings];
 
-        NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
-        [pasteboard clearContents];
-        [pasteboard setString:[newRecording.url absoluteString] forType:NSStringPboardType];
-
-        NSUserNotification *publishedNotification = [[NSUserNotification alloc] init];
-        publishedNotification.title = NSLocalizedString(@"GIFSharedSuccessNotificationTitle", nil);
-        publishedNotification.informativeText = NSLocalizedString(@"GIFSharedSuccessNotificationBody", nil);
-        [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:publishedNotification];
+        [newRecording copyURLStringToPasteboard];
+        [self displayPasteboardUserNotification];
     }];
 }
 
 - (id <JEFUploaderProtocol>)uploader {
-    enum JEFUploaderType uploaderType = [[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUploader"];
+    enum JEFUploaderType uploaderType = (enum JEFUploaderType)[[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUploader"];
     switch (uploaderType) {
         case JEFUploaderTypeDropbox:
             return [JEFDropboxUploader uploader];
-            break;
         case JEFUploaderTypeDepositBox:
         default:
             return [JEFDepositBoxUploader uploader];
-            break;
     }
 }
 
@@ -296,6 +288,15 @@
 
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification {
     return YES;
+}
+
+#pragma mark - Private
+
+- (void)displayPasteboardUserNotification {
+    NSUserNotification *publishedNotification = [[NSUserNotification alloc] init];
+    publishedNotification.title = NSLocalizedString(@"GIFSharedSuccessNotificationTitle", nil);
+    publishedNotification.informativeText = NSLocalizedString(@"GIFSharedSuccessNotificationBody", nil);
+    [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:publishedNotification];
 }
 
 @end

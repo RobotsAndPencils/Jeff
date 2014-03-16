@@ -41,4 +41,10 @@
     return self;
 }
 
+- (void)copyURLStringToPasteboard {
+    NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+    [pasteboard clearContents];
+    [pasteboard setString:[self.url absoluteString] forType:NSStringPboardType];
+}
+
 @end
