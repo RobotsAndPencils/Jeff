@@ -9,6 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import "SelectionView.h"
 
+extern NSString *const JEFClosePopoverNotification;
+extern NSString *const JEFDisplayPasteboardNotificationNotification;
+
 @interface AppDelegate : NSObject <NSApplicationDelegate, DrawMouseBoxViewDelegate>
 
 @end
