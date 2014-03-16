@@ -14,4 +14,6 @@
 
 + (instancetype)recordingWithURL:(NSURL *)url;
 
+- (void)copyURLStringToPasteboard;
+
 @end

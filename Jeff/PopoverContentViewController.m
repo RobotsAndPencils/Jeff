@@ -16,9 +16,11 @@
 @interface PopoverContentViewController () <NSTableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet NSArrayController *recentRecordingsArrayController;
-@property (nonatomic, weak) IBOutlet NSTableView *tableView;
+@property (weak, nonatomic) IBOutlet NSTableView *tableView;
+@property (weak, nonatomic) IBOutlet NSButton *recordingCellShareButton;
+@property (weak, nonatomic) IBOutlet NSButton *recordingCellCopyLinkButton;
 
-@property (nonatomic, strong) MASPreferencesWindowController *preferencesWindowController;
+@property (strong, nonatomic) MASPreferencesWindowController *preferencesWindowController;
 
 @end
 
@@ -32,6 +34,9 @@
 
     [self.tableView setTarget:self];
     [self.tableView setDoubleAction:@selector(didDoubleClickRow:)];
+
+    [self.recordingCellShareButton sendActionOn:NSLeftMouseDownMask];
+    [self.recordingCellCopyLinkButton sendActionOn:NSLeftMouseDownMask];
 }
 
 - (IBAction)showMenu:(NSButton *)sender {
@@ -60,6 +65,19 @@
 
 - (void)quit:(id)sender {
     [NSApp terminate:self];
+}
+
+- (IBAction)showShareMenu:(id)sender {
+    NSButton *button = (NSButton *)sender;
+    JEFRecording *recording = [(NSTableCellView *)[button superview] objectValue];
+    NSSharingServicePicker *sharePicker = [[NSSharingServicePicker alloc] initWithItems:@[ [recording.url absoluteString] ]];
+    [sharePicker showRelativeToRect:button.bounds ofView:button preferredEdge:NSMinYEdge];
+}
+
+- (IBAction)copyLinkToPasteboard:(id)sender {
+    NSButton *button = (NSButton *)sender;
+    JEFRecording *recording = [(NSTableCellView *)[button superview] objectValue];
+    [recording copyURLStringToPasteboard];
 }
 
 #pragma mark - NSTableViewDelegate
