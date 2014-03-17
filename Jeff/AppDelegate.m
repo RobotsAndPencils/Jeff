@@ -94,6 +94,7 @@ NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
     PopoverContentViewController *popoverController = [[PopoverContentViewController alloc] initWithNibName:@"PopoverContentView" bundle:nil];
     self.popover.contentViewController = popoverController;
     self.popover.animates = NO;
+    self.popover.color = [NSColor colorWithCalibratedWhite:0.9 alpha:1.0];
 }
 
 #pragma mark - Toggle popover

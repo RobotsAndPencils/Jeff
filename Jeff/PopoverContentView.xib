@@ -7,6 +7,8 @@
         <customObject id="-2" userLabel="File's Owner" customClass="PopoverContentViewController">
             <connections>
                 <outlet property="recentRecordingsArrayController" destination="wgD-kZ-8HX" id="ztB-Zy-s9S"/>
+                <outlet property="recordScreenButton" destination="NGg-8G-Zi6" id="Cie-91-fCJ"/>
+                <outlet property="recordSelectionButton" destination="jb8-Or-VEj" id="XTS-E4-Ugf"/>
                 <outlet property="recordingCellCopyLinkButton" destination="2CF-MH-33l" id="h1S-jc-4fJ"/>
                 <outlet property="recordingCellCreationDateTextField" destination="VCI-or-alw" id="9XM-6Y-u5q"/>
                 <outlet property="recordingCellLinkButton" destination="seV-7v-jkc" id="gS8-qQ-ILt"/>
@@ -21,6 +23,11 @@
             <rect key="frame" x="0.0" y="0.0" width="325" height="250"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zzH-fi-JL7" userLabel="Header Background Image View">
+                    <rect key="frame" x="0.0" y="201" width="325" height="49"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="HeaderBackground" id="aGB-zh-ZFb"/>
+                </imageView>
                 <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NGg-8G-Zi6">
                     <rect key="frame" x="0.0" y="201" width="164" height="49"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -196,12 +203,15 @@
             </subviews>
             <constraints>
                 <constraint firstItem="GIu-4z-OTd" firstAttribute="top" secondItem="NGg-8G-Zi6" secondAttribute="bottom" id="4y2-x2-ZLX"/>
+                <constraint firstItem="GIu-4z-OTd" firstAttribute="top" secondItem="zzH-fi-JL7" secondAttribute="bottom" id="5rm-CF-gcg"/>
                 <constraint firstItem="GIu-4z-OTd" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="49" id="GHY-67-thO"/>
                 <constraint firstAttribute="trailing" secondItem="GIu-4z-OTd" secondAttribute="trailing" id="Iig-MG-f4K"/>
                 <constraint firstItem="NGg-8G-Zi6" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="KhN-Hq-mGq"/>
+                <constraint firstAttribute="trailing" secondItem="zzH-fi-JL7" secondAttribute="trailing" id="RV1-EK-HNs"/>
                 <constraint firstItem="jb8-Or-VEj" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="Vok-VX-Fqy"/>
                 <constraint firstAttribute="trailing" secondItem="jb8-Or-VEj" secondAttribute="trailing" id="avI-mp-s10"/>
                 <constraint firstAttribute="bottom" secondItem="N48-dS-SkM" secondAttribute="bottom" id="btM-f1-dGQ"/>
+                <constraint firstItem="zzH-fi-JL7" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="kly-5t-RSy"/>
                 <constraint firstItem="NGg-8G-Zi6" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="nPu-DP-xMo"/>
                 <constraint firstAttribute="bottom" secondItem="GIu-4z-OTd" secondAttribute="bottom" constant="22" id="oRc-02-pv9"/>
                 <constraint firstAttribute="trailing" secondItem="N48-dS-SkM" secondAttribute="trailing" id="oSY-dl-AP3"/>
@@ -209,6 +219,7 @@
                 <constraint firstItem="GIu-4z-OTd" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="upr-iV-txE"/>
                 <constraint firstAttribute="centerX" secondItem="TlU-Dx-Zh5" secondAttribute="centerX" id="v0j-cv-aV8"/>
                 <constraint firstItem="TlU-Dx-Zh5" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="wTZ-kV-lwa"/>
+                <constraint firstItem="zzH-fi-JL7" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="xkk-k8-qu0"/>
                 <constraint firstItem="GIu-4z-OTd" firstAttribute="top" secondItem="jb8-Or-VEj" secondAttribute="bottom" id="ze7-uw-y5U"/>
             </constraints>
         </customView>
@@ -219,6 +230,7 @@
         </arrayController>
     </objects>
     <resources>
+        <image name="HeaderBackground" width="325" height="49"/>
         <image name="NSActionTemplate" width="14" height="14"/>
         <image name="PopoverButtonSeperator" width="1" height="48"/>
     </resources>

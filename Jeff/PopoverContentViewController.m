@@ -27,6 +27,8 @@
 @property (weak, nonatomic) IBOutlet NSButton *recordingCellShareButton;
 @property (weak, nonatomic) IBOutlet NSButton *recordingCellCopyLinkButton;
 @property (weak, nonatomic) IBOutlet NSTextField *recordingCellCreationDateTextField;
+@property (weak, nonatomic) IBOutlet NSButton *recordScreenButton;
+@property (weak, nonatomic) IBOutlet NSButton *recordSelectionButton;
 
 @property (strong, nonatomic) MASPreferencesWindowController *preferencesWindowController;
 @property (strong, nonatomic) NSMutableArray *recentRecordings;
@@ -52,6 +54,9 @@
 
     [self.recordingCellShareButton sendActionOn:NSLeftMouseDownMask];
     [self.recordingCellCopyLinkButton sendActionOn:NSLeftMouseDownMask];
+
+    [self setStyleForButton:self.recordScreenButton];
+    [self setStyleForButton:self.recordSelectionButton];
 
     __weak __typeof(self) weakSelf = self;
     [[NSNotificationCenter defaultCenter] addObserverForName:JEFStopRecordingNotification object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification *note) {
@@ -277,6 +282,23 @@
     publishedNotification.title = NSLocalizedString(@"GIFSharedSuccessNotificationTitle", nil);
     publishedNotification.informativeText = NSLocalizedString(@"GIFSharedSuccessNotificationBody", nil);
     [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:publishedNotification];
+}
+
+- (void)setStyleForButton:(NSButton *)button {
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [NSColor whiteColor];
+    shadow.shadowOffset = CGSizeMake(0.0f, -1.0f);
+
+    NSFont *font = [NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSRegularControlSize]];
+
+    NSColor *fontColor = [NSColor colorWithCalibratedWhite:0.2 alpha:1.0];
+
+    NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    [paragraphStyle setAlignment:NSCenterTextAlignment];
+
+    NSDictionary *attrsDictionary = @{ NSShadowAttributeName : shadow, NSFontAttributeName : font, NSParagraphStyleAttributeName : paragraphStyle, NSForegroundColorAttributeName : fontColor };
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:button.title attributes:attrsDictionary];
+    [button setAttributedTitle:attrString];
 }
 
 #pragma mark - NSUserNotificationCenterDelegate
