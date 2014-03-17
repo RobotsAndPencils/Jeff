@@ -17,6 +17,7 @@
 #import "JEFDropboxUploader.h"
 #import "Converter.h"
 #import "Recorder.h"
+#import "JEFRecordingCellView.h"
 
 #define kShadyWindowLevel (NSDockWindowLevel + 1000)
 
@@ -24,9 +25,6 @@
 
 @property (strong, nonatomic) IBOutlet NSArrayController *recentRecordingsArrayController;
 @property (weak, nonatomic) IBOutlet NSTableView *tableView;
-@property (weak, nonatomic) IBOutlet NSButton *recordingCellShareButton;
-@property (weak, nonatomic) IBOutlet NSButton *recordingCellCopyLinkButton;
-@property (weak, nonatomic) IBOutlet NSTextField *recordingCellCreationDateTextField;
 @property (weak, nonatomic) IBOutlet NSButton *recordScreenButton;
 @property (weak, nonatomic) IBOutlet NSButton *recordSelectionButton;
 
@@ -52,9 +50,6 @@
     [self.tableView setTarget:self];
     [self.tableView setDoubleAction:@selector(didDoubleClickRow:)];
     [self.tableView setIntercellSpacing:NSMakeSize(0, 0)];
-
-    [self.recordingCellShareButton sendActionOn:NSLeftMouseDownMask];
-    [self.recordingCellCopyLinkButton sendActionOn:NSLeftMouseDownMask];
 
     [self setStyleForButton:self.recordScreenButton];
     [self setStyleForButton:self.recordSelectionButton];
@@ -213,6 +208,17 @@
     NSInteger clickedRow = [sender selectedRow];
     JEFRecording *recording = self.recentRecordings[clickedRow];
     [[NSWorkspace sharedWorkspace] openURL:recording.url];
+}
+
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+    JEFRecordingCellView *view = [tableView makeViewWithIdentifier:@"JEFRecordingCellView" owner:self];
+
+    view.linkButton.target = self;
+    view.linkButton.action = @selector(copyLinkToPasteboard:);
+    view.shareButton.target = self;
+    view.shareButton.action = @selector(showShareMenu:);
+
+    return view;
 }
 
 #pragma mark - Properties
