@@ -51,6 +51,7 @@
 
     [self.tableView setTarget:self];
     [self.tableView setDoubleAction:@selector(didDoubleClickRow:)];
+    [self.tableView setIntercellSpacing:NSMakeSize(0, 0)];
 
     [self.recordingCellShareButton sendActionOn:NSLeftMouseDownMask];
     [self.recordingCellCopyLinkButton sendActionOn:NSLeftMouseDownMask];
