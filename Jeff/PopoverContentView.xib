@@ -185,7 +185,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="N48-dS-SkM" userLabel="Action Menu Button">
+                <button wantsLayer="YES" alphaValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="N48-dS-SkM" userLabel="Action Menu Button">
                     <rect key="frame" x="301" y="0.0" width="24" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
