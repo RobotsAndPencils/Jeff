@@ -129,8 +129,8 @@ NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
 
 - (void)setStatusItemActionRecord:(BOOL)record {
     if (record) {
-        self.statusItemView.image = [NSImage imageNamed:NSImageNameRightFacingTriangleTemplate];
-        self.statusItemView.alternateImage = [NSImage imageNamed:NSImageNameRightFacingTriangleTemplate];
+        self.statusItemView.image = [NSImage imageNamed:@"StatusItemTemplate"];
+        self.statusItemView.alternateImage = [NSImage imageNamed:@"StatusItemHighlightedTemplate"];
         __weak typeof(self) weakSelf = self;
         self.statusItemView.clickHandler = ^(id sender){
             [weakSelf showPopover:sender];
