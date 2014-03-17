@@ -52,15 +52,18 @@
 - (void)restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath from:(NSString *)srcPath metadata:(DBMetadata *)metadata {
     NSLog(@"File uploaded successfully to path: %@", metadata.path);
 
-    [self.restClient loadSharableLinkForFile:metadata.path shortUrl:YES];
+    [self.restClient loadSharableLinkForFile:metadata.path shortUrl:NO];
 }
 
 - (void)restClient:(DBRestClient*)restClient loadedSharableLink:(NSString*)link forFile:(NSString*)path {
     NSLog(@"Shareable link created for file at path: %@", path);
 
+    NSMutableString *directLink = [link mutableCopy];
+    [directLink replaceOccurrencesOfString:@"www.dropbox" withString:@"dl.dropboxusercontent" options:0 range:NSMakeRange(0, [directLink length])];
+
     NSString *filename = [path lastPathComponent];
     JEFUploaderCompletionBlock completion = self.filenameCompletionBlocks[filename];
-    if (completion) completion(YES, [NSURL URLWithString:link], nil);
+    if (completion) completion(YES, [NSURL URLWithString:directLink], nil);
 }
 
 // Failures
