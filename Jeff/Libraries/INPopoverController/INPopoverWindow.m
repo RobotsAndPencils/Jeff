@@ -84,6 +84,12 @@
 	if (_popoverContentView) {
 		[_popoverContentView removeFromSuperview];
 	}
+
+    aView.wantsLayer            = YES;
+    aView.layer.frame           = aView.frame;
+    aView.layer.cornerRadius    = self.frameView.cornerRadius;
+    aView.layer.masksToBounds   = YES;
+
 	_popoverContentView = aView;
 	[_popoverContentView setFrame:[self contentRectForFrameRect:bounds]];
 	[_popoverContentView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
