@@ -9,10 +9,6 @@
                 <outlet property="recentRecordingsArrayController" destination="wgD-kZ-8HX" id="ztB-Zy-s9S"/>
                 <outlet property="recordScreenButton" destination="NGg-8G-Zi6" id="Cie-91-fCJ"/>
                 <outlet property="recordSelectionButton" destination="jb8-Or-VEj" id="XTS-E4-Ugf"/>
-                <outlet property="recordingCellCopyLinkButton" destination="2CF-MH-33l" id="h1S-jc-4fJ"/>
-                <outlet property="recordingCellCreationDateTextField" destination="VCI-or-alw" id="9XM-6Y-u5q"/>
-                <outlet property="recordingCellLinkButton" destination="seV-7v-jkc" id="gS8-qQ-ILt"/>
-                <outlet property="recordingCellShareButton" destination="aqd-S6-fTt" id="Ptr-Mk-zBx"/>
                 <outlet property="tableView" destination="B5q-Mr-u3z" id="Geu-08-u1J"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -83,7 +79,7 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
-                                            <tableCellView id="seV-7v-jkc">
+                                            <tableCellView identifier="JEFRecordingCellView" id="seV-7v-jkc" customClass="JEFRecordingCellView">
                                                 <rect key="frame" x="0.0" y="0.0" width="324" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
@@ -102,27 +98,21 @@
                                                             <binding destination="seV-7v-jkc" name="value" keyPath="objectValue.name" id="Ilv-rs-YUP"/>
                                                         </connections>
                                                     </textField>
-                                                    <button wantsLayer="YES" fixedFrame="YES" alphaValue="0.70000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="aqd-S6-fTt">
+                                                    <button wantsLayer="YES" fixedFrame="YES" alphaValue="0.70000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="aqd-S6-fTt" userLabel="Share Button">
                                                         <rect key="frame" x="288" y="12" width="21" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="ShareButton" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="ogJ-zq-xAs">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
                                                         </buttonCell>
-                                                        <connections>
-                                                            <action selector="showShareMenu:" target="-2" id="3dM-K1-Eig"/>
-                                                        </connections>
                                                     </button>
-                                                    <button wantsLayer="YES" fixedFrame="YES" alphaValue="0.70000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="2CF-MH-33l">
+                                                    <button wantsLayer="YES" fixedFrame="YES" alphaValue="0.70000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="2CF-MH-33l" userLabel="Link Button">
                                                         <rect key="frame" x="259" y="11" width="21" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="CopyLinkButton" imagePosition="overlaps" alignment="center" inset="2" id="zrS-Wj-RR4">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
                                                         </buttonCell>
-                                                        <connections>
-                                                            <action selector="copyLinkToPasteboard:" target="-2" id="OKF-Ht-pp6"/>
-                                                        </connections>
                                                     </button>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Siv-G3-sRl">
                                                         <rect key="frame" x="0.0" y="0.0" width="325" height="1"/>
@@ -155,6 +145,8 @@
                                                     <constraint firstItem="VCI-or-alw" firstAttribute="leading" secondItem="seV-7v-jkc" secondAttribute="leading" constant="3" id="zaZ-xG-fZa"/>
                                                 </constraints>
                                                 <connections>
+                                                    <outlet property="linkButton" destination="2CF-MH-33l" id="5jf-Le-eCQ"/>
+                                                    <outlet property="shareButton" destination="aqd-S6-fTt" id="UOB-9G-vuB"/>
                                                     <outlet property="textField" destination="KIg-Mt-doG" id="21d-oN-5US"/>
                                                 </connections>
                                             </tableCellView>

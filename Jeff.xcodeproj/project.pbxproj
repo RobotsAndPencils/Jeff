@@ -33,6 +33,7 @@
 		CA47840418B923A400A5246D /* ImageMagick in Resources */ = {isa = PBXBuildFile; fileRef = CA47840318B923A400A5246D /* ImageMagick */; };
 		CA4C528918C8289C00C5EAE4 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA4C528818C8289C00C5EAE4 /* HockeySDK.framework */; };
 		CA4C528B18C828D900C5EAE4 /* HockeySDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CA4C528818C8289C00C5EAE4 /* HockeySDK.framework */; };
+		CA4D988418D6D2A900EFE4FD /* JEFRecordingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4D988318D6D2A900EFE4FD /* JEFRecordingCellView.m */; };
 		CA875EFC18B9974C009FC997 /* SelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA875EFB18B9974C009FC997 /* SelectionView.m */; };
 		CADF57B418C6F432006512E3 /* JEFRecording.m in Sources */ = {isa = PBXBuildFile; fileRef = CADF57B318C6F432006512E3 /* JEFRecording.m */; };
 		CAF30B3C18D3CAD800D7BC9D /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF30B3B18D3CAD800D7BC9D /* DropboxOSX.framework */; };
@@ -118,6 +119,8 @@
 		CA455B7E18B9143800F9A541 /* ffmpeg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = ffmpeg; path = Jeff/Resources/ffmpeg; sourceTree = "<group>"; };
 		CA47840318B923A400A5246D /* ImageMagick */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ImageMagick; path = Jeff/Resources/ImageMagick; sourceTree = "<group>"; };
 		CA4C528818C8289C00C5EAE4 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = Jeff/Frameworks/HockeySDK.framework; sourceTree = "<group>"; };
+		CA4D988218D6D2A900EFE4FD /* JEFRecordingCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecordingCellView.h; path = Views/JEFRecordingCellView.h; sourceTree = "<group>"; };
+		CA4D988318D6D2A900EFE4FD /* JEFRecordingCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFRecordingCellView.m; path = Views/JEFRecordingCellView.m; sourceTree = "<group>"; };
 		CA875EFA18B9974C009FC997 /* SelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionView.h; sourceTree = "<group>"; };
 		CA875EFB18B9974C009FC997 /* SelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionView.m; sourceTree = "<group>"; };
 		CADF57B218C6F432006512E3 /* JEFRecording.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecording.h; path = Models/JEFRecording.h; sourceTree = "<group>"; };
@@ -366,6 +369,8 @@
 				CA455B6618B8467000F9A541 /* StatusItemView.m */,
 				CA875EFA18B9974C009FC997 /* SelectionView.h */,
 				CA875EFB18B9974C009FC997 /* SelectionView.m */,
+				CA4D988218D6D2A900EFE4FD /* JEFRecordingCellView.h */,
+				CA4D988318D6D2A900EFE4FD /* JEFRecordingCellView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -567,6 +572,7 @@
 				CA455B6B18B848B700F9A541 /* PopoverContentViewController.m in Sources */,
 				CAF30B6118D5281100D7BC9D /* INPopoverController.m in Sources */,
 				CA455B6F18B84A1700F9A541 /* Recorder.m in Sources */,
+				CA4D988418D6D2A900EFE4FD /* JEFRecordingCellView.m in Sources */,
 				CAF30B6418D5281100D7BC9D /* INPopoverWindowFrame.m in Sources */,
 				CA455B3818B83EB900F9A541 /* main.m in Sources */,
 				8359322E52C5BFFB013B4AC7 /* JEFDropboxUploader.m in Sources */,
