@@ -10,8 +10,9 @@
 #import "SelectionView.h"
 
 extern NSString *const JEFClosePopoverNotification;
-extern NSString *const JEFDisplayPasteboardNotificationNotification;
+extern NSString *const JEFSetStatusViewNotRecordingNotification;
+extern NSString *const JEFSetStatusViewRecordingNotification;
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, DrawMouseBoxViewDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate>
 
 @end

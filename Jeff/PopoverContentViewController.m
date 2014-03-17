@@ -13,8 +13,14 @@
 #import "JEFAboutPreferencesViewController.h"
 #import "JEFRecording.h"
 #import "AppDelegate.h"
+#import "JEFDepositBoxUploader.h"
+#import "JEFDropboxUploader.h"
+#import "Converter.h"
+#import "Recorder.h"
 
-@interface PopoverContentViewController () <NSTableViewDelegate>
+#define kShadyWindowLevel (NSDockWindowLevel + 1000)
+
+@interface PopoverContentViewController () <NSTableViewDelegate, DrawMouseBoxViewDelegate, NSUserNotificationCenterDelegate>
 
 @property (strong, nonatomic) IBOutlet NSArrayController *recentRecordingsArrayController;
 @property (weak, nonatomic) IBOutlet NSTableView *tableView;
@@ -22,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet NSButton *recordingCellCopyLinkButton;
 
 @property (strong, nonatomic) MASPreferencesWindowController *preferencesWindowController;
+@property (strong, nonatomic) NSMutableArray *recentRecordings;
+@property (strong, nonatomic) NSMutableArray *overlayWindows;
 
 @end
 
@@ -29,6 +37,11 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+
+    self.overlayWindows = [NSMutableArray array];
+    self.recentRecordings = [self loadRecentRecordings];
+
+    [NSUserNotificationCenter defaultUserNotificationCenter].delegate = self;
 
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:YES];
     [self.recentRecordingsArrayController setSortDescriptors:@[ sortDescriptor ]];
@@ -57,6 +70,106 @@
     [actionMenu popUpMenuPositioningItem:nil atLocation:menuPoint inView:self.view];
 }
 
+#pragma mark - Recording
+
+- (IBAction)recordScreen:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:JEFSetStatusViewNotRecordingNotification object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:JEFClosePopoverNotification object:self];
+
+    [Recorder screenRecordingWithCompletion:^(NSURL *movieURL) {
+        [Converter convertMOVAtURLToGIF:movieURL completion:^(NSURL *gifURL) {
+            [[NSFileManager defaultManager] removeItemAtPath:[movieURL path] error:nil];
+            [self uploadGIFAtURL:gifURL];
+        }];
+    }];
+}
+
+- (IBAction)recordSelection:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:JEFClosePopoverNotification object:self];
+
+    for (NSScreen *screen in [NSScreen screens]) {
+        NSRect frame = [screen frame];
+        NSWindow *window = [[NSWindow alloc] initWithContentRect:frame styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
+        [window setBackgroundColor:[NSColor clearColor]];
+        [window setOpaque:NO];
+        [window setLevel:kShadyWindowLevel];
+        [window setReleasedWhenClosed:NO];
+        SelectionView *drawMouseBoxView = [[SelectionView alloc] initWithFrame:frame];
+        drawMouseBoxView.delegate = self;
+        [window setContentView:drawMouseBoxView];
+        [window makeKeyAndOrderFront:self];
+
+        [self.overlayWindows addObject:window];
+    }
+
+    [[NSCursor crosshairCursor] push];
+}
+
+- (void)stopRecording:(id)sender {
+    [Recorder finishRecording];
+    [[NSNotificationCenter defaultCenter] postNotificationName:JEFSetStatusViewRecordingNotification object:self];
+}
+
+#pragma mark - DrawMouseBoxViewDelegate
+
+- (void)selectionView:(SelectionView *)view didSelectRect:(NSRect)rect {
+    [[NSNotificationCenter defaultCenter] postNotificationName:JEFSetStatusViewNotRecordingNotification object:self];
+
+    for (NSWindow *window in self.overlayWindows) {
+        [window setIgnoresMouseEvents:YES];
+    }
+
+    // Map point into global coordinates.
+    NSRect globalRect = rect;
+    NSRect windowRect = [[view window] frame];
+    globalRect = NSOffsetRect(globalRect, windowRect.origin.x, windowRect.origin.y);
+    globalRect.origin.y = CGDisplayPixelsHigh(CGMainDisplayID()) - globalRect.origin.y;
+
+    // Get a list of online displays with bounds that include the specified point.
+    CGDirectDisplayID displayID = CGMainDisplayID();
+    uint32_t matchingDisplayCount = 0;
+    CGError error = CGGetDisplaysWithPoint(NSPointToCGPoint(globalRect.origin), 1, &displayID, &matchingDisplayCount);
+    if ((error == kCGErrorSuccess) && (matchingDisplayCount == 1)) {
+        [Recorder recordRect:rect display:displayID completion:^(NSURL *movieURL) {
+            [self.overlayWindows makeObjectsPerformSelector:@selector(close)];
+            [self.overlayWindows removeAllObjects];
+
+            [Converter convertMOVAtURLToGIF:movieURL completion:^(NSURL *gifURL) {
+                [[NSFileManager defaultManager] removeItemAtPath:[movieURL path] error:nil];
+                [self uploadGIFAtURL:gifURL];
+            }];
+        }];
+    }
+
+    [[NSCursor currentCursor] pop];
+}
+
+#pragma mark - Uploading
+
+- (void)uploadGIFAtURL:(NSURL *)gifURL {
+    [[self uploader] uploadGIF:gifURL withName:[[gifURL path] lastPathComponent] completion:^(BOOL succeeded, NSURL *publicURL, NSError *error) {
+        [[NSFileManager defaultManager] removeItemAtPath:[gifURL path] error:nil];
+
+        JEFRecording *newRecording = [JEFRecording recordingWithURL:publicURL];
+        [self insertObject:newRecording inRecentClipsAtIndex:[self countOfRecentClips]];
+        [self saveRecentRecordings];
+
+        [newRecording copyURLStringToPasteboard];
+        [self displayPasteboardUserNotification];
+    }];
+}
+
+- (id <JEFUploaderProtocol>)uploader {
+    enum JEFUploaderType uploaderType = (enum JEFUploaderType)[[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUploader"];
+    switch (uploaderType) {
+        case JEFUploaderTypeDropbox:
+            return [JEFDropboxUploader uploader];
+        case JEFUploaderTypeDepositBox:
+        default:
+            return [JEFDepositBoxUploader uploader];
+    }
+}
+
 #pragma mark - Actions
 
 - (void)showPreferencesMenu:(id)sender {
@@ -79,7 +192,7 @@
     NSButton *button = (NSButton *)sender;
     JEFRecording *recording = [(NSTableCellView *)[button superview] objectValue];
     [recording copyURLStringToPasteboard];
-    [[NSNotificationCenter defaultCenter] postNotificationName:JEFDisplayPasteboardNotificationNotification object:self];
+    [self displayPasteboardUserNotification];
 }
 
 #pragma mark - NSTableViewDelegate
@@ -90,7 +203,7 @@
     [[NSWorkspace sharedWorkspace] openURL:recording.url];
 }
 
-#pragma mark - Private
+#pragma mark - Properties
 
 - (MASPreferencesWindowController *)preferencesWindowController {
     if (!_preferencesWindowController) {
@@ -101,6 +214,69 @@
         _preferencesWindowController = [[MASPreferencesWindowController alloc] initWithViewControllers:controllers title:@"Preferences"];
     }
     return _preferencesWindowController;
+}
+
+#pragma mark - Recording Persistence
+
+- (NSMutableArray *)loadRecentRecordings {
+    NSString *filePath = [self userDataFilePathForUserID:nil];
+    NSMutableDictionary *userData = [NSMutableDictionary dictionaryWithContentsOfFile:filePath];
+    if (!userData) {
+        userData = [@{} mutableCopy];
+        userData[@"recentRecordings"] = [NSKeyedArchiver archivedDataWithRootObject:[@[] mutableCopy]];
+        [userData writeToFile:filePath atomically:YES];
+    }
+    return [NSKeyedUnarchiver unarchiveObjectWithData:userData[@"recentRecordings"]];
+}
+
+- (void)saveRecentRecordings {
+    NSString *filePath = [self userDataFilePathForUserID:nil];
+    NSMutableDictionary *userData = [NSMutableDictionary dictionaryWithContentsOfFile:filePath];
+    userData[@"recentRecordings"] = [NSKeyedArchiver archivedDataWithRootObject:self.recentRecordings];
+    [userData writeToFile:filePath atomically:YES];
+}
+
+#pragma mark - Recent Clips KVO
+
+- (NSUInteger)countOfRecentClips {
+    return [self.recentRecordings count];
+}
+
+- (void)insertObject:(JEFRecording *)recording inRecentClipsAtIndex:(NSUInteger)index {
+    [self.recentRecordings insertObject:recording atIndex:index];
+}
+
+- (void)insertRecentClips:(NSArray *)array atIndexes:(NSIndexSet *)indexes {
+    [self.recentRecordings insertObjects:array atIndexes:indexes];
+}
+
+- (void)removeObjectFromRecentClipsAtIndex:(NSUInteger)index {
+    [self.recentRecordings removeObjectAtIndex:index];
+}
+
+- (void)removeRecentClipsAtIndexes:(NSIndexSet *)indexes {
+    [self.recentRecordings removeObjectsAtIndexes:indexes];
+}
+
+#pragma mark - Saving recent recordings
+
+- (NSString *)userDataFilePathForUserID:(NSString *)userID {
+    return [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/userID"] stringByAppendingPathExtension:@"plist"];
+}
+
+#pragma mark - Private
+
+- (void)displayPasteboardUserNotification {
+    NSUserNotification *publishedNotification = [[NSUserNotification alloc] init];
+    publishedNotification.title = NSLocalizedString(@"GIFSharedSuccessNotificationTitle", nil);
+    publishedNotification.informativeText = NSLocalizedString(@"GIFSharedSuccessNotificationBody", nil);
+    [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:publishedNotification];
+}
+
+#pragma mark - NSUserNotificationCenterDelegate
+
+- (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification {
+    return YES;
 }
 
 @end
