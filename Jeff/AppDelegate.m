@@ -18,6 +18,7 @@
 NSString *const JEFClosePopoverNotification = @"JEFClosePopoverNotification";
 NSString *const JEFSetStatusViewNotRecordingNotification = @"JEFSetStatusViewNotRecordingNotification";
 NSString *const JEFSetStatusViewRecordingNotification = @"JEFSetStatusViewRecordingNotification";
+NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
 
 @interface AppDelegate () <BITHockeyManagerDelegate>
 
@@ -129,11 +130,16 @@ NSString *const JEFSetStatusViewRecordingNotification = @"JEFSetStatusViewRecord
     if (record) {
         self.statusItemView.image = [NSImage imageNamed:NSImageNameRightFacingTriangleTemplate];
         self.statusItemView.alternateImage = [NSImage imageNamed:NSImageNameRightFacingTriangleTemplate];
-        self.statusItemView.action = @selector(showPopover:);
+        __weak typeof(self) weakSelf = self;
+        self.statusItemView.clickHandler = ^(id sender){
+            [weakSelf showPopover:sender];
+        };
     }
     else {
         self.statusItemView.image = [NSImage imageNamed:NSImageNameStopProgressTemplate];
-        self.statusItemView.action = @selector(stopRecording:);
+        self.statusItemView.clickHandler = ^(id sender){
+            [[NSNotificationCenter defaultCenter] postNotificationName:JEFStopRecordingNotification object:nil];
+        };
     }
 }
 

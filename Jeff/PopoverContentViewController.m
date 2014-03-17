@@ -51,6 +51,11 @@
 
     [self.recordingCellShareButton sendActionOn:NSLeftMouseDownMask];
     [self.recordingCellCopyLinkButton sendActionOn:NSLeftMouseDownMask];
+
+    __weak __typeof(self) weakSelf = self;
+    [[NSNotificationCenter defaultCenter] addObserverForName:JEFStopRecordingNotification object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification *note) {
+        [weakSelf stopRecording:nil];
+    }];
 }
 
 - (IBAction)showMenu:(NSButton *)sender {

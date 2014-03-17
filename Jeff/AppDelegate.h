@@ -12,6 +12,7 @@
 extern NSString *const JEFClosePopoverNotification;
 extern NSString *const JEFSetStatusViewNotRecordingNotification;
 extern NSString *const JEFSetStatusViewRecordingNotification;
+extern NSString *const JEFStopRecordingNotification;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
