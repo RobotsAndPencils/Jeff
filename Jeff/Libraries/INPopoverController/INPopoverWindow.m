@@ -139,6 +139,7 @@
 
 - (void)dismissAnimated
 {
+    [[NSAnimationContext currentContext] setDuration:0.15];
 	[[_zoomWindow animator] setAlphaValue:0.0]; // in case zoom window is currently animating
 	[[self animator] setAlphaValue:0.0];
 }

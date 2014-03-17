@@ -93,7 +93,8 @@ NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
     self.popover.closesWhenApplicationBecomesInactive = YES;
     PopoverContentViewController *popoverController = [[PopoverContentViewController alloc] initWithNibName:@"PopoverContentView" bundle:nil];
     self.popover.contentViewController = popoverController;
-    self.popover.animates = NO;
+    self.popover.animates = YES;
+    self.popover.animationType = INPopoverAnimationTypeFadeOut;
     self.popover.color = [NSColor colorWithCalibratedWhite:0.9 alpha:1.0];
 }
 
