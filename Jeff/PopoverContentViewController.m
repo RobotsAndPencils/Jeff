@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet NSTableView *tableView;
 @property (weak, nonatomic) IBOutlet NSButton *recordingCellShareButton;
 @property (weak, nonatomic) IBOutlet NSButton *recordingCellCopyLinkButton;
+@property (weak, nonatomic) IBOutlet NSTextField *recordingCellCreationDateTextField;
 
 @property (strong, nonatomic) MASPreferencesWindowController *preferencesWindowController;
 @property (strong, nonatomic) NSMutableArray *recentRecordings;
