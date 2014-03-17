@@ -43,7 +43,7 @@
 #pragma mark Mouse tracking
 
 - (void)mouseDown:(NSEvent *)theEvent {
-    [NSApp sendAction:self.action to:self.target from:self];
+    if (self.clickHandler) self.clickHandler(self);
 }
 
 #pragma mark -

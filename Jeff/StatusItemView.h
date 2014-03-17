@@ -16,8 +16,6 @@
 @property (nonatomic, strong) NSImage *image;
 @property (nonatomic, strong) NSImage *alternateImage;
 @property (nonatomic, assign, setter = setHighlighted:) BOOL isHighlighted;
-@property (nonatomic, assign, readonly) NSRect globalRect;
-@property (nonatomic, assign) SEL action;
-@property (nonatomic, weak) id target;
+@property (nonatomic, copy) void (^clickHandler)(id sender);
 
 @end
