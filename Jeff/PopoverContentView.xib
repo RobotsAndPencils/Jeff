@@ -56,10 +56,10 @@
                         <action selector="recordSelection:" target="-2" id="o8K-Mc-MPI"/>
                     </connections>
                 </button>
-                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="45" horizontalPageScroll="10" verticalLineScroll="45" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="GIu-4z-OTd">
+                <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="45" horizontalPageScroll="10" verticalLineScroll="45" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="GIu-4z-OTd">
                     <rect key="frame" x="0.0" y="21" width="325" height="180"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <clipView key="contentView" id="dop-xO-8Wb">
+                    <clipView key="contentView" wantsLayer="YES" id="dop-xO-8Wb">
                         <rect key="frame" x="0.0" y="0.0" width="325" height="180"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -178,6 +178,11 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
+                <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FKI-00-jTo" userLabel="Footer Background Image View">
+                    <rect key="frame" x="0.0" y="0.0" width="325" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="FooterBackground" id="Hi8-3w-BXo"/>
+                </imageView>
                 <button wantsLayer="YES" alphaValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="N48-dS-SkM" userLabel="Action Menu Button">
                     <rect key="frame" x="301" y="0.0" width="24" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -193,11 +198,6 @@
                         <action selector="showMenu:" target="-2" id="bUm-Q3-CqK"/>
                     </connections>
                 </button>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FKI-00-jTo" userLabel="Footer Background Image View">
-                    <rect key="frame" x="0.0" y="0.0" width="325" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="FooterBackground" id="Hi8-3w-BXo"/>
-                </imageView>
             </subviews>
             <constraints>
                 <constraint firstItem="GIu-4z-OTd" firstAttribute="top" secondItem="NGg-8G-Zi6" secondAttribute="bottom" id="4y2-x2-ZLX"/>
