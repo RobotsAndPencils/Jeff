@@ -327,7 +327,7 @@
 - (NSArray *)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker sharingServicesForItems:(NSArray *)items proposedSharingServices:(NSArray *)proposedServices {
     NSMutableArray *services = [proposedServices mutableCopy];
     NSString *urlString = items[0];
-    NSSharingService *markdownURLService = [[NSSharingService alloc] initWithTitle:@"Copy Markdown Link" image:[NSImage imageNamed:NSImageNameMultipleDocuments] alternateImage:[NSImage imageNamed:NSImageNameMultipleDocuments] handler:^{
+    NSSharingService *markdownURLService = [[NSSharingService alloc] initWithTitle:@"Copy Markdown" image:[NSImage imageNamed:@"MarkdownMark"] alternateImage:[NSImage imageNamed:@"MarkdownMark"] handler:^{
         NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
         [pasteboard clearContents];
         [pasteboard setString:[NSString stringWithFormat:@"![A GIF by Jeff](%@)", urlString] forType:NSStringPboardType];
