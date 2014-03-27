@@ -3,4 +3,5 @@
 
 
 "GIFSharedSuccessNotificationTitle" = "Jeff shared your GIF";
-"GIFSharedSuccessNotificationBody" = "The direct URL is ready to be pasted.";
+"GIFCopiedSuccessNotificationTitle" = "Jeff has your URL";
+"GIFPasteboardNotificationBody" = "The direct URL is ready to be pasted.";

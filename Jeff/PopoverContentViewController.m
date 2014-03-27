@@ -21,7 +21,7 @@
 
 #define kShadyWindowLevel (NSDockWindowLevel + 1000)
 
-@interface PopoverContentViewController () <NSTableViewDelegate, DrawMouseBoxViewDelegate, NSUserNotificationCenterDelegate>
+@interface PopoverContentViewController () <NSTableViewDelegate, DrawMouseBoxViewDelegate, NSUserNotificationCenterDelegate, NSSharingServicePickerDelegate>
 
 @property (strong, nonatomic) IBOutlet NSArrayController *recentRecordingsArrayController;
 @property (weak, nonatomic) IBOutlet NSTableView *tableView;
@@ -162,7 +162,7 @@
         [self saveRecentRecordings];
 
         [newRecording copyURLStringToPasteboard];
-        [self displayPasteboardUserNotification];
+        [self displaySharedUserNotification];
     }];
 }
 
@@ -192,6 +192,7 @@
     NSButton *button = (NSButton *)sender;
     JEFRecording *recording = [(NSTableCellView *)[button superview] objectValue];
     NSSharingServicePicker *sharePicker = [[NSSharingServicePicker alloc] initWithItems:@[ [recording.url absoluteString] ]];
+    sharePicker.delegate = self;
     [sharePicker showRelativeToRect:button.bounds ofView:button preferredEdge:NSMinYEdge];
 }
 
@@ -199,7 +200,7 @@
     NSButton *button = (NSButton *)sender;
     JEFRecording *recording = [(NSTableCellView *)[button superview] objectValue];
     [recording copyURLStringToPasteboard];
-    [self displayPasteboardUserNotification];
+    [self displayCopiedUserNotification];
 }
 
 #pragma mark - NSTableViewDelegate
@@ -284,10 +285,17 @@
 
 #pragma mark - Private
 
-- (void)displayPasteboardUserNotification {
+- (void)displaySharedUserNotification {
     NSUserNotification *publishedNotification = [[NSUserNotification alloc] init];
     publishedNotification.title = NSLocalizedString(@"GIFSharedSuccessNotificationTitle", nil);
-    publishedNotification.informativeText = NSLocalizedString(@"GIFSharedSuccessNotificationBody", nil);
+    publishedNotification.informativeText = NSLocalizedString(@"GIFPasteboardNotificationBody", nil);
+    [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:publishedNotification];
+}
+
+- (void)displayCopiedUserNotification {
+    NSUserNotification *publishedNotification = [[NSUserNotification alloc] init];
+    publishedNotification.title = NSLocalizedString(@"GIFCopiedSuccessNotificationTitle", nil);
+    publishedNotification.informativeText = NSLocalizedString(@"GIFPasteboardNotificationBody", nil);
     [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:publishedNotification];
 }
 
@@ -312,6 +320,21 @@
 
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification {
     return YES;
+}
+
+#pragma mark - NSSharingServicePickerDelegate
+
+- (NSArray *)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker sharingServicesForItems:(NSArray *)items proposedSharingServices:(NSArray *)proposedServices {
+    NSMutableArray *services = [proposedServices mutableCopy];
+    NSString *urlString = items[0];
+    NSSharingService *markdownURLService = [[NSSharingService alloc] initWithTitle:@"Copy Markdown Link" image:[NSImage imageNamed:NSImageNameMultipleDocuments] alternateImage:[NSImage imageNamed:NSImageNameMultipleDocuments] handler:^{
+        NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+        [pasteboard clearContents];
+        [pasteboard setString:[NSString stringWithFormat:@"![A GIF by Jeff](%@)", urlString] forType:NSStringPboardType];
+        [self displayCopiedUserNotification];
+    }];
+    [services addObject:markdownURLService];
+    return services;
 }
 
 @end
