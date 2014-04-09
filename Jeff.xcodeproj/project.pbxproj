@@ -407,6 +407,7 @@
 				6AF62D2B5DAE422889FA4895 /* Copy Pods Resources */,
 				CA4C528A18C828CC00C5EAE4 /* CopyFiles */,
 				CAF30B4018D3CF4A00D7BC9D /* Sign Dropbox */,
+				CA0F8DB118F4E87C00775565 /* Check Header Style */,
 			);
 			buildRules = (
 			);
@@ -536,6 +537,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		CA0F8DB118F4E87C00775565 /* Check Header Style */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Header Style";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/zsh;
+			shellScript = "source ~/.zshrc\n\n# install obcd if it isn't already\nif ! $(gem list obcd -i); then\n    gem install obcd\nfi\n\n# run obcd, but ignore non-zero exit codes\nobcd -p Jeff/ find HeaderStyle || true";
 		};
 		CAF30B4018D3CF4A00D7BC9D /* Sign Dropbox */ = {
 			isa = PBXShellScriptBuildPhase;
