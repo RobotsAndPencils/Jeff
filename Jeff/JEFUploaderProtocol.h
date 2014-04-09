@@ -1,5 +1,5 @@
 //
-//  JEFUploaderProtocol 
+//  JEFUploaderProtocol.h
 //  Jeff
 //
 //  Created by brandon on 2014-03-14.
