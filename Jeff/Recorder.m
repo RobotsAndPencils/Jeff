@@ -56,13 +56,15 @@
         [input setCropRect:rect];
     }
 
-    if ([sharedRecorder.mSession canAddInput:input])
+    if ([sharedRecorder.mSession canAddInput:input]) {
         [sharedRecorder.mSession addInput:input];
+    }
 
     // Create a MovieFileOutput and add it to the session
     sharedRecorder.mMovieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
-    if ([sharedRecorder.mSession canAddOutput:sharedRecorder.mMovieFileOutput])
+    if ([sharedRecorder.mSession canAddOutput:sharedRecorder.mMovieFileOutput]) {
         [sharedRecorder.mSession addOutput:sharedRecorder.mMovieFileOutput];
+    }
 
     // Start running the session
     [sharedRecorder.mSession startRunning];
