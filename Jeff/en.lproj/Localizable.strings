@@ -5,3 +5,4 @@
 "GIFSharedSuccessNotificationTitle" = "Jeff shared your GIF";
 "GIFCopiedSuccessNotificationTitle" = "Jeff has your URL";
 "GIFPasteboardNotificationBody" = "The direct URL is ready to be pasted.";
+"UploadFailedAlertTitle" = "Jeff couldn't upload your GIF";

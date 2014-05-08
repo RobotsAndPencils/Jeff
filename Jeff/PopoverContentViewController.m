@@ -159,6 +159,12 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (void)uploadGIFAtURL:(NSURL *)gifURL {
     [[self uploader] uploadGIF:gifURL withName:[[gifURL path] lastPathComponent] completion:^(BOOL succeeded, NSURL *publicURL, NSError *error) {
+        if (error || !succeeded) {
+            NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"UploadFailedAlertTitle", nil) defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"%@", [error localizedDescription]];
+            [alert runModal];
+            return;
+        }
+        
         [[NSFileManager defaultManager] removeItemAtPath:[gifURL path] error:nil];
 
         JEFRecording *newRecording = [JEFRecording recordingWithURL:publicURL];
