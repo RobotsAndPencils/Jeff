@@ -21,6 +21,8 @@
 
 #define kShadyWindowLevel (NSDockWindowLevel + 1000)
 
+static void *PopoverContentViewControllerContext = &PopoverContentViewControllerContext;
+
 @interface PopoverContentViewController () <NSTableViewDelegate, DrawMouseBoxViewDelegate, NSUserNotificationCenterDelegate, NSSharingServicePickerDelegate>
 
 @property (strong, nonatomic) IBOutlet NSArrayController *recentRecordingsArrayController;
@@ -44,7 +46,7 @@
 
     [NSUserNotificationCenter defaultUserNotificationCenter].delegate = self;
 
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
     [self.recentRecordingsArrayController setSortDescriptors:@[ sortDescriptor ]];
 
     [self.tableView setTarget:self];
@@ -58,6 +60,8 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:JEFStopRecordingNotification object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification *note) {
         [weakSelf stopRecording:nil];
     }];
+    
+    [self addObserver:self forKeyPath:@"recentRecordings" options:NSKeyValueObservingOptionInitial context:&PopoverContentViewControllerContext];
 }
 
 - (IBAction)showMenu:(NSButton *)sender {
@@ -158,7 +162,7 @@
         [[NSFileManager defaultManager] removeItemAtPath:[gifURL path] error:nil];
 
         JEFRecording *newRecording = [JEFRecording recordingWithURL:publicURL];
-        [self insertObject:newRecording inRecentClipsAtIndex:[self countOfRecentClips]];
+        [[self mutableArrayValueForKey:@"recentRecordings"] addObject:newRecording];
         [self saveRecentRecordings];
 
         [newRecording copyURLStringToPasteboard];
@@ -257,24 +261,10 @@
 
 #pragma mark - Recent Clips KVO
 
-- (NSUInteger)countOfRecentClips {
-    return [self.recentRecordings count];
-}
-
-- (void)insertObject:(JEFRecording *)recording inRecentClipsAtIndex:(NSUInteger)index {
-    [self.recentRecordings insertObject:recording atIndex:index];
-}
-
-- (void)insertRecentClips:(NSArray *)array atIndexes:(NSIndexSet *)indexes {
-    [self.recentRecordings insertObjects:array atIndexes:indexes];
-}
-
-- (void)removeObjectFromRecentClipsAtIndex:(NSUInteger)index {
-    [self.recentRecordings removeObjectAtIndex:index];
-}
-
-- (void)removeRecentClipsAtIndexes:(NSIndexSet *)indexes {
-    [self.recentRecordings removeObjectsAtIndexes:indexes];
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"recentRecordings"]) {
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - Saving recent recordings
