@@ -8,8 +8,7 @@
 
 #import "JEFQuartzRecorder.h"
 
-#include <OpenGL/OpenGL.h>
-#include <OpenGL/gl.h>
+#import "NSEvent+MouseClamped.h"
 
 
 @interface JEFQuartzRecorder ()
@@ -88,22 +87,32 @@
 - (void)captureFrame {
     CGImageRef screenImageRef = CGDisplayCreateImageForRect(kCGDirectMainDisplay, self.rect);
     
-    if (self.displayScale != 1.0) {
-        CGFloat width = CGRectGetWidth(self.rect);
-        CGFloat height = CGRectGetHeight(self.rect);
-        CGContextRef context = CGBitmapContextCreate(NULL, width, height, 8, 0, CGColorSpaceCreateDeviceRGB(), (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
-        CGContextDrawImage(context, CGRectMake(0, 0, width, height), screenImageRef);
-        CGImageRelease(screenImageRef);
-        screenImageRef = CGBitmapContextCreateImage(context);
-        CGContextRelease(context);
-    }
+    CGFloat width = CGRectGetWidth(self.rect);
+    CGFloat height = CGRectGetHeight(self.rect);
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(NULL, width, height, 8, 0, colorSpace, (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
+    CGContextDrawImage(context, CGRectMake(0, 0, width, height), screenImageRef);
     
-    NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:screenImageRef];
-    CGImageRelease(screenImageRef);
+    NSCursor *cursor = [NSCursor currentSystemCursor];
+    NSImage *cursorImage = [cursor image];
+    NSPoint hotspot = [cursor hotSpot];
+    CGImageRef cursorImageRef = [cursorImage CGImageForProposedRect:NULL context:[NSGraphicsContext currentContext] hints:nil];
+    CGPoint cursorLocation = [NSEvent clampedMouseLocation];
+    CGRect cursorRect = CGRectMake(cursorLocation.x - CGRectGetMinX(self.rect) - hotspot.x, cursorLocation.y - (CGDisplayPixelsHigh(CGMainDisplayID()) - CGRectGetMaxY(self.rect)) + hotspot.y - CGImageGetHeight(cursorImageRef), CGImageGetWidth(cursorImageRef), CGImageGetHeight(cursorImageRef));
+    CGContextDrawImage(context, cursorRect, cursorImageRef);
+    
+    CGImageRef compositeImageRef = CGBitmapContextCreateImage(context);
+    
+    NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:compositeImageRef];
     NSData *pngData = [imageRep representationUsingType:NSGIFFileType properties:nil];
     NSString *filename = [self.path stringByAppendingPathComponent:[NSString stringWithFormat:@"JeffFrame%ld.gif", self.frameCount]];
     [pngData writeToFile:filename atomically:YES];
     NSLog(@"%@", filename);
+
+    CGContextRelease(context);
+    CGColorSpaceRelease(colorSpace);
+    CGImageRelease(screenImageRef);
+    CGImageRelease(compositeImageRef);
     
     self.frameCount += 1;
 }
