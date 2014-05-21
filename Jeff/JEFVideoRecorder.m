@@ -1,38 +1,38 @@
 //
-//  Recorder.m
+//  JEFVideoRecorder.m
 //  Jeff
 //
 //  Created by Brandon on 2/21/2014.
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-#import "Recorder.h"
+#import "JEFVideoRecorder.h"
 #import "NSFileManager+Temporary.h"
 
-@interface Recorder ()
+@interface JEFVideoRecorder ()
 
 @property (nonatomic, strong) NSURL *destinationURL;
 @property (nonatomic, copy) void (^completion)(NSURL *);
 
 @end
 
-@implementation Recorder
+@implementation JEFVideoRecorder
 
 + (instancetype)sharedRecorder {
-    static Recorder *sharedRecorder;
+    static JEFVideoRecorder *sharedRecorder;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedRecorder = [[Recorder alloc] init];
+        sharedRecorder = [[JEFVideoRecorder alloc] init];
     });
     return sharedRecorder;
 }
 
 + (void)screenRecordingWithCompletion:(void(^)(NSURL *))completion {
-    [Recorder recordRect:CGRectZero display:kCGDirectMainDisplay completion:completion];
+    [JEFVideoRecorder recordRect:CGRectZero display:kCGDirectMainDisplay completion:completion];
 }
 
 + (void)recordRect:(CGRect)rect display:(CGDirectDisplayID)displayID completion:(void(^)(NSURL *))completion {
-    Recorder *sharedRecorder = [Recorder sharedRecorder];
+    JEFVideoRecorder *sharedRecorder = [JEFVideoRecorder sharedRecorder];
     sharedRecorder.destinationURL = [NSURL fileURLWithPath:[[NSFileManager defaultManager] createTemporaryFileWithExtension:@"mov"]];
     sharedRecorder.completion = completion;
 
@@ -86,7 +86,7 @@
 }
 
 + (void)finishRecording {
-    [[Recorder sharedRecorder].mMovieFileOutput stopRecording];
+    [[JEFVideoRecorder sharedRecorder].mMovieFileOutput stopRecording];
 }
 
 #pragma mark - AVCaptureFileOutputRecordingDelegate
@@ -100,7 +100,7 @@
     [self.mSession stopRunning];
     self.mSession = nil;
 
-    Recorder *sharedRecorder = [Recorder sharedRecorder];
+    JEFVideoRecorder *sharedRecorder = [JEFVideoRecorder sharedRecorder];
     if (sharedRecorder.completion) sharedRecorder.completion(sharedRecorder.destinationURL);
 }
 

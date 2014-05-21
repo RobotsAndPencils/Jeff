@@ -1,5 +1,5 @@
 //
-//  Recorder.h
+//  JEFVideoRecorder.h
 //  Jeff
 //
 //  Created by Brandon on 2/21/2014.
@@ -8,7 +8,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-@interface Recorder : NSObject <AVCaptureFileOutputRecordingDelegate>
+@interface JEFVideoRecorder : NSObject <AVCaptureFileOutputRecordingDelegate>
 
 @property (nonatomic, strong) AVCaptureSession *mSession;
 @property (nonatomic, strong) AVCaptureMovieFileOutput *mMovieFileOutput;

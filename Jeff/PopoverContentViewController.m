@@ -16,8 +16,8 @@
 #import "JEFDepositBoxUploader.h"
 #import "JEFDropboxUploader.h"
 #import "Converter.h"
-#import "Recorder.h"
 #import "JEFRecordingCellView.h"
+#import "JEFQuartzRecorder.h"
 
 #define kShadyWindowLevel (NSDockWindowLevel + 1000)
 
@@ -33,6 +33,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 @property (strong, nonatomic) MASPreferencesWindowController *preferencesWindowController;
 @property (strong, nonatomic) NSMutableArray *recentRecordings;
 @property (strong, nonatomic) NSMutableArray *overlayWindows;
+@property (strong, nonatomic) JEFQuartzRecorder *recorder;
 
 @end
 
@@ -40,6 +41,8 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    self.recorder = [[JEFQuartzRecorder alloc] init];
 
     self.overlayWindows = [NSMutableArray array];
     self.recentRecordings = [self loadRecentRecordings];
@@ -56,12 +59,15 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     [self setStyleForButton:self.recordScreenButton];
     [self setStyleForButton:self.recordSelectionButton];
 
-    __weak __typeof(self) weakSelf = self;
-    [[NSNotificationCenter defaultCenter] addObserverForName:JEFStopRecordingNotification object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification *note) {
-        [weakSelf stopRecording:nil];
-    }];
-    
-    [self addObserver:self forKeyPath:@"recentRecordings" options:NSKeyValueObservingOptionInitial context:&PopoverContentViewControllerContext];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        __weak __typeof(self) weakSelf = self;
+        [[NSNotificationCenter defaultCenter] addObserverForName:JEFStopRecordingNotification object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification *note) {
+            [weakSelf stopRecording:nil];
+        }];
+        
+        [self addObserver:self forKeyPath:@"recentRecordings" options:NSKeyValueObservingOptionInitial context:&PopoverContentViewControllerContext];
+    });
 }
 
 - (IBAction)showMenu:(NSButton *)sender {
@@ -87,7 +93,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     [[NSNotificationCenter defaultCenter] postNotificationName:JEFSetStatusViewNotRecordingNotification object:self];
     [[NSNotificationCenter defaultCenter] postNotificationName:JEFClosePopoverNotification object:self];
 
-    [Recorder screenRecordingWithCompletion:^(NSURL *movieURL) {
+    [self.recorder recordScreen:CGMainDisplayID() completion:^(NSURL *movieURL) {
         [Converter convertMOVAtURLToGIF:movieURL completion:^(NSURL *gifURL) {
             [[NSFileManager defaultManager] removeItemAtPath:[movieURL path] error:nil];
             [self uploadGIFAtURL:gifURL];
@@ -117,7 +123,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 }
 
 - (void)stopRecording:(id)sender {
-    [Recorder finishRecording];
+    [self.recorder finishRecording];
     [[NSNotificationCenter defaultCenter] postNotificationName:JEFSetStatusViewRecordingNotification object:self];
 }
 
@@ -130,22 +136,23 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
         [window setIgnoresMouseEvents:YES];
     }
 
-    // Map point into global coordinates.
-    NSRect globalRect = rect;
+    // Map point into global CG coordinates.
+    NSRect cgOrientedRect = rect;
     NSRect windowRect = [[view window] frame];
-    globalRect = NSOffsetRect(globalRect, windowRect.origin.x, windowRect.origin.y);
-    globalRect.origin.y = CGDisplayPixelsHigh(CGMainDisplayID()) - globalRect.origin.y;
+    CGPoint origin = cgOrientedRect.origin;
+    origin.y = CGRectGetHeight(windowRect) - CGRectGetMaxY(cgOrientedRect);
+    cgOrientedRect.origin = origin;
 
     // Get a list of online displays with bounds that include the specified point.
     CGDirectDisplayID displayID = CGMainDisplayID();
     uint32_t matchingDisplayCount = 0;
-    CGError error = CGGetDisplaysWithPoint(NSPointToCGPoint(globalRect.origin), 1, &displayID, &matchingDisplayCount);
+    CGError error = CGGetDisplaysWithPoint(NSPointToCGPoint(cgOrientedRect.origin), 1, &displayID, &matchingDisplayCount);
     if ((error == kCGErrorSuccess) && (matchingDisplayCount == 1)) {
-        [Recorder recordRect:rect display:displayID completion:^(NSURL *movieURL) {
+        [self.recorder recordRect:cgOrientedRect display:displayID completion:^(NSURL *movieURL) {
             [self.overlayWindows makeObjectsPerformSelector:@selector(close)];
             [self.overlayWindows removeAllObjects];
 
-            [Converter convertMOVAtURLToGIF:movieURL completion:^(NSURL *gifURL) {
+            [Converter convertFramesAtURL:movieURL completion:^(NSURL *gifURL) {
                 [[NSFileManager defaultManager] removeItemAtPath:[movieURL path] error:nil];
                 [self uploadGIFAtURL:gifURL];
             }];

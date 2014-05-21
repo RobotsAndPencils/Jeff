@@ -152,7 +152,7 @@ NS_ENUM(NSInteger, HandleIndex) {
     self.confirmRectButton.hidden = YES;
     [self.shapeLayer removeFromSuperlayer];
 
-    [self setNeedsDisplay:YES];
+    [self display];
 
     [self.delegate selectionView:self didSelectRect:self.selectionRect];
 }
@@ -205,11 +205,11 @@ NS_ENUM(NSInteger, HandleIndex) {
         }
     } else {
         NSPoint curPoint = [theEvent locationInWindow];
-        self.selectionRect = NSMakeRect(
-                MIN(self.mouseDownPoint.x, curPoint.x),
-                MIN(self.mouseDownPoint.y, curPoint.y),
-                MAX(self.mouseDownPoint.x, curPoint.x) - MIN(self.mouseDownPoint.x, curPoint.x),
-                MAX(self.mouseDownPoint.y, curPoint.y) - MIN(self.mouseDownPoint.y, curPoint.y));
+        self.selectionRect = NSIntegralRect(NSMakeRect(
+            MIN(self.mouseDownPoint.x, curPoint.x),
+            MIN(self.mouseDownPoint.y, curPoint.y),
+            MAX(self.mouseDownPoint.x, curPoint.x) - MIN(self.mouseDownPoint.x, curPoint.x),
+            MAX(self.mouseDownPoint.y, curPoint.y) - MIN(self.mouseDownPoint.y, curPoint.y)));
     }
 
     [self updateConfirmRectButtonFrame];
