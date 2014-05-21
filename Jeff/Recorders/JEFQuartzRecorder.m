@@ -12,9 +12,7 @@
 #include <OpenGL/gl.h>
 
 
-@interface JEFQuartzRecorder () {
-    CVDisplayLinkRef displayLinkRef;
-}
+@interface JEFQuartzRecorder ()
 
 @property (nonatomic, assign) CGRect rect;
 @property (nonatomic, assign) NSInteger frameCount;
@@ -22,38 +20,9 @@
 @property (nonatomic, copy) void (^completion)(NSURL *);
 @property (nonatomic, copy) NSString *path;
 @property (nonatomic, assign) CGFloat displayScale;
+@property (nonatomic, strong) NSTimer *captureTimer;
 
 @end
-
-
-CVReturn displayLinkOutputCallback(CVDisplayLinkRef displayLink, const CVTimeStamp *inNow, const CVTimeStamp *inOutputTime, CVOptionFlags flagsIn, CVOptionFlags *flagsOut, void *displayLinkContext) {
-    @autoreleasepool {
-        JEFQuartzRecorder *self = (__bridge JEFQuartzRecorder *)displayLinkContext;
-
-        CGImageRef screenImageRef = CGDisplayCreateImageForRect(kCGDirectMainDisplay, self.rect);
-        
-        if (self.displayScale != 1.0) {
-            CGFloat width = CGRectGetWidth(self.rect);
-            CGFloat height = CGRectGetHeight(self.rect);
-            CGContextRef context = CGBitmapContextCreate(NULL, width, height, 8, 0, CGColorSpaceCreateDeviceRGB(), (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
-            CGContextDrawImage(context, CGRectMake(0, 0, width, height), screenImageRef);
-            CGImageRelease(screenImageRef);
-            screenImageRef = CGBitmapContextCreateImage(context);
-            CGContextRelease(context);
-        }
-        
-        NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:screenImageRef];
-        CGImageRelease(screenImageRef);
-        NSData *pngData = [imageRep representationUsingType:NSGIFFileType properties:nil];
-        NSString *filename = [self.path stringByAppendingPathComponent:[NSString stringWithFormat:@"JeffFrame%ld.gif", self.frameCount]];
-        [pngData writeToFile:filename atomically:YES];
-        NSLog(@"%@", filename);
-        
-        
-        self.frameCount += 1;
-    }
-    return kCVReturnSuccess;
-}
 
 
 @implementation JEFQuartzRecorder
@@ -103,17 +72,40 @@ CVReturn displayLinkOutputCallback(CVDisplayLinkRef displayLink, const CVTimeSta
             return;
         }
     }
-
-    CVDisplayLinkCreateWithActiveCGDisplays(&displayLinkRef);
-    CVDisplayLinkSetOutputCallback(displayLinkRef, displayLinkOutputCallback, (__bridge void *)self);
-    CVDisplayLinkStart(displayLinkRef);
+    
+    self.captureTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 / 20.0 target:self selector:@selector(captureFrame) userInfo:nil repeats:YES];
 }
 
 - (void)finishRecording {
-    CVDisplayLinkStop(displayLinkRef);
-    CVDisplayLinkRelease(displayLinkRef);
-
+    [self.captureTimer invalidate];
+    self.captureTimer = nil;
+    
     if (self.completion) self.completion([NSURL URLWithString:self.path]);
+}
+
+#pragma mark Private
+
+- (void)captureFrame {
+    CGImageRef screenImageRef = CGDisplayCreateImageForRect(kCGDirectMainDisplay, self.rect);
+    
+    if (self.displayScale != 1.0) {
+        CGFloat width = CGRectGetWidth(self.rect);
+        CGFloat height = CGRectGetHeight(self.rect);
+        CGContextRef context = CGBitmapContextCreate(NULL, width, height, 8, 0, CGColorSpaceCreateDeviceRGB(), (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
+        CGContextDrawImage(context, CGRectMake(0, 0, width, height), screenImageRef);
+        CGImageRelease(screenImageRef);
+        screenImageRef = CGBitmapContextCreateImage(context);
+        CGContextRelease(context);
+    }
+    
+    NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:screenImageRef];
+    CGImageRelease(screenImageRef);
+    NSData *pngData = [imageRep representationUsingType:NSGIFFileType properties:nil];
+    NSString *filename = [self.path stringByAppendingPathComponent:[NSString stringWithFormat:@"JeffFrame%ld.gif", self.frameCount]];
+    [pngData writeToFile:filename atomically:YES];
+    NSLog(@"%@", filename);
+    
+    self.frameCount += 1;
 }
 
 @end
