@@ -29,8 +29,6 @@
 		CA455B7418B84EC100F9A541 /* gifsicle in Resources */ = {isa = PBXBuildFile; fileRef = CA455B7318B84EC100F9A541 /* gifsicle */; };
 		CA455B7718B84ED200F9A541 /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B7618B84ED200F9A541 /* Converter.m */; };
 		CA455B7B18B882DB00F9A541 /* NSFileManager+Temporary.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B7A18B882DB00F9A541 /* NSFileManager+Temporary.m */; };
-		CA455B7F18B9143800F9A541 /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = CA455B7E18B9143800F9A541 /* ffmpeg */; };
-		CA47840418B923A400A5246D /* ImageMagick in Resources */ = {isa = PBXBuildFile; fileRef = CA47840318B923A400A5246D /* ImageMagick */; };
 		CA4C528918C8289C00C5EAE4 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA4C528818C8289C00C5EAE4 /* HockeySDK.framework */; };
 		CA4C528B18C828D900C5EAE4 /* HockeySDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CA4C528818C8289C00C5EAE4 /* HockeySDK.framework */; };
 		CA4D988418D6D2A900EFE4FD /* JEFRecordingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4D988318D6D2A900EFE4FD /* JEFRecordingCellView.m */; };
@@ -117,8 +115,6 @@
 		CA455B7618B84ED200F9A541 /* Converter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Converter.m; sourceTree = "<group>"; };
 		CA455B7918B882DB00F9A541 /* NSFileManager+Temporary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileManager+Temporary.h"; path = "Categories/NSFileManager+Temporary.h"; sourceTree = "<group>"; };
 		CA455B7A18B882DB00F9A541 /* NSFileManager+Temporary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileManager+Temporary.m"; path = "Categories/NSFileManager+Temporary.m"; sourceTree = "<group>"; };
-		CA455B7E18B9143800F9A541 /* ffmpeg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = ffmpeg; path = Jeff/Resources/ffmpeg; sourceTree = "<group>"; };
-		CA47840318B923A400A5246D /* ImageMagick */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ImageMagick; path = Jeff/Resources/ImageMagick; sourceTree = "<group>"; };
 		CA4C528818C8289C00C5EAE4 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = Jeff/Frameworks/HockeySDK.framework; sourceTree = "<group>"; };
 		CA4D988218D6D2A900EFE4FD /* JEFRecordingCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecordingCellView.h; path = Views/JEFRecordingCellView.h; sourceTree = "<group>"; };
 		CA4D988318D6D2A900EFE4FD /* JEFRecordingCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFRecordingCellView.m; path = Views/JEFRecordingCellView.m; sourceTree = "<group>"; };
@@ -307,8 +303,6 @@
 			isa = PBXGroup;
 			children = (
 				CADF57B018C6DE4D006512E3 /* Strings */,
-				CA47840318B923A400A5246D /* ImageMagick */,
-				CA455B7E18B9143800F9A541 /* ffmpeg */,
 				CA455B7318B84EC100F9A541 /* gifsicle */,
 			);
 			name = Resources;
@@ -496,10 +490,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA455B6C18B848B700F9A541 /* PopoverContentView.xib in Resources */,
-				CA47840418B923A400A5246D /* ImageMagick in Resources */,
 				CA455B7418B84EC100F9A541 /* gifsicle in Resources */,
 				CAF30B6018D5281100D7BC9D /* INPopoverController-Info.plist in Resources */,
-				CA455B7F18B9143800F9A541 /* ffmpeg in Resources */,
 				CA455B3618B83EB900F9A541 /* InfoPlist.strings in Resources */,
 				CAF30B4E18D3D7CC00D7BC9D /* JEFUploaderPreferencesViewController.xib in Resources */,
 				CA455B4418B83EBA00F9A541 /* Images.xcassets in Resources */,
