@@ -94,7 +94,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     [[NSNotificationCenter defaultCenter] postNotificationName:JEFClosePopoverNotification object:self];
 
     [self.recorder recordScreen:CGMainDisplayID() completion:^(NSURL *movieURL) {
-        [Converter convertMOVAtURLToGIF:movieURL completion:^(NSURL *gifURL) {
+        [Converter convertFramesAtURL:movieURL completion:^(NSURL *gifURL) {
             [[NSFileManager defaultManager] removeItemAtPath:[movieURL path] error:nil];
             [self uploadGIFAtURL:gifURL];
         }];

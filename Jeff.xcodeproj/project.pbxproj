@@ -25,7 +25,6 @@
 		CA455B6718B8467000F9A541 /* StatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B6618B8467000F9A541 /* StatusItemView.m */; };
 		CA455B6B18B848B700F9A541 /* PopoverContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B6918B848B700F9A541 /* PopoverContentViewController.m */; };
 		CA455B6C18B848B700F9A541 /* PopoverContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA455B6A18B848B700F9A541 /* PopoverContentView.xib */; };
-		CA455B6F18B84A1700F9A541 /* JEFVideoRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B6E18B84A1700F9A541 /* JEFVideoRecorder.m */; };
 		CA455B7418B84EC100F9A541 /* gifsicle in Resources */ = {isa = PBXBuildFile; fileRef = CA455B7318B84EC100F9A541 /* gifsicle */; };
 		CA455B7718B84ED200F9A541 /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B7618B84ED200F9A541 /* Converter.m */; };
 		CA455B7B18B882DB00F9A541 /* NSFileManager+Temporary.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B7A18B882DB00F9A541 /* NSFileManager+Temporary.m */; };
@@ -108,8 +107,6 @@
 		CA455B6818B848B700F9A541 /* PopoverContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverContentViewController.h; sourceTree = "<group>"; };
 		CA455B6918B848B700F9A541 /* PopoverContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverContentViewController.m; sourceTree = "<group>"; };
 		CA455B6A18B848B700F9A541 /* PopoverContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopoverContentView.xib; sourceTree = "<group>"; };
-		CA455B6D18B84A1700F9A541 /* JEFVideoRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFVideoRecorder.h; sourceTree = "<group>"; };
-		CA455B6E18B84A1700F9A541 /* JEFVideoRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFVideoRecorder.m; sourceTree = "<group>"; };
 		CA455B7318B84EC100F9A541 /* gifsicle */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = gifsicle; path = Jeff/Resources/gifsicle; sourceTree = "<group>"; };
 		CA455B7518B84ED200F9A541 /* Converter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Converter.h; sourceTree = "<group>"; };
 		CA455B7618B84ED200F9A541 /* Converter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Converter.m; sourceTree = "<group>"; };
@@ -320,8 +317,6 @@
 		CAA79EAD192A725D00A4299F /* Recorders */ = {
 			isa = PBXGroup;
 			children = (
-				CA455B6D18B84A1700F9A541 /* JEFVideoRecorder.h */,
-				CA455B6E18B84A1700F9A541 /* JEFVideoRecorder.m */,
 				CAA79EAA192A725800A4299F /* JEFQuartzRecorder.h */,
 				CAA79EAB192A725800A4299F /* JEFQuartzRecorder.m */,
 			);
@@ -592,7 +587,6 @@
 				CA413BE018BA8A720090A1A7 /* RBKDepositBoxManager.m in Sources */,
 				CA455B6B18B848B700F9A541 /* PopoverContentViewController.m in Sources */,
 				CAF30B6118D5281100D7BC9D /* INPopoverController.m in Sources */,
-				CA455B6F18B84A1700F9A541 /* JEFVideoRecorder.m in Sources */,
 				CA4D988418D6D2A900EFE4FD /* JEFRecordingCellView.m in Sources */,
 				CAF30B6418D5281100D7BC9D /* INPopoverWindowFrame.m in Sources */,
 				CA455B3818B83EB900F9A541 /* main.m in Sources */,
