@@ -563,7 +563,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "source ~/.zshrc\n\n# install obcd if it isn't already\nif ! $(gem list obcd -i); then\n    gem install obcd\nfi\n\n# run obcd, but ignore non-zero exit codes\nobcd -p Jeff/ find HeaderStyle || true";
+			shellScript = "source ~/.zshrc\n\n# install obcd if it isn't already\nif ! $(gem list obcd -i); then\n    gem install obcd\nfi\n\n# run obcd, but ignore non-zero exit codes\nobcd -p Jeff/ find HeaderStyle 2>/dev/null || true";
 		};
 		CAF30B4018D3CF4A00D7BC9D /* Sign Dropbox */ = {
 			isa = PBXShellScriptBuildPhase;
