@@ -11,28 +11,6 @@
 
 @implementation Converter
 
-+ (void)convertMOVAtURLToGIF:(NSURL *)url completion:(void(^)(NSURL *))completion {
-    NSPipe *gifPipe = [NSPipe pipe];
-    NSURL *outputURL = [NSURL fileURLWithPath:[[NSFileManager defaultManager] createTemporaryFileWithExtension:@"gif"]];
-    NSFileHandle *outputFileHandle = [NSFileHandle fileHandleForWritingToURL:outputURL error:nil];
-
-    NSTask *ffmpegTask = [[NSTask alloc] init];
-    ffmpegTask.launchPath = [[NSBundle mainBundle] pathForResource:@"ffmpeg" ofType:nil];
-    ffmpegTask.arguments = @[ @"-i", [url path], @"-vf", @"scale=640:-1", @"-r", @"20", @"-f", @"gif", @"-"];
-    [ffmpegTask setStandardOutput:gifPipe.fileHandleForWriting];
-    [ffmpegTask launch];
-
-    NSTask *gifsicleTask = [[NSTask alloc] init];
-    gifsicleTask.launchPath = [[NSBundle mainBundle] pathForResource:@"gifsicle" ofType:nil];
-    gifsicleTask.arguments = @[ @"--optimize=3", @"--delay=5" ];
-    [gifsicleTask setStandardInput:gifPipe.fileHandleForReading];
-    [gifsicleTask setStandardOutput:outputFileHandle];
-    [gifsicleTask launch];
-    gifsicleTask.terminationHandler = ^(NSTask *task) {
-        if (completion) completion(outputURL);
-    };
-}
-
 + (void)convertFramesAtURL:(NSURL *)framesURL completion:(void (^)(NSURL *))completion {
     NSURL *outputURL = [NSURL fileURLWithPath:[[NSFileManager defaultManager] createTemporaryFileWithExtension:@"gif"]];
     NSFileHandle *outputFileHandle = [NSFileHandle fileHandleForWritingToURL:outputURL error:nil];
