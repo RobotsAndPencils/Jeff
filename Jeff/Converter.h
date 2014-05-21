@@ -11,5 +11,6 @@
 @interface Converter : NSObject
 
 + (void)convertMOVAtURLToGIF:(NSURL *)url completion:(void(^)(NSURL *))completion;
++ (void)convertFramesAtURL:(NSURL *)framesURL completion:(void (^)(NSURL *))completion;
 
 @end
