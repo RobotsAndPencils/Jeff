@@ -19,8 +19,13 @@
     gifsicleTask.launchPath = [[NSBundle mainBundle] pathForResource:@"gifsicle" ofType:nil];
     [gifsicleTask setCurrentDirectoryPath:[framesURL absoluteString]];
     
-    NSMutableArray *arguments = [@[ @"--optimize=3", @"--delay=5", @"--loop" ] mutableCopy];
-    [arguments addObjectsFromArray:[[NSFileManager defaultManager] contentsOfDirectoryAtPath:[framesURL absoluteString] error:NULL]];
+    NSInteger hundredthsOfASecondDelay = (NSInteger)floor(1.0/20.0 * 100);
+    NSMutableArray *arguments = [@[ @"--optimize=3", [NSString stringWithFormat:@"--delay=%ld", hundredthsOfASecondDelay], @"--loop" ] mutableCopy];
+    NSArray *filenames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[framesURL absoluteString] error:NULL];
+    filenames = [filenames sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [obj1 compare:obj2 options:NSNumericSearch];
+    }];
+    [arguments addObjectsFromArray:filenames];
     
     gifsicleTask.arguments = arguments;
     [gifsicleTask setStandardOutput:outputFileHandle];
