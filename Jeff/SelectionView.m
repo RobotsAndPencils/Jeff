@@ -262,8 +262,10 @@ NS_ENUM(NSInteger, HandleIndex) {
     self.selectionRect = ({
         CGRect selectionRect = self.selectionRect;
         CGPoint origin = self.selectionRect.origin;
-        origin.x += x;
-        origin.y += y;
+        CGFloat maximumX = CGRectGetWidth(self.window.frame) - CGRectGetWidth(self.selectionRect);
+        CGFloat maximumY = CGRectGetHeight(self.window.frame) - CGRectGetHeight(self.selectionRect);
+        origin.x = fmin(fmax(origin.x + x, 0), maximumX);
+        origin.y = fmin(fmax(origin.y + y, 0), maximumY);
         selectionRect.origin = origin;
         selectionRect;
     });
