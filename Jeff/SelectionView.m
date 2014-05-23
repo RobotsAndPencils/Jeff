@@ -50,16 +50,17 @@
 
 const CGFloat HandleSize = 5.0;
 
-NS_ENUM(NSInteger, HandleIndex) {
-    NoHandleIndex = -1,
-    BottomLeftHandleIndex = 0,
-    MiddleLeftHandleIndex,
-    TopLeftHandleIndex,
-    TopMiddleHandleIndex,
-    TopRightHandleIndex,
-    MiddleRightHandleIndex,
-    BottomRightHandleIndex,
-    BottomMiddleHandleIndex
+typedef NS_ENUM(NSInteger, JEFHandleIndex) {
+    JEFHandleIndexNone = -1,
+    JEFHandleIndexBottomLeft = 0,
+    JEFHandleIndexMiddleLeft,
+    JEFHandleIndexTopLeft,
+    JEFHandleIndexTopMiddle,
+    JEFHandleIndexTopRight,
+    JEFHandleIndexMiddleRight,
+    JEFHandleIndexBottomRight,
+    JEFHandleIndexBottomMiddle,
+    JEFHandleIndexCount
 };
 
 @interface SelectionView ()
@@ -70,7 +71,7 @@ NS_ENUM(NSInteger, HandleIndex) {
 @property (nonatomic, assign) BOOL hasMadeInitialSelection;
 @property (nonatomic, assign) BOOL hasConfirmedSelection;
 
-@property (nonatomic, assign) NSInteger clickedHandle;
+@property (nonatomic, assign) enum JEFHandleIndex clickedHandle;
 @property (nonatomic, assign) NSPoint anchor;
 
 @property (nonatomic, strong) NSButton *confirmRectButton;
@@ -125,12 +126,12 @@ NS_ENUM(NSInteger, HandleIndex) {
 }
 
 - (void)drawHandles {
-    for (NSInteger handleIndex = BottomLeftHandleIndex; handleIndex < BottomMiddleHandleIndex; handleIndex++) {
-        [self drawHandleAtIndex:(enum HandleIndex)handleIndex];
+    for (NSInteger handleIndex = JEFHandleIndexBottomLeft; handleIndex < JEFHandleIndexCount; handleIndex++) {
+        [self drawHandleAtIndex:(enum JEFHandleIndex)handleIndex];
     }
 }
 
-- (void)drawHandleAtIndex:(enum HandleIndex)handleIndex {
+- (void)drawHandleAtIndex:(enum JEFHandleIndex)handleIndex {
     NSRect handleRect = [self rectForHandleAtIndex:handleIndex];
     NSBezierPath *handlePath = [NSBezierPath bezierPathWithOvalInRect:handleRect];
     [handlePath setLineWidth:3.0];
@@ -152,7 +153,7 @@ NS_ENUM(NSInteger, HandleIndex) {
     self.confirmRectButton.hidden = YES;
     [self.shapeLayer removeFromSuperlayer];
 
-    [self setNeedsDisplay:YES];
+    [self display];
 
     [self.delegate selectionView:self didSelectRect:self.selectionRect];
 }
@@ -195,7 +196,7 @@ NS_ENUM(NSInteger, HandleIndex) {
         self.anchor = mousePoint;
 
         // Dragging the selection
-        if (self.clickedHandle == NoHandleIndex) {
+        if (self.clickedHandle == JEFHandleIndexNone) {
             [self offsetSelectionRectLocationByX:newPoint.x y:newPoint.y];
         }
         // Dragging a selection handle
@@ -205,11 +206,11 @@ NS_ENUM(NSInteger, HandleIndex) {
         }
     } else {
         NSPoint curPoint = [theEvent locationInWindow];
-        self.selectionRect = NSMakeRect(
-                MIN(self.mouseDownPoint.x, curPoint.x),
-                MIN(self.mouseDownPoint.y, curPoint.y),
-                MAX(self.mouseDownPoint.x, curPoint.x) - MIN(self.mouseDownPoint.x, curPoint.x),
-                MAX(self.mouseDownPoint.y, curPoint.y) - MIN(self.mouseDownPoint.y, curPoint.y));
+        self.selectionRect = NSIntegralRect(NSMakeRect(
+            MIN(self.mouseDownPoint.x, curPoint.x),
+            MIN(self.mouseDownPoint.y, curPoint.y),
+            MAX(self.mouseDownPoint.x, curPoint.x) - MIN(self.mouseDownPoint.x, curPoint.x),
+            MAX(self.mouseDownPoint.y, curPoint.y) - MIN(self.mouseDownPoint.y, curPoint.y)));
     }
 
     [self updateConfirmRectButtonFrame];
@@ -219,7 +220,7 @@ NS_ENUM(NSInteger, HandleIndex) {
 
 - (void)mouseUp:(NSEvent *)theEvent {
     if (self.hasMadeInitialSelection) {
-        self.clickedHandle = NoHandleIndex;
+        self.clickedHandle = JEFHandleIndexNone;
     }
     else {
         self.hasMadeInitialSelection = YES;
@@ -262,10 +263,8 @@ NS_ENUM(NSInteger, HandleIndex) {
     self.selectionRect = ({
         CGRect selectionRect = self.selectionRect;
         CGPoint origin = self.selectionRect.origin;
-        CGFloat maximumX = CGRectGetWidth(self.window.frame) - CGRectGetWidth(self.selectionRect);
-        CGFloat maximumY = CGRectGetHeight(self.window.frame) - CGRectGetHeight(self.selectionRect);
-        origin.x = fmin(fmax(origin.x + x, 0), maximumX);
-        origin.y = fmin(fmax(origin.y + y, 0), maximumY);
+        origin.x += x;
+        origin.y += y;
         selectionRect.origin = origin;
         selectionRect;
     });
@@ -273,49 +272,49 @@ NS_ENUM(NSInteger, HandleIndex) {
 
 #pragma mark - Handles
 
-- (NSRect)rectForHandleAtIndex:(enum HandleIndex)handleIndex {
-    NSPoint handleCenter;
+- (NSRect)rectForHandleAtIndex:(enum JEFHandleIndex)handleIndex {
+    NSPoint handleCenter = NSZeroPoint;
     NSRect selectionBounds = [self selectionRect];
 
     switch (handleIndex) {
-        case BottomLeftHandleIndex:
+        case JEFHandleIndexBottomLeft:
             handleCenter.x = NSMinX(selectionBounds);
             handleCenter.y = NSMinY(selectionBounds);
             break;
 
-        case MiddleLeftHandleIndex:
-            handleCenter.x = NSMidX(selectionBounds);
-            handleCenter.y = NSMinY(selectionBounds);
-            break;
-
-        case TopLeftHandleIndex:
-            handleCenter.x = NSMaxX(selectionBounds);
-            handleCenter.y = NSMinY(selectionBounds);
-            break;
-
-        case TopMiddleHandleIndex:
-            handleCenter.x = NSMaxX(selectionBounds);
+        case JEFHandleIndexMiddleLeft:
+            handleCenter.x = NSMinX(selectionBounds);
             handleCenter.y = NSMidY(selectionBounds);
             break;
 
-        case TopRightHandleIndex:
-            handleCenter.x = NSMaxX(selectionBounds);
+        case JEFHandleIndexTopLeft:
+            handleCenter.x = NSMinX(selectionBounds);
             handleCenter.y = NSMaxY(selectionBounds);
             break;
 
-        case MiddleRightHandleIndex:
+        case JEFHandleIndexTopMiddle:
             handleCenter.x = NSMidX(selectionBounds);
             handleCenter.y = NSMaxY(selectionBounds);
             break;
 
-        case BottomRightHandleIndex:
-            handleCenter.x = NSMinX(selectionBounds);
+        case JEFHandleIndexTopRight:
+            handleCenter.x = NSMaxX(selectionBounds);
             handleCenter.y = NSMaxY(selectionBounds);
             break;
 
-        case BottomMiddleHandleIndex:
-            handleCenter.x = NSMinX(selectionBounds);
+        case JEFHandleIndexMiddleRight:
+            handleCenter.x = NSMaxX(selectionBounds);
             handleCenter.y = NSMidY(selectionBounds);
+            break;
+
+        case JEFHandleIndexBottomRight:
+            handleCenter.x = NSMaxX(selectionBounds);
+            handleCenter.y = NSMinY(selectionBounds);
+            break;
+
+        case JEFHandleIndexBottomMiddle:
+            handleCenter.x = NSMidX(selectionBounds);
+            handleCenter.y = NSMinY(selectionBounds);
             break;
 
         default:
@@ -327,50 +326,50 @@ NS_ENUM(NSInteger, HandleIndex) {
     return NSInsetRect(selectionBounds, -HandleSize, -HandleSize);
 }
 
-- (NSRect)newBoundsFromBounds:(NSRect)oldBounds forHandle:(enum HandleIndex)handleIndex withDelta:(NSPoint)boundsDelta {
+- (NSRect)newBoundsFromBounds:(NSRect)oldBounds forHandle:(enum JEFHandleIndex)handleIndex withDelta:(NSPoint)boundsDelta {
     NSRect newBounds = oldBounds;
 
     switch (handleIndex) {
-        case TopMiddleHandleIndex:
-            newBounds.size.width += boundsDelta.x;
-            break;
-
-        case MiddleRightHandleIndex:
+        case JEFHandleIndexTopMiddle:
             newBounds.size.height += boundsDelta.y;
             break;
 
-        case MiddleLeftHandleIndex:
-            newBounds.size.height -= boundsDelta.y;
-            newBounds.origin.y += boundsDelta.y;
+        case JEFHandleIndexMiddleRight:
+            newBounds.size.width += boundsDelta.x;
             break;
 
-        case BottomMiddleHandleIndex:
+        case JEFHandleIndexMiddleLeft:
             newBounds.size.width -= boundsDelta.x;
             newBounds.origin.x += boundsDelta.x;
             break;
 
-        case BottomLeftHandleIndex:
+        case JEFHandleIndexBottomMiddle:
+            newBounds.size.height -= boundsDelta.y;
+            newBounds.origin.y += boundsDelta.y;
+            break;
+
+        case JEFHandleIndexBottomLeft:
             newBounds.size.width -= boundsDelta.x;
             newBounds.origin.x += boundsDelta.x;
             newBounds.size.height -= boundsDelta.y;
             newBounds.origin.y += boundsDelta.y;
             break;
 
-        case TopLeftHandleIndex:
-            newBounds.size.height -= boundsDelta.y;
-            newBounds.origin.y += boundsDelta.y;
-            newBounds.size.width += boundsDelta.x;
-            break;
-
-        case TopRightHandleIndex:
-            newBounds.size.width += boundsDelta.x;
+        case JEFHandleIndexTopLeft:
             newBounds.size.height += boundsDelta.y;
-            break;
-
-        case BottomRightHandleIndex:
-            newBounds.size.width -= boundsDelta.x;
             newBounds.origin.x += boundsDelta.x;
+            newBounds.size.width -= boundsDelta.x;
+            break;
+
+        case JEFHandleIndexTopRight:
+            newBounds.size.width += boundsDelta.x;
             newBounds.size.height += boundsDelta.y;
+            break;
+
+        case JEFHandleIndexBottomRight:
+            newBounds.size.width += boundsDelta.x;
+            newBounds.origin.y += boundsDelta.y;
+            newBounds.size.height -= boundsDelta.y;
             break;
 
         default:
@@ -380,15 +379,15 @@ NS_ENUM(NSInteger, HandleIndex) {
     return newBounds;
 }
 
-- (NSInteger)handleAtPoint:(NSPoint)point {
-    NSInteger handleIndex;
+- (enum JEFHandleIndex)handleAtPoint:(NSPoint)point {
+    enum JEFHandleIndex handleIndex;
     NSRect handleRect;
 
     if (CGRectEqualToRect([self bounds], CGRectZero)) {
-        return 5;
+        return JEFHandleIndexNone;
     }
     else {
-        for (handleIndex = 0; handleIndex < 8; handleIndex++) {
+        for (handleIndex = JEFHandleIndexBottomLeft; handleIndex < JEFHandleIndexCount; handleIndex++) {
             handleRect = [self rectForHandleAtIndex:handleIndex];
 
             if (NSPointInRect(point, handleRect)) {
@@ -397,7 +396,7 @@ NS_ENUM(NSInteger, HandleIndex) {
         }
     }
 
-    return -1;
+    return JEFHandleIndexNone;
 }
 
 @end
