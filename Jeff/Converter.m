@@ -11,42 +11,23 @@
 
 @implementation Converter
 
-+ (void)convertMOVAtURLToGIF:(NSURL *)url completion:(void(^)(NSURL *))completion {
-    NSPipe *gifPipe = [NSPipe pipe];
++ (void)convertFramesAtURL:(NSURL *)framesURL completion:(void (^)(NSURL *))completion {
     NSURL *outputURL = [NSURL fileURLWithPath:[[NSFileManager defaultManager] createTemporaryFileWithExtension:@"gif"]];
     NSFileHandle *outputFileHandle = [NSFileHandle fileHandleForWritingToURL:outputURL error:nil];
-
-//    NSString *directory = [[NSFileManager defaultManager] createTemporaryDirectory];
-//    NSString *pngOutput = [directory stringByAppendingPathComponent:@"frame-%3d.png"];
-//    NSString *pngInput = [directory stringByAppendingPathComponent:@"frame-*.png"];
-
-    NSTask *ffmpegTask = [[NSTask alloc] init];
-    ffmpegTask.launchPath = [[NSBundle mainBundle] pathForResource:@"ffmpeg" ofType:nil];
-    ffmpegTask.arguments = @[ @"-i", [url path], @"-vf", @"scale=640:-1", @"-r", @"20", @"-f", @"gif", @"-"];
-//    ffmpegTask.arguments = @[ @"-i", [url path], @"-vf", @"scale=640:-1", @"-r", @"10", pngOutput];
-    [ffmpegTask setStandardOutput:gifPipe.fileHandleForWriting];
-    [ffmpegTask launch];
-//    [ffmpegTask waitUntilExit];
-
-//    [[NSWorkspace sharedWorkspace] openFile:[url path]];
-//    [[NSWorkspace sharedWorkspace] openFile:directory];
-//
-//    NSLog(@"Convert -----");
-//    NSString* imageMagickPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"/Contents/Resources/ImageMagick"];
-//    NSString* imageMagickLibraryPath = [imageMagickPath stringByAppendingPathComponent:@"/lib"];
-//    NSDictionary *environment = @{ @"MAGICK_HOME" : imageMagickPath, @"DYLD_LIBRARY_PATH" : imageMagickLibraryPath };
-//
-//    NSTask *convertTask = [[NSTask alloc] init];
-//    [convertTask setEnvironment:environment];
-//    convertTask.launchPath = [[NSBundle mainBundle] pathForResource:@"convert" ofType:nil];
-//    convertTask.arguments = @[ pngInput, @"-delay", @"5", @"-loop", @"0", @"gif:-" ];
-//    [convertTask setStandardOutput:gifPipe.fileHandleForWriting];
-//    [convertTask launch];
-
+    
     NSTask *gifsicleTask = [[NSTask alloc] init];
     gifsicleTask.launchPath = [[NSBundle mainBundle] pathForResource:@"gifsicle" ofType:nil];
-    gifsicleTask.arguments = @[ @"--optimize=3", @"--delay=5" ];
-    [gifsicleTask setStandardInput:gifPipe.fileHandleForReading];
+    [gifsicleTask setCurrentDirectoryPath:[framesURL absoluteString]];
+    
+    NSInteger hundredthsOfASecondDelay = (NSInteger)floor(1.0/20.0 * 100);
+    NSMutableArray *arguments = [@[ @"--optimize=3", [NSString stringWithFormat:@"--delay=%ld", hundredthsOfASecondDelay], @"--loop" ] mutableCopy];
+    NSArray *filenames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[framesURL absoluteString] error:NULL];
+    filenames = [filenames sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [obj1 compare:obj2 options:NSNumericSearch];
+    }];
+    [arguments addObjectsFromArray:filenames];
+    
+    gifsicleTask.arguments = arguments;
     [gifsicleTask setStandardOutput:outputFileHandle];
     [gifsicleTask launch];
     gifsicleTask.terminationHandler = ^(NSTask *task) {
