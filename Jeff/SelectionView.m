@@ -48,7 +48,14 @@
 #import "SelectionView.h"
 #import <QuartzCore/QuartzCore.h>
 
+
 const CGFloat HandleSize = 5.0;
+const CGFloat JEFSelectionMinimumWidth = 50.0;
+const CGFloat JEFSelectionMinimumHeight = 50.0;
+
+CGFloat constrain(CGFloat value, CGFloat min, CGFloat max) {
+    return fmin(fmax(value, min), max);
+}
 
 typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     JEFHandleIndexNone = -1,
@@ -63,6 +70,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     JEFHandleIndexCount
 };
 
+
 @interface SelectionView ()
 
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
@@ -75,7 +83,9 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 @property (nonatomic, assign) NSPoint anchor;
 
 @property (nonatomic, strong) NSButton *confirmRectButton;
+
 @end
+
 
 @implementation SelectionView
 
@@ -190,20 +200,23 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     if (self.hasMadeInitialSelection) {
         NSPoint mousePoint = [theEvent locationInWindow];
         NSPoint newPoint;
+        
 
         newPoint.x = mousePoint.x - self.anchor.x;
         newPoint.y = mousePoint.y - self.anchor.y;
-        self.anchor = mousePoint;
 
-        // Dragging the selection
+        // Dragging to move the selection
         if (self.clickedHandle == JEFHandleIndexNone) {
             [self offsetSelectionRectLocationByX:newPoint.x y:newPoint.y];
         }
         // Dragging a selection handle
-        else if (self.clickedHandle >= 0 && self.clickedHandle < 8) {
+        else if (self.clickedHandle >= JEFHandleIndexNone && self.clickedHandle < JEFHandleIndexCount) {
             NSRect newBounds = [self newBoundsFromBounds:self.selectionRect forHandle:self.clickedHandle withDelta:newPoint];
             self.selectionRect = newBounds;
         }
+
+        mousePoint = [self constrainMousePoint:mousePoint onHandle:self.clickedHandle inRect:self.selectionRect];
+        self.anchor = mousePoint;
     } else {
         NSPoint curPoint = [theEvent locationInWindow];
         self.selectionRect = NSIntegralRect(NSMakeRect(
@@ -216,6 +229,29 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     [self updateConfirmRectButtonFrame];
     [self updateMarchingAntsPath];
     [self setNeedsDisplayInRect:[self bounds]];
+}
+
+- (NSPoint)constrainMousePoint:(NSPoint)mousePoint onHandle:(JEFHandleIndex)handle inRect:(NSRect)rect {
+    switch (handle) {
+        case JEFHandleIndexBottomLeft:
+            return NSMakePoint(constrain(mousePoint.x, CGFLOAT_MIN, CGRectGetMinX(rect)), constrain(mousePoint.y, CGFLOAT_MIN, CGRectGetMinY(rect)));
+        case JEFHandleIndexMiddleLeft:
+            return NSMakePoint(constrain(mousePoint.x, CGFLOAT_MIN, CGRectGetMinX(rect)), mousePoint.y);
+        case JEFHandleIndexTopLeft:
+            return NSMakePoint(constrain(mousePoint.x, CGFLOAT_MIN, CGRectGetMinX(rect)), constrain(mousePoint.y, CGRectGetMaxY(rect), CGFLOAT_MAX));
+        case JEFHandleIndexTopMiddle:
+            return NSMakePoint(mousePoint.x, constrain(mousePoint.y, CGRectGetMaxY(rect), CGFLOAT_MAX));
+        case JEFHandleIndexTopRight:
+            return NSMakePoint(constrain(mousePoint.x, CGRectGetMaxX(rect), CGFLOAT_MAX), constrain(mousePoint.y, CGRectGetMaxY(rect), CGFLOAT_MAX));
+        case JEFHandleIndexMiddleRight:
+            return NSMakePoint(constrain(mousePoint.x, CGRectGetMaxX(rect), CGFLOAT_MAX), mousePoint.y);
+        case JEFHandleIndexBottomRight:
+            return NSMakePoint(constrain(mousePoint.x, CGRectGetMaxX(rect), CGFLOAT_MAX), constrain(mousePoint.y, CGFLOAT_MIN, CGRectGetMinY(rect)));
+        case JEFHandleIndexBottomMiddle:
+            return NSMakePoint(mousePoint.x, constrain(mousePoint.y, CGFLOAT_MIN, CGRectGetMinY(rect)));
+        default:
+            return mousePoint;
+    }
 }
 
 - (void)mouseUp:(NSEvent *)theEvent {
@@ -375,6 +411,28 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         default:
             break;
     }
+
+    NSSize minimumSize = newBounds.size;
+    // Explicitly not using CGGeometry here so as not to normalize the rect
+    if (newBounds.size.width < JEFSelectionMinimumWidth) {
+        minimumSize.width = JEFSelectionMinimumWidth;
+        if (handleIndex == JEFHandleIndexTopLeft || handleIndex == JEFHandleIndexMiddleLeft || handleIndex == JEFHandleIndexBottomLeft) {
+            newBounds.origin.x = CGRectGetMaxX(oldBounds) - minimumSize.width;
+        }
+        else {
+            newBounds.origin.x = oldBounds.origin.x;
+        }
+    }
+    if (newBounds.size.height < JEFSelectionMinimumHeight) {
+        minimumSize.height = JEFSelectionMinimumHeight;
+        if (handleIndex == JEFHandleIndexBottomLeft || handleIndex == JEFHandleIndexBottomMiddle || handleIndex == JEFHandleIndexBottomRight) {
+            newBounds.origin.y = CGRectGetMaxY(oldBounds) - minimumSize.height;
+        }
+        else {
+            newBounds.origin.y = oldBounds.origin.y;
+        }
+    }
+    newBounds.size = minimumSize;
 
     return newBounds;
 }
