@@ -46,17 +46,19 @@
  
  */
 
-#import <Cocoa/Cocoa.h>
-
 @class SelectionView;
 
+
 @protocol DrawMouseBoxViewDelegate<NSObject>
+
 - (void)selectionView:(SelectionView *)view didSelectRect:(NSRect)rect;
+- (void)selectionViewDidCancel:(SelectionView *)view;
+
 @end
 
 
 @interface SelectionView : NSView
 
-@property(readwrite, weak) id <DrawMouseBoxViewDelegate> delegate;
+@property (nonatomic, weak) id<DrawMouseBoxViewDelegate> delegate;
 
 @end
