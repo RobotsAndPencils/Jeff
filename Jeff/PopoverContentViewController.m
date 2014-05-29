@@ -234,7 +234,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (void)didDoubleClickRow:(NSTableView *)sender {
     NSInteger clickedRow = [sender selectedRow];
-    JEFRecording *recording = self.recentRecordings[clickedRow];
+    JEFRecording *recording = [self.recentRecordingsArrayController arrangedObjects][clickedRow];
     [[NSWorkspace sharedWorkspace] openURL:recording.url];
 }
 
