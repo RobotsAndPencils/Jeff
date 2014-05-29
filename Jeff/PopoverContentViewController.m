@@ -18,8 +18,7 @@
 #import "Converter.h"
 #import "JEFRecordingCellView.h"
 #import "JEFQuartzRecorder.h"
-
-#define kShadyWindowLevel (NSDockWindowLevel + 1000)
+#import "JEFOverlayWindow.h"
 
 static void *PopoverContentViewControllerContext = &PopoverContentViewControllerContext;
 
@@ -104,17 +103,17 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 - (IBAction)recordSelection:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:JEFClosePopoverNotification object:self];
 
+    __weak __typeof(self) weakSelf = self;
     for (NSScreen *screen in [NSScreen screens]) {
         NSRect frame = [screen frame];
-        NSWindow *window = [[NSWindow alloc] initWithContentRect:frame styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
-        [window setBackgroundColor:[NSColor clearColor]];
-        [window setOpaque:NO];
-        [window setLevel:kShadyWindowLevel];
-        [window setReleasedWhenClosed:NO];
-        SelectionView *drawMouseBoxView = [[SelectionView alloc] initWithFrame:frame];
-        drawMouseBoxView.delegate = self;
-        [window setContentView:drawMouseBoxView];
-        [window makeKeyAndOrderFront:self];
+        JEFOverlayWindow *window = [[JEFOverlayWindow alloc] initWithContentRect:frame completion:^(SelectionView *view, NSRect rect, BOOL cancelled){
+            if (!cancelled) {
+                [weakSelf selectionView:view didSelectRect:rect];
+            }
+            else {
+                [weakSelf selectionViewDidCancel:view];
+            }
+        }];
 
         [self.overlayWindows addObject:window];
     }
@@ -160,6 +159,17 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     }
 
     [[NSCursor currentCursor] pop];
+}
+
+- (void)selectionViewDidCancel:(SelectionView *)view {
+    [[NSNotificationCenter defaultCenter] postNotificationName:JEFSetStatusViewRecordingNotification object:self];
+    
+    for (NSWindow *window in self.overlayWindows) {
+        [window setIgnoresMouseEvents:YES];
+    }
+    
+    [self.overlayWindows makeObjectsPerformSelector:@selector(close)];
+    [self.overlayWindows removeAllObjects];
 }
 
 #pragma mark - Uploading

@@ -96,26 +96,22 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     if (self) {
         [self setWantsLayer:YES];
 
-        self.hasMadeInitialSelection = NO;
-        self.hasConfirmedSelection = NO;
+        _hasMadeInitialSelection = NO;
+        _hasConfirmedSelection = NO;
 
-        self.confirmRectButton = [[NSButton alloc] initWithFrame:CGRectMake(0, 0, 100, 24)];
-        [self.confirmRectButton setButtonType:NSMomentaryLightButton];
-        [self.confirmRectButton setBezelStyle:NSInlineBezelStyle];
-        [self.confirmRectButton setTitle:@"Record"];
-        self.confirmRectButton.hidden = YES;
-        [self.confirmRectButton setTarget:self];
-        [self.confirmRectButton setAction:@selector(confirmRect)];
+        _confirmRectButton = [[NSButton alloc] initWithFrame:CGRectMake(0, 0, 100, 24)];
+        [_confirmRectButton setButtonType:NSMomentaryLightButton];
+        [_confirmRectButton setBezelStyle:NSInlineBezelStyle];
+        [_confirmRectButton setTitle:@"Record"];
+        _confirmRectButton.hidden = YES;
+        [_confirmRectButton setTarget:self];
+        [_confirmRectButton setAction:@selector(confirmRect)];
         [self addSubview:self.confirmRectButton];
     }
     return self;
 }
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)theEvent {
-    return YES;
-}
-
-- (BOOL)acceptsFirstResponder {
     return YES;
 }
 
@@ -166,6 +162,16 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     [self display];
 
     [self.delegate selectionView:self didSelectRect:self.selectionRect];
+}
+
+#pragma mark - NSResponder
+
+- (BOOL)acceptsFirstResponder {
+    return YES;
+}
+
+- (void)cancelOperation:(id)sender {
+    [self.delegate selectionViewDidCancel:self];
 }
 
 #pragma mark - Mouse events
