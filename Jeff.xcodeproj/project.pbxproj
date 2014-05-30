@@ -10,6 +10,8 @@
 		8359316EB0FC2DB3A978A67C /* JEFDepositBoxUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 835937AA85B94A9524F73CBD /* JEFDepositBoxUploader.m */; };
 		8359322E52C5BFFB013B4AC7 /* JEFDropboxUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 835935E41B797539819CFB36 /* JEFDropboxUploader.m */; };
 		83593BA6023A48A43B1002E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83593BD28BA68D2EAD12CF1C /* Localizable.strings */; };
+		CA1F9908192F0A7F00C3EF33 /* JeffLauncher.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = CA1F9905192F0A5F00C3EF33 /* JeffLauncher.app */; };
+		CA1F990C192F0ACB00C3EF33 /* StartAtLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1F990B192F0ACB00C3EF33 /* StartAtLoginController.m */; };
 		CA413BE018BA8A720090A1A7 /* RBKDepositBoxManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CA413BDF18BA8A720090A1A7 /* RBKDepositBoxManager.m */; };
 		CA455B2C18B83EB900F9A541 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA455B2B18B83EB900F9A541 /* Cocoa.framework */; };
 		CA455B3618B83EB900F9A541 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CA455B3418B83EB900F9A541 /* InfoPlist.strings */; };
@@ -52,6 +54,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		CA1F9904192F0A5F00C3EF33 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CA1F98FF192F0A5F00C3EF33 /* JeffLauncher.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CADB5F0418E3D71900832B7A;
+			remoteInfo = JeffLauncher;
+		};
+		CA1F9906192F0A5F00C3EF33 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CA1F98FF192F0A5F00C3EF33 /* JeffLauncher.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CADB5F2518E3D71900832B7A;
+			remoteInfo = JeffLauncherTests;
+		};
 		CA455B4D18B83EBA00F9A541 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CA455B2018B83EB900F9A541 /* Project object */;
@@ -68,6 +84,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				CA1F9908192F0A7F00C3EF33 /* JeffLauncher.app in CopyFiles */,
 				CAF30B3D18D3CAF300D7BC9D /* DropboxOSX.framework in CopyFiles */,
 				CA4C528B18C828D900C5EAE4 /* HockeySDK.framework in CopyFiles */,
 			);
@@ -83,6 +100,9 @@
 		83593BB07DFAFBD9106DD41E /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		83593E3E69C23122FB40765D /* JEFUploaderProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFUploaderProtocol.h; path = ../JEFUploaderProtocol.h; sourceTree = "<group>"; };
 		83593F946B55E6E3610A19A4 /* JEFDropboxUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFDropboxUploader.h; sourceTree = "<group>"; };
+		CA1F98FF192F0A5F00C3EF33 /* JeffLauncher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JeffLauncher.xcodeproj; path = JeffLauncher/JeffLauncher.xcodeproj; sourceTree = "<group>"; };
+		CA1F990A192F0ACB00C3EF33 /* StartAtLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartAtLoginController.h; sourceTree = "<group>"; };
+		CA1F990B192F0ACB00C3EF33 /* StartAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartAtLoginController.m; sourceTree = "<group>"; };
 		CA413BDE18BA8A720090A1A7 /* RBKDepositBoxManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBKDepositBoxManager.h; sourceTree = "<group>"; };
 		CA413BDF18BA8A720090A1A7 /* RBKDepositBoxManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBKDepositBoxManager.m; sourceTree = "<group>"; };
 		CA455B2818B83EB900F9A541 /* Jeff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jeff.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,9 +210,28 @@
 		83593B9212B387F97DA9E104 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				CA1F9909192F0ACB00C3EF33 /* StartAtLoginController */,
 				CAF30B5418D5281100D7BC9D /* INPopoverController */,
 			);
 			path = Libraries;
+			sourceTree = "<group>";
+		};
+		CA1F9900192F0A5F00C3EF33 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CA1F9905192F0A5F00C3EF33 /* JeffLauncher.app */,
+				CA1F9907192F0A5F00C3EF33 /* JeffLauncherTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CA1F9909192F0ACB00C3EF33 /* StartAtLoginController */ = {
+			isa = PBXGroup;
+			children = (
+				CA1F990A192F0ACB00C3EF33 /* StartAtLoginController.h */,
+				CA1F990B192F0ACB00C3EF33 /* StartAtLoginController.m */,
+			);
+			path = StartAtLoginController;
 			sourceTree = "<group>";
 		};
 		CA413BDD18BA8A250090A1A7 /* RBKDepositBoxManager */ = {
@@ -207,6 +246,7 @@
 		CA455B1F18B83EB900F9A541 = {
 			isa = PBXGroup;
 			children = (
+				CA1F98FF192F0A5F00C3EF33 /* JeffLauncher.xcodeproj */,
 				CA455B3118B83EB900F9A541 /* Jeff */,
 				CA455B4F18B83EBA00F9A541 /* JeffTests */,
 				CA455B2A18B83EB900F9A541 /* Frameworks */,
@@ -426,7 +466,7 @@
 				CA455B2618B83EB900F9A541 /* Resources */,
 				6AF62D2B5DAE422889FA4895 /* Copy Pods Resources */,
 				CA4C528A18C828CC00C5EAE4 /* CopyFiles */,
-				CAF30B4018D3CF4A00D7BC9D /* Sign Dropbox */,
+				CAF30B4018D3CF4A00D7BC9D /* Sign Bundles */,
 				CA0F8DB118F4E87C00775565 /* Check Header Style */,
 			);
 			buildRules = (
@@ -489,6 +529,12 @@
 			mainGroup = CA455B1F18B83EB900F9A541;
 			productRefGroup = CA455B2918B83EB900F9A541 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = CA1F9900192F0A5F00C3EF33 /* Products */;
+					ProjectRef = CA1F98FF192F0A5F00C3EF33 /* JeffLauncher.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				CA455B2718B83EB900F9A541 /* Jeff */,
@@ -496,6 +542,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		CA1F9905192F0A5F00C3EF33 /* JeffLauncher.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = JeffLauncher.app;
+			remoteRef = CA1F9904192F0A5F00C3EF33 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CA1F9907192F0A5F00C3EF33 /* JeffLauncherTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = JeffLauncherTests.xctest;
+			remoteRef = CA1F9906192F0A5F00C3EF33 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		CA455B2618B83EB900F9A541 /* Resources */ = {
@@ -570,19 +633,19 @@
 			shellPath = /bin/zsh;
 			shellScript = "source ~/.zshrc\n\n# install obcd if it isn't already\nif ! $(gem list obcd -i); then\n    gem install obcd\nfi\n\n# run obcd, but ignore non-zero exit codes\nobcd -p Jeff/ find HeaderStyle 2>/dev/null || true";
 		};
-		CAF30B4018D3CF4A00D7BC9D /* Sign Dropbox */ = {
+		CAF30B4018D3CF4A00D7BC9D /* Sign Bundles */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Sign Dropbox";
+			name = "Sign Bundles";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "LOCATION=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\nIDENTITY=\"Developer ID Application: Brandon Evans\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$LOCATION/DropboxOSX.framework/Versions/A\"";
+			shellScript = "LOCATION=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\nIDENTITY=\"Developer ID Application: Brandon Evans\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$LOCATION/DropboxOSX.framework/Versions/A\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"${BUILT_PRODUCTS_DIR}/JeffLauncher.app\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -606,6 +669,7 @@
 				CA571B1C1936E371005E9C46 /* JEFOverlayWindow.m in Sources */,
 				CA413BE018BA8A720090A1A7 /* RBKDepositBoxManager.m in Sources */,
 				CA455B6B18B848B700F9A541 /* PopoverContentViewController.m in Sources */,
+				CA1F990C192F0ACB00C3EF33 /* StartAtLoginController.m in Sources */,
 				CAF30B6118D5281100D7BC9D /* INPopoverController.m in Sources */,
 				CA4D988418D6D2A900EFE4FD /* JEFRecordingCellView.m in Sources */,
 				CAF30B6418D5281100D7BC9D /* INPopoverWindowFrame.m in Sources */,
