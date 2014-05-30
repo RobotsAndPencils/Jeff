@@ -38,7 +38,7 @@ NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
     [self setupStatusItem];
     [self setupPopover];
 
-    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"8937bcd0d2b85a5ebe3ae3c924af1efb" companyName:@"Brandon Evans" delegate:self];
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"7651f7d7bbfce57dca36b225029130f2"];
     [[BITHockeyManager sharedHockeyManager] startManager];
     [[BITHockeyManager sharedHockeyManager].crashManager setAutoSubmitCrashReport: YES];
 
