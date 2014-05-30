@@ -30,8 +30,6 @@
 		CA455B7418B84EC100F9A541 /* gifsicle in Resources */ = {isa = PBXBuildFile; fileRef = CA455B7318B84EC100F9A541 /* gifsicle */; };
 		CA455B7718B84ED200F9A541 /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B7618B84ED200F9A541 /* Converter.m */; };
 		CA455B7B18B882DB00F9A541 /* NSFileManager+Temporary.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B7A18B882DB00F9A541 /* NSFileManager+Temporary.m */; };
-		CA4C528918C8289C00C5EAE4 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA4C528818C8289C00C5EAE4 /* HockeySDK.framework */; };
-		CA4C528B18C828D900C5EAE4 /* HockeySDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CA4C528818C8289C00C5EAE4 /* HockeySDK.framework */; };
 		CA4D988418D6D2A900EFE4FD /* JEFRecordingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4D988318D6D2A900EFE4FD /* JEFRecordingCellView.m */; };
 		CA571B1C1936E371005E9C46 /* JEFOverlayWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CA571B1B1936E371005E9C46 /* JEFOverlayWindow.m */; };
 		CA875EFC18B9974C009FC997 /* SelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA875EFB18B9974C009FC997 /* SelectionView.m */; };
@@ -86,7 +84,6 @@
 			files = (
 				CA1F9908192F0A7F00C3EF33 /* JeffLauncher.app in CopyFiles */,
 				CAF30B3D18D3CAF300D7BC9D /* DropboxOSX.framework in CopyFiles */,
-				CA4C528B18C828D900C5EAE4 /* HockeySDK.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,7 +131,6 @@
 		CA455B7618B84ED200F9A541 /* Converter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Converter.m; sourceTree = "<group>"; };
 		CA455B7918B882DB00F9A541 /* NSFileManager+Temporary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileManager+Temporary.h"; path = "Categories/NSFileManager+Temporary.h"; sourceTree = "<group>"; };
 		CA455B7A18B882DB00F9A541 /* NSFileManager+Temporary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileManager+Temporary.m"; path = "Categories/NSFileManager+Temporary.m"; sourceTree = "<group>"; };
-		CA4C528818C8289C00C5EAE4 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = Jeff/Frameworks/HockeySDK.framework; sourceTree = "<group>"; };
 		CA4D988218D6D2A900EFE4FD /* JEFRecordingCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecordingCellView.h; path = Views/JEFRecordingCellView.h; sourceTree = "<group>"; };
 		CA4D988318D6D2A900EFE4FD /* JEFRecordingCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFRecordingCellView.m; path = Views/JEFRecordingCellView.m; sourceTree = "<group>"; };
 		CA571B1A1936E371005E9C46 /* JEFOverlayWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFOverlayWindow.h; path = Windows/JEFOverlayWindow.h; sourceTree = "<group>"; };
@@ -179,7 +175,6 @@
 				CAF30B3C18D3CAD800D7BC9D /* DropboxOSX.framework in Frameworks */,
 				CA455B2C18B83EB900F9A541 /* Cocoa.framework in Frameworks */,
 				E0C4A7F96812441E8DA95076 /* libPods.a in Frameworks */,
-				CA4C528918C8289C00C5EAE4 /* HockeySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,7 +265,6 @@
 			children = (
 				CAF30B3E18D3CAFD00D7BC9D /* Security.framework */,
 				CAF30B3B18D3CAD800D7BC9D /* DropboxOSX.framework */,
-				CA4C528818C8289C00C5EAE4 /* HockeySDK.framework */,
 				CA455B2B18B83EB900F9A541 /* Cocoa.framework */,
 				CA455B4A18B83EBA00F9A541 /* XCTest.framework */,
 				CA455B2D18B83EB900F9A541 /* Other Frameworks */,
