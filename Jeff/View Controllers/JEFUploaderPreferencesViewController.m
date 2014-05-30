@@ -9,6 +9,7 @@
 #import "JEFUploaderPreferencesViewController.h"
 
 #import <DropboxOSX/DropboxOSX.h>
+#import <ServiceManagement/ServiceManagement.h>
 
 @interface JEFUploaderPreferencesViewController ()
 

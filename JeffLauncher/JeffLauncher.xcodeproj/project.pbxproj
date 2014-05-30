@@ -1,0 +1,491 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CA23061918E3EA2F000288DE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA23061818E3EA2F000288DE /* MainMenu.xib */; };
+		CADB5F0818E3D71900832B7A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CADB5F0718E3D71900832B7A /* Cocoa.framework */; };
+		CADB5F1218E3D71900832B7A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CADB5F1018E3D71900832B7A /* InfoPlist.strings */; };
+		CADB5F1418E3D71900832B7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CADB5F1318E3D71900832B7A /* main.m */; };
+		CADB5F1818E3D71900832B7A /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CADB5F1618E3D71900832B7A /* Credits.rtf */; };
+		CADB5F1B18E3D71900832B7A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CADB5F1A18E3D71900832B7A /* AppDelegate.m */; };
+		CADB5F2018E3D71900832B7A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CADB5F1F18E3D71900832B7A /* Images.xcassets */; };
+		CADB5F2718E3D71900832B7A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CADB5F2618E3D71900832B7A /* XCTest.framework */; };
+		CADB5F2818E3D71900832B7A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CADB5F0718E3D71900832B7A /* Cocoa.framework */; };
+		CADB5F3018E3D71900832B7A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CADB5F2E18E3D71900832B7A /* InfoPlist.strings */; };
+		CADB5F3218E3D71900832B7A /* JeffLauncherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CADB5F3118E3D71900832B7A /* JeffLauncherTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CADB5F2918E3D71900832B7A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CADB5EFC18E3D71900832B7A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CADB5F0318E3D71900832B7A;
+			remoteInfo = JeffLauncher;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CA23061818E3EA2F000288DE /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		CADB5F0418E3D71900832B7A /* JeffLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JeffLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CADB5F0718E3D71900832B7A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		CADB5F0A18E3D71900832B7A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		CADB5F0B18E3D71900832B7A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		CADB5F0C18E3D71900832B7A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CADB5F0F18E3D71900832B7A /* JeffLauncher-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JeffLauncher-Info.plist"; sourceTree = "<group>"; };
+		CADB5F1118E3D71900832B7A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CADB5F1318E3D71900832B7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CADB5F1518E3D71900832B7A /* JeffLauncher-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JeffLauncher-Prefix.pch"; sourceTree = "<group>"; };
+		CADB5F1718E3D71900832B7A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		CADB5F1918E3D71900832B7A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CADB5F1A18E3D71900832B7A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CADB5F1F18E3D71900832B7A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CADB5F2518E3D71900832B7A /* JeffLauncherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JeffLauncherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CADB5F2618E3D71900832B7A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		CADB5F2D18E3D71900832B7A /* JeffLauncherTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JeffLauncherTests-Info.plist"; sourceTree = "<group>"; };
+		CADB5F2F18E3D71900832B7A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CADB5F3118E3D71900832B7A /* JeffLauncherTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JeffLauncherTests.m; sourceTree = "<group>"; };
+		CADB5F4B18E3D86800832B7A /* JeffLauncher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = JeffLauncher.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CADB5F0118E3D71900832B7A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CADB5F0818E3D71900832B7A /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CADB5F2218E3D71900832B7A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CADB5F2818E3D71900832B7A /* Cocoa.framework in Frameworks */,
+				CADB5F2718E3D71900832B7A /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CADB5EFB18E3D71900832B7A = {
+			isa = PBXGroup;
+			children = (
+				CADB5F0D18E3D71900832B7A /* JeffLauncher */,
+				CADB5F2B18E3D71900832B7A /* JeffLauncherTests */,
+				CADB5F0618E3D71900832B7A /* Frameworks */,
+				CADB5F0518E3D71900832B7A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CADB5F0518E3D71900832B7A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CADB5F0418E3D71900832B7A /* JeffLauncher.app */,
+				CADB5F2518E3D71900832B7A /* JeffLauncherTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CADB5F0618E3D71900832B7A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CADB5F0718E3D71900832B7A /* Cocoa.framework */,
+				CADB5F2618E3D71900832B7A /* XCTest.framework */,
+				CADB5F0918E3D71900832B7A /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CADB5F0918E3D71900832B7A /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CADB5F0A18E3D71900832B7A /* AppKit.framework */,
+				CADB5F0B18E3D71900832B7A /* CoreData.framework */,
+				CADB5F0C18E3D71900832B7A /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		CADB5F0D18E3D71900832B7A /* JeffLauncher */ = {
+			isa = PBXGroup;
+			children = (
+				CADB5F4B18E3D86800832B7A /* JeffLauncher.entitlements */,
+				CADB5F1918E3D71900832B7A /* AppDelegate.h */,
+				CADB5F1A18E3D71900832B7A /* AppDelegate.m */,
+				CA23061818E3EA2F000288DE /* MainMenu.xib */,
+				CADB5F1F18E3D71900832B7A /* Images.xcassets */,
+				CADB5F0E18E3D71900832B7A /* Supporting Files */,
+			);
+			path = JeffLauncher;
+			sourceTree = "<group>";
+		};
+		CADB5F0E18E3D71900832B7A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CADB5F0F18E3D71900832B7A /* JeffLauncher-Info.plist */,
+				CADB5F1018E3D71900832B7A /* InfoPlist.strings */,
+				CADB5F1318E3D71900832B7A /* main.m */,
+				CADB5F1518E3D71900832B7A /* JeffLauncher-Prefix.pch */,
+				CADB5F1618E3D71900832B7A /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CADB5F2B18E3D71900832B7A /* JeffLauncherTests */ = {
+			isa = PBXGroup;
+			children = (
+				CADB5F3118E3D71900832B7A /* JeffLauncherTests.m */,
+				CADB5F2C18E3D71900832B7A /* Supporting Files */,
+			);
+			path = JeffLauncherTests;
+			sourceTree = "<group>";
+		};
+		CADB5F2C18E3D71900832B7A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CADB5F2D18E3D71900832B7A /* JeffLauncherTests-Info.plist */,
+				CADB5F2E18E3D71900832B7A /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CADB5F0318E3D71900832B7A /* JeffLauncher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CADB5F3518E3D71900832B7A /* Build configuration list for PBXNativeTarget "JeffLauncher" */;
+			buildPhases = (
+				CADB5F0018E3D71900832B7A /* Sources */,
+				CADB5F0118E3D71900832B7A /* Frameworks */,
+				CADB5F0218E3D71900832B7A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JeffLauncher;
+			productName = JeffLauncher;
+			productReference = CADB5F0418E3D71900832B7A /* JeffLauncher.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CADB5F2418E3D71900832B7A /* JeffLauncherTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CADB5F3818E3D71900832B7A /* Build configuration list for PBXNativeTarget "JeffLauncherTests" */;
+			buildPhases = (
+				CADB5F2118E3D71900832B7A /* Sources */,
+				CADB5F2218E3D71900832B7A /* Frameworks */,
+				CADB5F2318E3D71900832B7A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CADB5F2A18E3D71900832B7A /* PBXTargetDependency */,
+			);
+			name = JeffLauncherTests;
+			productName = JeffLauncherTests;
+			productReference = CADB5F2518E3D71900832B7A /* JeffLauncherTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CADB5EFC18E3D71900832B7A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Robots and Pencils";
+				TargetAttributes = {
+					CADB5F0318E3D71900832B7A = {
+						DevelopmentTeam = Z2R9WCWER2;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
+					};
+					CADB5F2418E3D71900832B7A = {
+						TestTargetID = CADB5F0318E3D71900832B7A;
+					};
+				};
+			};
+			buildConfigurationList = CADB5EFF18E3D71900832B7A /* Build configuration list for PBXProject "JeffLauncher" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CADB5EFB18E3D71900832B7A;
+			productRefGroup = CADB5F0518E3D71900832B7A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CADB5F0318E3D71900832B7A /* JeffLauncher */,
+				CADB5F2418E3D71900832B7A /* JeffLauncherTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CADB5F0218E3D71900832B7A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CADB5F1218E3D71900832B7A /* InfoPlist.strings in Resources */,
+				CADB5F2018E3D71900832B7A /* Images.xcassets in Resources */,
+				CADB5F1818E3D71900832B7A /* Credits.rtf in Resources */,
+				CA23061918E3EA2F000288DE /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CADB5F2318E3D71900832B7A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CADB5F3018E3D71900832B7A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CADB5F0018E3D71900832B7A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CADB5F1B18E3D71900832B7A /* AppDelegate.m in Sources */,
+				CADB5F1418E3D71900832B7A /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CADB5F2118E3D71900832B7A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CADB5F3218E3D71900832B7A /* JeffLauncherTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CADB5F2A18E3D71900832B7A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CADB5F0318E3D71900832B7A /* JeffLauncher */;
+			targetProxy = CADB5F2918E3D71900832B7A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CADB5F1018E3D71900832B7A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CADB5F1118E3D71900832B7A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CADB5F1618E3D71900832B7A /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CADB5F1718E3D71900832B7A /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		CADB5F2E18E3D71900832B7A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CADB5F2F18E3D71900832B7A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CADB5F3318E3D71900832B7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		CADB5F3418E3D71900832B7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		CADB5F3618E3D71900832B7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = JeffLauncher/JeffLauncher.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JeffLauncher/JeffLauncher-Prefix.pch";
+				INFOPLIST_FILE = "JeffLauncher/JeffLauncher-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CADB5F3718E3D71900832B7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = JeffLauncher/JeffLauncher.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JeffLauncher/JeffLauncher-Prefix.pch";
+				INFOPLIST_FILE = "JeffLauncher/JeffLauncher-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		CADB5F3918E3D71900832B7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JeffLauncher.app/Contents/MacOS/JeffLauncher";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JeffLauncher/JeffLauncher-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "JeffLauncherTests/JeffLauncherTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		CADB5F3A18E3D71900832B7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JeffLauncher.app/Contents/MacOS/JeffLauncher";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JeffLauncher/JeffLauncher-Prefix.pch";
+				INFOPLIST_FILE = "JeffLauncherTests/JeffLauncherTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CADB5EFF18E3D71900832B7A /* Build configuration list for PBXProject "JeffLauncher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CADB5F3318E3D71900832B7A /* Debug */,
+				CADB5F3418E3D71900832B7A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CADB5F3518E3D71900832B7A /* Build configuration list for PBXNativeTarget "JeffLauncher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CADB5F3618E3D71900832B7A /* Debug */,
+				CADB5F3718E3D71900832B7A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CADB5F3818E3D71900832B7A /* Build configuration list for PBXNativeTarget "JeffLauncherTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CADB5F3918E3D71900832B7A /* Debug */,
+				CADB5F3A18E3D71900832B7A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CADB5EFC18E3D71900832B7A /* Project object */;
+}
