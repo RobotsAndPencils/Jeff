@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet NSButtonCell *depositBoxButtonCell;
 
 @property (weak, nonatomic) IBOutlet NSButton *linkButton;
+@property (weak, nonatomic) IBOutlet NSTextField *versionLabel;
 
 @end
 
@@ -30,6 +31,10 @@
     self.dropboxLinked = [[DBSession sharedSession] isLinked];
     [self updateLinkButton];
     [self preventSelectionOfDisabledUploaders];
+    
+    NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+    NSString *buildNumber = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
+    self.versionLabel.stringValue = [NSString stringWithFormat:@"You've got Jeff version %@ (Build %@)", version, buildNumber];
 }
 
 - (IBAction)toggleLinkDropbox:(id)sender {
