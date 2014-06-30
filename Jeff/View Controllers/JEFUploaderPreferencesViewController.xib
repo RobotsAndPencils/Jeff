@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.21" systemVersion="14A261i" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.21"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="JEFUploaderPreferencesViewController">
@@ -10,6 +10,7 @@
                 <outlet property="dropboxButtonCell" destination="A5g-Bu-rwC" id="HbN-4p-wZE"/>
                 <outlet property="linkButton" destination="KcE-UW-p2P" id="6RK-hr-Vfv"/>
                 <outlet property="uploaderMatrix" destination="EWR-MU-ARn" id="2Vz-Jh-EOB"/>
+                <outlet property="versionLabel" destination="HgP-VG-owT" id="k2L-Wf-3ss"/>
                 <outlet property="view" destination="c22-O7-iKe" id="zuD-qa-6Tn"/>
             </connections>
         </customObject>
@@ -19,11 +20,10 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="163"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EWR-MU-ARn">
-                    <rect key="frame" x="32" y="80" width="219" height="38"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EWR-MU-ARn">
+                    <rect key="frame" x="32" y="80" width="170" height="38"/>
                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    <size key="cellSize" width="173" height="18"/>
+                    <size key="cellSize" width="170" height="18"/>
                     <size key="intercellSpacing" width="4" height="2"/>
                     <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="jBS-9e-eul">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -48,9 +48,8 @@
                         <binding destination="xeH-QL-CZZ" name="selectedIndex" keyPath="values.selectedUploader" id="Tj0-ax-Ai5"/>
                     </connections>
                 </matrix>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wUY-e7-mxK">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wUY-e7-mxK">
                     <rect key="frame" x="18" y="126" width="297" height="17"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Choose where you'd like Jeff to upload GIFs to:" id="K1f-Oa-hgK">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -59,7 +58,6 @@
                 </textField>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KcE-UW-p2P">
                     <rect key="frame" x="253" y="72" width="126" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="push" title="Link Dropbox" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eZU-n6-ZVT">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -68,9 +66,8 @@
                         <action selector="toggleLinkDropbox:" target="-2" id="37F-fb-alF"/>
                     </connections>
                 </button>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cYA-E7-kAz">
-                    <rect key="frame" x="18" y="36" width="144" height="18"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="cYA-E7-kAz">
+                    <rect key="frame" x="18" y="36" width="143" height="18"/>
                     <buttonCell key="cell" type="check" title="Launch Jeff at login" bezelStyle="regularSquare" imagePosition="left" inset="2" id="NOV-Wg-hHc">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -79,7 +76,26 @@
                         <binding destination="D5W-WQ-fsD" name="value" keyPath="startAtLogin" id="Pfl-KI-GOg"/>
                     </connections>
                 </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HgP-VG-owT">
+                    <rect key="frame" x="20" y="13" width="442" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Version" id="HjI-sp-WId">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
+            <constraints>
+                <constraint firstItem="cYA-E7-kAz" firstAttribute="leading" secondItem="wUY-e7-mxK" secondAttribute="leading" id="B6I-Ti-eR7"/>
+                <constraint firstItem="wUY-e7-mxK" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" id="BfL-4m-hCd"/>
+                <constraint firstItem="HgP-VG-owT" firstAttribute="top" secondItem="cYA-E7-kAz" secondAttribute="bottom" constant="8" id="C7x-Cr-fQu"/>
+                <constraint firstAttribute="bottom" secondItem="HgP-VG-owT" secondAttribute="bottom" constant="13" id="Gp8-Pf-h48"/>
+                <constraint firstItem="cYA-E7-kAz" firstAttribute="top" secondItem="EWR-MU-ARn" secondAttribute="bottom" constant="28" id="NQ1-XK-9Ki"/>
+                <constraint firstItem="wUY-e7-mxK" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="TGO-rt-hWN"/>
+                <constraint firstItem="HgP-VG-owT" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="22" id="Wwa-4k-ntW"/>
+                <constraint firstAttribute="trailing" secondItem="HgP-VG-owT" secondAttribute="trailing" constant="20" id="ijw-cV-joq"/>
+                <constraint firstItem="EWR-MU-ARn" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="32" id="m3Z-Mg-QaM"/>
+            </constraints>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="xeH-QL-CZZ"/>
         <customObject id="D5W-WQ-fsD" customClass="StartAtLoginController">
