@@ -12,7 +12,7 @@
 #import <DropboxOSX/DropboxOSX.h>
 
 #import "StatusItemView.h"
-#import "PopoverContentViewController.h"
+#import "PopoverRecordingsViewController.h"
 #import "INPopoverController.h"
 
 NSString *const JEFClosePopoverNotification = @"JEFClosePopoverNotification";
@@ -91,7 +91,7 @@ NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
 - (void)setupPopover {
     self.popover = [[INPopoverController alloc] init];
     self.popover.closesWhenApplicationBecomesInactive = YES;
-    PopoverContentViewController *popoverController = [[PopoverContentViewController alloc] initWithNibName:@"PopoverContentView" bundle:nil];
+    PopoverRecordingsViewController *popoverController = [[PopoverRecordingsViewController alloc] initWithNibName:@"PopoverRecordingsView" bundle:nil];
     self.popover.contentViewController = popoverController;
     self.popover.animates = YES;
     self.popover.animationType = INPopoverAnimationTypeFadeOut;
