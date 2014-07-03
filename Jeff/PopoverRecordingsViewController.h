@@ -1,5 +1,5 @@
 //
-//  PopoverContentViewController.h
+//  PopoverRecordingsViewController.h
 //  Jeff
 //
 //  Created by Brandon on 2/21/2014.
@@ -7,6 +7,6 @@
 //
 
 
-@interface PopoverContentViewController : NSViewController
+@interface PopoverRecordingsViewController : NSViewController
 
 @end

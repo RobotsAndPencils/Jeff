@@ -1,5 +1,5 @@
 //
-//  PopoverContentViewController.m
+//  PopoverRecordingsViewController.m
 //  Jeff
 //
 //  Created by Brandon on 2/21/2014.
@@ -8,7 +8,7 @@
 
 #import <MASPreferences/MASPreferencesWindowController.h>
 
-#import "PopoverContentViewController.h"
+#import "PopoverRecordingsViewController.h"
 #import "JEFUploaderPreferencesViewController.h"
 #import "JEFAboutPreferencesViewController.h"
 #import "JEFRecording.h"
@@ -22,7 +22,7 @@
 
 static void *PopoverContentViewControllerContext = &PopoverContentViewControllerContext;
 
-@interface PopoverContentViewController () <NSTableViewDelegate, DrawMouseBoxViewDelegate, NSUserNotificationCenterDelegate, NSSharingServicePickerDelegate>
+@interface PopoverRecordingsViewController () <NSTableViewDelegate, DrawMouseBoxViewDelegate, NSUserNotificationCenterDelegate, NSSharingServicePickerDelegate>
 
 @property (strong, nonatomic) IBOutlet NSArrayController *recentRecordingsArrayController;
 @property (weak, nonatomic) IBOutlet NSTableView *tableView;
@@ -36,7 +36,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 @end
 
-@implementation PopoverContentViewController
+@implementation PopoverRecordingsViewController
 
 - (void)awakeFromNib {
     [super awakeFromNib];
