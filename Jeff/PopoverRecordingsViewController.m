@@ -38,8 +38,8 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 @implementation PopoverRecordingsViewController
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
     self.recorder = [[JEFQuartzRecorder alloc] init];
 
