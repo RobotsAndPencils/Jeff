@@ -14,6 +14,7 @@
 #import "StatusItemView.h"
 #import "PopoverRecordingsViewController.h"
 #import "INPopoverController.h"
+#import "JEFPopoverContentViewController.h"
 
 NSString *const JEFClosePopoverNotification = @"JEFClosePopoverNotification";
 NSString *const JEFSetStatusViewNotRecordingNotification = @"JEFSetStatusViewNotRecordingNotification";
@@ -91,7 +92,7 @@ NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
 - (void)setupPopover {
     self.popover = [[INPopoverController alloc] init];
     self.popover.closesWhenApplicationBecomesInactive = YES;
-    PopoverRecordingsViewController *popoverController = [[PopoverRecordingsViewController alloc] initWithNibName:@"PopoverRecordingsView" bundle:nil];
+    JEFPopoverContentViewController *popoverController = [[NSStoryboard storyboardWithName:@"JEFPopoverStoryboard" bundle:nil] instantiateInitialController];
     self.popover.contentViewController = popoverController;
     self.popover.animates = YES;
     self.popover.animationType = INPopoverAnimationTypeFadeOut;
