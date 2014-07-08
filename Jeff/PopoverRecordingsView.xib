@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.21" systemVersion="14A261i" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.21"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="PopoverContentViewController">
+        <customObject id="-2" userLabel="File's Owner" customClass="PopoverRecordingsViewController">
             <connections>
                 <outlet property="recentRecordingsArrayController" destination="wgD-kZ-8HX" id="ztB-Zy-s9S"/>
                 <outlet property="recordScreenButton" destination="NGg-8G-Zi6" id="Cie-91-fCJ"/>
@@ -21,12 +21,10 @@
             <subviews>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zzH-fi-JL7" userLabel="Header Background Image View">
                     <rect key="frame" x="0.0" y="197" width="325" height="49"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="HeaderBackground" id="aGB-zh-ZFb"/>
                 </imageView>
                 <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NGg-8G-Zi6">
                     <rect key="frame" x="0.0" y="197" width="164" height="49"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="164" id="CaC-wB-53g"/>
                     </constraints>
@@ -40,7 +38,6 @@
                 </button>
                 <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jb8-Or-VEj">
                     <rect key="frame" x="162" y="197" width="163" height="49"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="163" id="Vkh-1k-hpg"/>
                     </constraints>
@@ -54,13 +51,11 @@
                 </button>
                 <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="45" horizontalPageScroll="10" verticalLineScroll="45" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="GIu-4z-OTd">
                     <rect key="frame" x="0.0" y="21" width="325" height="176"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <clipView key="contentView" wantsLayer="YES" id="dop-xO-8Wb">
                         <rect key="frame" x="0.0" y="0.0" width="325" height="176"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView wantsLayer="YES" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="44" rowSizeStyle="automatic" viewBased="YES" id="B5q-Mr-u3z" customClass="RBLTableView">
-                                <rect key="frame" x="0.0" y="0.0" width="325" height="176"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="1" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -85,7 +80,6 @@
                                                 <subviews>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="KIg-Mt-doG">
                                                         <rect key="frame" x="1" y="22" width="252" height="17"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="17" id="GHb-bb-IdP"/>
                                                         </constraints>
@@ -100,7 +94,6 @@
                                                     </textField>
                                                     <button wantsLayer="YES" fixedFrame="YES" alphaValue="0.70000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="aqd-S6-fTt" userLabel="Share Button">
                                                         <rect key="frame" x="288" y="12" width="21" height="21"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="ShareButton" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="ogJ-zq-xAs">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
@@ -108,7 +101,6 @@
                                                     </button>
                                                     <button wantsLayer="YES" fixedFrame="YES" alphaValue="0.70000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="2CF-MH-33l" userLabel="Link Button">
                                                         <rect key="frame" x="259" y="11" width="21" height="21"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="CopyLinkButton" imagePosition="overlaps" alignment="center" inset="2" id="zrS-Wj-RR4">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
@@ -116,12 +108,10 @@
                                                     </button>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Siv-G3-sRl">
                                                         <rect key="frame" x="0.0" y="0.0" width="325" height="1"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="RecordingCellBottomBorder" id="LPG-WY-FeO"/>
                                                     </imageView>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VCI-or-alw">
                                                         <rect key="frame" x="1" y="3" width="252" height="17"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="17" id="FvI-wD-ZxL"/>
                                                         </constraints>
@@ -166,18 +156,15 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="4I3-SR-0mj">
-                        <rect key="frame" x="-15" y="17" width="16" height="0.0"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
                 <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FKI-00-jTo" userLabel="Footer Background Image View">
                     <rect key="frame" x="0.0" y="0.0" width="325" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="FooterBackground" id="Hi8-3w-BXo"/>
                 </imageView>
                 <button wantsLayer="YES" alphaValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="N48-dS-SkM" userLabel="Action Menu Button">
                     <rect key="frame" x="301" y="0.0" width="24" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="Zcg-gR-P27"/>
                         <constraint firstAttribute="width" constant="24" id="vQ1-z8-gUi"/>
