@@ -46,6 +46,13 @@
     [[DBAuthHelperOSX sharedHelper] authenticate];
 }
 
+- (IBAction)quitApp:(id)sender {
+    [[NSApplication sharedApplication] terminate:nil];
+}
+
+- (IBAction)showSetupHelp:(id)sender {
+}
+
 #pragma mark Private
 
 - (void)updateView {
