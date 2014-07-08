@@ -44,8 +44,6 @@
 		CAF30B3D18D3CAF300D7BC9D /* DropboxOSX.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAF30B3B18D3CAD800D7BC9D /* DropboxOSX.framework */; };
 		CAF30B3F18D3CAFD00D7BC9D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF30B3E18D3CAFD00D7BC9D /* Security.framework */; };
 		CAF30B4518D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF30B4418D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.m */; };
-		CAF30B4B18D3D7A400D7BC9D /* JEFAboutPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF30B4918D3D7A400D7BC9D /* JEFAboutPreferencesViewController.m */; };
-		CAF30B4C18D3D7A400D7BC9D /* JEFAboutPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAF30B4A18D3D7A400D7BC9D /* JEFAboutPreferencesViewController.xib */; };
 		CAF30B4E18D3D7CC00D7BC9D /* JEFUploaderPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAF30B4D18D3D7CC00D7BC9D /* JEFUploaderPreferencesViewController.xib */; };
 		CAF30B6018D5281100D7BC9D /* INPopoverController-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CAF30B5518D5281100D7BC9D /* INPopoverController-Info.plist */; };
 		CAF30B6118D5281100D7BC9D /* INPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF30B5718D5281100D7BC9D /* INPopoverController.m */; };
@@ -158,9 +156,6 @@
 		CAF30B3E18D3CAFD00D7BC9D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		CAF30B4318D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFUploaderPreferencesViewController.h; path = "View Controllers/JEFUploaderPreferencesViewController.h"; sourceTree = "<group>"; };
 		CAF30B4418D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFUploaderPreferencesViewController.m; path = "View Controllers/JEFUploaderPreferencesViewController.m"; sourceTree = "<group>"; };
-		CAF30B4818D3D7A400D7BC9D /* JEFAboutPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFAboutPreferencesViewController.h; path = "View Controllers/JEFAboutPreferencesViewController.h"; sourceTree = "<group>"; };
-		CAF30B4918D3D7A400D7BC9D /* JEFAboutPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFAboutPreferencesViewController.m; path = "View Controllers/JEFAboutPreferencesViewController.m"; sourceTree = "<group>"; };
-		CAF30B4A18D3D7A400D7BC9D /* JEFAboutPreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JEFAboutPreferencesViewController.xib; path = "View Controllers/JEFAboutPreferencesViewController.xib"; sourceTree = "<group>"; };
 		CAF30B4D18D3D7CC00D7BC9D /* JEFUploaderPreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JEFUploaderPreferencesViewController.xib; path = "View Controllers/JEFUploaderPreferencesViewController.xib"; sourceTree = "<group>"; };
 		CAF30B5518D5281100D7BC9D /* INPopoverController-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "INPopoverController-Info.plist"; sourceTree = "<group>"; };
 		CAF30B5618D5281100D7BC9D /* INPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPopoverController.h; sourceTree = "<group>"; };
@@ -425,9 +420,6 @@
 				CAF30B4318D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.h */,
 				CAF30B4418D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.m */,
 				CAF30B4D18D3D7CC00D7BC9D /* JEFUploaderPreferencesViewController.xib */,
-				CAF30B4818D3D7A400D7BC9D /* JEFAboutPreferencesViewController.h */,
-				CAF30B4918D3D7A400D7BC9D /* JEFAboutPreferencesViewController.m */,
-				CAF30B4A18D3D7A400D7BC9D /* JEFAboutPreferencesViewController.xib */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -584,7 +576,6 @@
 				CAF30B4E18D3D7CC00D7BC9D /* JEFUploaderPreferencesViewController.xib in Resources */,
 				CA455B4418B83EBA00F9A541 /* Images.xcassets in Resources */,
 				CA455B3C18B83EB900F9A541 /* Credits.rtf in Resources */,
-				CAF30B4C18D3D7A400D7BC9D /* JEFAboutPreferencesViewController.xib in Resources */,
 				CA455B4218B83EBA00F9A541 /* MainMenu.xib in Resources */,
 				83593BA6023A48A43B1002E8 /* Localizable.strings in Resources */,
 			);
@@ -678,7 +669,6 @@
 				CAF30B4518D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.m in Sources */,
 				CAEC3FC21964EBFD004FDA19 /* JEFPopoverContentViewController.m in Sources */,
 				CAB110D4192C6C61000A04C0 /* NSEvent+MouseClamped.m in Sources */,
-				CAF30B4B18D3D7A400D7BC9D /* JEFAboutPreferencesViewController.m in Sources */,
 				CA571B1C1936E371005E9C46 /* JEFOverlayWindow.m in Sources */,
 				CA413BE018BA8A720090A1A7 /* RBKDepositBoxManager.m in Sources */,
 				CA455B6B18B848B700F9A541 /* PopoverRecordingsViewController.m in Sources */,
