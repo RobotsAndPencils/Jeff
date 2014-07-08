@@ -33,6 +33,8 @@
 
     self.uploaderSetupViewController = [[JEFPopoverUploaderSetupViewController alloc] init];
     [self addChildViewController:self.uploaderSetupViewController];
+
+    [self updateViewControllerImmediately:YES];
 }
 
 - (void)viewDidAppear {
@@ -56,6 +58,7 @@
 
 - (void)updateViewControllerImmediately:(BOOL)immediately {
     BOOL linked = [[DBSession sharedSession] isLinked];
+    
     if (linked && self.isShowingSetup) {
         NSViewControllerTransitionOptions transition = immediately ? NSViewControllerTransitionNone : NSViewControllerTransitionSlideBackward;
         [self transitionFromViewController:self.uploaderSetupViewController toViewController:self.recordingsViewController options:transition completionHandler:^(){}];
