@@ -10,7 +10,6 @@
 
 #import "PopoverRecordingsViewController.h"
 #import "JEFUploaderPreferencesViewController.h"
-#import "JEFAboutPreferencesViewController.h"
 #import "JEFRecording.h"
 #import "AppDelegate.h"
 #import "JEFDepositBoxUploader.h"
@@ -254,8 +253,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 - (MASPreferencesWindowController *)preferencesWindowController {
     if (!_preferencesWindowController) {
         NSViewController *uploadsViewController = [[JEFUploaderPreferencesViewController alloc] initWithNibName:@"JEFUploaderPreferencesViewController" bundle:nil];
-        NSViewController *aboutViewController = [[JEFAboutPreferencesViewController alloc] initWithNibName:@"JEFAboutPreferencesViewController" bundle:nil];
-        NSArray *controllers = @[ uploadsViewController, [NSNull null], aboutViewController ];
+        NSArray *controllers = @[ uploadsViewController ];
 
         _preferencesWindowController = [[MASPreferencesWindowController alloc] initWithViewControllers:controllers title:@"Preferences"];
     }
