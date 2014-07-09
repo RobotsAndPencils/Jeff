@@ -1,5 +1,5 @@
 //
-//  PopoverRecordingsViewController.h
+//  JEFPopoverRecordingsViewController.h
 //  Jeff
 //
 //  Created by Brandon on 2/21/2014.
@@ -7,6 +7,6 @@
 //
 
 
-@interface PopoverRecordingsViewController : NSViewController
+@interface JEFPopoverRecordingsViewController : NSViewController
 
 @end

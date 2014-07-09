@@ -1,12 +1,12 @@
 //
-//  PopoverRecordingsViewController.m
+//  JEFPopoverRecordingsViewController.m
 //  Jeff
 //
 //  Created by Brandon on 2/21/2014.
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-#import "PopoverRecordingsViewController.h"
+#import "JEFPopoverRecordingsViewController.h"
 #import "JEFUploaderPreferencesViewController.h"
 #import "JEFRecording.h"
 #import "AppDelegate.h"
@@ -19,7 +19,7 @@
 
 static void *PopoverContentViewControllerContext = &PopoverContentViewControllerContext;
 
-@interface PopoverRecordingsViewController () <NSTableViewDelegate, DrawMouseBoxViewDelegate, NSUserNotificationCenterDelegate, NSSharingServicePickerDelegate>
+@interface JEFPopoverRecordingsViewController () <NSTableViewDelegate, DrawMouseBoxViewDelegate, NSUserNotificationCenterDelegate, NSSharingServicePickerDelegate>
 
 @property (strong, nonatomic) IBOutlet NSArrayController *recentRecordingsArrayController;
 @property (weak, nonatomic) IBOutlet NSTableView *tableView;
@@ -33,7 +33,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 @end
 
-@implementation PopoverRecordingsViewController
+@implementation JEFPopoverRecordingsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
