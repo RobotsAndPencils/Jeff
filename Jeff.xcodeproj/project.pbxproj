@@ -11,6 +11,7 @@
 		8359322E52C5BFFB013B4AC7 /* JEFDropboxUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 835935E41B797539819CFB36 /* JEFDropboxUploader.m */; };
 		8359376F55CC63D6FE3DE740 /* JEFPopoverUploaderSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83593B5EA5926018F6E2110D /* JEFPopoverUploaderSetupViewController.m */; };
 		83593BA6023A48A43B1002E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83593BD28BA68D2EAD12CF1C /* Localizable.strings */; };
+		CA007B22196CD22000746934 /* JEFPreferencesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA007B21196CD22000746934 /* JEFPreferencesStoryboard.storyboard */; };
 		CA1F9908192F0A7F00C3EF33 /* JeffLauncher.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = CA1F9905192F0A5F00C3EF33 /* JeffLauncher.app */; };
 		CA1F990C192F0ACB00C3EF33 /* StartAtLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1F990B192F0ACB00C3EF33 /* StartAtLoginController.m */; };
 		CA413BE018BA8A720090A1A7 /* RBKDepositBoxManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CA413BDF18BA8A720090A1A7 /* RBKDepositBoxManager.m */; };
@@ -44,7 +45,6 @@
 		CAF30B3D18D3CAF300D7BC9D /* DropboxOSX.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAF30B3B18D3CAD800D7BC9D /* DropboxOSX.framework */; };
 		CAF30B3F18D3CAFD00D7BC9D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF30B3E18D3CAFD00D7BC9D /* Security.framework */; };
 		CAF30B4518D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF30B4418D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.m */; };
-		CAF30B4E18D3D7CC00D7BC9D /* JEFUploaderPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAF30B4D18D3D7CC00D7BC9D /* JEFUploaderPreferencesViewController.xib */; };
 		CAF30B6018D5281100D7BC9D /* INPopoverController-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CAF30B5518D5281100D7BC9D /* INPopoverController-Info.plist */; };
 		CAF30B6118D5281100D7BC9D /* INPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF30B5718D5281100D7BC9D /* INPopoverController.m */; };
 		CAF30B6218D5281100D7BC9D /* INPopoverParentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF30B5A18D5281100D7BC9D /* INPopoverParentWindow.m */; };
@@ -101,6 +101,7 @@
 		83593BB07DFAFBD9106DD41E /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		83593E3E69C23122FB40765D /* JEFUploaderProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFUploaderProtocol.h; path = ../JEFUploaderProtocol.h; sourceTree = "<group>"; };
 		83593F946B55E6E3610A19A4 /* JEFDropboxUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFDropboxUploader.h; sourceTree = "<group>"; };
+		CA007B21196CD22000746934 /* JEFPreferencesStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = JEFPreferencesStoryboard.storyboard; path = Storyboards/JEFPreferencesStoryboard.storyboard; sourceTree = "<group>"; };
 		CA1F98FF192F0A5F00C3EF33 /* JeffLauncher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JeffLauncher.xcodeproj; path = JeffLauncher/JeffLauncher.xcodeproj; sourceTree = "<group>"; };
 		CA1F990A192F0ACB00C3EF33 /* StartAtLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartAtLoginController.h; sourceTree = "<group>"; };
 		CA1F990B192F0ACB00C3EF33 /* StartAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartAtLoginController.m; sourceTree = "<group>"; };
@@ -156,7 +157,6 @@
 		CAF30B3E18D3CAFD00D7BC9D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		CAF30B4318D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFUploaderPreferencesViewController.h; path = "View Controllers/JEFUploaderPreferencesViewController.h"; sourceTree = "<group>"; };
 		CAF30B4418D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFUploaderPreferencesViewController.m; path = "View Controllers/JEFUploaderPreferencesViewController.m"; sourceTree = "<group>"; };
-		CAF30B4D18D3D7CC00D7BC9D /* JEFUploaderPreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JEFUploaderPreferencesViewController.xib; path = "View Controllers/JEFUploaderPreferencesViewController.xib"; sourceTree = "<group>"; };
 		CAF30B5518D5281100D7BC9D /* INPopoverController-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "INPopoverController-Info.plist"; sourceTree = "<group>"; };
 		CAF30B5618D5281100D7BC9D /* INPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPopoverController.h; sourceTree = "<group>"; };
 		CAF30B5718D5281100D7BC9D /* INPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPopoverController.m; sourceTree = "<group>"; };
@@ -419,7 +419,7 @@
 			children = (
 				CAF30B4318D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.h */,
 				CAF30B4418D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.m */,
-				CAF30B4D18D3D7CC00D7BC9D /* JEFUploaderPreferencesViewController.xib */,
+				CA007B21196CD22000746934 /* JEFPreferencesStoryboard.storyboard */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -569,11 +569,11 @@
 			files = (
 				CA455B6C18B848B700F9A541 /* PopoverRecordingsView.xib in Resources */,
 				CA455B7418B84EC100F9A541 /* gifsicle in Resources */,
+				CA007B22196CD22000746934 /* JEFPreferencesStoryboard.storyboard in Resources */,
 				CAF30B6018D5281100D7BC9D /* INPopoverController-Info.plist in Resources */,
 				CAEC3FBC1964D683004FDA19 /* JEFPopoverStoryboard.storyboard in Resources */,
 				CA455B3618B83EB900F9A541 /* InfoPlist.strings in Resources */,
 				CAEC3FB61964D3FA004FDA19 /* JEFPopoverUploaderSetupViewController.xib in Resources */,
-				CAF30B4E18D3D7CC00D7BC9D /* JEFUploaderPreferencesViewController.xib in Resources */,
 				CA455B4418B83EBA00F9A541 /* Images.xcassets in Resources */,
 				CA455B3C18B83EB900F9A541 /* Credits.rtf in Resources */,
 				CA455B4218B83EBA00F9A541 /* MainMenu.xib in Resources */,

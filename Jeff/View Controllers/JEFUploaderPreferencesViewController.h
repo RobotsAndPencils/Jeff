@@ -6,9 +6,7 @@
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-#import <MASPreferences/MASPreferencesViewController.h>
-
-@interface JEFUploaderPreferencesViewController : NSViewController <MASPreferencesViewController>
+@interface JEFUploaderPreferencesViewController : NSViewController
 
 @property (assign, nonatomic) BOOL dropboxLinked;
 
