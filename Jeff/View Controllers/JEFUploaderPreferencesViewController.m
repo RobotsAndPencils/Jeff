@@ -13,9 +13,6 @@
 
 @interface JEFUploaderPreferencesViewController ()
 
-@property (weak, nonatomic) IBOutlet NSMatrix *uploaderMatrix;
-@property (weak, nonatomic) IBOutlet NSButtonCell *depositBoxButtonCell;
-
 @property (weak, nonatomic) IBOutlet NSButton *linkButton;
 @property (weak, nonatomic) IBOutlet NSTextField *versionLabel;
 
@@ -30,7 +27,6 @@
 
     self.dropboxLinked = [[DBSession sharedSession] isLinked];
     [self updateLinkButton];
-    [self preventSelectionOfDisabledUploaders];
     
     NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
     NSString *buildNumber = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
@@ -58,27 +54,6 @@
 - (void)authHelperStateChangedNotification:(NSNotification *)notification {
     self.dropboxLinked = [[DBSession sharedSession] isLinked];
     [self updateLinkButton];
-    [self preventSelectionOfDisabledUploaders];
-}
-
-- (void)preventSelectionOfDisabledUploaders {
-    if (![self.uploaderMatrix.selectedCell isEnabled]) {
-        [self.uploaderMatrix selectCell:self.depositBoxButtonCell];
-    }
-}
-
-#pragma mark - MASPreferencesViewController
-
-- (NSString *)identifier {
-    return @"Uploads";
-}
-
-- (NSImage *)toolbarItemImage {
-    return [NSImage imageNamed:NSImageNameNetwork];
-}
-
-- (NSString *)toolbarItemLabel {
-    return @"Uploads";
 }
 
 @end

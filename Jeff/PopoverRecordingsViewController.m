@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-#import <MASPreferences/MASPreferencesWindowController.h>
-
 #import "PopoverRecordingsViewController.h"
 #import "JEFUploaderPreferencesViewController.h"
 #import "JEFRecording.h"
@@ -28,7 +26,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 @property (weak, nonatomic) IBOutlet NSButton *recordScreenButton;
 @property (weak, nonatomic) IBOutlet NSButton *recordSelectionButton;
 
-@property (strong, nonatomic) MASPreferencesWindowController *preferencesWindowController;
+@property (strong, nonatomic) NSWindowController *preferencesWindowController;
 @property (strong, nonatomic) NSMutableArray *recentRecordings;
 @property (strong, nonatomic) NSMutableArray *overlayWindows;
 @property (strong, nonatomic) JEFQuartzRecorder *recorder;
@@ -250,12 +248,9 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 #pragma mark - Properties
 
-- (MASPreferencesWindowController *)preferencesWindowController {
+- (NSWindowController *)preferencesWindowController {
     if (!_preferencesWindowController) {
-        NSViewController *uploadsViewController = [[JEFUploaderPreferencesViewController alloc] initWithNibName:@"JEFUploaderPreferencesViewController" bundle:nil];
-        NSArray *controllers = @[ uploadsViewController ];
-
-        _preferencesWindowController = [[MASPreferencesWindowController alloc] initWithViewControllers:controllers title:@"Preferences"];
+        _preferencesWindowController = [[NSStoryboard storyboardWithName:@"JEFPreferencesStoryboard" bundle:nil] instantiateInitialController];
     }
     return _preferencesWindowController;
 }
