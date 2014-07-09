@@ -12,7 +12,7 @@
 #import <DropboxOSX/DropboxOSX.h>
 
 #import "StatusItemView.h"
-#import "PopoverRecordingsViewController.h"
+#import "JEFPopoverRecordingsViewController.h"
 #import "INPopoverController.h"
 #import "JEFPopoverContentViewController.h"
 
