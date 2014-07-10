@@ -93,16 +93,16 @@
                                             </textFieldCell>
                                         </textField>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="69n-ax-ZZs" customClass="MASShortcutView">
-                                            <rect key="frame" x="132" y="14" width="150" height="19"/>
+                                            <rect key="frame" x="132" y="11" width="150" height="25"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="19" id="QaK-Ia-OKc"/>
+                                                <constraint firstAttribute="height" constant="25" id="QaK-Ia-OKc"/>
                                                 <constraint firstAttribute="width" constant="150" id="TK9-Wc-2V6"/>
                                             </constraints>
                                         </customView>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="bZj-MY-CSg" customClass="MASShortcutView">
-                                            <rect key="frame" x="132" y="40" width="150" height="19"/>
+                                            <rect key="frame" x="132" y="37" width="150" height="25"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="19" id="0QG-a0-qdS"/>
+                                                <constraint firstAttribute="height" constant="25" id="0QG-a0-qdS"/>
                                                 <constraint firstAttribute="width" constant="150" id="Bt1-q4-HrJ"/>
                                             </constraints>
                                         </customView>

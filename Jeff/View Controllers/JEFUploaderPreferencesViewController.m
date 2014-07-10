@@ -33,6 +33,8 @@
     
     self.recordScreenShortcutView.associatedUserDefaultsKey = JEFRecordScreenShortcutKey;
     self.recordSelectionShortcutView.associatedUserDefaultsKey = JEFRecordSelectionShortcutKey;
+    self.recordScreenShortcutView.appearance = MASShortcutViewAppearanceTexturedRect;
+    self.recordSelectionShortcutView.appearance = MASShortcutViewAppearanceTexturedRect;
 
     self.dropboxLinked = [[DBSession sharedSession] isLinked];
     [self updateLinkButton];
