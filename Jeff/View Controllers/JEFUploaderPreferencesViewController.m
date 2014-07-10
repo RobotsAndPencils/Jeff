@@ -10,11 +10,17 @@
 
 #import <DropboxOSX/DropboxOSX.h>
 #import <ServiceManagement/ServiceManagement.h>
+#import <MASShortcut/MASShortcutView.h>
+#import <MASShortcut/MASShortcutView+UserDefaults.h>
+#import "Constants.h"
+
 
 @interface JEFUploaderPreferencesViewController ()
 
-@property (weak, nonatomic) IBOutlet NSButton *linkButton;
-@property (weak, nonatomic) IBOutlet NSTextField *versionLabel;
+@property (nonatomic, weak) IBOutlet NSButton *linkButton;
+@property (nonatomic, weak) IBOutlet NSTextField *versionLabel;
+@property (nonatomic, weak) IBOutlet MASShortcutView *recordScreenShortcutView;
+@property (nonatomic, weak) IBOutlet MASShortcutView *recordSelectionShortcutView;
 
 @end
 
@@ -24,6 +30,9 @@
     [super loadView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authHelperStateChangedNotification:) name:DBAuthHelperOSXStateChangedNotification object:[DBAuthHelperOSX sharedHelper]];
+    
+    self.recordScreenShortcutView.associatedUserDefaultsKey = JEFRecordScreenShortcutKey;
+    self.recordSelectionShortcutView.associatedUserDefaultsKey = JEFRecordSelectionShortcutKey;
 
     self.dropboxLinked = [[DBSession sharedSession] isLinked];
     [self updateLinkButton];

@@ -7,6 +7,9 @@
 //
 
 #import "JEFPopoverRecordingsViewController.h"
+
+#import <MASShortcut/MASShortcut+UserDefaults.h>
+
 #import "JEFUploaderPreferencesViewController.h"
 #import "JEFRecording.h"
 #import "AppDelegate.h"
@@ -16,8 +19,11 @@
 #import "JEFRecordingCellView.h"
 #import "JEFQuartzRecorder.h"
 #import "JEFOverlayWindow.h"
+#import "Constants.h"
+
 
 static void *PopoverContentViewControllerContext = &PopoverContentViewControllerContext;
+
 
 @interface JEFPopoverRecordingsViewController () <NSTableViewDelegate, DrawMouseBoxViewDelegate, NSUserNotificationCenterDelegate, NSSharingServicePickerDelegate>
 
@@ -37,6 +43,14 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [MASShortcut registerGlobalShortcutWithUserDefaultsKey:JEFRecordScreenShortcutKey handler:^{
+        [self recordScreen:nil];
+    }];
+    
+    [MASShortcut registerGlobalShortcutWithUserDefaultsKey:JEFRecordSelectionShortcutKey handler:^{
+        [self recordSelection:nil];
+    }];
     
     self.recorder = [[JEFQuartzRecorder alloc] init];
 
