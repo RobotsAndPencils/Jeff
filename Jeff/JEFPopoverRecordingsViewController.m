@@ -36,7 +36,6 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 @property (strong, nonatomic) NSMutableArray *recentRecordings;
 @property (strong, nonatomic) NSMutableArray *overlayWindows;
 @property (strong, nonatomic) JEFQuartzRecorder *recorder;
-@property (assign, nonatomic, getter=isRecording) BOOL recording;
 @property (assign, nonatomic, getter=isShowingSelection) BOOL showingSelection;
 
 @end
@@ -102,7 +101,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 #pragma mark - Recording
 
 - (void)toggleRecordingScreen {
-    if (!self.isRecording) {
+    if (!self.recorder.isRecording) {
         [self recordScreen:nil];
     }
     else {
@@ -120,15 +119,13 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
             [self uploadGIFAtURL:gifURL];
         }];
     }];
-    
-    self.recording = YES;
 }
 
 - (void)toggleRecordingSelection {
-    if (!self.isRecording && !self.isShowingSelection) {
+    if (!self.recorder.isRecording && !self.isShowingSelection) {
         [self recordSelection:nil];
     }
-    else if (!self.isRecording && self.isShowingSelection) {
+    else if (!self.recorder.isRecording && self.isShowingSelection) {
         [self selectionViewDidCancel:nil];
     }
     else {
@@ -159,14 +156,13 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 }
 
 - (void)stopRecording:(id)sender {
-    if (!self.isRecording && self.isShowingSelection) {
+    if (!self.recorder.isRecording && self.isShowingSelection) {
         [self selectionViewDidCancel:nil];
         return;
     }
     
     [self.recorder finishRecording];
     [[NSNotificationCenter defaultCenter] postNotificationName:JEFSetStatusViewRecordingNotification object:self];
-    self.recording = NO;
 }
 
 #pragma mark - DrawMouseBoxViewDelegate
@@ -202,7 +198,6 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     }
 
     [[NSCursor currentCursor] pop];
-    self.recording = YES;
     self.showingSelection = NO;
 }
 
