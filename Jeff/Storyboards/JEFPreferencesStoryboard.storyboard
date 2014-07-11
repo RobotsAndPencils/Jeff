@@ -31,11 +31,11 @@
                 <customObject id="R4X-zv-grB" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController title="Preferences" nibName="" id="hcX-tR-6FI" customClass="JEFUploaderPreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="01J-C7-M6j">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="213"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="289"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EYK-Pu-veP">
-                                <rect key="frame" x="14" y="131" width="136" height="32"/>
+                                <rect key="frame" x="14" y="207" width="136" height="32"/>
                                 <buttonCell key="cell" type="push" title="Unlink Dropbox" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ezq-Av-0gL">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -45,7 +45,7 @@
                                 </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="lPg-hI-bQi">
-                                <rect key="frame" x="18" y="177" width="143" height="18"/>
+                                <rect key="frame" x="18" y="253" width="143" height="18"/>
                                 <buttonCell key="cell" type="check" title="Launch Jeff at login" bezelStyle="regularSquare" imagePosition="left" inset="2" id="0Jt-kO-2z8">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -70,22 +70,79 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <box autoresizesSubviews="NO" title="Shortcuts" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="BCk-9w-EPg">
+                                <rect key="frame" x="17" y="109" width="446" height="85"/>
+                                <view key="contentView">
+                                    <rect key="frame" x="1" y="1" width="444" height="69"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cNN-T1-k7R">
+                                            <rect key="frame" x="16" y="41" width="96" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Record Screen" id="yPP-nl-8UG">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Z9U-z2-pip">
+                                            <rect key="frame" x="16" y="16" width="110" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Record Selection" id="FUW-Dr-dBU">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="69n-ax-ZZs" customClass="MASShortcutView">
+                                            <rect key="frame" x="132" y="11" width="150" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="QaK-Ia-OKc"/>
+                                                <constraint firstAttribute="width" constant="150" id="TK9-Wc-2V6"/>
+                                            </constraints>
+                                        </customView>
+                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="bZj-MY-CSg" customClass="MASShortcutView">
+                                            <rect key="frame" x="132" y="37" width="150" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="0QG-a0-qdS"/>
+                                                <constraint firstAttribute="width" constant="150" id="Bt1-q4-HrJ"/>
+                                            </constraints>
+                                        </customView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="bZj-MY-CSg" firstAttribute="leading" secondItem="cNN-T1-k7R" secondAttribute="trailing" constant="22" id="1TF-tR-rKC"/>
+                                    <constraint firstItem="cNN-T1-k7R" firstAttribute="leading" secondItem="BCk-9w-EPg" secondAttribute="leading" constant="16" id="LoK-Ua-Pds"/>
+                                    <constraint firstItem="cNN-T1-k7R" firstAttribute="top" secondItem="BCk-9w-EPg" secondAttribute="top" constant="26" id="QXR-FM-BHc"/>
+                                    <constraint firstItem="bZj-MY-CSg" firstAttribute="centerY" secondItem="cNN-T1-k7R" secondAttribute="centerY" id="TR7-r8-V0K"/>
+                                    <constraint firstItem="Z9U-z2-pip" firstAttribute="leading" secondItem="BCk-9w-EPg" secondAttribute="leading" constant="16" id="ce2-c9-jEt"/>
+                                    <constraint firstItem="Z9U-z2-pip" firstAttribute="centerY" secondItem="69n-ax-ZZs" secondAttribute="centerY" constant="-1" id="d8m-rf-aBJ"/>
+                                    <constraint firstItem="69n-ax-ZZs" firstAttribute="leading" secondItem="Z9U-z2-pip" secondAttribute="trailing" constant="8" id="gDT-Jc-aT5"/>
+                                    <constraint firstItem="Z9U-z2-pip" firstAttribute="top" secondItem="cNN-T1-k7R" secondAttribute="bottom" constant="8" id="lom-Sd-paj"/>
+                                    <constraint firstAttribute="bottom" secondItem="Z9U-z2-pip" secondAttribute="bottom" constant="13" id="wki-qU-A2m"/>
+                                </constraints>
+                                <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </box>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LW9-Fv-Ek9" secondAttribute="trailing" constant="22" id="2hm-gl-YCp"/>
                             <constraint firstItem="VHF-Su-JDS" firstAttribute="top" secondItem="LW9-Fv-Ek9" secondAttribute="bottom" constant="8" id="4k1-Hl-48Q"/>
                             <constraint firstItem="LW9-Fv-Ek9" firstAttribute="leading" secondItem="01J-C7-M6j" secondAttribute="leading" constant="22" id="E3N-N4-gOM"/>
-                            <constraint firstItem="LW9-Fv-Ek9" firstAttribute="top" relation="greaterThanOrEqual" secondItem="EYK-Pu-veP" secondAttribute="bottom" constant="40" id="EsQ-HU-88B"/>
+                            <constraint firstItem="LW9-Fv-Ek9" firstAttribute="top" relation="greaterThanOrEqual" secondItem="BCk-9w-EPg" secondAttribute="bottom" constant="40" id="FNp-ma-wX9"/>
+                            <constraint firstItem="BCk-9w-EPg" firstAttribute="top" secondItem="EYK-Pu-veP" secondAttribute="bottom" constant="20" id="GfB-uQ-gDi"/>
+                            <constraint firstItem="BCk-9w-EPg" firstAttribute="leading" secondItem="01J-C7-M6j" secondAttribute="leading" constant="20" id="HUe-pv-3IX"/>
                             <constraint firstItem="VHF-Su-JDS" firstAttribute="leading" secondItem="01J-C7-M6j" secondAttribute="leading" constant="22" id="Luh-Ln-GEI"/>
                             <constraint firstItem="EYK-Pu-veP" firstAttribute="leading" secondItem="01J-C7-M6j" secondAttribute="leading" constant="20" id="Wq1-BG-iwM"/>
                             <constraint firstItem="lPg-hI-bQi" firstAttribute="top" secondItem="01J-C7-M6j" secondAttribute="top" constant="20" id="lfv-8m-76o"/>
                             <constraint firstAttribute="bottom" secondItem="VHF-Su-JDS" secondAttribute="bottom" constant="20" id="q2P-es-t1D"/>
                             <constraint firstItem="EYK-Pu-veP" firstAttribute="top" secondItem="lPg-hI-bQi" secondAttribute="bottom" constant="20" id="qIJ-Kg-GrH"/>
                             <constraint firstItem="lPg-hI-bQi" firstAttribute="leading" secondItem="01J-C7-M6j" secondAttribute="leading" constant="20" id="sKO-YX-xk1"/>
+                            <constraint firstAttribute="trailing" secondItem="BCk-9w-EPg" secondAttribute="trailing" constant="20" id="z8p-pf-KnY"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="linkButton" destination="EYK-Pu-veP" id="7zF-jU-p2K"/>
+                        <outlet property="recordScreenShortcutView" destination="bZj-MY-CSg" id="IwK-Su-07l"/>
+                        <outlet property="recordSelectionShortcutView" destination="69n-ax-ZZs" id="trb-Cp-rhf"/>
                         <outlet property="versionLabel" destination="VHF-Su-JDS" id="Sb6-HT-QTt"/>
                     </connections>
                 </viewController>
@@ -95,7 +152,7 @@
                     </userDefinedRuntimeAttributes>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="393" y="718.5"/>
+            <point key="canvasLocation" x="393" y="756.5"/>
         </scene>
     </scenes>
 </document>
