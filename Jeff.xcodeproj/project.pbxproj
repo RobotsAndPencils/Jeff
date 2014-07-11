@@ -32,6 +32,7 @@
 		CA455B7718B84ED200F9A541 /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B7618B84ED200F9A541 /* Converter.m */; };
 		CA455B7B18B882DB00F9A541 /* NSFileManager+Temporary.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B7A18B882DB00F9A541 /* NSFileManager+Temporary.m */; };
 		CA4D988418D6D2A900EFE4FD /* JEFRecordingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4D988318D6D2A900EFE4FD /* JEFRecordingCellView.m */; };
+		CA54FCEE196E2DF4000C46CC /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = CA54FCED196E2DF4000C46CC /* Constants.m */; };
 		CA571B1C1936E371005E9C46 /* JEFOverlayWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CA571B1B1936E371005E9C46 /* JEFOverlayWindow.m */; };
 		CA875EFC18B9974C009FC997 /* SelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA875EFB18B9974C009FC997 /* SelectionView.m */; };
 		CAA79EAC192A725800A4299F /* JEFQuartzRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA79EAB192A725800A4299F /* JEFQuartzRecorder.m */; };
@@ -136,6 +137,8 @@
 		CA455B7A18B882DB00F9A541 /* NSFileManager+Temporary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileManager+Temporary.m"; path = "Categories/NSFileManager+Temporary.m"; sourceTree = "<group>"; };
 		CA4D988218D6D2A900EFE4FD /* JEFRecordingCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecordingCellView.h; path = Views/JEFRecordingCellView.h; sourceTree = "<group>"; };
 		CA4D988318D6D2A900EFE4FD /* JEFRecordingCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFRecordingCellView.m; path = Views/JEFRecordingCellView.m; sourceTree = "<group>"; };
+		CA54FCEA196E2B50000C46CC /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		CA54FCED196E2DF4000C46CC /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		CA571B1A1936E371005E9C46 /* JEFOverlayWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFOverlayWindow.h; path = Windows/JEFOverlayWindow.h; sourceTree = "<group>"; };
 		CA571B1B1936E371005E9C46 /* JEFOverlayWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFOverlayWindow.m; path = Windows/JEFOverlayWindow.m; sourceTree = "<group>"; };
 		CA875EFA18B9974C009FC997 /* SelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionView.h; sourceTree = "<group>"; };
@@ -147,6 +150,7 @@
 		CADF57B218C6F432006512E3 /* JEFRecording.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecording.h; path = Models/JEFRecording.h; sourceTree = "<group>"; };
 		CADF57B318C6F432006512E3 /* JEFRecording.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFRecording.m; path = Models/JEFRecording.m; sourceTree = "<group>"; };
 		CADF57B518C70081006512E3 /* Jeff.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Jeff.entitlements; sourceTree = "<group>"; };
+		CAE40E16196F6715002901BD /* JEFRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JEFRecorder.h; path = Recorders/JEFRecorder.h; sourceTree = "<group>"; };
 		CAEC3FB51964D3FA004FDA19 /* JEFPopoverUploaderSetupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JEFPopoverUploaderSetupViewController.xib; sourceTree = "<group>"; };
 		CAEC3FBB1964D683004FDA19 /* JEFPopoverStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = JEFPopoverStoryboard.storyboard; path = Storyboards/JEFPopoverStoryboard.storyboard; sourceTree = "<group>"; };
 		CAEC3FBF1964EBFD004FDA19 /* JEFPopoverContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFPopoverContentViewController.h; path = "View Controllers/JEFPopoverContentViewController.h"; sourceTree = "<group>"; };
@@ -303,6 +307,8 @@
 				CA455B7518B84ED200F9A541 /* Converter.h */,
 				CA455B7618B84ED200F9A541 /* Converter.m */,
 				CA455B4018B83EBA00F9A541 /* MainMenu.xib */,
+				CA54FCEA196E2B50000C46CC /* Constants.h */,
+				CA54FCED196E2DF4000C46CC /* Constants.m */,
 				CA455B4318B83EBA00F9A541 /* Images.xcassets */,
 				CA455B3218B83EB900F9A541 /* Supporting Files */,
 				83593B9212B387F97DA9E104 /* Libraries */,
@@ -374,6 +380,7 @@
 			children = (
 				CAA79EAA192A725800A4299F /* JEFQuartzRecorder.h */,
 				CAA79EAB192A725800A4299F /* JEFQuartzRecorder.m */,
+				CAE40E16196F6715002901BD /* JEFRecorder.h */,
 			);
 			name = Recorders;
 			sourceTree = "<group>";
@@ -664,6 +671,7 @@
 				CAF30B6318D5281100D7BC9D /* INPopoverWindow.m in Sources */,
 				CAF30B4518D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.m in Sources */,
 				CAEC3FC21964EBFD004FDA19 /* JEFPopoverContentViewController.m in Sources */,
+				CA54FCEE196E2DF4000C46CC /* Constants.m in Sources */,
 				CAB110D4192C6C61000A04C0 /* NSEvent+MouseClamped.m in Sources */,
 				CA571B1C1936E371005E9C46 /* JEFOverlayWindow.m in Sources */,
 				CA413BE018BA8A720090A1A7 /* RBKDepositBoxManager.m in Sources */,
