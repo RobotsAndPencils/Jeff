@@ -6,7 +6,11 @@
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-@interface JEFQuartzRecorder : NSObject
+#import "JEFRecorder.h"
+
+@interface JEFQuartzRecorder : NSObject <JEFRecorder>
+
+@property (nonatomic, assign, readonly) BOOL isRecording;
 
 - (void)recordScreen:(CGDirectDisplayID)displayID completion:(void (^)(NSURL *))completion;
 - (void)recordRect:(CGRect)rect display:(CGDirectDisplayID)displayID completion:(void (^)(NSURL *))completion;

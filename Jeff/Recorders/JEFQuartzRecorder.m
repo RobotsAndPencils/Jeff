@@ -13,6 +13,9 @@
 
 @interface JEFQuartzRecorder ()
 
+// JEFRecorder Protocol
+@property (nonatomic, assign, readwrite) BOOL isRecording;
+
 @property (nonatomic, assign) CGRect rect;
 @property (nonatomic, assign) NSInteger frameCount;
 @property (nonatomic, strong) NSMutableArray *files;
@@ -31,6 +34,7 @@
 }
 
 - (void)recordRect:(CGRect)rect display:(CGDirectDisplayID)displayID completion:(void (^)(NSURL *))completion {
+    self.isRecording = YES;
     self.rect = rect;
     self.frameCount = 0;
     self.files = [NSMutableArray array];
@@ -78,6 +82,7 @@
 - (void)finishRecording {
     [self.captureTimer invalidate];
     self.captureTimer = nil;
+    self.isRecording = NO;
     
     if (self.completion) self.completion([NSURL URLWithString:self.path]);
 }

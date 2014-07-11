@@ -150,6 +150,7 @@
 		CADF57B218C6F432006512E3 /* JEFRecording.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecording.h; path = Models/JEFRecording.h; sourceTree = "<group>"; };
 		CADF57B318C6F432006512E3 /* JEFRecording.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFRecording.m; path = Models/JEFRecording.m; sourceTree = "<group>"; };
 		CADF57B518C70081006512E3 /* Jeff.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Jeff.entitlements; sourceTree = "<group>"; };
+		CAE40E16196F6715002901BD /* JEFRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JEFRecorder.h; path = Recorders/JEFRecorder.h; sourceTree = "<group>"; };
 		CAEC3FB51964D3FA004FDA19 /* JEFPopoverUploaderSetupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JEFPopoverUploaderSetupViewController.xib; sourceTree = "<group>"; };
 		CAEC3FBB1964D683004FDA19 /* JEFPopoverStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = JEFPopoverStoryboard.storyboard; path = Storyboards/JEFPopoverStoryboard.storyboard; sourceTree = "<group>"; };
 		CAEC3FBF1964EBFD004FDA19 /* JEFPopoverContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFPopoverContentViewController.h; path = "View Controllers/JEFPopoverContentViewController.h"; sourceTree = "<group>"; };
@@ -379,6 +380,7 @@
 			children = (
 				CAA79EAA192A725800A4299F /* JEFQuartzRecorder.h */,
 				CAA79EAB192A725800A4299F /* JEFQuartzRecorder.m */,
+				CAE40E16196F6715002901BD /* JEFRecorder.h */,
 			);
 			name = Recorders;
 			sourceTree = "<group>";
