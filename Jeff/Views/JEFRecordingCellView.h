@@ -6,11 +6,12 @@
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "JEFScaleToFillImageView.h"
 
 @interface JEFRecordingCellView : NSTableCellView
 
 @property (weak, nonatomic) IBOutlet NSButton *linkButton;
 @property (weak, nonatomic) IBOutlet NSButton *shareButton;
+@property (weak, nonatomic) IBOutlet JEFScaleToFillImageView *previewImageView;
 
 @end
