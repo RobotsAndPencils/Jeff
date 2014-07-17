@@ -286,6 +286,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     view.linkButton.action = @selector(copyLinkToPasteboard:);
     view.shareButton.target = self;
     view.shareButton.action = @selector(showShareMenu:);
+    view.previewImageView.image = [NSImage imageNamed:@"500x500"];
 
     return view;
 }
