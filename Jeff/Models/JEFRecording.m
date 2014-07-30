@@ -10,10 +10,11 @@
 
 @implementation JEFRecording
 
-+ (instancetype)recordingWithURL:(NSURL *)url {
++ (instancetype)recordingWithURL:(NSURL *)url posterFrameImage:(NSImage *)posterFrameImage {
     JEFRecording *recording = [[JEFRecording alloc] init];
     recording.url = url;
     recording.name = [url absoluteString];
+    recording.posterFrameImage = posterFrameImage;
     return recording;
 }
 
@@ -29,14 +30,16 @@
     [encoder encodeObject:self.url forKey:@"url"];
     [encoder encodeObject:self.name forKey:@"name"];
     [encoder encodeObject:self.createdAt forKey:@"createdAt"];
+    [encoder encodeObject:self.posterFrameImage forKey:@"posterFrameImage"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
     self = [super init];
     if (self) {
-        self.url = [decoder decodeObjectForKey:@"url"];
-        self.name = [decoder decodeObjectForKey:@"name"];
+        _url = [decoder decodeObjectForKey:@"url"];
+        _name = [decoder decodeObjectForKey:@"name"];
         _createdAt = [decoder decodeObjectForKey:@"createdAt"];
+        _posterFrameImage = [decoder decodeObjectForKey:@"posterFrameImage"];
     }
     return self;
 }

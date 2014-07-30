@@ -1,4 +1,4 @@
-platform :osx, '10.9'
+platform :osx, '10.10'
 
 pod 'AFNetworking', '~> 1.3'
 pod 'Rebel'
