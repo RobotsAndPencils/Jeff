@@ -24,7 +24,7 @@
     return self;
 }
 
-#pragma mark -
+#pragma mark NSView
 
 - (void)drawRect:(NSRect)dirtyRect {
 	[self.statusItem drawStatusBarBackgroundInRect:dirtyRect withHighlight:self.isHighlighted];
@@ -39,23 +39,19 @@
 	[icon drawAtPoint:iconPoint fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
 }
 
-#pragma mark -
-#pragma mark Mouse tracking
+#pragma mark Mouse Events
 
 - (void)mouseDown:(NSEvent *)theEvent {
     if (self.clickHandler) self.clickHandler(self);
 }
 
-#pragma mark -
-#pragma mark Accessors
+#pragma mark Properties
 
 - (void)setHighlighted:(BOOL)newFlag {
     if (_isHighlighted == newFlag) return;
     _isHighlighted = newFlag;
     [self setNeedsDisplay:YES];
 }
-
-#pragma mark -
 
 - (void)setImage:(NSImage *)newImage {
     if (_image != newImage) {
@@ -71,14 +67,6 @@
             [self setNeedsDisplay:YES];
         }
     }
-}
-
-#pragma mark -
-
-- (NSRect)globalRect {
-    NSRect frame = [self frame];
-    frame.origin = [self.window convertBaseToScreen:frame.origin];
-    return frame;
 }
 
 @end
