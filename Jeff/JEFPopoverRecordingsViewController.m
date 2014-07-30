@@ -115,8 +115,9 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
     [self.recorder recordScreen:CGMainDisplayID() completion:^(NSURL *movieURL) {
         [Converter convertFramesAtURL:movieURL completion:^(NSURL *gifURL) {
+            // Really don't care about removeItemAtPath:error: failing since it's in a temp directory anyways
             [[NSFileManager defaultManager] removeItemAtPath:[movieURL path] error:nil];
-            [self uploadGIFAtURL:gifURL];
+            [self uploadNewRecordingWithGIFURL:gifURL posterFrameURL:nil];
         }];
     }];
 }
@@ -125,6 +126,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     if (!self.recorder.isRecording && !self.isShowingSelection) {
         [self recordSelection:nil];
     }
+    
     else if (!self.recorder.isRecording && self.isShowingSelection) {
         [self selectionViewDidCancel:nil];
     }
@@ -186,13 +188,22 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     uint32_t matchingDisplayCount = 0;
     CGError error = CGGetDisplaysWithPoint(NSPointToCGPoint(cgOrientedRect.origin), 1, &displayID, &matchingDisplayCount);
     if ((error == kCGErrorSuccess) && (matchingDisplayCount == 1)) {
-        [self.recorder recordRect:cgOrientedRect display:displayID completion:^(NSURL *movieURL) {
+        [self.recorder recordRect:cgOrientedRect display:displayID completion:^(NSURL *framesURL) {
             [self.overlayWindows makeObjectsPerformSelector:@selector(close)];
             [self.overlayWindows removeAllObjects];
 
-            [Converter convertFramesAtURL:movieURL completion:^(NSURL *gifURL) {
-                [[NSFileManager defaultManager] removeItemAtPath:[movieURL path] error:nil];
-                [self uploadGIFAtURL:gifURL];
+            NSError *framesError;
+            NSArray *frames = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:framesURL includingPropertiesForKeys:nil options:0 error:&framesError];
+            if (!frames && error) {
+                NSLog(@"Error fetching frames for poster frame image: %@", framesError);
+            }
+            NSURL *firstFrame = frames.firstObject;
+
+            [Converter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
+                // Really don't care about removeItemAtPath:error: failing since it's in a temp directory anyways
+
+                [self uploadNewRecordingWithGIFURL:gifURL posterFrameURL:firstFrame];
+                [[NSFileManager defaultManager] removeItemAtPath:[framesURL path] error:nil];
             }];
         }];
     }
@@ -215,22 +226,28 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 #pragma mark - Uploading
 
-- (void)uploadGIFAtURL:(NSURL *)gifURL {
+- (void)uploadNewRecordingWithGIFURL:(NSURL *)gifURL posterFrameURL:(NSURL *)posterFrameURL {
+    NSImage *posterFrameImage;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[posterFrameURL path]]) {
+        posterFrameImage = [[NSImage alloc] initWithContentsOfFile:[posterFrameURL path]];
+    }
+    
     [[self uploader] uploadGIF:gifURL withName:[[gifURL path] lastPathComponent] completion:^(BOOL succeeded, NSURL *publicURL, NSError *error) {
         if (error || !succeeded) {
             NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"UploadFailedAlertTitle", nil) defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"%@", [error localizedDescription]];
             [alert runModal];
             return;
         }
-        
-        [[NSFileManager defaultManager] removeItemAtPath:[gifURL path] error:nil];
 
-        JEFRecording *newRecording = [JEFRecording recordingWithURL:publicURL];
+        JEFRecording *newRecording = [JEFRecording recordingWithURL:publicURL posterFrameImage:posterFrameImage];
+
         [[self mutableArrayValueForKey:@"recentRecordings"] addObject:newRecording];
         [self saveRecentRecordings];
 
         [newRecording copyURLStringToPasteboard];
         [self displaySharedUserNotification];
+
+        [[NSFileManager defaultManager] removeItemAtPath:[gifURL path] error:nil];
     }];
 }
 
@@ -281,12 +298,13 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     JEFRecordingCellView *view = [tableView makeViewWithIdentifier:@"JEFRecordingCellView" owner:self];
+    JEFRecording *recording = [self.recentRecordingsArrayController arrangedObjects][(NSUInteger)row];
 
     view.linkButton.target = self;
     view.linkButton.action = @selector(copyLinkToPasteboard:);
     view.shareButton.target = self;
     view.shareButton.action = @selector(showShareMenu:);
-    view.previewImageView.image = [NSImage imageNamed:@"500x500"];
+    view.previewImageView.image = recording.posterFrameImage ?: [NSImage imageNamed:@"500x500"];
 
     return view;
 }
@@ -363,7 +381,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     [paragraphStyle setAlignment:NSCenterTextAlignment];
 
     NSDictionary *attrsDictionary = @{ NSShadowAttributeName : shadow, NSFontAttributeName : font, NSParagraphStyleAttributeName : paragraphStyle, NSForegroundColorAttributeName : fontColor };
-    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:button.title attributes:attrsDictionary];
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:button.title ?: @"" attributes:attrsDictionary];
     [button setAttributedTitle:attrString];
 }
 
