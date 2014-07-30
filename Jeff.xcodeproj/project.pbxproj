@@ -43,7 +43,7 @@
 		CAEC3FBC1964D683004FDA19 /* JEFPopoverStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAEC3FBB1964D683004FDA19 /* JEFPopoverStoryboard.storyboard */; };
 		CAEC3FC21964EBFD004FDA19 /* JEFPopoverContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAEC3FC01964EBFD004FDA19 /* JEFPopoverContentViewController.m */; };
 		CAF30B3C18D3CAD800D7BC9D /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF30B3B18D3CAD800D7BC9D /* DropboxOSX.framework */; };
-		CAF30B3D18D3CAF300D7BC9D /* DropboxOSX.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAF30B3B18D3CAD800D7BC9D /* DropboxOSX.framework */; };
+		CAF30B3D18D3CAF300D7BC9D /* DropboxOSX.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAF30B3B18D3CAD800D7BC9D /* DropboxOSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		CAF30B3F18D3CAFD00D7BC9D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF30B3E18D3CAFD00D7BC9D /* Security.framework */; };
 		CAF30B4518D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF30B4418D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.m */; };
 		CAF30B6018D5281100D7BC9D /* INPopoverController-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CAF30B5518D5281100D7BC9D /* INPopoverController-Info.plist */; };
@@ -513,7 +513,7 @@
 		CA455B2018B83EB900F9A541 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Brandon Evans";
 				TargetAttributes = {
 					CA455B2718B83EB900F9A541 = {
@@ -656,7 +656,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "LOCATION=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\nIDENTITY=\"Developer ID Application: Brandon Evans\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$LOCATION/DropboxOSX.framework/Versions/A\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"${BUILT_PRODUCTS_DIR}/JeffLauncher.app\"";
+			shellScript = "LOCATION=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\nIDENTITY=\"Developer ID Application: Brandon Evans\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"${BUILT_PRODUCTS_DIR}/JeffLauncher.app\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
