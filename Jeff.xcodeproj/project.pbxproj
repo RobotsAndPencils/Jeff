@@ -33,6 +33,7 @@
 		CA4D988418D6D2A900EFE4FD /* JEFRecordingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4D988318D6D2A900EFE4FD /* JEFRecordingCellView.m */; };
 		CA54FCEE196E2DF4000C46CC /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = CA54FCED196E2DF4000C46CC /* Constants.m */; };
 		CA571B1C1936E371005E9C46 /* JEFOverlayWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CA571B1B1936E371005E9C46 /* JEFOverlayWindow.m */; };
+		CA7A1D991991E9FF008DA733 /* JEFCreditsTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA7A1D981991E9FF008DA733 /* JEFCreditsTextView.m */; };
 		CA81B09C197777DF00761ECC /* JEFScaleToFillImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA81B09B197777DF00761ECC /* JEFScaleToFillImageView.m */; };
 		CA875EFC18B9974C009FC997 /* SelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA875EFB18B9974C009FC997 /* SelectionView.m */; };
 		CAA79EAC192A725800A4299F /* JEFQuartzRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA79EAB192A725800A4299F /* JEFQuartzRecorder.m */; };
@@ -141,6 +142,8 @@
 		CA54FCED196E2DF4000C46CC /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		CA571B1A1936E371005E9C46 /* JEFOverlayWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFOverlayWindow.h; path = Windows/JEFOverlayWindow.h; sourceTree = "<group>"; };
 		CA571B1B1936E371005E9C46 /* JEFOverlayWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFOverlayWindow.m; path = Windows/JEFOverlayWindow.m; sourceTree = "<group>"; };
+		CA7A1D971991E9FF008DA733 /* JEFCreditsTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFCreditsTextView.h; sourceTree = "<group>"; };
+		CA7A1D981991E9FF008DA733 /* JEFCreditsTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFCreditsTextView.m; sourceTree = "<group>"; };
 		CA81B09A197777DF00761ECC /* JEFScaleToFillImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFScaleToFillImageView.h; path = Views/JEFScaleToFillImageView.h; sourceTree = "<group>"; };
 		CA81B09B197777DF00761ECC /* JEFScaleToFillImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFScaleToFillImageView.m; path = Views/JEFScaleToFillImageView.m; sourceTree = "<group>"; };
 		CA875EFA18B9974C009FC997 /* SelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionView.h; sourceTree = "<group>"; };
@@ -453,6 +456,8 @@
 				CA4D988318D6D2A900EFE4FD /* JEFRecordingCellView.m */,
 				CA81B09A197777DF00761ECC /* JEFScaleToFillImageView.h */,
 				CA81B09B197777DF00761ECC /* JEFScaleToFillImageView.m */,
+				CA7A1D971991E9FF008DA733 /* JEFCreditsTextView.h */,
+				CA7A1D981991E9FF008DA733 /* JEFCreditsTextView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -681,6 +686,7 @@
 				CADF57B418C6F432006512E3 /* JEFRecording.m in Sources */,
 				CA455B7718B84ED200F9A541 /* Converter.m in Sources */,
 				CAA79EAC192A725800A4299F /* JEFQuartzRecorder.m in Sources */,
+				CA7A1D991991E9FF008DA733 /* JEFCreditsTextView.m in Sources */,
 				CA455B7B18B882DB00F9A541 /* NSFileManager+Temporary.m in Sources */,
 				CA455B3F18B83EB900F9A541 /* AppDelegate.m in Sources */,
 				CAF30B6218D5281100D7BC9D /* INPopoverParentWindow.m in Sources */,

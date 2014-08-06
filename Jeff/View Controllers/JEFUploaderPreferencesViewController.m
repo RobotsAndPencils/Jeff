@@ -21,6 +21,7 @@
 @property (nonatomic, weak) IBOutlet NSTextField *versionLabel;
 @property (nonatomic, weak) IBOutlet MASShortcutView *recordScreenShortcutView;
 @property (nonatomic, weak) IBOutlet MASShortcutView *recordSelectionShortcutView;
+@property (nonatomic, strong) IBOutlet NSTextView *openSourceCreditTextView;
 
 @end
 
@@ -35,6 +36,14 @@
     self.recordSelectionShortcutView.associatedUserDefaultsKey = JEFRecordSelectionShortcutKey;
     self.recordScreenShortcutView.appearance = MASShortcutViewAppearanceTexturedRect;
     self.recordSelectionShortcutView.appearance = MASShortcutViewAppearanceTexturedRect;
+    
+    NSString *htmlString = NSLocalizedString(@"PreferencesOpenSourceCreditsHTML", @"An HTML string containing open source credits");
+    NSData *htmlData = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableAttributedString *attributedCredits = [[NSMutableAttributedString alloc] initWithHTML:htmlData documentAttributes:NULL];
+    NSDictionary *attributes = @{ NSFontAttributeName : [NSFont systemFontOfSize:[NSFont systemFontSize]], NSForegroundColorAttributeName: [NSColor labelColor] };
+    [attributedCredits addAttributes:attributes range:NSMakeRange(0, attributedCredits.string.length - 1)];
+    self.openSourceCreditTextView.linkTextAttributes = @{ NSForegroundColorAttributeName: [NSColor labelColor], NSCursorAttributeName: [NSCursor pointingHandCursor] };
+    self.openSourceCreditTextView.textStorage.attributedString = attributedCredits;
 
     self.dropboxLinked = [[DBSession sharedSession] isLinked];
     [self updateLinkButton];
