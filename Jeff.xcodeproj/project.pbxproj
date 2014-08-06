@@ -38,6 +38,8 @@
 		CAA79EAC192A725800A4299F /* JEFQuartzRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA79EAB192A725800A4299F /* JEFQuartzRecorder.m */; };
 		CAB110D4192C6C61000A04C0 /* NSEvent+MouseClamped.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB110D3192C6C61000A04C0 /* NSEvent+MouseClamped.m */; };
 		CADF57B418C6F432006512E3 /* JEFRecording.m in Sources */ = {isa = PBXBuildFile; fileRef = CADF57B318C6F432006512E3 /* JEFRecording.m */; };
+		CAE8F9C61991CBFF00F24D4C /* MIT-License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CAE8F9C31991CBFF00F24D4C /* MIT-License.rtf */; };
+		CAE8F9C71991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE8F9C51991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m */; };
 		CAEC3FB61964D3FA004FDA19 /* JEFPopoverUploaderSetupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAEC3FB51964D3FA004FDA19 /* JEFPopoverUploaderSetupViewController.xib */; };
 		CAEC3FBC1964D683004FDA19 /* JEFPopoverStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAEC3FBB1964D683004FDA19 /* JEFPopoverStoryboard.storyboard */; };
 		CAEC3FC21964EBFD004FDA19 /* JEFPopoverContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAEC3FC01964EBFD004FDA19 /* JEFPopoverContentViewController.m */; };
@@ -151,6 +153,9 @@
 		CADF57B318C6F432006512E3 /* JEFRecording.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFRecording.m; path = Models/JEFRecording.m; sourceTree = "<group>"; };
 		CADF57B518C70081006512E3 /* Jeff.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Jeff.entitlements; sourceTree = "<group>"; };
 		CAE40E16196F6715002901BD /* JEFRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JEFRecorder.h; path = Recorders/JEFRecorder.h; sourceTree = "<group>"; };
+		CAE8F9C31991CBFF00F24D4C /* MIT-License.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "MIT-License.rtf"; sourceTree = "<group>"; };
+		CAE8F9C41991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
+		CAE8F9C51991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
 		CAEC3FB51964D3FA004FDA19 /* JEFPopoverUploaderSetupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JEFPopoverUploaderSetupViewController.xib; sourceTree = "<group>"; };
 		CAEC3FBB1964D683004FDA19 /* JEFPopoverStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = JEFPopoverStoryboard.storyboard; path = Storyboards/JEFPopoverStoryboard.storyboard; sourceTree = "<group>"; };
 		CAEC3FBF1964EBFD004FDA19 /* JEFPopoverContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFPopoverContentViewController.h; path = "View Controllers/JEFPopoverContentViewController.h"; sourceTree = "<group>"; };
@@ -212,6 +217,7 @@
 		83593B9212B387F97DA9E104 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				CAE8F9C21991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell */,
 				CA1F9909192F0ACB00C3EF33 /* StartAtLoginController */,
 				CAF30B5418D5281100D7BC9D /* INPopoverController */,
 			);
@@ -402,6 +408,16 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		CAE8F9C21991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell */ = {
+			isa = PBXGroup;
+			children = (
+				CAE8F9C31991CBFF00F24D4C /* MIT-License.rtf */,
+				CAE8F9C41991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.h */,
+				CAE8F9C51991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m */,
+			);
+			path = RSVerticallyCenteredTextFieldCell;
+			sourceTree = "<group>";
+		};
 		CAF30B4118D3D73E00D7BC9D /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,6 +596,7 @@
 				CA455B4418B83EBA00F9A541 /* Images.xcassets in Resources */,
 				CA455B3C18B83EB900F9A541 /* Credits.rtf in Resources */,
 				CA455B4218B83EBA00F9A541 /* MainMenu.xib in Resources */,
+				CAE8F9C61991CBFF00F24D4C /* MIT-License.rtf in Resources */,
 				83593BA6023A48A43B1002E8 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -678,6 +695,7 @@
 				CA81B09C197777DF00761ECC /* JEFScaleToFillImageView.m in Sources */,
 				CA1F990C192F0ACB00C3EF33 /* StartAtLoginController.m in Sources */,
 				CAF30B6118D5281100D7BC9D /* INPopoverController.m in Sources */,
+				CAE8F9C71991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m in Sources */,
 				CA4D988418D6D2A900EFE4FD /* JEFRecordingCellView.m in Sources */,
 				CAF30B6418D5281100D7BC9D /* INPopoverWindowFrame.m in Sources */,
 				CA455B3818B83EB900F9A541 /* main.m in Sources */,
