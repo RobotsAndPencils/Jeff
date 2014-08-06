@@ -15,6 +15,7 @@
 #import "JEFPopoverRecordingsViewController.h"
 #import "INPopoverController.h"
 #import "JEFPopoverContentViewController.h"
+#import "JEFUploaderProtocol.h"
 
 NSString *const JEFClosePopoverNotification = @"JEFClosePopoverNotification";
 NSString *const JEFSetStatusViewNotRecordingNotification = @"JEFSetStatusViewNotRecordingNotification";
@@ -38,10 +39,11 @@ NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
 
     [self setupStatusItem];
     [self setupPopover];
+    [self registerDefaults];
 
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"***REMOVED***"];
     [[BITHockeyManager sharedHockeyManager] startManager];
-    [[BITHockeyManager sharedHockeyManager].crashManager setAutoSubmitCrashReport: YES];
+    [[BITHockeyManager sharedHockeyManager].crashManager setAutoSubmitCrashReport:YES];
 
     __weak typeof(self) weakSelf = self;
     [[NSNotificationCenter defaultCenter] addObserverForName:JEFClosePopoverNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
@@ -97,6 +99,10 @@ NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
     self.popover.animates = YES;
     self.popover.animationType = INPopoverAnimationTypeFadeOut;
     self.popover.color = [NSColor colorWithCalibratedWhite:0.9 alpha:1.0];
+}
+
+- (void)registerDefaults {
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"selectedUploader": @(JEFUploaderTypeDropbox) }];
 }
 
 #pragma mark - Toggle popover
