@@ -275,7 +275,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (IBAction)showShareMenu:(id)sender {
     NSButton *button = (NSButton *)sender;
-    JEFRecording *recording = [(NSTableCellView *)[button superview] objectValue];
+    JEFRecording *recording = [(NSTableCellView *)[[button superview] superview] objectValue];
     NSSharingServicePicker *sharePicker = [[NSSharingServicePicker alloc] initWithItems:@[ [recording.url absoluteString] ]];
     sharePicker.delegate = self;
     [sharePicker showRelativeToRect:button.bounds ofView:button preferredEdge:NSMinYEdge];
@@ -283,7 +283,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (IBAction)copyLinkToPasteboard:(id)sender {
     NSButton *button = (NSButton *)sender;
-    JEFRecording *recording = [(NSTableCellView *)[button superview] objectValue];
+    JEFRecording *recording = [(NSTableCellView *)[[button superview] superview] objectValue];
     [recording copyURLStringToPasteboard];
     [self displayCopiedUserNotification];
 }
