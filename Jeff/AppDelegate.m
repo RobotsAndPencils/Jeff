@@ -11,7 +11,6 @@
 #import <HockeySDK/HockeySDK.h>
 #import <DropboxOSX/DropboxOSX.h>
 
-#import "StatusItemView.h"
 #import "JEFPopoverRecordingsViewController.h"
 #import "INPopoverController.h"
 #import "JEFPopoverContentViewController.h"
@@ -24,7 +23,7 @@ NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
 
 @interface AppDelegate () <BITHockeyManagerDelegate>
 
-@property (strong, nonatomic) StatusItemView *statusItemView;
+@property (strong, nonatomic) NSStatusItem *statusItem;
 @property (strong, nonatomic) INPopoverController *popover;
 @property (strong, nonatomic) id popoverTransiencyMonitor;
 
@@ -86,8 +85,9 @@ NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
 }
 
 - (void)setupStatusItem {
-    NSStatusItem *statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
-    self.statusItemView = [[StatusItemView alloc] initWithStatusItem:statusItem];
+    self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
+    self.statusItem.button.image = [NSImage imageNamed:@"StatusItemTemplate"];
+    self.statusItem.button.target = self;
     [self setStatusItemActionRecord:YES];
 }
 
@@ -107,8 +107,7 @@ NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
 
 #pragma mark - Toggle popover
 
-- (void)showPopover:(StatusItemView *)sender {
-    [self.statusItemView setHighlighted:YES];
+- (void)showPopover:(NSStatusBarButton *)sender {
     if (self.popover.popoverIsVisible) {
         [self closePopover:nil];
         return;
@@ -127,7 +126,6 @@ NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
 }
 
 - (void)closePopover:(id)sender {
-    [self.statusItemView setHighlighted:NO];
     if (self.popoverTransiencyMonitor) {
         [NSEvent removeMonitor:self.popoverTransiencyMonitor];
         self.popoverTransiencyMonitor = nil;
@@ -135,20 +133,18 @@ NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
     }
 }
 
+- (void)stopRecording:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:JEFStopRecordingNotification object:nil];
+}
+
 - (void)setStatusItemActionRecord:(BOOL)record {
     if (record) {
-        self.statusItemView.image = [NSImage imageNamed:@"StatusItemTemplate"];
-        self.statusItemView.alternateImage = [NSImage imageNamed:@"StatusItemHighlightedTemplate"];
-        __weak typeof(self) weakSelf = self;
-        self.statusItemView.clickHandler = ^(id sender){
-            [weakSelf showPopover:sender];
-        };
+        self.statusItem.button.image = [NSImage imageNamed:@"StatusItemTemplate"];
+        self.statusItem.button.action = @selector(showPopover:);
     }
     else {
-        self.statusItemView.image = [NSImage imageNamed:NSImageNameStopProgressTemplate];
-        self.statusItemView.clickHandler = ^(id sender){
-            [[NSNotificationCenter defaultCenter] postNotificationName:JEFStopRecordingNotification object:nil];
-        };
+        self.statusItem.button.image = [NSImage imageNamed:NSImageNameStopProgressTemplate];
+        self.statusItem.button.action = @selector(stopRecording:);
     }
 }
 

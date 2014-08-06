@@ -26,7 +26,6 @@
 		CA455B4C18B83EBA00F9A541 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA455B2B18B83EB900F9A541 /* Cocoa.framework */; };
 		CA455B5418B83EBA00F9A541 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CA455B5218B83EBA00F9A541 /* InfoPlist.strings */; };
 		CA455B5618B83EBA00F9A541 /* JeffTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B5518B83EBA00F9A541 /* JeffTests.m */; };
-		CA455B6718B8467000F9A541 /* StatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B6618B8467000F9A541 /* StatusItemView.m */; };
 		CA455B6B18B848B700F9A541 /* JEFPopoverRecordingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B6918B848B700F9A541 /* JEFPopoverRecordingsViewController.m */; };
 		CA455B7418B84EC100F9A541 /* gifsicle in Resources */ = {isa = PBXBuildFile; fileRef = CA455B7318B84EC100F9A541 /* gifsicle */; };
 		CA455B7718B84ED200F9A541 /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B7618B84ED200F9A541 /* Converter.m */; };
@@ -127,8 +126,6 @@
 		CA455B5118B83EBA00F9A541 /* JeffTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JeffTests-Info.plist"; sourceTree = "<group>"; };
 		CA455B5318B83EBA00F9A541 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CA455B5518B83EBA00F9A541 /* JeffTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JeffTests.m; sourceTree = "<group>"; };
-		CA455B6518B8467000F9A541 /* StatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusItemView.h; sourceTree = "<group>"; };
-		CA455B6618B8467000F9A541 /* StatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusItemView.m; sourceTree = "<group>"; };
 		CA455B6818B848B700F9A541 /* JEFPopoverRecordingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFPopoverRecordingsViewController.h; sourceTree = "<group>"; };
 		CA455B6918B848B700F9A541 /* JEFPopoverRecordingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFPopoverRecordingsViewController.m; sourceTree = "<group>"; };
 		CA455B7318B84EC100F9A541 /* gifsicle */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = gifsicle; path = Jeff/Resources/gifsicle; sourceTree = "<group>"; };
@@ -434,8 +431,6 @@
 		CAF30B4F18D3E31D00D7BC9D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CA455B6518B8467000F9A541 /* StatusItemView.h */,
-				CA455B6618B8467000F9A541 /* StatusItemView.m */,
 				CA875EFA18B9974C009FC997 /* SelectionView.h */,
 				CA875EFB18B9974C009FC997 /* SelectionView.m */,
 				CA4D988218D6D2A900EFE4FD /* JEFRecordingCellView.h */,
@@ -668,7 +663,6 @@
 				CA875EFC18B9974C009FC997 /* SelectionView.m in Sources */,
 				CADF57B418C6F432006512E3 /* JEFRecording.m in Sources */,
 				CA455B7718B84ED200F9A541 /* Converter.m in Sources */,
-				CA455B6718B8467000F9A541 /* StatusItemView.m in Sources */,
 				CAA79EAC192A725800A4299F /* JEFQuartzRecorder.m in Sources */,
 				CA455B7B18B882DB00F9A541 /* NSFileManager+Temporary.m in Sources */,
 				CA455B3F18B83EB900F9A541 /* AppDelegate.m in Sources */,
