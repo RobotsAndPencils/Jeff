@@ -47,11 +47,14 @@
 
 #import "SelectionView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "RSVerticallyCenteredTextFieldCell.h"
+#import <tgmath.h>
 
 
 const CGFloat HandleSize = 5.0;
 const CGFloat JEFSelectionMinimumWidth = 50.0;
 const CGFloat JEFSelectionMinimumHeight = 50.0;
+const CGFloat JEFSelectionViewInfoMargin = 20.0;
 
 CGFloat constrain(CGFloat value, CGFloat min, CGFloat max) {
     return fmin(fmax(value, min), max);
@@ -83,6 +86,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 @property (nonatomic, assign) NSPoint anchor;
 
 @property (nonatomic, strong) NSButton *confirmRectButton;
+@property (nonatomic, strong) NSVisualEffectView *infoContainer;
 
 @end
 
@@ -94,19 +98,42 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 - (id)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
     if (self) {
-        [self setWantsLayer:YES];
+        self.wantsLayer = YES;
 
         _hasMadeInitialSelection = NO;
         _hasConfirmedSelection = NO;
 
         _confirmRectButton = [[NSButton alloc] initWithFrame:CGRectMake(0, 0, 100, 24)];
-        [_confirmRectButton setButtonType:NSMomentaryLightButton];
-        [_confirmRectButton setBezelStyle:NSInlineBezelStyle];
-        [_confirmRectButton setTitle:@"Record"];
-        _confirmRectButton.hidden = YES;
+        _confirmRectButton.buttonType = NSMomentaryLightButton;
+        _confirmRectButton.bezelStyle = NSRecessedBezelStyle;
+        _confirmRectButton.title = @"Record";
+        _confirmRectButton.alphaValue = 0.0;
         [_confirmRectButton setTarget:self];
         [_confirmRectButton setAction:@selector(confirmRect)];
         [self addSubview:self.confirmRectButton];
+        
+        NSTextField *infoTextField = [[NSTextField alloc] initWithFrame:CGRectZero];
+        infoTextField.cell = [[RSVerticallyCenteredTextFieldCell alloc] init];
+        infoTextField.font = [NSFont systemFontOfSize:18.0];
+        infoTextField.alignment = NSCenterTextAlignment;
+        infoTextField.stringValue = NSLocalizedString(@"RecordSelectionInfo", @"Instructions for the user to make a selection");
+        
+        NSScreen *screen = [NSScreen mainScreen];
+        CGFloat screenWidth = CGRectGetWidth(screen.frame);
+        CGSize stringSize = [infoTextField.stringValue sizeWithAttributes:@{ NSFontAttributeName: infoTextField.font }];
+        
+        CGFloat width = fmin(stringSize.width + JEFSelectionViewInfoMargin * 2, screenWidth);
+        CGFloat height = stringSize.height + JEFSelectionViewInfoMargin * 2;
+        CGFloat x = (screenWidth - width) / 2;
+        CGFloat y = 100.0;
+        CGRect infoFrame = CGRectMake(x, y, width, height);
+        
+        _infoContainer = [[NSVisualEffectView alloc] initWithFrame:infoFrame];
+        _infoContainer.appearance = [NSAppearance appearanceNamed:NSAppearanceNameVibrantDark];
+        [_infoContainer addSubview:infoTextField];
+        
+        infoTextField.frame = _infoContainer.bounds;
+        [self addSubview:_infoContainer];
     }
     return self;
 }
@@ -276,7 +303,10 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
             centeredRect.origin = origin;
             centeredRect;
         });
-        self.confirmRectButton.hidden = NO;
+
+        [NSAnimationContext currentContext].duration = 0.1;
+        self.confirmRectButton.animator.alphaValue = 1.0;
+        self.infoContainer.animator.alphaValue = 0.0;
     }
 }
 

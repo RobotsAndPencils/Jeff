@@ -6,3 +6,5 @@
 "GIFCopiedSuccessNotificationTitle" = "Jeff has your URL";
 "GIFPasteboardNotificationBody" = "The direct URL is ready to be pasted.";
 "UploadFailedAlertTitle" = "Jeff couldn't upload your GIF";
+
+"RecordSelectionInfo" = "Click and drag over the part of the screen that you want Jeff to record.";
