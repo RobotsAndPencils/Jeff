@@ -33,8 +33,6 @@
 
     self.uploaderSetupViewController = [[JEFPopoverUploaderSetupViewController alloc] init];
     [self addChildViewController:self.uploaderSetupViewController];
-
-    [self updateViewControllerImmediately:YES];
 }
 
 - (void)viewDidAppear {
