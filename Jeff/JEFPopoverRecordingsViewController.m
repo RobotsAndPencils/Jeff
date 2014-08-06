@@ -120,6 +120,8 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
             [self uploadNewRecordingWithGIFURL:gifURL posterFrameURL:nil];
         }];
     }];
+    
+    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }
 
 - (void)toggleRecordingSelection {
@@ -133,6 +135,8 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     else {
         [self stopRecording:nil];
     }
+    
+    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }
 
 - (IBAction)recordSelection:(id)sender {
