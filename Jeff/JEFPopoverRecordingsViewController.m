@@ -371,7 +371,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 - (void)setStyleForButton:(NSButton *)button {
     NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowColor = [NSColor whiteColor];
-    shadow.shadowOffset = CGSizeMake(0.0f, -1.0f);
+    shadow.shadowOffset = CGSizeMake(0.0, 1.0);
 
     NSFont *font = [NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSRegularControlSize]];
 
