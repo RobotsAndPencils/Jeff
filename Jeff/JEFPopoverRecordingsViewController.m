@@ -29,7 +29,6 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 @property (strong, nonatomic) IBOutlet NSArrayController *recentRecordingsArrayController;
 @property (weak, nonatomic) IBOutlet NSTableView *tableView;
-@property (weak, nonatomic) IBOutlet NSScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet NSVisualEffectView *headerContainerView;
 @property (weak, nonatomic) IBOutlet NSVisualEffectView *footerContainerView;
 
@@ -71,8 +70,8 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     [self.tableView setDoubleAction:@selector(didDoubleClickRow:)];
     [self.tableView setIntercellSpacing:NSMakeSize(0, 0)];
     
-    self.scrollView.automaticallyAdjustsContentInsets = NO;
-    self.scrollView.contentInsets = NSEdgeInsetsMake(CGRectGetHeight(self.headerContainerView.frame), 0, CGRectGetHeight(self.footerContainerView.frame), 0);
+    self.tableView.enclosingScrollView.automaticallyAdjustsContentInsets = NO;
+    self.tableView.enclosingScrollView.contentInsets = NSEdgeInsetsMake(CGRectGetHeight(self.headerContainerView.frame), 0, CGRectGetHeight(self.footerContainerView.frame), 0);
 
     [self setStyleForButton:self.recordScreenButton];
     [self setStyleForButton:self.recordSelectionButton];
