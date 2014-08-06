@@ -17,4 +17,19 @@
     [self.linkButton sendActionOn:NSLeftMouseDownMask];
 }
 
+// Use vibrant dark material to denote selected state
+- (void)setBackgroundStyle:(NSBackgroundStyle)backgroundStyle {
+    [super setBackgroundStyle:backgroundStyle];
+    
+    switch (backgroundStyle) {
+        case NSBackgroundStyleDark:
+            self.infoContainerVisualEffectView.appearance = [NSAppearance appearanceNamed:NSAppearanceNameVibrantDark];
+            break;
+        case NSBackgroundStyleLight:
+        default:
+            self.infoContainerVisualEffectView.appearance = [NSAppearance appearanceNamed:NSAppearanceNameVibrantLight];
+            break;
+    }
+}
+
 @end
