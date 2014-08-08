@@ -21,6 +21,8 @@ NSString *const JEFSetStatusViewNotRecordingNotification = @"JEFSetStatusViewNot
 NSString *const JEFSetStatusViewRecordingNotification = @"JEFSetStatusViewRecordingNotification";
 NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
 
+CGFloat const JEFPopoverVerticalOffset = 3.0;
+
 @interface AppDelegate () <BITHockeyManagerDelegate>
 
 @property (strong, nonatomic) NSStatusItem *statusItem;
@@ -113,7 +115,7 @@ NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
         return;
     }
 
-    [self.popover presentPopoverFromRect:sender.frame inView:sender preferredArrowDirection:INPopoverArrowDirectionUp anchorsToPositionView:YES];
+    [self.popover presentPopoverFromRect:NSOffsetRect(sender.frame, 0, JEFPopoverVerticalOffset) inView:sender preferredArrowDirection:INPopoverArrowDirectionUp anchorsToPositionView:YES];
 
     if (!self.popoverTransiencyMonitor) {
         __weak __typeof(self) weakSelf = self;
