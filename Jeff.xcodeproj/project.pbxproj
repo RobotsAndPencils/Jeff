@@ -38,6 +38,7 @@
 		CA875EFC18B9974C009FC997 /* SelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA875EFB18B9974C009FC997 /* SelectionView.m */; };
 		CAA79EAC192A725800A4299F /* JEFQuartzRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA79EAB192A725800A4299F /* JEFQuartzRecorder.m */; };
 		CAB110D4192C6C61000A04C0 /* NSEvent+MouseClamped.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB110D3192C6C61000A04C0 /* NSEvent+MouseClamped.m */; };
+		CAB84C74199470B200EA0414 /* RBLTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB84C73199470B200EA0414 /* RBLTableView.m */; };
 		CADF57B418C6F432006512E3 /* JEFRecording.m in Sources */ = {isa = PBXBuildFile; fileRef = CADF57B318C6F432006512E3 /* JEFRecording.m */; };
 		CAE8F9C61991CBFF00F24D4C /* MIT-License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CAE8F9C31991CBFF00F24D4C /* MIT-License.rtf */; };
 		CAE8F9C71991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE8F9C51991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m */; };
@@ -152,6 +153,8 @@
 		CAA79EAB192A725800A4299F /* JEFQuartzRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFQuartzRecorder.m; path = Recorders/JEFQuartzRecorder.m; sourceTree = "<group>"; };
 		CAB110D2192C6C61000A04C0 /* NSEvent+MouseClamped.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSEvent+MouseClamped.h"; path = "Categories/NSEvent+MouseClamped.h"; sourceTree = "<group>"; };
 		CAB110D3192C6C61000A04C0 /* NSEvent+MouseClamped.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSEvent+MouseClamped.m"; path = "Categories/NSEvent+MouseClamped.m"; sourceTree = "<group>"; };
+		CAB84C72199470B200EA0414 /* RBLTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBLTableView.h; sourceTree = "<group>"; };
+		CAB84C73199470B200EA0414 /* RBLTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBLTableView.m; sourceTree = "<group>"; };
 		CADF57B218C6F432006512E3 /* JEFRecording.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecording.h; path = Models/JEFRecording.h; sourceTree = "<group>"; };
 		CADF57B318C6F432006512E3 /* JEFRecording.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFRecording.m; path = Models/JEFRecording.m; sourceTree = "<group>"; };
 		CADF57B518C70081006512E3 /* Jeff.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Jeff.entitlements; sourceTree = "<group>"; };
@@ -220,6 +223,7 @@
 		83593B9212B387F97DA9E104 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				CAB84C71199470B200EA0414 /* RBLTableView */,
 				CAE8F9C21991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell */,
 				CA1F9909192F0ACB00C3EF33 /* StartAtLoginController */,
 				CAF30B5418D5281100D7BC9D /* INPopoverController */,
@@ -392,6 +396,15 @@
 				CAE40E16196F6715002901BD /* JEFRecorder.h */,
 			);
 			name = Recorders;
+			sourceTree = "<group>";
+		};
+		CAB84C71199470B200EA0414 /* RBLTableView */ = {
+			isa = PBXGroup;
+			children = (
+				CAB84C72199470B200EA0414 /* RBLTableView.h */,
+				CAB84C73199470B200EA0414 /* RBLTableView.m */,
+			);
+			path = RBLTableView;
 			sourceTree = "<group>";
 		};
 		CADF57B018C6DE4D006512E3 /* Strings */ = {
@@ -684,6 +697,7 @@
 			files = (
 				CA875EFC18B9974C009FC997 /* SelectionView.m in Sources */,
 				CADF57B418C6F432006512E3 /* JEFRecording.m in Sources */,
+				CAB84C74199470B200EA0414 /* RBLTableView.m in Sources */,
 				CA455B7718B84ED200F9A541 /* Converter.m in Sources */,
 				CAA79EAC192A725800A4299F /* JEFQuartzRecorder.m in Sources */,
 				CA7A1D991991E9FF008DA733 /* JEFCreditsTextView.m in Sources */,
