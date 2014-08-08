@@ -13,7 +13,12 @@
 - (BOOL)scrollRectToVisible:(NSRect)aRect {
 	NSScrollView *scrollView = self.enclosingScrollView;
 	NSRect visibleRect = self.visibleRect;
-	
+
+    NSEdgeInsets insets = NSEdgeInsetsMake(0, 0, 0, 0);
+    if ([scrollView respondsToSelector:@selector(contentInsets)]) {
+        insets = scrollView.contentInsets;
+    }
+
 	void (^scrollToY)(CGFloat) = ^(CGFloat y) {
 		NSPoint pointToScrollTo = NSMakePoint(0, y);
 		
@@ -22,12 +27,12 @@
 	};
 	
 	if (NSMinY(aRect) < NSMinY(visibleRect)) {
-		scrollToY(NSMinY(aRect) - self.enclosingScrollView.contentInsets.top);
+		scrollToY(NSMinY(aRect) - insets.top);
 		return YES;
 	}
 	
 	if (NSMaxY(aRect) > NSMaxY(visibleRect)) {
-		scrollToY(NSMaxY(aRect) - NSHeight(visibleRect) + self.enclosingScrollView.contentInsets.bottom);
+		scrollToY(NSMaxY(aRect) - NSHeight(visibleRect) + insets.bottom);
 		return YES;
 	}
 	
