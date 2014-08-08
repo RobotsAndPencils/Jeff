@@ -47,6 +47,9 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.tableView.enclosingScrollView.layer.cornerRadius = 5.0;
+    self.tableView.enclosingScrollView.layer.masksToBounds = YES;
     
     [MASShortcut registerGlobalShortcutWithUserDefaultsKey:JEFRecordScreenShortcutKey handler:^{
         [self toggleRecordingScreen];

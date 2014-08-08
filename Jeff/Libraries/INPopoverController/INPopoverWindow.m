@@ -36,7 +36,7 @@
 {
 	windowFrame.origin = NSZeroPoint;
 	const CGFloat arrowHeight = self.frameView.arrowSize.height;
-	return NSInsetRect(windowFrame, arrowHeight, arrowHeight);
+	return NSInsetRect(windowFrame, arrowHeight, 0);
 }
 
 - (NSRect)frameRectForContentRect:(NSRect)contentRect
