@@ -22,12 +22,12 @@
 	};
 	
 	if (NSMinY(aRect) < NSMinY(visibleRect)) {
-		scrollToY(NSMinY(aRect));
+		scrollToY(NSMinY(aRect) - self.enclosingScrollView.contentInsets.top);
 		return YES;
 	}
 	
 	if (NSMaxY(aRect) > NSMaxY(visibleRect)) {
-		scrollToY(NSMaxY(aRect) - NSHeight(visibleRect));
+		scrollToY(NSMaxY(aRect) - NSHeight(visibleRect) + self.enclosingScrollView.contentInsets.bottom);
 		return YES;
 	}
 	
