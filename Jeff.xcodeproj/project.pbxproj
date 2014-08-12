@@ -12,7 +12,6 @@
 		8359376F55CC63D6FE3DE740 /* JEFPopoverUploaderSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83593B5EA5926018F6E2110D /* JEFPopoverUploaderSetupViewController.m */; };
 		83593BA6023A48A43B1002E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83593BD28BA68D2EAD12CF1C /* Localizable.strings */; };
 		CA007B22196CD22000746934 /* JEFPreferencesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA007B21196CD22000746934 /* JEFPreferencesStoryboard.storyboard */; };
-		CA1F9908192F0A7F00C3EF33 /* JeffLauncher.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = CA1F9905192F0A5F00C3EF33 /* JeffLauncher.app */; };
 		CA1F990C192F0ACB00C3EF33 /* StartAtLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1F990B192F0ACB00C3EF33 /* StartAtLoginController.m */; };
 		CA413BE018BA8A720090A1A7 /* RBKDepositBoxManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CA413BDF18BA8A720090A1A7 /* RBKDepositBoxManager.m */; };
 		CA455B2C18B83EB900F9A541 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA455B2B18B83EB900F9A541 /* Cocoa.framework */; };
@@ -33,6 +32,7 @@
 		CA4D988418D6D2A900EFE4FD /* JEFRecordingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4D988318D6D2A900EFE4FD /* JEFRecordingCellView.m */; };
 		CA54FCEE196E2DF4000C46CC /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = CA54FCED196E2DF4000C46CC /* Constants.m */; };
 		CA571B1C1936E371005E9C46 /* JEFOverlayWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CA571B1B1936E371005E9C46 /* JEFOverlayWindow.m */; };
+		CA6BF4DF1999B63A00E3C146 /* JeffLauncher.app in Copy Launcher */ = {isa = PBXBuildFile; fileRef = CA1F9905192F0A5F00C3EF33 /* JeffLauncher.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CA7A1D991991E9FF008DA733 /* JEFCreditsTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA7A1D981991E9FF008DA733 /* JEFCreditsTextView.m */; };
 		CA81B09C197777DF00761ECC /* JEFScaleToFillImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA81B09B197777DF00761ECC /* JEFScaleToFillImageView.m */; };
 		CA875EFC18B9974C009FC997 /* SelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA875EFB18B9974C009FC997 /* SelectionView.m */; };
@@ -88,9 +88,19 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CA1F9908192F0A7F00C3EF33 /* JeffLauncher.app in CopyFiles */,
 				CAF30B3D18D3CAF300D7BC9D /* DropboxOSX.framework in CopyFiles */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CAB1334D1999B2350099CD56 /* Copy Launcher */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				CA6BF4DF1999B63A00E3C146 /* JeffLauncher.app in Copy Launcher */,
+			);
+			name = "Copy Launcher";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -506,6 +516,7 @@
 				CA455B2618B83EB900F9A541 /* Resources */,
 				6AF62D2B5DAE422889FA4895 /* Copy Pods Resources */,
 				CA4C528A18C828CC00C5EAE4 /* CopyFiles */,
+				CAB1334D1999B2350099CD56 /* Copy Launcher */,
 				CAF30B4018D3CF4A00D7BC9D /* Sign Bundles */,
 				CA0F8DB118F4E87C00775565 /* Check Header Style */,
 			);
@@ -686,7 +697,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "LOCATION=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\nIDENTITY=\"Developer ID Application: Brandon Evans\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"${BUILT_PRODUCTS_DIR}/JeffLauncher.app\"";
+			shellScript = "IDENTITY=\"Developer ID Application: Brandon Evans\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"${BUILT_PRODUCTS_DIR}/Jeff.app/Contents/Library/LoginItems/JeffLauncher.app\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
