@@ -63,7 +63,7 @@
 	[self _setArrowDirection:calculatedDirection]; // Change the arrow direction of the popover
 	NSRect windowFrame = [self popoverFrameWithSize:self.contentSize andArrowDirection:calculatedDirection]; // Calculate the window frame based on the arrow direction
 	[_popoverWindow setFrame:windowFrame display:YES]; // Se the frame of the window
-	[[_popoverWindow animationForKey:@"alphaValue"] setDelegate:self];
+	[(CAAnimation *)[_popoverWindow animationForKey:@"alphaValue"] setDelegate:self];
 
 	// Show the popover
 	[self _callDelegateMethod:@selector(popoverWillShow:)]; // Call the delegate
