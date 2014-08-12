@@ -81,7 +81,7 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="1" id="QuB-me-WsH"/>
                                                                     </constraints>
-                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="288498A5-61E0-4E2A-A597-CF7E8699DA72" id="ujV-zr-NTo"/>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="7BA27FEC-BC1A-4E5A-86AA-918B4CBC8F5C" id="ujV-zr-NTo"/>
                                                                 </imageView>
                                                                 <visualEffectView appearanceType="vibrantLight" blendingMode="withinWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="O9S-Hz-IkY">
                                                                     <rect key="frame" x="0.0" y="0.0" width="325" height="50"/>
@@ -115,8 +115,8 @@
                                                                                 <binding destination="cVE-jQ-rxi" name="value" keyPath="objectValue.createdAt" id="SaD-tX-W2K"/>
                                                                             </connections>
                                                                         </textField>
-                                                                        <button misplaced="YES" alphaValue="0.70000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="uBE-ho-exA" userLabel="Share Button">
-                                                                            <rect key="frame" x="294" y="16" width="21" height="21"/>
+                                                                        <button alphaValue="0.70000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="uBE-ho-exA" userLabel="Share Button">
+                                                                            <rect key="frame" x="294" y="15" width="21" height="21"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="21" id="gRx-yu-lml"/>
                                                                                 <constraint firstAttribute="height" constant="21" id="kVq-We-wRl"/>
@@ -129,8 +129,8 @@
                                                                                 <action selector="showShareMenu:" target="gTI-EO-G1X" id="7WC-gD-yd8"/>
                                                                             </connections>
                                                                         </button>
-                                                                        <button misplaced="YES" alphaValue="0.70000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="Os0-PP-n7L" userLabel="Link Button">
-                                                                            <rect key="frame" x="265" y="16" width="21" height="21"/>
+                                                                        <button alphaValue="0.70000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="Os0-PP-n7L" userLabel="Link Button">
+                                                                            <rect key="frame" x="265" y="15" width="21" height="21"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="21" id="DlX-IF-4l0"/>
                                                                                 <constraint firstAttribute="height" constant="21" id="eqF-AJ-gJp"/>
@@ -198,11 +198,11 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <visualEffectView appearanceType="vibrantLight" blendingMode="withinWindow" material="titlebar" state="followsWindowActiveState" maskImage="Header" translatesAutoresizingMaskIntoConstraints="NO" id="M8f-DG-79k" userLabel="Header Container View">
+                            <visualEffectView appearanceType="vibrantLight" blendingMode="withinWindow" material="titlebar" state="followsWindowActiveState" maskImage="RecordingsHeaderMask" translatesAutoresizingMaskIntoConstraints="NO" id="M8f-DG-79k" userLabel="Header Container View">
                                 <rect key="frame" x="0.0" y="234" width="325" height="62"/>
                                 <subviews>
-                                    <button focusRingType="none" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ygm-Fv-aCf">
-                                        <rect key="frame" x="0.0" y="0.0" width="163" height="50"/>
+                                    <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ygm-Fv-aCf">
+                                        <rect key="frame" x="0.0" y="0.0" width="162" height="50"/>
                                         <buttonCell key="cell" type="bevel" title="Record screen" bezelStyle="rounded" alignment="center" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="rZ9-AW-bFA">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -211,8 +211,8 @@
                                             <action selector="recordScreen:" target="gTI-EO-G1X" id="Xrh-vI-926"/>
                                         </connections>
                                     </button>
-                                    <button focusRingType="none" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QCX-5M-k3c">
-                                        <rect key="frame" x="163" y="0.0" width="162" height="50"/>
+                                    <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QCX-5M-k3c">
+                                        <rect key="frame" x="162" y="0.0" width="163" height="50"/>
                                         <buttonCell key="cell" type="bevel" title="Record selection" bezelStyle="rounded" alignment="center" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="fLU-Pl-ibK">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -221,22 +221,22 @@
                                             <action selector="recordSelection:" target="gTI-EO-G1X" id="H5o-6W-A5l"/>
                                         </connections>
                                     </button>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="peH-Y4-Nbb">
-                                        <rect key="frame" x="162" y="-12" width="1" height="48"/>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="peH-Y4-Nbb">
+                                        <rect key="frame" x="162" y="-10" width="1" height="48"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="PopoverButtonSeperator" id="zpa-xC-0ir"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="QCX-5M-k3c" firstAttribute="leading" secondItem="Ygm-Fv-aCf" secondAttribute="trailing" id="5bv-Vc-4Bs"/>
-                                    <constraint firstItem="Ygm-Fv-aCf" firstAttribute="top" secondItem="M8f-DG-79k" secondAttribute="top" constant="17" id="C7c-yZ-ApJ"/>
+                                    <constraint firstItem="Ygm-Fv-aCf" firstAttribute="top" secondItem="M8f-DG-79k" secondAttribute="top" constant="12" id="C7c-yZ-ApJ"/>
                                     <constraint firstAttribute="trailing" secondItem="QCX-5M-k3c" secondAttribute="trailing" id="Cv6-4L-rvX"/>
                                     <constraint firstAttribute="height" constant="62" id="NBd-5m-yv9"/>
                                     <constraint firstItem="Ygm-Fv-aCf" firstAttribute="leading" secondItem="M8f-DG-79k" secondAttribute="leading" id="ac2-BB-SyL"/>
                                     <constraint firstAttribute="bottom" secondItem="QCX-5M-k3c" secondAttribute="bottom" id="ezG-51-RZi"/>
-                                    <constraint firstItem="QCX-5M-k3c" firstAttribute="top" secondItem="M8f-DG-79k" secondAttribute="top" constant="17" id="h49-jT-h2u"/>
+                                    <constraint firstItem="QCX-5M-k3c" firstAttribute="top" secondItem="M8f-DG-79k" secondAttribute="top" constant="12" id="h49-jT-h2u"/>
                                     <constraint firstAttribute="centerY" secondItem="peH-Y4-Nbb" secondAttribute="centerY" constant="-17" id="hHd-hZ-El5"/>
                                     <constraint firstAttribute="centerX" secondItem="peH-Y4-Nbb" secondAttribute="centerX" id="hNE-0E-Eac"/>
-                                    <constraint firstItem="QCX-5M-k3c" firstAttribute="width" secondItem="Ygm-Fv-aCf" secondAttribute="width" id="kuP-7e-8CN"/>
+                                    <constraint firstItem="QCX-5M-k3c" firstAttribute="width" secondItem="Ygm-Fv-aCf" secondAttribute="width" constant="1" id="kuP-7e-8CN"/>
                                     <constraint firstAttribute="bottom" secondItem="Ygm-Fv-aCf" secondAttribute="bottom" id="vJD-DU-lHH"/>
                                 </constraints>
                             </visualEffectView>
@@ -308,7 +308,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="288498A5-61E0-4E2A-A597-CF7E8699DA72" width="325" height="1">
+        <image name="500x500" width="500" height="500"/>
+        <image name="7BA27FEC-BC1A-4E5A-86AA-918B4CBC8F5C" width="325" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -380,11 +381,10 @@ DnoOfg6RDpwOpQ6qDrIOtQ66DskOzQ7UDtwO6Q7uDvAO8g73Dv8PAg8HDw8PEg8kDycPLAAAAAAAAAIB
 AAAAAAAAAD8AAAAAAAAAAAAAAAAAAA8uA
 </mutableData>
         </image>
-        <image name="500x500" width="500" height="500"/>
         <image name="CopyLinkButton" width="20" height="20"/>
-        <image name="Header" width="325" height="62"/>
         <image name="NSActionTemplate" width="14" height="14"/>
         <image name="PopoverButtonSeperator" width="1" height="48"/>
+        <image name="RecordingsHeaderMask" width="325" height="62"/>
         <image name="ShareButton" width="20" height="20"/>
     </resources>
 </document>
