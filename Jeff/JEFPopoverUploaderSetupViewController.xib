@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6185.7" systemVersion="14A283o" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6205" systemVersion="14A314h" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6185.7"/>
+        <deployment defaultVersion="101000" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6205"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="JEFPopoverUploaderSetupViewController">
@@ -13,7 +14,7 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe">
             <rect key="frame" x="0.0" y="0.0" width="341" height="116"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -40,7 +41,7 @@
                     <rect key="frame" x="235" y="52" width="16" height="16"/>
                 </progressIndicator>
                 <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Y4A-GO-HpB">
-                    <rect key="frame" x="254" y="8" width="25" height="25"/>
+                    <rect key="frame" x="254" y="17" width="25" height="25"/>
                     <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ehe-1s-ROr">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -50,7 +51,7 @@
                     </connections>
                 </button>
                 <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zAz-2e-v9I">
-                    <rect key="frame" x="289" y="8" width="40" height="25"/>
+                    <rect key="frame" x="289" y="17" width="40" height="25"/>
                     <buttonCell key="cell" type="roundTextured" title="Quit" bezelStyle="texturedRounded" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gMI-3f-NUn">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -60,7 +61,7 @@
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="whM-Ee-LPG">
-                    <rect key="frame" x="13" y="13" width="66" height="14"/>
+                    <rect key="frame" x="13" y="23" width="66" height="14"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Jeff Version" id="448-oB-GYo">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -72,11 +73,11 @@
                 <constraint firstItem="yiZ-df-uD5" firstAttribute="centerY" secondItem="dg0-ZU-T1C" secondAttribute="centerY" constant="0.5" id="Al4-TB-xYq"/>
                 <constraint firstItem="zAz-2e-v9I" firstAttribute="leading" secondItem="Y4A-GO-HpB" secondAttribute="trailing" constant="12" id="Gdt-W6-rYO"/>
                 <constraint firstAttribute="centerX" secondItem="QKg-uI-qs9" secondAttribute="centerX" id="J85-Ry-ItS"/>
-                <constraint firstAttribute="bottom" secondItem="zAz-2e-v9I" secondAttribute="bottom" constant="10" id="RNJ-c7-ufK"/>
                 <constraint firstItem="dg0-ZU-T1C" firstAttribute="top" secondItem="QKg-uI-qs9" secondAttribute="bottom" constant="8" id="W3o-l4-ZCe"/>
-                <constraint firstAttribute="bottom" secondItem="whM-Ee-LPG" secondAttribute="bottom" constant="13" id="YjT-Ws-N8d"/>
+                <constraint firstAttribute="bottom" secondItem="whM-Ee-LPG" secondAttribute="bottom" constant="23" id="YjT-Ws-N8d"/>
                 <constraint firstItem="whM-Ee-LPG" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="15" id="aH7-jx-OGp"/>
-                <constraint firstItem="Y4A-GO-HpB" firstAttribute="centerY" secondItem="zAz-2e-v9I" secondAttribute="centerY" constant="-0.5" id="mbb-cH-1bu"/>
+                <constraint firstItem="whM-Ee-LPG" firstAttribute="centerY" secondItem="Y4A-GO-HpB" secondAttribute="centerY" id="bZu-vh-n6C"/>
+                <constraint firstItem="Y4A-GO-HpB" firstAttribute="centerY" secondItem="zAz-2e-v9I" secondAttribute="centerY" id="mbb-cH-1bu"/>
                 <constraint firstItem="yiZ-df-uD5" firstAttribute="leading" secondItem="dg0-ZU-T1C" secondAttribute="trailing" constant="8" id="mmG-7q-y36"/>
                 <constraint firstAttribute="trailing" secondItem="zAz-2e-v9I" secondAttribute="trailing" constant="12" id="nO2-8W-5Oh"/>
                 <constraint firstItem="QKg-uI-qs9" firstAttribute="centerX" secondItem="dg0-ZU-T1C" secondAttribute="centerX" id="nRv-OS-puf"/>
