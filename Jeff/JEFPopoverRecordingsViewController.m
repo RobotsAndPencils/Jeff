@@ -247,7 +247,10 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     
     [[self uploader] uploadGIF:gifURL withName:[[gifURL path] lastPathComponent] completion:^(BOOL succeeded, NSURL *publicURL, NSError *error) {
         if (error || !succeeded) {
-            NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"UploadFailedAlertTitle", nil) defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"%@", [error localizedDescription]];
+            NSAlert *alert = [[NSAlert alloc] init];
+            alert.messageText = NSLocalizedString(@"UploadFailedAlertTitle", nil);
+            [alert addButtonWithTitle:@"OK"];
+            alert.informativeText = [NSString stringWithFormat:@"%@", [error localizedDescription]];
             [alert runModal];
             return;
         }
