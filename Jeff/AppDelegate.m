@@ -21,7 +21,7 @@ NSString *const JEFSetStatusViewNotRecordingNotification = @"JEFSetStatusViewNot
 NSString *const JEFSetStatusViewRecordingNotification = @"JEFSetStatusViewRecordingNotification";
 NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
 
-CGFloat const JEFPopoverVerticalOffset = 3.0;
+CGFloat const JEFPopoverVerticalOffset = -3.0;
 
 @interface AppDelegate () <BITHockeyManagerDelegate>
 
