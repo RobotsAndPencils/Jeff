@@ -8,7 +8,9 @@
 
 #import "JEFPopoverUploaderSetupViewController.h"
 
-#import <DropboxOSX/DropboxOSX.h>
+#import <Dropbox/Dropbox.h>
+
+#import "AppDelegate.h"
 
 
 @interface JEFPopoverUploaderSetupViewController ()
@@ -25,7 +27,10 @@
 #pragma mark NSViewController
 
 - (void)viewDidLoad {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateView) name:DBAuthHelperOSXStateChangedNotification object:nil];
+    __weak __typeof(self) weakSelf = self;
+    [[DBAccountManager sharedManager] addObserver:self block:^(DBAccount *account) {
+        [weakSelf updateView];
+    }];
     
     NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
     NSString *buildNumber = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
@@ -37,13 +42,15 @@
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:DBAuthHelperOSXStateChangedNotification object:nil];
+    [[DBAccountManager sharedManager] removeObserver:self];
 }
 
 #pragma mark Actions
 
 - (IBAction)linkDropbox:(id)sender {
-    [[DBAuthHelperOSX sharedHelper] authenticate];
+    [[DBAccountManager sharedManager] linkFromWindow:nil withCompletionBlock:^(DBAccount *account) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:JEFOpenPopoverNotification object:self];
+    }];
 }
 
 - (IBAction)quitApp:(id)sender {
@@ -56,14 +63,6 @@
 #pragma mark Private
 
 - (void)updateView {
-    BOOL loading = [[DBAuthHelperOSX sharedHelper] isLoading];
-    if (loading) {
-        [self.linkProgressIndicator startAnimation:nil];
-    }
-    else {
-        [self.linkProgressIndicator stopAnimation:nil];
-    }
-    self.linkButton.state = loading ? NSOffState : NSOnState;
 }
 
 @end

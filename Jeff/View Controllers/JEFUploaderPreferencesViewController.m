@@ -8,7 +8,7 @@
 
 #import "JEFUploaderPreferencesViewController.h"
 
-#import <DropboxOSX/DropboxOSX.h>
+#import <Dropbox/Dropbox.h>
 #import <ServiceManagement/ServiceManagement.h>
 #import <MASShortcut/MASShortcutView.h>
 #import <MASShortcut/MASShortcutView+UserDefaults.h>
@@ -29,8 +29,12 @@
 
 - (void)loadView {
     [super loadView];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authHelperStateChangedNotification:) name:DBAuthHelperOSXStateChangedNotification object:[DBAuthHelperOSX sharedHelper]];
+
+    __weak __typeof(self) weakSelf = self;
+    [[DBAccountManager sharedManager] addObserver:self block:^(DBAccount *account) {
+        weakSelf.dropboxLinked = account != nil;
+        [weakSelf updateLinkButton];
+    }];
     
     self.recordScreenShortcutView.associatedUserDefaultsKey = JEFRecordScreenShortcutKey;
     self.recordSelectionShortcutView.associatedUserDefaultsKey = JEFRecordSelectionShortcutKey;
@@ -45,7 +49,7 @@
     self.openSourceCreditTextView.linkTextAttributes = @{ NSForegroundColorAttributeName: [NSColor labelColor], NSCursorAttributeName: [NSCursor pointingHandCursor] };
     self.openSourceCreditTextView.textStorage.attributedString = attributedCredits;
 
-    self.dropboxLinked = [[DBSession sharedSession] isLinked];
+    self.dropboxLinked = [[DBAccountManager sharedManager] linkedAccount] != nil;
     [self updateLinkButton];
     
     NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
@@ -53,27 +57,28 @@
     self.versionLabel.stringValue = [NSString stringWithFormat:@"You've got Jeff version %@ (Build %@)", version, buildNumber];
 }
 
+- (void)dealloc {
+    [[DBAccountManager sharedManager] removeObserver:self];
+}
+
 - (IBAction)toggleLinkDropbox:(id)sender {
-    if ([[DBSession sharedSession] isLinked]) {
-        [[DBSession sharedSession] unlinkAll];
+    if ([[DBAccountManager sharedManager] linkedAccount]) {
+        [[[DBAccountManager sharedManager] linkedAccount] unlink];
         [self updateLinkButton];
     } else {
-        [[DBAuthHelperOSX sharedHelper] authenticate];
+        __weak __typeof(self) weakSelf = self;
+        [[DBAccountManager sharedManager] linkFromWindow:self.view.window withCompletionBlock:^(DBAccount *account) {
+            [weakSelf updateLinkButton];
+        }];
     }
 }
 
 - (void)updateLinkButton {
-    if ([[DBSession sharedSession] isLinked]) {
+    if ([[DBAccountManager sharedManager] linkedAccount]) {
         self.linkButton.title = @"Unlink Dropbox";
     } else {
         self.linkButton.title = @"Link Dropbox";
-        self.linkButton.state = [[DBAuthHelperOSX sharedHelper] isLoading] ? NSOffState : NSOnState;
     }
-}
-
-- (void)authHelperStateChangedNotification:(NSNotification *)notification {
-    self.dropboxLinked = [[DBSession sharedSession] isLinked];
-    [self updateLinkButton];
 }
 
 @end

@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "SelectionView.h"
 
+extern NSString *const JEFOpenPopoverNotification;
 extern NSString *const JEFClosePopoverNotification;
 extern NSString *const JEFSetStatusViewNotRecordingNotification;
 extern NSString *const JEFSetStatusViewRecordingNotification;
