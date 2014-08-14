@@ -39,14 +39,14 @@
 		CAA79EAC192A725800A4299F /* JEFQuartzRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA79EAB192A725800A4299F /* JEFQuartzRecorder.m */; };
 		CAB110D4192C6C61000A04C0 /* NSEvent+MouseClamped.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB110D3192C6C61000A04C0 /* NSEvent+MouseClamped.m */; };
 		CAB84C74199470B200EA0414 /* RBLTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB84C73199470B200EA0414 /* RBLTableView.m */; };
+		CAC40812199C391900833FAB /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC40811199C391900833FAB /* Dropbox.framework */; };
+		CAC40813199C4CEA00833FAB /* Dropbox.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAC40811199C391900833FAB /* Dropbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CADF57B418C6F432006512E3 /* JEFRecording.m in Sources */ = {isa = PBXBuildFile; fileRef = CADF57B318C6F432006512E3 /* JEFRecording.m */; };
 		CAE8F9C61991CBFF00F24D4C /* MIT-License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CAE8F9C31991CBFF00F24D4C /* MIT-License.rtf */; };
 		CAE8F9C71991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE8F9C51991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m */; };
 		CAEC3FB61964D3FA004FDA19 /* JEFPopoverUploaderSetupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAEC3FB51964D3FA004FDA19 /* JEFPopoverUploaderSetupViewController.xib */; };
 		CAEC3FBC1964D683004FDA19 /* JEFPopoverStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAEC3FBB1964D683004FDA19 /* JEFPopoverStoryboard.storyboard */; };
 		CAEC3FC21964EBFD004FDA19 /* JEFPopoverContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAEC3FC01964EBFD004FDA19 /* JEFPopoverContentViewController.m */; };
-		CAF30B3C18D3CAD800D7BC9D /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF30B3B18D3CAD800D7BC9D /* DropboxOSX.framework */; };
-		CAF30B3D18D3CAF300D7BC9D /* DropboxOSX.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAF30B3B18D3CAD800D7BC9D /* DropboxOSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		CAF30B3F18D3CAFD00D7BC9D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF30B3E18D3CAFD00D7BC9D /* Security.framework */; };
 		CAF30B4518D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF30B4418D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.m */; };
 		CAF30B6018D5281100D7BC9D /* INPopoverController-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CAF30B5518D5281100D7BC9D /* INPopoverController-Info.plist */; };
@@ -88,7 +88,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CAF30B3D18D3CAF300D7BC9D /* DropboxOSX.framework in CopyFiles */,
+				CAC40813199C4CEA00833FAB /* Dropbox.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +165,7 @@
 		CAB110D3192C6C61000A04C0 /* NSEvent+MouseClamped.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSEvent+MouseClamped.m"; path = "Categories/NSEvent+MouseClamped.m"; sourceTree = "<group>"; };
 		CAB84C72199470B200EA0414 /* RBLTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBLTableView.h; sourceTree = "<group>"; };
 		CAB84C73199470B200EA0414 /* RBLTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBLTableView.m; sourceTree = "<group>"; };
+		CAC40811199C391900833FAB /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = Jeff/Frameworks/Dropbox.framework; sourceTree = "<group>"; };
 		CADF57B218C6F432006512E3 /* JEFRecording.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecording.h; path = Models/JEFRecording.h; sourceTree = "<group>"; };
 		CADF57B318C6F432006512E3 /* JEFRecording.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFRecording.m; path = Models/JEFRecording.m; sourceTree = "<group>"; };
 		CADF57B518C70081006512E3 /* Jeff.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Jeff.entitlements; sourceTree = "<group>"; };
@@ -176,7 +177,6 @@
 		CAEC3FBB1964D683004FDA19 /* JEFPopoverStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = JEFPopoverStoryboard.storyboard; path = Storyboards/JEFPopoverStoryboard.storyboard; sourceTree = "<group>"; };
 		CAEC3FBF1964EBFD004FDA19 /* JEFPopoverContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFPopoverContentViewController.h; path = "View Controllers/JEFPopoverContentViewController.h"; sourceTree = "<group>"; };
 		CAEC3FC01964EBFD004FDA19 /* JEFPopoverContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFPopoverContentViewController.m; path = "View Controllers/JEFPopoverContentViewController.m"; sourceTree = "<group>"; };
-		CAF30B3B18D3CAD800D7BC9D /* DropboxOSX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxOSX.framework; path = Jeff/Frameworks/DropboxOSX.framework; sourceTree = "<group>"; };
 		CAF30B3E18D3CAFD00D7BC9D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		CAF30B4318D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFUploaderPreferencesViewController.h; path = "View Controllers/JEFUploaderPreferencesViewController.h"; sourceTree = "<group>"; };
 		CAF30B4418D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFUploaderPreferencesViewController.m; path = "View Controllers/JEFUploaderPreferencesViewController.m"; sourceTree = "<group>"; };
@@ -200,9 +200,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAF30B3F18D3CAFD00D7BC9D /* Security.framework in Frameworks */,
-				CAF30B3C18D3CAD800D7BC9D /* DropboxOSX.framework in Frameworks */,
 				CA455B2C18B83EB900F9A541 /* Cocoa.framework in Frameworks */,
 				E0C4A7F96812441E8DA95076 /* libPods.a in Frameworks */,
+				CAC40812199C391900833FAB /* Dropbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,8 +293,8 @@
 		CA455B2A18B83EB900F9A541 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CAC40811199C391900833FAB /* Dropbox.framework */,
 				CAF30B3E18D3CAFD00D7BC9D /* Security.framework */,
-				CAF30B3B18D3CAD800D7BC9D /* DropboxOSX.framework */,
 				CA455B2B18B83EB900F9A541 /* Cocoa.framework */,
 				CA455B4A18B83EBA00F9A541 /* XCTest.framework */,
 				CA455B2D18B83EB900F9A541 /* Other Frameworks */,
