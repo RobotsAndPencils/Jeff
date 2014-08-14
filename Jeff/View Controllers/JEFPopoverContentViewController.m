@@ -8,7 +8,7 @@
 
 #import "JEFPopoverContentViewController.h"
 
-#import <DropboxOSX/DropboxOSX.h>
+#import <Dropbox/Dropbox.h>
 
 #import "JEFPopoverUploaderSetupViewController.h"
 
@@ -28,11 +28,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authHelperStateChangedNotification:) name:DBAuthHelperOSXStateChangedNotification object:[DBAuthHelperOSX sharedHelper]];
+
+    [[DBAccountManager sharedManager] addObserver:self block:^(DBAccount *account) {
+        [self updateViewControllerImmediately:NO];
+    }];
 
     self.uploaderSetupViewController = [[JEFPopoverUploaderSetupViewController alloc] init];
     [self addChildViewController:self.uploaderSetupViewController];
+}
+
+- (void)dealloc {
+    [[DBAccountManager sharedManager] removeObserver:self];
 }
 
 - (void)viewDidAppear {
@@ -46,16 +52,10 @@
     }
 }
 
-#pragma mark Notifications
-
-- (void)authHelperStateChangedNotification:(NSNotification *)notification {
-    [self updateViewControllerImmediately:NO];
-}
-
 #pragma mark Private
 
 - (void)updateViewControllerImmediately:(BOOL)immediately {
-    BOOL linked = [[DBSession sharedSession] isLinked];
+    BOOL linked = [[DBAccountManager sharedManager] linkedAccount] != nil;
     
     if (linked && self.isShowingSetup) {
         NSViewControllerTransitionOptions transition = immediately ? NSViewControllerTransitionNone : NSViewControllerTransitionSlideBackward;

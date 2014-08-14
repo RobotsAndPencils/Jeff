@@ -8,18 +8,17 @@
 
 #import "JEFDropboxUploader.h"
 
-#import <DropboxOSX/DropboxOSX.h>
+#import <Dropbox/Dropbox.h>
 
-@interface JEFDropboxUploader () <DBRestClientDelegate>
 
-@property (strong, nonatomic, readonly) DBRestClient *restClient;
+@interface JEFDropboxUploader ()
+
 @property (strong, nonatomic) NSMutableDictionary *filenameCompletionBlocks;
 
 @end
 
-@implementation JEFDropboxUploader
 
-@synthesize restClient = _restClient;
+@implementation JEFDropboxUploader
 
 + (instancetype)uploader {
     static JEFDropboxUploader *uploader;
@@ -39,60 +38,35 @@
 }
 
 - (void)uploadGIF:(NSURL *)url withName:(NSString *)name completion:(void (^)(BOOL succeeded, NSURL *publicURL, NSError *error))completion {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.restClient uploadFile:name toPath:@"/" withParentRev:nil fromPath:[url path]];
-        self.filenameCompletionBlocks[name] = [completion copy];
-    });
-}
-
-#pragma mark - DBRestClientDelegate
-
-// Success
-
-- (void)restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath from:(NSString *)srcPath metadata:(DBMetadata *)metadata {
-    [self.restClient loadSharableLinkForFile:metadata.path shortUrl:NO];
-}
-
-- (void)restClient:(DBRestClient*)restClient loadedSharableLink:(NSString*)link forFile:(NSString*)path {
-
-    NSMutableString *directLink = [link mutableCopy];
-    [directLink replaceOccurrencesOfString:@"www.dropbox" withString:@"dl.dropboxusercontent" options:0 range:NSMakeRange(0, [directLink length])];
-
-    NSString *filename = [path lastPathComponent];
-    JEFUploaderCompletionBlock completion = self.filenameCompletionBlocks[filename];
-    if (completion) completion(YES, [NSURL URLWithString:directLink], nil);
-}
-
-// Failures
-
-- (void)restClient:(DBRestClient *)client uploadFileFailedWithError:(NSError *)error {
-    NSLog(@"File upload failed with error: %@", error);
-
-    NSString *sourcePath = [error userInfo][@"sourcePath"];
-    NSString *filename = [sourcePath lastPathComponent];
-
-    JEFUploaderCompletionBlock completion = self.filenameCompletionBlocks[filename];
-    if (completion) completion(NO, nil, error);
-}
-
-- (void)restClient:(DBRestClient*)restClient loadSharableLinkFailedWithError:(NSError*)error {
-    NSLog(@"Shareable link creation failed with error: %@", error);
-
-    NSString *sourcePath = [error userInfo][@"sourcePath"];
-    NSString *filename = [sourcePath lastPathComponent];
-
-    JEFUploaderCompletionBlock completion = self.filenameCompletionBlocks[filename];
-    if (completion) completion(NO, nil, error);
-}
-
-#pragma mark - Properties
-
-- (DBRestClient *)restClient {
-    if (!_restClient) {
-        _restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-        _restClient.delegate = self;
+    DBPath *filePath = [[DBPath root] childPath:url.lastPathComponent];
+    __block DBError *error;
+    DBFile *newFile = [[DBFilesystem sharedFilesystem] createFile:filePath error:&error];
+    if (!newFile && error) {
+        completion(NO, nil, error);
+        return;
     }
-    return _restClient;
+
+    NSData *fileData = [NSData dataWithContentsOfURL:url];
+    BOOL success = [newFile writeData:fileData error:&error];
+    if (!success && error) {
+        completion(NO, nil, error);
+        return;
+    }
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        NSString *link = [[DBFilesystem sharedFilesystem] fetchShareLinkForPath:newFile.info.path shorten:NO error:&error];
+        if (!link && error) {
+            completion(NO, nil, error);
+            return;
+        }
+
+        NSMutableString *directLink = [link mutableCopy];
+        [directLink replaceOccurrencesOfString:@"www.dropbox" withString:@"dl.dropboxusercontent" options:0 range:NSMakeRange(0, [directLink length])];
+
+        NSString *filename = [newFile.info.path.stringValue lastPathComponent];
+        JEFUploaderCompletionBlock completion = self.filenameCompletionBlocks[filename];
+        if (completion) completion(YES, [NSURL URLWithString:directLink], nil);
+    });
 }
 
 @end

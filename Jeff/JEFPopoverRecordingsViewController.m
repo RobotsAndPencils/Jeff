@@ -9,6 +9,7 @@
 #import "JEFPopoverRecordingsViewController.h"
 
 #import <MASShortcut/MASShortcut+UserDefaults.h>
+#import <Dropbox/Dropbox.h>
 
 #import "JEFUploaderPreferencesViewController.h"
 #import "JEFRecording.h"
@@ -45,6 +46,12 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
+    if (account) {
+        DBFilesystem *filesystem = [[DBFilesystem alloc] initWithAccount:account];
+        [DBFilesystem setSharedFilesystem:filesystem];
+    }
 
     self.tableView.enclosingScrollView.layer.cornerRadius = 5.0;
     self.tableView.enclosingScrollView.layer.masksToBounds = YES;
@@ -272,7 +279,6 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
         JEFRecording *newRecording = [JEFRecording recordingWithURL:publicURL posterFrameImage:posterFrameImage];
 
         [[self mutableArrayValueForKey:@"recentRecordings"] addObject:newRecording];
-        [self saveRecentRecordings];
 
         [newRecording copyURLStringToPasteboard];
         [self displaySharedUserNotificationForRecording:newRecording];
@@ -362,21 +368,15 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 #pragma mark - Recording Persistence
 
 - (NSMutableArray *)loadRecentRecordings {
-    NSString *filePath = [self userDataFilePathForUserID:nil];
-    NSMutableDictionary *userData = [NSMutableDictionary dictionaryWithContentsOfFile:filePath];
-    if (!userData) {
-        userData = [@{} mutableCopy];
-        userData[@"recentRecordings"] = [NSKeyedArchiver archivedDataWithRootObject:[@[] mutableCopy]];
-        [userData writeToFile:filePath atomically:YES];
+    NSArray *files = [[DBFilesystem sharedFilesystem] listFolder:[DBPath root] error:NULL];
+    NSMutableArray *recordings = [NSMutableArray array];
+    for (DBFileInfo *fileInfo in files) {
+        JEFRecording *newRecording = [[JEFRecording alloc] init];
+        newRecording.name = fileInfo.path.name;
+        newRecording.createdAt = fileInfo.modifiedTime;
+        [recordings addObject:newRecording];
     }
-    return [NSKeyedUnarchiver unarchiveObjectWithData:userData[@"recentRecordings"]];
-}
-
-- (void)saveRecentRecordings {
-    NSString *filePath = [self userDataFilePathForUserID:nil];
-    NSMutableDictionary *userData = [NSMutableDictionary dictionaryWithContentsOfFile:filePath];
-    userData[@"recentRecordings"] = [NSKeyedArchiver archivedDataWithRootObject:self.recentRecordings];
-    [userData writeToFile:filePath atomically:YES];
+    return recordings;
 }
 
 #pragma mark - Recent Clips KVO
@@ -385,12 +385,6 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     if ([keyPath isEqualToString:@"recentRecordings"]) {
         [self.tableView reloadData];
     }
-}
-
-#pragma mark - Saving recent recordings
-
-- (NSString *)userDataFilePathForUserID:(NSString *)userID {
-    return [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/userID"] stringByAppendingPathExtension:@"plist"];
 }
 
 #pragma mark - Private

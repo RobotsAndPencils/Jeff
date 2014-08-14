@@ -10,7 +10,7 @@
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, strong) NSURL *url;
-@property (nonatomic, strong, readonly) NSDate *createdAt;
+@property (nonatomic, strong) NSDate *createdAt;
 @property (nonatomic, strong) NSImage *posterFrameImage;
 
 + (instancetype)recordingWithURL:(NSURL *)url posterFrameImage:(NSImage *)posterFrameImage;
