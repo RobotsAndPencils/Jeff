@@ -14,7 +14,6 @@
 #import "JEFUploaderPreferencesViewController.h"
 #import "JEFRecording.h"
 #import "AppDelegate.h"
-#import "JEFDepositBoxUploader.h"
 #import "JEFDropboxUploader.h"
 #import "Converter.h"
 #import "JEFRecordingCellView.h"
@@ -291,10 +290,9 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     enum JEFUploaderType uploaderType = (enum JEFUploaderType)[[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUploader"];
     switch (uploaderType) {
         case JEFUploaderTypeDropbox:
-            return [JEFDropboxUploader uploader];
         case JEFUploaderTypeDepositBox:
         default:
-            return [JEFDepositBoxUploader uploader];
+            return [JEFDropboxUploader uploader];
     }
 }
 

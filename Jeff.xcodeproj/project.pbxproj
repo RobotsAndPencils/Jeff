@@ -7,13 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8359316EB0FC2DB3A978A67C /* JEFDepositBoxUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 835937AA85B94A9524F73CBD /* JEFDepositBoxUploader.m */; };
 		8359322E52C5BFFB013B4AC7 /* JEFDropboxUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 835935E41B797539819CFB36 /* JEFDropboxUploader.m */; };
 		8359376F55CC63D6FE3DE740 /* JEFPopoverUploaderSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83593B5EA5926018F6E2110D /* JEFPopoverUploaderSetupViewController.m */; };
 		83593BA6023A48A43B1002E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83593BD28BA68D2EAD12CF1C /* Localizable.strings */; };
 		CA007B22196CD22000746934 /* JEFPreferencesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA007B21196CD22000746934 /* JEFPreferencesStoryboard.storyboard */; };
 		CA1F990C192F0ACB00C3EF33 /* StartAtLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1F990B192F0ACB00C3EF33 /* StartAtLoginController.m */; };
-		CA413BE018BA8A720090A1A7 /* RBKDepositBoxManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CA413BDF18BA8A720090A1A7 /* RBKDepositBoxManager.m */; };
 		CA455B2C18B83EB900F9A541 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA455B2B18B83EB900F9A541 /* Cocoa.framework */; };
 		CA455B3618B83EB900F9A541 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CA455B3418B83EB900F9A541 /* InfoPlist.strings */; };
 		CA455B3818B83EB900F9A541 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B3718B83EB900F9A541 /* main.m */; };
@@ -107,9 +105,7 @@
 
 /* Begin PBXFileReference section */
 		552FC149DE814638B883B810 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		8359306491D20C6F17E98D8B /* JEFDepositBoxUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFDepositBoxUploader.h; sourceTree = "<group>"; };
 		835935E41B797539819CFB36 /* JEFDropboxUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFDropboxUploader.m; sourceTree = "<group>"; };
-		835937AA85B94A9524F73CBD /* JEFDepositBoxUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFDepositBoxUploader.m; sourceTree = "<group>"; };
 		835938D219B64AF401E6EAEE /* JEFPopoverUploaderSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFPopoverUploaderSetupViewController.h; sourceTree = "<group>"; };
 		83593B5EA5926018F6E2110D /* JEFPopoverUploaderSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFPopoverUploaderSetupViewController.m; sourceTree = "<group>"; };
 		83593BB07DFAFBD9106DD41E /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -119,8 +115,6 @@
 		CA1F98FF192F0A5F00C3EF33 /* JeffLauncher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JeffLauncher.xcodeproj; path = JeffLauncher/JeffLauncher.xcodeproj; sourceTree = "<group>"; };
 		CA1F990A192F0ACB00C3EF33 /* StartAtLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartAtLoginController.h; sourceTree = "<group>"; };
 		CA1F990B192F0ACB00C3EF33 /* StartAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartAtLoginController.m; sourceTree = "<group>"; };
-		CA413BDE18BA8A720090A1A7 /* RBKDepositBoxManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBKDepositBoxManager.h; sourceTree = "<group>"; };
-		CA413BDF18BA8A720090A1A7 /* RBKDepositBoxManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBKDepositBoxManager.m; sourceTree = "<group>"; };
 		CA455B2818B83EB900F9A541 /* Jeff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jeff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA455B2B18B83EB900F9A541 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		CA455B2E18B83EB900F9A541 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -224,8 +218,6 @@
 				83593E3E69C23122FB40765D /* JEFUploaderProtocol.h */,
 				835935E41B797539819CFB36 /* JEFDropboxUploader.m */,
 				83593F946B55E6E3610A19A4 /* JEFDropboxUploader.h */,
-				835937AA85B94A9524F73CBD /* JEFDepositBoxUploader.m */,
-				8359306491D20C6F17E98D8B /* JEFDepositBoxUploader.h */,
 			);
 			path = Uploaders;
 			sourceTree = "<group>";
@@ -257,15 +249,6 @@
 				CA1F990B192F0ACB00C3EF33 /* StartAtLoginController.m */,
 			);
 			path = StartAtLoginController;
-			sourceTree = "<group>";
-		};
-		CA413BDD18BA8A250090A1A7 /* RBKDepositBoxManager */ = {
-			isa = PBXGroup;
-			children = (
-				CA413BDE18BA8A720090A1A7 /* RBKDepositBoxManager.h */,
-				CA413BDF18BA8A720090A1A7 /* RBKDepositBoxManager.m */,
-			);
-			name = RBKDepositBoxManager;
 			sourceTree = "<group>";
 		};
 		CA455B1F18B83EB900F9A541 = {
@@ -321,7 +304,6 @@
 				CAF30B4118D3D73E00D7BC9D /* View Controllers */,
 				CADF57B118C6F3E7006512E3 /* Models */,
 				CA455B7818B882A900F9A541 /* Categories */,
-				CA413BDD18BA8A250090A1A7 /* RBKDepositBoxManager */,
 				CAF30B4F18D3E31D00D7BC9D /* Views */,
 				CAA79EAD192A725D00A4299F /* Recorders */,
 				83593406A410EF88B08D5442 /* Uploaders */,
@@ -721,7 +703,6 @@
 				CA54FCEE196E2DF4000C46CC /* Constants.m in Sources */,
 				CAB110D4192C6C61000A04C0 /* NSEvent+MouseClamped.m in Sources */,
 				CA571B1C1936E371005E9C46 /* JEFOverlayWindow.m in Sources */,
-				CA413BE018BA8A720090A1A7 /* RBKDepositBoxManager.m in Sources */,
 				CA455B6B18B848B700F9A541 /* JEFPopoverRecordingsViewController.m in Sources */,
 				CA81B09C197777DF00761ECC /* JEFScaleToFillImageView.m in Sources */,
 				CA1F990C192F0ACB00C3EF33 /* StartAtLoginController.m in Sources */,
@@ -731,7 +712,6 @@
 				CAF30B6418D5281100D7BC9D /* INPopoverWindowFrame.m in Sources */,
 				CA455B3818B83EB900F9A541 /* main.m in Sources */,
 				8359322E52C5BFFB013B4AC7 /* JEFDropboxUploader.m in Sources */,
-				8359316EB0FC2DB3A978A67C /* JEFDepositBoxUploader.m in Sources */,
 				8359376F55CC63D6FE3DE740 /* JEFPopoverUploaderSetupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
