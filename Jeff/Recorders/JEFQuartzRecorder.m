@@ -112,7 +112,6 @@
     NSData *pngData = [imageRep representationUsingType:NSGIFFileType properties:nil];
     NSString *filename = [self.path stringByAppendingPathComponent:[NSString stringWithFormat:@"JeffFrame%ld.gif", self.frameCount]];
     [pngData writeToFile:filename atomically:YES];
-    NSLog(@"%@", filename);
 
     CGContextRelease(context);
     CGColorSpaceRelease(colorSpace);

@@ -60,8 +60,7 @@
     _identifier = identifier;
     [self startAtLogin];
 #if !defined(NDEBUG)
-    NSLog(@"Launcher '%@' %@ configured to start at login",
-          self.identifier, (_enabled ? @"is" : @"is not"));
+    NSLog(@"Launcher '%@' %@ configured to start at login", self.identifier, (_enabled ? @"is" : @"is not"));
 #endif
 }
 
