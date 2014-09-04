@@ -122,11 +122,19 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     [[NSNotificationCenter defaultCenter] postNotificationName:JEFSetStatusViewNotRecordingNotification object:self];
     [[NSNotificationCenter defaultCenter] postNotificationName:JEFClosePopoverNotification object:self];
 
-    [self.recorder recordScreen:CGMainDisplayID() completion:^(NSURL *movieURL) {
-        [Converter convertFramesAtURL:movieURL completion:^(NSURL *gifURL) {
+    [self.recorder recordScreen:CGMainDisplayID() completion:^(NSURL *framesURL) {
+        [Converter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
+            NSError *framesError;
+            NSArray *frames = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:framesURL includingPropertiesForKeys:nil options:0 error:&framesError];
+            if (!frames && framesError) {
+                NSLog(@"Error fetching frames for poster frame image: %@", framesError);
+            }
+            NSURL *firstFrameURL = frames.firstObject;
+
+            [self uploadNewRecordingWithGIFURL:gifURL posterFrameURL:firstFrameURL];
+
             // Really don't care about removeItemAtPath:error: failing since it's in a temp directory anyways
-            [[NSFileManager defaultManager] removeItemAtPath:[movieURL path] error:nil];
-            [self uploadNewRecordingWithGIFURL:gifURL posterFrameURL:nil];
+            [[NSFileManager defaultManager] removeItemAtPath:[framesURL path] error:nil];
         }];
     }];
     
@@ -207,15 +215,15 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
             NSError *framesError;
             NSArray *frames = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:framesURL includingPropertiesForKeys:nil options:0 error:&framesError];
-            if (!frames && error) {
+            if (!frames && framesError) {
                 NSLog(@"Error fetching frames for poster frame image: %@", framesError);
             }
-            NSURL *firstFrame = frames.firstObject;
+            NSURL *firstFrameURL = frames.firstObject;
 
             [Converter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
-                // Really don't care about removeItemAtPath:error: failing since it's in a temp directory anyways
+                [self uploadNewRecordingWithGIFURL:gifURL posterFrameURL:firstFrameURL];
 
-                [self uploadNewRecordingWithGIFURL:gifURL posterFrameURL:firstFrame];
+                // Really don't care about removeItemAtPath:error: failing since it's in a temp directory anyways
                 [[NSFileManager defaultManager] removeItemAtPath:[framesURL path] error:nil];
             }];
         }];
