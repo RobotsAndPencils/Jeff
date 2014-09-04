@@ -24,7 +24,9 @@
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>
-			<string>None</string>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Jeff</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>db-iugqsnjvza6fuub</string>

@@ -71,6 +71,7 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
 }
 
 - (void)getUrl:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
+    [self showPopover:self.statusItem.button];
 }
 
 #pragma mark - Setup
