@@ -20,7 +20,7 @@
     [gifsicleTask setCurrentDirectoryPath:[framesURL absoluteString]];
     
     NSInteger hundredthsOfASecondDelay = (NSInteger)floor(1.0/20.0 * 100);
-    NSMutableArray *arguments = [@[ @"--optimize=3", [NSString stringWithFormat:@"--delay=%ld", hundredthsOfASecondDelay], @"--loop" ] mutableCopy];
+    NSMutableArray *arguments = [@[ @"--optimize=2", [NSString stringWithFormat:@"--delay=%ld", hundredthsOfASecondDelay], @"--loop" ] mutableCopy];
     NSArray *filenames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[framesURL absoluteString] error:NULL];
     filenames = [filenames sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         return [obj1 compare:obj2 options:NSNumericSearch];
