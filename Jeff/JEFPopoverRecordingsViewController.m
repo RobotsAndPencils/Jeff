@@ -21,11 +21,9 @@
 #import "JEFOverlayWindow.h"
 #import "Constants.h"
 
-
 static void *PopoverContentViewControllerContext = &PopoverContentViewControllerContext;
 
-
-@interface JEFPopoverRecordingsViewController () <NSTableViewDelegate, DrawMouseBoxViewDelegate, NSUserNotificationCenterDelegate, NSSharingServicePickerDelegate>
+@interface JEFPopoverRecordingsViewController () <NSTableViewDelegate, NSTableViewDataSource, DrawMouseBoxViewDelegate, NSUserNotificationCenterDelegate, NSSharingServicePickerDelegate>
 
 @property (strong, nonatomic) IBOutlet NSArrayController *recentRecordingsArrayController;
 @property (weak, nonatomic) IBOutlet NSTableView *tableView;
@@ -50,7 +48,10 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
     self.tableView.enclosingScrollView.layer.cornerRadius = 5.0;
     self.tableView.enclosingScrollView.layer.masksToBounds = YES;
-    
+
+    // Display the green + bubble cursor when dragging into something that accepts the drag
+    [self.tableView setDraggingSourceOperationMask:NSDragOperationCopy forLocal:NO];
+
     [MASShortcut registerGlobalShortcutWithUserDefaultsKey:JEFRecordScreenShortcutKey handler:^{
         [self toggleRecordingScreen];
     }];
@@ -331,6 +332,17 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     view.previewImageView.image = recording.posterFrameImage ?: [NSImage imageNamed:@"500x500"];
 
     return view;
+}
+
+#pragma mark - NSTableView Drag and Drop
+
+- (BOOL)tableView:(NSTableView *)tableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
+    // Only one recording can be dragged/selected at a time
+    JEFRecording *draggedRecording = [[self.recentRecordingsArrayController.arrangedObjects objectsAtIndexes:rowIndexes] firstObject];
+    [pboard declareTypes:@[ NSPasteboardTypeString ] owner:self];
+    [pboard setString:draggedRecording.url.absoluteString forType:NSPasteboardTypeString];
+
+    return YES;
 }
 
 #pragma mark - Properties
