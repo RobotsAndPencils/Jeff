@@ -269,7 +269,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
         [self saveRecentRecordings];
 
         [newRecording copyURLStringToPasteboard];
-        [self displaySharedUserNotification];
+        [self displaySharedUserNotificationForRecording:newRecording];
 
         [[NSFileManager defaultManager] removeItemAtPath:[gifURL path] error:nil];
     }];
@@ -378,10 +378,11 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 #pragma mark - Private
 
-- (void)displaySharedUserNotification {
+- (void)displaySharedUserNotificationForRecording:(JEFRecording *)recording {
     NSUserNotification *publishedNotification = [[NSUserNotification alloc] init];
     publishedNotification.title = NSLocalizedString(@"GIFSharedSuccessNotificationTitle", nil);
     publishedNotification.informativeText = NSLocalizedString(@"GIFPasteboardNotificationBody", nil);
+    publishedNotification.contentImage = recording.posterFrameImage;
     [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:publishedNotification];
 }
 
