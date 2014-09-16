@@ -21,35 +21,29 @@
 @property (nonatomic, strong) NSMutableArray *files;
 @property (nonatomic, copy) void (^completion)(NSURL *);
 @property (nonatomic, copy) NSString *path;
-@property (nonatomic, assign) CGFloat displayScale;
 @property (nonatomic, strong) NSTimer *captureTimer;
+@property (nonatomic, assign) CGDirectDisplayID displayID;
+@property (nonatomic, assign) CGRect screenFrame;
 
 @end
 
 
 @implementation JEFQuartzRecorder
 
-- (void)recordScreen:(CGDirectDisplayID)displayID completion:(void (^)(NSURL *))completion {
-    [self recordRect:[[NSScreen mainScreen] visibleFrame] display:displayID completion:completion];
+- (void)recordScreen:(NSScreen *)screen completion:(void (^)(NSURL *))completion {
+    [self recordRect:[screen visibleFrame] screen:screen completion:completion];
 }
 
-- (void)recordRect:(CGRect)rect display:(CGDirectDisplayID)displayID completion:(void (^)(NSURL *))completion {
+- (void)recordRect:(CGRect)rect screen:(NSScreen *)screen completion:(void (^)(NSURL *))completion {
     self.isRecording = YES;
     self.rect = rect;
     self.frameCount = 0;
     self.files = [NSMutableArray array];
     self.path = [NSHomeDirectory() stringByAppendingPathComponent:@"Frames"];
     self.completion = completion;
-    
-    NSDictionary *screenDescription;
-    for (NSScreen *screen in [NSScreen screens]) {
-        screenDescription = [screen deviceDescription];
-        if ((CGDirectDisplayID)[screenDescription[@"NSScreenNumber"] intValue] == displayID) {
-            self.displayScale = [screen backingScaleFactor];
-            break;
-        }
-    }
-    
+    self.displayID = [screen.deviceDescription[@"NSScreenNumber"] unsignedIntValue];
+    self.screenFrame = screen.frame;
+
     // Empty the frames directory or create it
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL isDirectory;
@@ -90,7 +84,7 @@
 #pragma mark Private
 
 - (void)captureFrame {
-    CGImageRef screenImageRef = CGDisplayCreateImageForRect(kCGDirectMainDisplay, self.rect);
+    CGImageRef screenImageRef = CGDisplayCreateImageForRect(self.displayID, self.rect);
     
     CGFloat width = CGRectGetWidth(self.rect);
     CGFloat height = CGRectGetHeight(self.rect);
@@ -103,7 +97,11 @@
     NSPoint hotspot = [cursor hotSpot];
     CGImageRef cursorImageRef = [cursorImage CGImageForProposedRect:NULL context:[NSGraphicsContext currentContext] hints:nil];
     CGPoint cursorLocation = [NSEvent clampedMouseLocation];
-    CGRect cursorRect = CGRectMake(cursorLocation.x - CGRectGetMinX(self.rect) - hotspot.x, cursorLocation.y - (CGDisplayPixelsHigh(CGMainDisplayID()) - CGRectGetMaxY(self.rect)) + hotspot.y - CGImageGetHeight(cursorImageRef), CGImageGetWidth(cursorImageRef), CGImageGetHeight(cursorImageRef));
+    // Convert top-left rect space to bottom-left
+    CGFloat rectY = CGRectGetHeight(self.screenFrame) - CGRectGetMaxY(self.rect);
+    CGFloat cursorX = cursorLocation.x - CGRectGetMinX(self.screenFrame) - CGRectGetMinX(self.rect) - hotspot.x;
+    CGFloat cursorY = cursorLocation.y - CGRectGetMinY(self.screenFrame) - rectY + hotspot.y - CGImageGetHeight(cursorImageRef);
+    CGRect cursorRect = CGRectMake(cursorX, cursorY, CGImageGetWidth(cursorImageRef), CGImageGetHeight(cursorImageRef));
     CGContextDrawImage(context, cursorRect, cursorImageRef);
     
     CGImageRef compositeImageRef = CGBitmapContextCreateImage(context);

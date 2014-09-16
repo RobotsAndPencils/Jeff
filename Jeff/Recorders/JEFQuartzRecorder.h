@@ -12,8 +12,8 @@
 
 @property (nonatomic, assign, readonly) BOOL isRecording;
 
-- (void)recordScreen:(CGDirectDisplayID)displayID completion:(void (^)(NSURL *))completion;
-- (void)recordRect:(CGRect)rect display:(CGDirectDisplayID)displayID completion:(void (^)(NSURL *))completion;
+- (void)recordScreen:(NSScreen *)screen completion:(void (^)(NSURL *))completion;
+- (void)recordRect:(CGRect)rect screen:(NSScreen *)screen completion:(void (^)(NSURL *))completion;
 - (void)finishRecording;
 
 @end

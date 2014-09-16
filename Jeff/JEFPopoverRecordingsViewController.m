@@ -123,7 +123,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     [[NSNotificationCenter defaultCenter] postNotificationName:JEFSetStatusViewNotRecordingNotification object:self];
     [[NSNotificationCenter defaultCenter] postNotificationName:JEFClosePopoverNotification object:self];
 
-    [self.recorder recordScreen:CGMainDisplayID() completion:^(NSURL *framesURL) {
+    [self.recorder recordScreen:[NSScreen mainScreen] completion:^(NSURL *framesURL) {
         [Converter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
             NSError *framesError;
             NSArray *frames = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:framesURL includingPropertiesForKeys:nil options:0 error:&framesError];
@@ -199,18 +199,23 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     }
 
     // Map point into global CG coordinates.
-    NSRect cgOrientedRect = rect;
-    NSRect windowRect = [[view window] frame];
-    CGPoint origin = cgOrientedRect.origin;
-    origin.y = CGRectGetHeight(windowRect) - CGRectGetMaxY(cgOrientedRect);
-    cgOrientedRect.origin = origin;
+    NSRect globalRect = CGRectOffset(rect, CGRectGetMinX(view.window.frame), CGRectGetMinY(view.window.frame));
 
     // Get a list of online displays with bounds that include the specified point.
-    CGDirectDisplayID displayID = CGMainDisplayID();
-    uint32_t matchingDisplayCount = 0;
-    CGError error = CGGetDisplaysWithPoint(NSPointToCGPoint(cgOrientedRect.origin), 1, &displayID, &matchingDisplayCount);
-    if ((error == kCGErrorSuccess) && (matchingDisplayCount == 1)) {
-        [self.recorder recordRect:cgOrientedRect display:displayID completion:^(NSURL *framesURL) {
+    NSScreen *selectedScreen;
+    for (NSScreen *screen in [NSScreen screens]) {
+        if (CGRectContainsPoint([screen frame], globalRect.origin)) {
+            selectedScreen = screen;
+            break;
+        }
+    }
+
+    if (selectedScreen) {
+        // Convert Cocoa screen coordinates (bottom left) to Quartz coordinates (top left)
+        CGRect localQuartzRect = rect;
+        localQuartzRect.origin = CGPointMake(rect.origin.x, CGRectGetHeight(selectedScreen.frame) - CGRectGetMaxY(rect));
+
+        [self.recorder recordRect:localQuartzRect screen:selectedScreen completion:^(NSURL *framesURL) {
             [self.overlayWindows makeObjectsPerformSelector:@selector(close)];
             [self.overlayWindows removeAllObjects];
 
