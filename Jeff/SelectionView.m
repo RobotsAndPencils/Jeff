@@ -134,8 +134,14 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         
         infoTextField.frame = _infoContainer.bounds;
         [self addSubview:_infoContainer];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideInstructions) name:@"JEFRecordingSelectionMadeNotification" object:nil];
     }
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)theEvent {
@@ -293,6 +299,9 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     }
     else if (!CGSizeEqualToSize(self.selectionRect.size, CGSizeZero)) {
         self.hasMadeInitialSelection = YES;
+        // This notification will hide the instructions on all displays, including the display with *this* view.
+        // We don't need to call hideInstructions here for that reason
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"JEFRecordingSelectionMadeNotification" object:self];
 
         self.confirmRectButton.frame = ({
             CGRect centeredRect = CGRectZero;
@@ -304,9 +313,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
             centeredRect;
         });
 
-        [NSAnimationContext currentContext].duration = 0.1;
-        self.confirmRectButton.animator.alphaValue = 1.0;
-        self.infoContainer.animator.alphaValue = 0.0;
+        [self showRecordButton];
     }
 }
 
@@ -340,6 +347,16 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         selectionRect.origin = origin;
         selectionRect;
     });
+}
+
+- (void)hideInstructions {
+    [NSAnimationContext currentContext].duration = 0.1;
+    self.infoContainer.animator.alphaValue = 0.0;
+}
+
+- (void)showRecordButton {
+    [NSAnimationContext currentContext].duration = 0.1;
+    self.confirmRectButton.animator.alphaValue = 1.0;
 }
 
 #pragma mark - Handles
