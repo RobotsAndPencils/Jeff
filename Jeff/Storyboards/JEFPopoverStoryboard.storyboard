@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6205" systemVersion="14A314h" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="czx-q9-v5M">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6246" systemVersion="14A361c" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="czx-q9-v5M">
     <dependencies>
-        <deployment defaultVersion="101000" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6205"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6246"/>
     </dependencies>
     <scenes>
         <!--Popover Content View Controller-->
@@ -49,7 +48,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="325" height="176"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView wantsLayer="YES" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="132" rowSizeStyle="automatic" viewBased="YES" id="cdU-1N-Oto" customClass="RBLTableView">
+                                        <tableView wantsLayer="YES" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="132" viewBased="YES" id="cdU-1N-Oto" customClass="RBLTableView">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="1" height="1"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -81,7 +80,7 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="1" id="QuB-me-WsH"/>
                                                                     </constraints>
-                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="7BA27FEC-BC1A-4E5A-86AA-918B4CBC8F5C" id="ujV-zr-NTo"/>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="4BD719FE-3CA9-4BEB-ABD6-EF16DE77EF5C" id="ujV-zr-NTo"/>
                                                                 </imageView>
                                                                 <visualEffectView appearanceType="vibrantLight" blendingMode="withinWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="O9S-Hz-IkY">
                                                                     <rect key="frame" x="0.0" y="0.0" width="325" height="50"/>
@@ -308,8 +307,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="500x500" width="500" height="500"/>
-        <image name="7BA27FEC-BC1A-4E5A-86AA-918B4CBC8F5C" width="325" height="1">
+        <image name="4BD719FE-3CA9-4BEB-ABD6-EF16DE77EF5C" width="325" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -381,6 +379,7 @@ DnoOfg6RDpwOpQ6qDrIOtQ66DskOzQ7UDtwO6Q7uDvAO8g73Dv8PAg8HDw8PEg8kDycPLAAAAAAAAAIB
 AAAAAAAAAD8AAAAAAAAAAAAAAAAAAA8uA
 </mutableData>
         </image>
+        <image name="500x500" width="500" height="500"/>
         <image name="CopyLinkButton" width="20" height="20"/>
         <image name="NSActionTemplate" width="14" height="14"/>
         <image name="PopoverButtonSeperator" width="1" height="48"/>
