@@ -32,7 +32,7 @@
     [self setOpaque:NO];
     [self setLevel:kShadyWindowLevel];
     [self setReleasedWhenClosed:NO];
-    SelectionView *drawMouseBoxView = [[SelectionView alloc] initWithFrame:contentRect];
+    SelectionView *drawMouseBoxView = [[SelectionView alloc] initWithFrame:contentRect screen:self.screen];
     drawMouseBoxView.delegate = self;
     [self setContentView:drawMouseBoxView];
     [self makeKeyAndOrderFront:self];
