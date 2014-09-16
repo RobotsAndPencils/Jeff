@@ -61,4 +61,6 @@
 
 @property (nonatomic, weak) id<DrawMouseBoxViewDelegate> delegate;
 
+- (instancetype)initWithFrame:(NSRect)frameRect screen:(NSScreen *)screen;
+
 @end

@@ -95,7 +95,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 
 #pragma mark - NSView
 
-- (id)initWithFrame:(NSRect)frameRect {
+- (id)initWithFrame:(NSRect)frameRect screen:(NSScreen *)screen {
     self = [super initWithFrame:frameRect];
     if (self) {
         self.wantsLayer = YES;
@@ -117,8 +117,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         infoTextField.font = [NSFont systemFontOfSize:18.0];
         infoTextField.alignment = NSCenterTextAlignment;
         infoTextField.stringValue = NSLocalizedString(@"RecordSelectionInfo", @"Instructions for the user to make a selection");
-        
-        NSScreen *screen = [NSScreen mainScreen];
+
         CGFloat screenWidth = CGRectGetWidth(screen.frame);
         CGSize stringSize = [infoTextField.stringValue sizeWithAttributes:@{ NSFontAttributeName: infoTextField.font }];
         
