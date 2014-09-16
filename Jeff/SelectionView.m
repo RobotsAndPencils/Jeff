@@ -346,6 +346,9 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         selectionRect.origin = origin;
         selectionRect;
     });
+
+    // Constrain to the bounds of the current screen
+    self.selectionRect = CGRectIntersection(CGRectMake(0, 0, CGRectGetWidth(self.window.screen.frame), CGRectGetHeight(self.window.screen.frame)), self.selectionRect);
 }
 
 - (void)hideInstructions {
