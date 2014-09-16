@@ -80,7 +80,7 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="1" id="QuB-me-WsH"/>
                                                                     </constraints>
-                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="4BD719FE-3CA9-4BEB-ABD6-EF16DE77EF5C" id="ujV-zr-NTo"/>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="5FA122C0-EF5C-41BF-ACAC-E22075E3424A" id="ujV-zr-NTo"/>
                                                                 </imageView>
                                                                 <visualEffectView appearanceType="vibrantLight" blendingMode="withinWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="O9S-Hz-IkY">
                                                                     <rect key="frame" x="0.0" y="0.0" width="325" height="50"/>
@@ -183,6 +183,7 @@
                                             </tableColumns>
                                             <connections>
                                                 <binding destination="jGV-2I-igK" name="content" keyPath="arrangedObjects" id="cw1-su-NgB"/>
+                                                <outlet property="dataSource" destination="gTI-EO-G1X" id="D6L-1S-kao"/>
                                                 <outlet property="delegate" destination="gTI-EO-G1X" id="Lmw-Xs-vkH"/>
                                             </connections>
                                         </tableView>
@@ -307,7 +308,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="4BD719FE-3CA9-4BEB-ABD6-EF16DE77EF5C" width="325" height="1">
+        <image name="500x500" width="500" height="500"/>
+        <image name="5FA122C0-EF5C-41BF-ACAC-E22075E3424A" width="325" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -379,7 +381,6 @@ DnoOfg6RDpwOpQ6qDrIOtQ66DskOzQ7UDtwO6Q7uDvAO8g73Dv8PAg8HDw8PEg8kDycPLAAAAAAAAAIB
 AAAAAAAAAD8AAAAAAAAAAAAAAAAAAA8uA
 </mutableData>
         </image>
-        <image name="500x500" width="500" height="500"/>
         <image name="CopyLinkButton" width="20" height="20"/>
         <image name="NSActionTemplate" width="14" height="14"/>
         <image name="PopoverButtonSeperator" width="1" height="48"/>
