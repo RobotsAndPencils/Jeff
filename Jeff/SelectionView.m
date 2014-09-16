@@ -291,7 +291,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     if (self.hasMadeInitialSelection) {
         self.clickedHandle = JEFHandleIndexNone;
     }
-    else {
+    else if (!CGSizeEqualToSize(self.selectionRect.size, CGSizeZero)) {
         self.hasMadeInitialSelection = YES;
 
         self.confirmRectButton.frame = ({
