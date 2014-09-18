@@ -51,6 +51,10 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
         DBFilesystem *filesystem = [[DBFilesystem alloc] initWithAccount:account];
         [DBFilesystem setSharedFilesystem:filesystem];
     }
+    __weak __typeof(self) weakSelf = self;
+    [[DBFilesystem sharedFilesystem] addObserver:self forPathAndDescendants:[DBPath root] block:^{
+        weakSelf.recentRecordings = [weakSelf loadRecentRecordings];
+    }];
 
     self.tableView.enclosingScrollView.layer.cornerRadius = 5.0;
     self.tableView.enclosingScrollView.layer.masksToBounds = YES;
@@ -95,6 +99,10 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
         
         [self addObserver:self forKeyPath:@"recentRecordings" options:NSKeyValueObservingOptionInitial context:&PopoverContentViewControllerContext];
     });
+}
+
+- (void)dealloc {
+    [[DBFilesystem sharedFilesystem] removeObserver:self];
 }
 
 - (IBAction)showMenu:(NSButton *)sender {
@@ -265,7 +273,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
         posterFrameImage = [[NSImage alloc] initWithContentsOfFile:[posterFrameURL path]];
     }
     
-    [[self uploader] uploadGIF:gifURL withName:[[gifURL path] lastPathComponent] completion:^(BOOL succeeded, NSURL *publicURL, NSError *error) {
+    [[self uploader] uploadGIF:gifURL withName:[[gifURL path] lastPathComponent] completion:^(BOOL succeeded, JEFRecording *recording, NSError *error) {
         if (error || !succeeded) {
             NSAlert *alert = [[NSAlert alloc] init];
             alert.messageText = NSLocalizedString(@"UploadFailedAlertTitle", nil);
@@ -275,14 +283,14 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
             return;
         }
 
-        JEFRecording *newRecording = [JEFRecording recordingWithURL:publicURL posterFrameImage:posterFrameImage];
-
-        [[self mutableArrayValueForKey:@"recentRecordings"] addObject:newRecording];
-
-        [newRecording copyURLStringToPasteboard];
-        [self displaySharedUserNotificationForRecording:newRecording];
-
         [[NSFileManager defaultManager] removeItemAtPath:[gifURL path] error:nil];
+
+        recording.posterFrameImage = posterFrameImage;
+        [[self mutableArrayValueForKey:@"recentRecordings"] addObject:recording];
+
+        [self copyURLStringToPasteboard:recording completion:^{
+            [self displaySharedUserNotificationForRecording:recording];
+        }];
     }];
 }
 
@@ -327,18 +335,23 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 - (void)didDoubleClickRow:(NSTableView *)sender {
     NSInteger clickedRow = [sender selectedRow];
     JEFRecording *recording = [self.recentRecordingsArrayController arrangedObjects][clickedRow];
-    [[NSWorkspace sharedWorkspace] openURL:recording.url];
+
+    [self fetchPublicURLForRecording:recording completion:^(NSURL *url) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSWorkspace sharedWorkspace] openURL:url];
+        });
+    }];
 }
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     JEFRecordingCellView *view = [tableView makeViewWithIdentifier:@"JEFRecordingCellView" owner:self];
-    JEFRecording *recording = [self.recentRecordingsArrayController arrangedObjects][(NSUInteger)row];
 
     view.linkButton.target = self;
     view.linkButton.action = @selector(copyLinkToPasteboard:);
     view.shareButton.target = self;
     view.shareButton.action = @selector(showShareMenu:);
-    view.previewImageView.image = recording.posterFrameImage ?: [NSImage imageNamed:@"500x500"];
+
+    [view setup];
 
     return view;
 }
@@ -366,12 +379,17 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 #pragma mark - Recording Persistence
 
 - (NSMutableArray *)loadRecentRecordings {
-    NSArray *files = [[DBFilesystem sharedFilesystem] listFolder:[DBPath root] error:NULL];
+    if (![[DBFilesystem sharedFilesystem] completedFirstSync]) return [NSMutableArray array];
+
+    DBError *listError;
+    NSArray *files = [[[DBFilesystem sharedFilesystem] listFolder:[DBPath root] error:&listError] subarrayWithRange:NSMakeRange(0, 100)];
+    if (listError) {
+        NSLog(@"Error listing files: %@", listError);
+        return [NSMutableArray array];
+    }
     NSMutableArray *recordings = [NSMutableArray array];
     for (DBFileInfo *fileInfo in files) {
-        JEFRecording *newRecording = [[JEFRecording alloc] init];
-        newRecording.name = fileInfo.path.name;
-        newRecording.createdAt = fileInfo.modifiedTime;
+        JEFRecording *newRecording = [JEFRecording recordingWithFileInfo:fileInfo publicURL:nil];
         [recordings addObject:newRecording];
     }
     return recordings;
@@ -381,7 +399,10 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"recentRecordings"]) {
-        [self.tableView reloadData];
+        __weak __typeof(self) weakSelf = self;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.tableView reloadData];
+        });
     }
 }
 
@@ -417,6 +438,44 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     NSDictionary *attrsDictionary = @{ NSShadowAttributeName : shadow, NSFontAttributeName : font, NSParagraphStyleAttributeName : paragraphStyle, NSForegroundColorAttributeName : fontColor };
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:button.title ?: @"" attributes:attrsDictionary];
     [button setAttributedTitle:attrString];
+}
+
+/**
+ *  If the recording is not finished uploading then the URL will be to Dropbox's public preview page instead of a direct link to the GIF
+ *
+ *  @param recording  The recording to fetch the public URL for
+ *  @param completion Completion block that could be called on any thread
+ */
+- (void)fetchPublicURLForRecording:(JEFRecording *)recording completion:(void(^)(NSURL *url))completion {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        DBError *error;
+        NSString *link = [[DBFilesystem sharedFilesystem] fetchShareLinkForPath:recording.fileInfo.path shorten:NO error:&error];
+        if (!link && error) {
+            if (completion) completion(nil);
+        }
+
+        NSURL *directURL = [NSURL URLWithString:link];
+
+        // If file is not still uploading, convert public URL to direct URL
+        DBFile *file = [[DBFilesystem sharedFilesystem] openFile:recording.fileInfo.path error:NULL];
+        if (file.status.state != DBFileStateUploading) {
+            NSMutableString *directLink = [link mutableCopy];
+            [directLink replaceOccurrencesOfString:@"www.dropbox" withString:@"dl.dropboxusercontent" options:0 range:NSMakeRange(0, [directLink length])];
+            directURL = [NSURL URLWithString:directLink];
+        }
+
+        if (completion) completion(directURL);
+    });
+}
+
+- (void)copyURLStringToPasteboard:(JEFRecording *)recording completion:(void(^)())completion {
+    [self fetchPublicURLForRecording:recording completion:^(NSURL *url) {
+        NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+        [pasteboard clearContents];
+        [pasteboard setString:[url absoluteString] forType:NSStringPboardType];
+
+        if (completion) completion();
+    }];
 }
 
 #pragma mark - NSUserNotificationCenterDelegate
