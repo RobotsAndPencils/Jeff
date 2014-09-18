@@ -6,15 +6,22 @@
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-@interface JEFRecording : NSObject <NSCoding>
+#import <Dropbox/Dropbox.h>
 
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, strong) NSURL *url;
-@property (nonatomic, strong) NSDate *createdAt;
+@interface JEFRecording : NSObject
+
+@property (nonatomic, strong, readonly) NSString *name;
+@property (nonatomic, strong, readonly) NSURL *url;
+@property (nonatomic, strong, readonly) NSString *path;
+@property (nonatomic, strong, readonly) DBFileInfo *fileInfo;
+@property (nonatomic, strong, readonly) NSDate *createdAt;
+@property (nonatomic, assign, readonly) BOOL isFetchingPosterFrame;
+
+/**
+ *  readwrite so that a temporary thumbnail can be set on new recordings before they're finished syncing
+ */
 @property (nonatomic, strong) NSImage *posterFrameImage;
 
-+ (instancetype)recordingWithURL:(NSURL *)url posterFrameImage:(NSImage *)posterFrameImage;
-
-- (void)copyURLStringToPasteboard;
++ (instancetype)recordingWithFileInfo:(DBFileInfo *)fileInfo publicURL:(NSURL *)publicURL;
 
 @end

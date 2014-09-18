@@ -8,6 +8,12 @@
 
 #import "JEFRecordingCellView.h"
 
+@interface JEFRecordingCellView ()
+
+@property (nonatomic, assign) BOOL isSetup;
+
+@end
+
 @implementation JEFRecordingCellView
 
 - (void)awakeFromNib {
@@ -29,6 +35,41 @@
         default:
             self.infoContainerVisualEffectView.appearance = [NSAppearance appearanceNamed:NSAppearanceNameVibrantLight];
             break;
+    }
+}
+
+- (void)setup {
+    self.isSetup = YES;
+    [self addObserver:self forKeyPath:@"objectValue.isFetchingPosterFrame" options:NSKeyValueObservingOptionInitial context:NULL];
+}
+
+- (void)teardown {
+    if (self.isSetup) {
+        self.isSetup = NO;
+        [self removeObserver:self forKeyPath:@"objectValue.isFetchingPosterFrame"];
+    }
+}
+
+- (void)prepareForReuse {
+    [self teardown];
+}
+
+- (void)dealloc {
+    [self teardown];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"objectValue.isFetchingPosterFrame"]) {
+        if ([[object valueForKeyPath:keyPath] boolValue] == YES) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.statusLabel.stringValue = @"Loading thumbnail...";
+            });
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.statusLabel.stringValue = @"";
+            });
+        }
     }
 }
 

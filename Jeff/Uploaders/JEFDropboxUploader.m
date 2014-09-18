@@ -10,6 +10,7 @@
 
 #import <Dropbox/Dropbox.h>
 
+#import "JEFRecording.h"
 
 @interface JEFDropboxUploader ()
 
@@ -37,36 +38,24 @@
     return self;
 }
 
-- (void)uploadGIF:(NSURL *)url withName:(NSString *)name completion:(void (^)(BOOL succeeded, NSURL *publicURL, NSError *error))completion {
+- (void)uploadGIF:(NSURL *)url withName:(NSString *)name completion:(JEFUploaderCompletionBlock)completion {
     DBPath *filePath = [[DBPath root] childPath:url.lastPathComponent];
     __block DBError *error;
     DBFile *newFile = [[DBFilesystem sharedFilesystem] createFile:filePath error:&error];
     if (!newFile && error) {
-        completion(NO, nil, error);
+        if (completion) completion(NO, nil, error);
         return;
     }
 
     NSData *fileData = [NSData dataWithContentsOfURL:url];
     BOOL success = [newFile writeData:fileData error:&error];
     if (!success && error) {
-        completion(NO, nil, error);
+        if (completion) completion(NO, nil, error);
         return;
     }
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        NSString *link = [[DBFilesystem sharedFilesystem] fetchShareLinkForPath:newFile.info.path shorten:NO error:&error];
-        if (!link && error) {
-            completion(NO, nil, error);
-            return;
-        }
-
-        NSMutableString *directLink = [link mutableCopy];
-        [directLink replaceOccurrencesOfString:@"www.dropbox" withString:@"dl.dropboxusercontent" options:0 range:NSMakeRange(0, [directLink length])];
-
-        NSString *filename = [newFile.info.path.stringValue lastPathComponent];
-        JEFUploaderCompletionBlock completion = self.filenameCompletionBlocks[filename];
-        if (completion) completion(YES, [NSURL URLWithString:directLink], nil);
-    });
+    JEFRecording *recording = [JEFRecording recordingWithFileInfo:newFile.info publicURL:nil];
+    if (completion) completion(YES, recording, nil);
 }
 
 @end
