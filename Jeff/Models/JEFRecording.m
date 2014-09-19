@@ -11,60 +11,85 @@
 
 @interface JEFRecording ()
 
-@property (nonatomic, strong, readwrite) NSURL *url;
+@property (nonatomic, strong) DBFile *file;
 @property (nonatomic, assign, readwrite) BOOL isFetchingPosterFrame;
+@property (nonatomic, assign, readwrite) CGFloat progress;
 
 @end
 
 
 @implementation JEFRecording
 
-@synthesize url = _url;
-
-+ (instancetype)recordingWithFileInfo:(DBFileInfo *)fileInfo publicURL:(NSURL *)publicURL {
++ (instancetype)recordingWithNewFile:(DBFile *)file {
     JEFRecording *recording = [[self alloc] init];
-    [recording setValue:fileInfo forKey:@"fileInfo"];
-    recording.url = publicURL;
+    [recording setValue:file forKey:@"file"];
+    __weak DBFile *weakFile = file;
+    [file addObserver:self block:^{
+        recording.progress = weakFile.status.progress;
+    }];
     return recording;
+}
+
++ (instancetype)recordingWithFileInfo:(DBFileInfo *)fileInfo {
+    JEFRecording *recording = [[self alloc] init];
+    DBError *error;
+    DBFile *file = [[DBFilesystem sharedFilesystem] openFile:fileInfo.path error:&error];
+    if (!file || error) {
+        NSLog(@"Error opening file: %@", error);
+        [file close];
+        return nil;
+    }
+    [recording setValue:file forKey:@"file"];
+    __weak DBFile *weakFile = file;
+    [file addObserver:self block:^{
+        recording.progress = weakFile.status.progress;
+    }];
+    return recording;
+}
+
+- (void)dealloc {
+    [self.file removeObserver:self];
+    [self.file close];
 }
 
 #pragma mark Properties
 
 - (NSString *)name {
-    return self.fileInfo.path.name;
+    return self.file.info.path.name;
 }
 
-- (NSURL *)url {
-    if (_url) return _url;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        _url = [NSURL URLWithString:[[DBFilesystem sharedFilesystem] fetchShareLinkForPath:[[DBPath alloc] initWithString:self.path] shorten:NO error:NULL]];
-    });
-    return _url;
-}
-
-- (NSString *)path {
-    return self.fileInfo.path.stringValue;
+- (DBPath *)path {
+    return self.file.info.path;
 }
 
 - (NSDate *)createdAt {
-    return self.fileInfo.modifiedTime;
+    return self.file.info.modifiedTime;
+}
+
+- (DBFileState)state {
+    return self.file.status.state;
+}
+
+- (CGFloat)progress {
+    return self.file.status.progress;
 }
 
 - (NSImage *)posterFrameImage {
-    if (!_posterFrameImage && !self.isFetchingPosterFrame && self.fileInfo.thumbExists) {
+    if (!_posterFrameImage && !self.isFetchingPosterFrame && self.file.info.thumbExists) {
         self.isFetchingPosterFrame = YES;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             DBError *openError;
-            DBFile *thumbFile = [[DBFilesystem sharedFilesystem] openThumbnail:self.fileInfo.path ofSize:DBThumbSizeL inFormat:DBThumbFormatPNG error:&openError];
+            DBFile *thumbFile = [[DBFilesystem sharedFilesystem] openThumbnail:self.file.info.path ofSize:DBThumbSizeL inFormat:DBThumbFormatPNG error:&openError];
             if (openError) {
                 NSLog(@"Error loading thumbnail: %@", openError);
                 return;
             }
 
-            if (!thumbFile.status.cached) return;
-
             NSData *thumbData = [thumbFile readData:NULL];
             NSImage *thumbImage = [[NSImage alloc] initWithData:thumbData];
+
+            [thumbFile close];
+
             [self setPosterFrameImage:thumbImage];
             self.isFetchingPosterFrame = NO;
         });
