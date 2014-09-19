@@ -362,14 +362,21 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 #pragma mark - NSTableView Drag and Drop
 
-#warning - TODO
 - (BOOL)tableView:(NSTableView *)tableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
     // Only one recording can be dragged/selected at a time
-//    JEFRecording *draggedRecording = [[self.recentRecordingsArrayController.arrangedObjects objectsAtIndexes:rowIndexes] firstObject];
-    [pboard declareTypes:@[ NSPasteboardTypeString ] owner:self];
-//    [pboard setString:draggedRecording.url.absoluteString forType:NSPasteboardTypeString];
+    JEFRecording *draggedRecording = [[self.recentRecordingsArrayController.arrangedObjects objectsAtIndexes:rowIndexes] firstObject];
+    [pboard declareTypes:@[ NSCreateFileContentsPboardType(@"gif"), NSFilesPromisePboardType, NSPasteboardTypeString ] owner:self];
+    [pboard setData:draggedRecording.data forType:NSCreateFileContentsPboardType(@"gif")];
+    [pboard setPropertyList:@[ [draggedRecording.path.stringValue pathExtension] ] forType:NSFilesPromisePboardType];
+    [pboard setString:draggedRecording.path.stringValue forType:NSPasteboardTypeString];
 
     return YES;
+}
+
+- (NSArray *)tableView:(NSTableView *)tableView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedRowsWithIndexes:(NSIndexSet *)indexSet {
+    JEFRecording *draggedRecording = [[self.recentRecordingsArrayController.arrangedObjects objectsAtIndexes:indexSet] firstObject];
+    [draggedRecording.data writeToFile:[dropDestination.path stringByAppendingPathComponent:draggedRecording.path.stringValue] atomically:YES];
+    return @[ draggedRecording.path.stringValue ];
 }
 
 #pragma mark - Properties

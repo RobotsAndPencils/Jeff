@@ -62,6 +62,10 @@
     return self.file.info.path;
 }
 
+- (NSData *)data {
+    return [self.file readData:NULL];
+}
+
 - (NSDate *)createdAt {
     return self.file.info.modifiedTime;
 }
