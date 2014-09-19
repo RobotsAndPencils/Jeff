@@ -42,7 +42,7 @@
     DBPath *filePath = [[DBPath root] childPath:url.lastPathComponent];
     __block DBError *error;
     DBFile *newFile = [[DBFilesystem sharedFilesystem] createFile:filePath error:&error];
-    if (!newFile && error) {
+    if (!newFile || error) {
         if (completion) completion(NO, nil, error);
         return;
     }
@@ -54,7 +54,7 @@
         return;
     }
 
-    JEFRecording *recording = [JEFRecording recordingWithFileInfo:newFile.info publicURL:nil];
+    JEFRecording *recording = [JEFRecording recordingWithNewFile:newFile];
     if (completion) completion(YES, recording, nil);
 }
 

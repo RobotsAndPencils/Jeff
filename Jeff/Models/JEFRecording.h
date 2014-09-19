@@ -11,9 +11,9 @@
 @interface JEFRecording : NSObject
 
 @property (nonatomic, strong, readonly) NSString *name;
-@property (nonatomic, strong, readonly) NSURL *url;
-@property (nonatomic, strong, readonly) NSString *path;
-@property (nonatomic, strong, readonly) DBFileInfo *fileInfo;
+@property (nonatomic, strong, readonly) DBPath *path;
+@property (nonatomic, assign, readonly) DBFileState state;
+@property (nonatomic, assign, readonly) CGFloat progress;
 @property (nonatomic, strong, readonly) NSDate *createdAt;
 @property (nonatomic, assign, readonly) BOOL isFetchingPosterFrame;
 
@@ -22,6 +22,7 @@
  */
 @property (nonatomic, strong) NSImage *posterFrameImage;
 
-+ (instancetype)recordingWithFileInfo:(DBFileInfo *)fileInfo publicURL:(NSURL *)publicURL;
++ (instancetype)recordingWithNewFile:(DBFile *)file;
++ (instancetype)recordingWithFileInfo:(DBFileInfo *)fileInfo;
 
 @end
