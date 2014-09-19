@@ -7,6 +7,7 @@
 //
 
 #import "JEFRecordingCellView.h"
+#import <Dropbox/Dropbox.h>
 
 @interface JEFRecordingCellView ()
 
@@ -41,12 +42,16 @@
 - (void)setup {
     self.isSetup = YES;
     [self addObserver:self forKeyPath:@"objectValue.isFetchingPosterFrame" options:NSKeyValueObservingOptionInitial context:NULL];
+    [self addObserver:self forKeyPath:@"objectValue.state" options:NSKeyValueObservingOptionInitial context:NULL];
+    [self addObserver:self forKeyPath:@"objectValue.progress" options:NSKeyValueObservingOptionInitial context:NULL];
 }
 
 - (void)teardown {
     if (self.isSetup) {
         self.isSetup = NO;
         [self removeObserver:self forKeyPath:@"objectValue.isFetchingPosterFrame"];
+        [self removeObserver:self forKeyPath:@"objectValue.state"];
+        [self removeObserver:self forKeyPath:@"objectValue.progress"];
     }
 }
 
@@ -59,18 +64,24 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"objectValue.isFetchingPosterFrame"]) {
-        if ([[object valueForKeyPath:keyPath] boolValue] == YES) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.statusLabel.stringValue = @"Loading thumbnail...";
-            });
-        }
-        else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.statusLabel.stringValue = @"";
-            });
-        }
+    NSString *statusString = @"";
+    CGFloat progress = 0;
+    BOOL isFetchingPosterFrame = ([[object valueForKeyPath:@"objectValue.isFetchingPosterFrame"] boolValue] == YES);
+    BOOL isUploading = ([[object valueForKeyPath:@"objectValue.state"] integerValue] == DBFileStateUploading);
+
+    if (isUploading) {
+        progress = [[object valueForKeyPath:@"objectValue.progress"] floatValue] * 100;
+        statusString = [NSString stringWithFormat:@"Uploading: %.0f%%", progress];
     }
+    else if (isFetchingPosterFrame) {
+        statusString = @"Loading thumbnail...";
+    }
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.statusLabel.stringValue = statusString;
+        self.progressIndicator.hidden = !isUploading;
+        self.progressIndicator.doubleValue = progress;
+    });
 }
 
 @end

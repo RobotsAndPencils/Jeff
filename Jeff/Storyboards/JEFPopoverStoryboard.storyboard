@@ -42,13 +42,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="325" height="296"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="133" horizontalPageScroll="10" verticalLineScroll="133" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="Gf6-NN-Iq2">
+                            <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="161" horizontalPageScroll="10" verticalLineScroll="161" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="Gf6-NN-Iq2">
                                 <rect key="frame" x="0.0" y="0.0" width="325" height="284"/>
                                 <clipView key="contentView" wantsLayer="YES" copiesOnScroll="NO" id="jh4-2L-pST">
                                     <rect key="frame" x="0.0" y="0.0" width="325" height="176"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView wantsLayer="YES" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="132" viewBased="YES" id="cdU-1N-Oto" customClass="RBLTableView">
+                                        <tableView wantsLayer="YES" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="160" viewBased="YES" id="cdU-1N-Oto" customClass="RBLTableView">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="1" height="1"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -68,22 +68,15 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="JEFRecordingCellView" wantsLayer="YES" id="cVE-jQ-rxi" customClass="JEFRecordingCellView">
-                                                            <rect key="frame" x="0.0" y="0.0" width="324" height="132"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="324" height="160"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="249" verticalCompressionResistancePriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="cYF-kf-3pq" userLabel="Preview Image View" customClass="JEFScaleToFillImageView">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="325" height="132"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="325" height="160"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="500x500" id="46O-t5-ZYI"/>
                                                                     <connections>
                                                                         <binding destination="cVE-jQ-rxi" name="value" keyPath="objectValue.posterFrameImage" id="eg4-f3-F2P"/>
                                                                     </connections>
-                                                                </imageView>
-                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ily-Fz-9Hs">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="325" height="1"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="1" id="QuB-me-WsH"/>
-                                                                    </constraints>
-                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="3074895F-F2A3-40DF-80EE-AD6AA1A9E06F" id="ujV-zr-NTo"/>
                                                                 </imageView>
                                                                 <visualEffectView appearanceType="vibrantLight" blendingMode="withinWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="O9S-Hz-IkY">
                                                                     <rect key="frame" x="0.0" y="0.0" width="325" height="50"/>
@@ -160,33 +153,39 @@
                                                                         <constraint firstItem="6zT-HO-9zX" firstAttribute="leading" secondItem="O9S-Hz-IkY" secondAttribute="leading" constant="14" id="xgD-jz-4BG"/>
                                                                     </constraints>
                                                                 </visualEffectView>
-                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VT6-j5-hAw" userLabel="Status Label">
-                                                                    <rect key="frame" x="142" y="58" width="38" height="17"/>
+                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VT6-j5-hAw" userLabel="Status Label">
+                                                                    <rect key="frame" x="158" y="110" width="8" height="17"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="420-oA-vlz">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
+                                                                <progressIndicator hidden="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="h6Z-Do-gmH">
+                                                                    <rect key="frame" x="112" y="89" width="100" height="20"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="100" id="EMw-5U-dSt"/>
+                                                                    </constraints>
+                                                                </progressIndicator>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="cYF-kf-3pq" firstAttribute="leading" secondItem="cVE-jQ-rxi" secondAttribute="leading" id="1w1-d1-1qj"/>
                                                                 <constraint firstItem="cYF-kf-3pq" firstAttribute="top" secondItem="cVE-jQ-rxi" secondAttribute="top" id="82X-xr-MoC"/>
-                                                                <constraint firstAttribute="bottom" secondItem="ily-Fz-9Hs" secondAttribute="bottom" id="9Vz-Ns-E5a"/>
-                                                                <constraint firstAttribute="centerX" secondItem="VT6-j5-hAw" secondAttribute="centerX" constant="1" id="BMu-HI-5Au"/>
+                                                                <constraint firstAttribute="centerX" secondItem="VT6-j5-hAw" secondAttribute="centerX" id="BMu-HI-5Au"/>
                                                                 <constraint firstAttribute="bottom" secondItem="O9S-Hz-IkY" secondAttribute="bottom" id="Dl9-33-ce1"/>
-                                                                <constraint firstAttribute="centerY" secondItem="VT6-j5-hAw" secondAttribute="centerY" constant="0.5" id="IiS-Jh-8OO"/>
-                                                                <constraint firstItem="ily-Fz-9Hs" firstAttribute="leading" secondItem="cVE-jQ-rxi" secondAttribute="leading" id="TJo-Mr-flT"/>
                                                                 <constraint firstItem="O9S-Hz-IkY" firstAttribute="leading" secondItem="cVE-jQ-rxi" secondAttribute="leading" id="ZEY-zF-vRp"/>
                                                                 <constraint firstAttribute="bottom" secondItem="cYF-kf-3pq" secondAttribute="bottom" id="bpw-xA-BnK"/>
+                                                                <constraint firstItem="O9S-Hz-IkY" firstAttribute="top" secondItem="VT6-j5-hAw" secondAttribute="bottom" constant="60" id="gGx-IK-bIc"/>
                                                                 <constraint firstAttribute="trailing" secondItem="cYF-kf-3pq" secondAttribute="trailing" constant="-1" id="hl3-ek-XhV"/>
+                                                                <constraint firstItem="O9S-Hz-IkY" firstAttribute="top" secondItem="h6Z-Do-gmH" secondAttribute="bottom" constant="40" id="mth-uo-5Qf"/>
                                                                 <constraint firstAttribute="trailing" secondItem="O9S-Hz-IkY" secondAttribute="trailing" constant="-1" id="muE-Jc-DFi"/>
-                                                                <constraint firstAttribute="trailing" secondItem="ily-Fz-9Hs" secondAttribute="trailing" constant="-1" id="xw8-vb-HwY"/>
+                                                                <constraint firstAttribute="centerX" secondItem="h6Z-Do-gmH" secondAttribute="centerX" id="r01-Nn-Gav"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="infoContainerVisualEffectView" destination="O9S-Hz-IkY" id="Dbk-o5-KTQ"/>
                                                                 <outlet property="linkButton" destination="Os0-PP-n7L" id="G3c-RF-OoA"/>
                                                                 <outlet property="previewImageView" destination="cYF-kf-3pq" id="Qfo-83-5cB"/>
+                                                                <outlet property="progressIndicator" destination="h6Z-Do-gmH" id="YFf-mD-ne7"/>
                                                                 <outlet property="shareButton" destination="uBE-ho-exA" id="DdR-aw-Zzm"/>
                                                                 <outlet property="statusLabel" destination="VT6-j5-hAw" id="u5W-AY-R2n"/>
                                                                 <outlet property="textField" destination="6zT-HO-9zX" id="L7h-EH-AZX"/>
@@ -322,78 +321,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="3074895F-F2A3-40DF-80EE-AD6AA1A9E06F" width="325" height="1">
-            <mutableData key="keyedArchiveRepresentation">
-YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
-GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
-DBIAwAAAgAKACtISCRMVWk5TLm9iamVjdHOhFIADgAnSEgkXGqIYGYAEgAWACBAA0h0JHh9fEBROU1RJ
-RkZSZXByZXNlbnRhdGlvboAGgAdPEQ2CTU0AKgAABRz///8BmZmZBf///wf///8K////Df///xDk5OQT
-6OjoFurq6hjs7Owb5ubmHvDw8CHq6uok6+vrJuzs7Cnv7+8v6+vrMuzs7DXo6Og36enpOurq6j3j4+NA
-5OTkQ+Li4kbg4OBJ4eHhTOLi4k7g4OBR4eHhVN/f31nZ2dld2traYNjY2GPZ2dll1dXVZ9TU1GvT09Nu
-0tLScdPT03PS0tJ3z8/PedDQ0HzOzs5+zc3NhMnJyYjJycmKycnJjcjIyJDHx8eTx8fHlsTExJjExMSb
-w8PDnsPDw6HBwcGkwMDApsDAwKbAwMCmwMDApsDAwKa/v7+nwMDApr+/v6fCwsKnwsLCp8LCwqfAwMCm
-wsLCp8LCwqfCwsKnwsLCp8HBwajCwsKnwcHBqMLCwqfBwcGowcHBqMLCwqfBwcGowcHBqMDAwKnBwcGo
-wcHBqMDAwKnBwcGowMDAqcDAwKnBwcGpwMDAqcDAwKnAwMCpwMDAqcDAwKrAwMCpwMDAqsDAwKrAwMCq
-wMDAqsDAwKnAwMCqwMDAqsDAwKrAwMCqwMDAq8DAwKrAwMCrwMDAqsDAwKvAwMCrwMDAqsDAwKvAwMCr
-vr6+rMDAwKvAwMCrvr6+rL6+vqzBwcGswcHBrMHBwazBwcGswcHBrL6+vqzBwcGsvr6+rb6+vqy+vr6t
-vr6+rcHBwa2+vr6twcHBrL6+vq2+vr6twcHBrcHBwa3AwMCuwcHBrcDAwK7BwcGtwMDArsDAwK7BwcGt
-wMDArsHBwa7AwMCvwMDAr8DAwK7AwMCvwMDAr8DAwK/AwMCvwMDAr8DAwK/AwMCvwMDAr8DAwK/BwcGw
-wMDAr76+vrDBwcGwwcHBsMHBwbDAwMCvwcHBsMHBwbDBwcGwwcHBsMHBwbDAwMCvvr6+sMDAwK/AwMCv
-wMDAr8DAwK7AwMCvwMDAr8DAwK/AwMCvwMDArsHBwa7AwMCuwMDAr8DAwK7AwMCvwMDArsDAwK7BwcGt
-wMDArsDAwK6+vr6twcHBrcDAwK7AwMCuwcHBrb6+vq2+vr6tvr6+rb6+vq2+vr6tvr6+rcHBwazBwcGs
-vr6+rMHBwazBwcGswMDAq8HBwazBwcGswcHBrMHBwazAwMCrvr6+rMDAwKvAwMCrwMDAq8DAwKvAwMCr
-wMDAq8DAwKrAwMCrwMDAq8DAwKrAwMCqwMDAq8DAwKvAwMCqwMDAqsDAwKrAwMCqwMDAqsDAwKrAwMCq
-wMDAqcHBwanAwMCpwMDAqcHBwanBwcGowMDAqcDAwKnAwMCpwMDAqcHBwajBwcGowcHBqMHBwajBwcGo
-wcHBqMHBwajBwcGowsLCp8HBwajBwcGov7+/p8LCwqfBwcGowcHBqMLCwqfAwMCmwsLCp7+/v6fCwsKn
-v7+/p8LCwqfAwMCmwMDApsDAwKbAwMCmwMDApsDAwKXAwMCmwcHBpMPDw6HDw8OexMTEm8TExJjHx8eV
-x8fHk8jIyJDJycmNycnJiszMzIfNzc2Ezc3Nf9DQ0HzPz895z8/PdtPT03TU1NRx09PTbtnZ2WrV1dVo
-2dnZZdjY2GPc3Nxf29vbXdra2lrh4eFU4ODgUeLi4k7h4eFM4+PjSOLi4kbk5ORD5OTkQerq6j3p6ek6
-5OTkOOfn5zXr6+sy6enpL+3t7Sry8vIm6urqJO/v7yDu7u4e7OzsG+rq6hj///8V5OTkE////xD///8N
-zMzMCv///wf///8EAA4BAAADAAAAAQFFAAABAQADAAAAAQABAAABAgADAAAABAAABcoBAwADAAAAAQAB
-AAABBgADAAAAAQACAAABEQAEAAAAAQAAAAgBEgADAAAAAQABAAABFQADAAAAAQAEAAABFgADAAAAAQAB
-AAABFwAEAAAAAQAABRQBHAADAAAAAQABAAABUgADAAAAAQACAAABUwADAAAABAAABdKHcwAHAAAHqAAA
-BdoAAAAAAAgACAAIAAgAAQABAAEAAQAAB6hhcHBsAiAAAG1udHJSR0IgWFlaIAfZAAIAGQALABoAC2Fj
-c3BBUFBMAAAAAGFwcGwAAAAAAAAAAAAAAAAAAAAAAAD21gABAAAAANMtYXBwbAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC2Rlc2MAAAEIAAAAb2RzY20AAAF4AAAFbGNw
-cnQAAAbkAAAAOHd0cHQAAAccAAAAFHJYWVoAAAcwAAAAFGdYWVoAAAdEAAAAFGJYWVoAAAdYAAAAFHJU
-UkMAAAdsAAAADmNoYWQAAAd8AAAALGJUUkMAAAdsAAAADmdUUkMAAAdsAAAADmRlc2MAAAAAAAAAFEdl
-bmVyaWMgUkdCIFByb2ZpbGUAAAAAAAAAAAAAABRHZW5lcmljIFJHQiBQcm9maWxlAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABtbHVjAAAAAAAAAB4AAAAMc2tTSwAA
-ACgAAAF4aHJIUgAAACgAAAGgY2FFUwAAACQAAAHIcHRCUgAAACYAAAHsdWtVQQAAACoAAAISZnJGVQAA
-ACgAAAI8emhUVwAAABYAAAJkaXRJVAAAACgAAAJ6bmJOTwAAACYAAAKia29LUgAAABYAAALIY3NDWgAA
-ACIAAALeaGVJTAAAAB4AAAMAZGVERQAAACwAAAMeaHVIVQAAACgAAANKc3ZTRQAAACYAAAKiemhDTgAA
-ABYAAANyamFKUAAAABoAAAOIcm9STwAAACQAAAOiZWxHUgAAACIAAAPGcHRQTwAAACYAAAPobmxOTAAA
-ACgAAAQOZXNFUwAAACYAAAPodGhUSAAAACQAAAQ2dHJUUgAAACIAAARaZmlGSQAAACgAAAR8cGxQTAAA
-ACwAAASkcnVSVQAAACIAAATQYXJFRwAAACYAAATyZW5VUwAAACYAAAUYZGFESwAAAC4AAAU+AFYBYQBl
-AG8AYgBlAGMAbgD9ACAAUgBHAEIAIABwAHIAbwBmAGkAbABHAGUAbgBlAHIAaQENAGsAaQAgAFIARwBC
-ACAAcAByAG8AZgBpAGwAUABlAHIAZgBpAGwAIABSAEcAQgAgAGcAZQBuAOgAcgBpAGMAUABlAHIAZgBp
-AGwAIABSAEcAQgAgAEcAZQBuAOkAcgBpAGMAbwQXBDAEMwQwBDsETAQ9BDgEOQAgBD8EQAQ+BEQEMAQ5
-BDsAIABSAEcAQgBQAHIAbwBmAGkAbAAgAGcA6QBuAOkAcgBpAHEAdQBlACAAUgBWAEKQGnUoACAAUgBH
-AEIAIIJyX2ljz4/wAFAAcgBvAGYAaQBsAG8AIABSAEcAQgAgAGcAZQBuAGUAcgBpAGMAbwBHAGUAbgBl
-AHIAaQBzAGsAIABSAEcAQgAtAHAAcgBvAGYAaQBsx3y8GAAgAFIARwBCACDVBLhc0wzHfABPAGIAZQBj
-AG4A/QAgAFIARwBCACAAcAByAG8AZgBpAGwF5AXoBdUF5AXZBdwAIABSAEcAQgAgBdsF3AXcBdkAQQBs
-AGwAZwBlAG0AZQBpAG4AZQBzACAAUgBHAEIALQBQAHIAbwBmAGkAbADBAGwAdABhAGwA4QBuAG8AcwAg
-AFIARwBCACAAcAByAG8AZgBpAGxmbpAaACAAUgBHAEIAIGPPj/Blh072TgCCLAAgAFIARwBCACAw1zDt
-MNUwoTCkMOsAUAByAG8AZgBpAGwAIABSAEcAQgAgAGcAZQBuAGUAcgBpAGMDkwO1A70DuQO6A8wAIAPA
-A8EDvwPGA68DuwAgAFIARwBCAFAAZQByAGYAaQBsACAAUgBHAEIAIABnAGUAbgDpAHIAaQBjAG8AQQBs
-AGcAZQBtAGUAZQBuACAAUgBHAEIALQBwAHIAbwBmAGkAZQBsDkIOGw4jDkQOHw4lDkwAIABSAEcAQgAg
-DhcOMQ5IDicORA4bAEcAZQBuAGUAbAAgAFIARwBCACAAUAByAG8AZgBpAGwAaQBZAGwAZQBpAG4AZQBu
-ACAAUgBHAEIALQBwAHIAbwBmAGkAaQBsAGkAVQBuAGkAdwBlAHIAcwBhAGwAbgB5ACAAcAByAG8AZgBp
-AGwAIABSAEcAQgQeBDEESQQ4BDkAIAQ/BEAEPgREBDgEOwRMACAAUgBHAEIGRQZEBkEAIAYqBjkGMQZK
-BkEAIABSAEcAQgAgBicGRAY5BicGRQBHAGUAbgBlAHIAaQBjACAAUgBHAEIAIABQAHIAbwBmAGkAbABl
-AEcAZQBuAGUAcgBlAGwAIABSAEcAQgAtAGIAZQBzAGsAcgBpAHYAZQBsAHMAZXRleHQAAAAAQ29weXJp
-Z2h0IDIwMDcgQXBwbGUgSW5jLiwgYWxsIHJpZ2h0cyByZXNlcnZlZC4AWFlaIAAAAAAAAPNSAAEAAAAB
-Fs9YWVogAAAAAAAAdE0AAD3uAAAD0FhZWiAAAAAAAABadQAArHMAABc0WFlaIAAAAAAAACgaAAAVnwAA
-uDZjdXJ2AAAAAAAAAAEBzQAAc2YzMgAAAAAAAQxCAAAF3v//8yYAAAeSAAD9kf//+6L///2jAAAD3AAA
-wGzSIiMkJVokY2xhc3NuYW1lWCRjbGFzc2VzXxAQTlNCaXRtYXBJbWFnZVJlcKMmJyhfEBBOU0JpdG1h
-cEltYWdlUmVwWk5TSW1hZ2VSZXBYTlNPYmplY3TSIiMqK1dOU0FycmF5oioo0iIjLS5eTlNNdXRhYmxl
-QXJyYXmjLSoo0zAxCTIzNFdOU1doaXRlXE5TQ29sb3JTcGFjZUQwIDAAEAOAC9IiIzY3V05TQ29sb3Ki
-NijSIiM5OldOU0ltYWdlojkoXxAPTlNLZXllZEFyY2hpdmVy0T0+VHJvb3SAAQAIABEAGgAjAC0AMgA3
-AEUASwBUAFsAaABvAHcAeQB+AIAAggCHAJIAlACWAJgAnQCgAKIApACmAKgArQDEAMYAyA5ODlMOXg5n
-DnoOfg6RDpwOpQ6qDrIOtQ66DskOzQ7UDtwO6Q7uDvAO8g73Dv8PAg8HDw8PEg8kDycPLAAAAAAAAAIB
-AAAAAAAAAD8AAAAAAAAAAAAAAAAAAA8uA
-</mutableData>
-        </image>
         <image name="500x500" width="500" height="500"/>
         <image name="CopyLinkButton" width="20" height="20"/>
         <image name="NSActionTemplate" width="14" height="14"/>
