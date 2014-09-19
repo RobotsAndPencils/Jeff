@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong, readonly) NSString *name;
 @property (nonatomic, strong, readonly) DBPath *path;
+@property (nonatomic, strong, readonly) NSData *data;
 @property (nonatomic, assign, readonly) DBFileState state;
 @property (nonatomic, assign, readonly) CGFloat progress;
 @property (nonatomic, strong, readonly) NSDate *createdAt;
