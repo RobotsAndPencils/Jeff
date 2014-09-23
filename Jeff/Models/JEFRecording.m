@@ -8,46 +8,119 @@
 
 #import "JEFRecording.h"
 
+
+@interface JEFRecording ()
+
+@property (nonatomic, strong) DBFile *file;
+@property (nonatomic, assign, readwrite) BOOL isFetchingPosterFrame;
+@property (nonatomic, assign, readwrite) CGFloat progress;
+
+@end
+
+
 @implementation JEFRecording
 
-+ (instancetype)recordingWithURL:(NSURL *)url posterFrameImage:(NSImage *)posterFrameImage {
-    JEFRecording *recording = [[JEFRecording alloc] init];
-    recording.url = url;
-    recording.name = [url absoluteString];
-    recording.posterFrameImage = posterFrameImage;
+@synthesize uploadHandler = _uploadHandler;
+
++ (instancetype)recordingWithNewFile:(DBFile *)file {
+    JEFRecording *recording = [[self alloc] init];
+    [recording setValue:file forKey:@"file"];
+    __weak DBFile *weakFile = file;
+    [file addObserver:self block:^{
+        recording.progress = weakFile.status.progress;
+    }];
     return recording;
 }
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        _createdAt = [NSDate date];
++ (instancetype)recordingWithFileInfo:(DBFileInfo *)fileInfo {
+    JEFRecording *recording = [[self alloc] init];
+    DBError *error;
+    DBFile *file = [[DBFilesystem sharedFilesystem] openFile:fileInfo.path error:&error];
+    if (!file || error) {
+        NSLog(@"Error opening file: %@", error);
+        [file close];
+        return nil;
     }
-    return self;
+    [recording setValue:file forKey:@"file"];
+    __weak DBFile *weakFile = file;
+    [file addObserver:self block:^{
+        recording.progress = weakFile.status.progress;
+    }];
+    return recording;
 }
 
-- (void)encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeObject:self.url forKey:@"url"];
-    [encoder encodeObject:self.name forKey:@"name"];
-    [encoder encodeObject:self.createdAt forKey:@"createdAt"];
-    [encoder encodeObject:self.posterFrameImage forKey:@"posterFrameImage"];
+- (void)dealloc {
+    [self.file removeObserver:self];
+    [self.file close];
 }
 
-- (id)initWithCoder:(NSCoder *)decoder {
-    self = [super init];
-    if (self) {
-        _url = [decoder decodeObjectForKey:@"url"];
-        _name = [decoder decodeObjectForKey:@"name"];
-        _createdAt = [decoder decodeObjectForKey:@"createdAt"];
-        _posterFrameImage = [decoder decodeObjectForKey:@"posterFrameImage"];
+#pragma mark Properties
+
+- (NSString *)name {
+    return self.file.info.path.name;
+}
+
+- (DBPath *)path {
+    return self.file.info.path;
+}
+
+- (NSData *)data {
+    return [self.file readData:NULL];
+}
+
+- (NSDate *)createdAt {
+    return self.file.info.modifiedTime;
+}
+
+- (DBFileState)state {
+    return self.file.status.state;
+}
+
+- (CGFloat)progress {
+    return self.file.status.progress;
+}
+
+- (JEFRecordingUploadHandler)uploadHandler {
+    return _uploadHandler;
+}
+
+- (void)setUploadHandler:(JEFRecordingUploadHandler)uploadHandler {
+    if (_uploadHandler) {
+        [self.file removeObserver:self];
     }
-    return self;
+    _uploadHandler = [uploadHandler copy];
+
+    __weak __typeof(self.file) weakFile = self.file;
+    __weak __typeof(self) weakSelf = self;
+    [self.file addObserver:self block:^{
+        if (weakFile.status.state == DBFileStateIdle) {
+            if (uploadHandler) uploadHandler(weakSelf);
+            [weakFile removeObserver:weakSelf];
+        }
+    }];
 }
 
-- (void)copyURLStringToPasteboard {
-    NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
-    [pasteboard clearContents];
-    [pasteboard setString:[self.url absoluteString] forType:NSStringPboardType];
+- (NSImage *)posterFrameImage {
+    if (!_posterFrameImage && !self.isFetchingPosterFrame && self.file.info.thumbExists) {
+        self.isFetchingPosterFrame = YES;
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            DBError *openError;
+            DBFile *thumbFile = [[DBFilesystem sharedFilesystem] openThumbnail:self.file.info.path ofSize:DBThumbSizeL inFormat:DBThumbFormatPNG error:&openError];
+            if (openError) {
+                NSLog(@"Error loading thumbnail: %@", openError);
+                return;
+            }
+
+            NSData *thumbData = [thumbFile readData:NULL];
+            NSImage *thumbImage = [[NSImage alloc] initWithData:thumbData];
+
+            [thumbFile close];
+
+            [self setPosterFrameImage:thumbImage];
+            self.isFetchingPosterFrame = NO;
+        });
+    }
+    return _posterFrameImage;
 }
 
 @end

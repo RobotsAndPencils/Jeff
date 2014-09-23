@@ -9,11 +9,11 @@
 #import "JEFPopoverRecordingsViewController.h"
 
 #import <MASShortcut/MASShortcut+UserDefaults.h>
+#import <Dropbox/Dropbox.h>
 
 #import "JEFUploaderPreferencesViewController.h"
 #import "JEFRecording.h"
 #import "AppDelegate.h"
-#import "JEFDepositBoxUploader.h"
 #import "JEFDropboxUploader.h"
 #import "Converter.h"
 #import "JEFRecordingCellView.h"
@@ -45,6 +45,12 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
+    if (account) {
+        DBFilesystem *filesystem = [[DBFilesystem alloc] initWithAccount:account];
+        [DBFilesystem setSharedFilesystem:filesystem];
+    }
 
     self.tableView.enclosingScrollView.layer.cornerRadius = 5.0;
     self.tableView.enclosingScrollView.layer.masksToBounds = YES;
@@ -89,6 +95,10 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
         
         [self addObserver:self forKeyPath:@"recentRecordings" options:NSKeyValueObservingOptionInitial context:&PopoverContentViewControllerContext];
     });
+}
+
+- (void)dealloc {
+    [[DBFilesystem sharedFilesystem] removeObserver:self];
 }
 
 - (IBAction)showMenu:(NSButton *)sender {
@@ -259,7 +269,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
         posterFrameImage = [[NSImage alloc] initWithContentsOfFile:[posterFrameURL path]];
     }
     
-    [[self uploader] uploadGIF:gifURL withName:[[gifURL path] lastPathComponent] completion:^(BOOL succeeded, NSURL *publicURL, NSError *error) {
+    [[self uploader] uploadGIF:gifURL withName:[[gifURL path] lastPathComponent] completion:^(BOOL succeeded, JEFRecording *recording, NSError *error) {
         if (error || !succeeded) {
             NSAlert *alert = [[NSAlert alloc] init];
             alert.messageText = NSLocalizedString(@"UploadFailedAlertTitle", nil);
@@ -269,15 +279,19 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
             return;
         }
 
-        JEFRecording *newRecording = [JEFRecording recordingWithURL:publicURL posterFrameImage:posterFrameImage];
-
-        [[self mutableArrayValueForKey:@"recentRecordings"] addObject:newRecording];
-        [self saveRecentRecordings];
-
-        [newRecording copyURLStringToPasteboard];
-        [self displaySharedUserNotificationForRecording:newRecording];
-
         [[NSFileManager defaultManager] removeItemAtPath:[gifURL path] error:nil];
+
+        recording.posterFrameImage = posterFrameImage;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[self mutableArrayValueForKey:@"recentRecordings"] addObject:recording];
+        });
+
+        __weak __typeof(self) weakSelf = self;
+        recording.uploadHandler = ^(JEFRecording *recording){
+            [weakSelf copyURLStringToPasteboard:recording completion:^{
+                [weakSelf displaySharedUserNotificationForRecording:recording];
+            }];
+        };
     }];
 }
 
@@ -285,10 +299,9 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     enum JEFUploaderType uploaderType = (enum JEFUploaderType)[[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUploader"];
     switch (uploaderType) {
         case JEFUploaderTypeDropbox:
-            return [JEFDropboxUploader uploader];
         case JEFUploaderTypeDepositBox:
         default:
-            return [JEFDepositBoxUploader uploader];
+            return [JEFDropboxUploader uploader];
     }
 }
 
@@ -306,16 +319,22 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 - (IBAction)showShareMenu:(id)sender {
     NSButton *button = (NSButton *)sender;
     JEFRecording *recording = [(NSTableCellView *)[[button superview] superview] objectValue];
-    NSSharingServicePicker *sharePicker = [[NSSharingServicePicker alloc] initWithItems:@[ [recording.url absoluteString] ]];
-    sharePicker.delegate = self;
-    [sharePicker showRelativeToRect:button.bounds ofView:button preferredEdge:NSMinYEdge];
+
+    [self fetchPublicURLForRecording:recording completion:^(NSURL *url) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSSharingServicePicker *sharePicker = [[NSSharingServicePicker alloc] initWithItems:@[ [url absoluteString] ]];
+            sharePicker.delegate = self;
+            [sharePicker showRelativeToRect:button.bounds ofView:button preferredEdge:NSMinYEdge];
+        });
+    }];
 }
 
 - (IBAction)copyLinkToPasteboard:(id)sender {
     NSButton *button = (NSButton *)sender;
     JEFRecording *recording = [(NSTableCellView *)[[button superview] superview] objectValue];
-    [recording copyURLStringToPasteboard];
-    [self displayCopiedUserNotification];
+    [self copyURLStringToPasteboard:recording completion:^{
+        [self displayCopiedUserNotification];
+    }];
 }
 
 #pragma mark - NSTableViewDelegate
@@ -323,18 +342,23 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 - (void)didDoubleClickRow:(NSTableView *)sender {
     NSInteger clickedRow = [sender selectedRow];
     JEFRecording *recording = [self.recentRecordingsArrayController arrangedObjects][clickedRow];
-    [[NSWorkspace sharedWorkspace] openURL:recording.url];
+
+    [self fetchPublicURLForRecording:recording completion:^(NSURL *url) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSWorkspace sharedWorkspace] openURL:url];
+        });
+    }];
 }
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     JEFRecordingCellView *view = [tableView makeViewWithIdentifier:@"JEFRecordingCellView" owner:self];
-    JEFRecording *recording = [self.recentRecordingsArrayController arrangedObjects][(NSUInteger)row];
 
     view.linkButton.target = self;
     view.linkButton.action = @selector(copyLinkToPasteboard:);
     view.shareButton.target = self;
     view.shareButton.action = @selector(showShareMenu:);
-    view.previewImageView.image = recording.posterFrameImage ?: [NSImage imageNamed:@"500x500"];
+
+    [view setup];
 
     return view;
 }
@@ -344,10 +368,18 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 - (BOOL)tableView:(NSTableView *)tableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
     // Only one recording can be dragged/selected at a time
     JEFRecording *draggedRecording = [[self.recentRecordingsArrayController.arrangedObjects objectsAtIndexes:rowIndexes] firstObject];
-    [pboard declareTypes:@[ NSPasteboardTypeString ] owner:self];
-    [pboard setString:draggedRecording.url.absoluteString forType:NSPasteboardTypeString];
+    [pboard declareTypes:@[ NSCreateFileContentsPboardType(@"gif"), NSFilesPromisePboardType, NSPasteboardTypeString ] owner:self];
+    [pboard setData:draggedRecording.data forType:NSCreateFileContentsPboardType(@"gif")];
+    [pboard setPropertyList:@[ [draggedRecording.path.stringValue pathExtension] ] forType:NSFilesPromisePboardType];
+    [pboard setString:draggedRecording.path.stringValue forType:NSPasteboardTypeString];
 
     return YES;
+}
+
+- (NSArray *)tableView:(NSTableView *)tableView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedRowsWithIndexes:(NSIndexSet *)indexSet {
+    JEFRecording *draggedRecording = [[self.recentRecordingsArrayController.arrangedObjects objectsAtIndexes:indexSet] firstObject];
+    [draggedRecording.data writeToFile:[dropDestination.path stringByAppendingPathComponent:draggedRecording.path.stringValue] atomically:YES];
+    return @[ draggedRecording.path.stringValue ];
 }
 
 #pragma mark - Properties
@@ -362,35 +394,34 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 #pragma mark - Recording Persistence
 
 - (NSMutableArray *)loadRecentRecordings {
-    NSString *filePath = [self userDataFilePathForUserID:nil];
-    NSMutableDictionary *userData = [NSMutableDictionary dictionaryWithContentsOfFile:filePath];
-    if (!userData) {
-        userData = [@{} mutableCopy];
-        userData[@"recentRecordings"] = [NSKeyedArchiver archivedDataWithRootObject:[@[] mutableCopy]];
-        [userData writeToFile:filePath atomically:YES];
-    }
-    return [NSKeyedUnarchiver unarchiveObjectWithData:userData[@"recentRecordings"]];
-}
+    if (![[DBFilesystem sharedFilesystem] completedFirstSync]) return [NSMutableArray array];
 
-- (void)saveRecentRecordings {
-    NSString *filePath = [self userDataFilePathForUserID:nil];
-    NSMutableDictionary *userData = [NSMutableDictionary dictionaryWithContentsOfFile:filePath];
-    userData[@"recentRecordings"] = [NSKeyedArchiver archivedDataWithRootObject:self.recentRecordings];
-    [userData writeToFile:filePath atomically:YES];
+    DBError *listError;
+    NSArray *files = [[DBFilesystem sharedFilesystem] listFolder:[DBPath root] error:&listError];
+    if (listError) {
+        NSLog(@"Error listing files: %@", listError);
+        return [NSMutableArray array];
+    }
+    NSMutableArray *recordings = [self.recentRecordings mutableCopy];
+    if (!recordings) recordings = [NSMutableArray array];
+    for (DBFileInfo *fileInfo in files) {
+        JEFRecording *newRecording = [JEFRecording recordingWithFileInfo:fileInfo];
+        if (newRecording) {
+            [recordings addObject:newRecording];
+        }
+    }
+    return recordings;
 }
 
 #pragma mark - Recent Clips KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"recentRecordings"]) {
-        [self.tableView reloadData];
+        __weak __typeof(self) weakSelf = self;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.tableView reloadData];
+        });
     }
-}
-
-#pragma mark - Saving recent recordings
-
-- (NSString *)userDataFilePathForUserID:(NSString *)userID {
-    return [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/userID"] stringByAppendingPathExtension:@"plist"];
 }
 
 #pragma mark - Private
@@ -425,6 +456,44 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     NSDictionary *attrsDictionary = @{ NSShadowAttributeName : shadow, NSFontAttributeName : font, NSParagraphStyleAttributeName : paragraphStyle, NSForegroundColorAttributeName : fontColor };
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:button.title ?: @"" attributes:attrsDictionary];
     [button setAttributedTitle:attrString];
+}
+
+/**
+ *  If the recording is not finished uploading then the URL will be to Dropbox's public preview page instead of a direct link to the GIF
+ *
+ *  @param recording  The recording to fetch the public URL for
+ *  @param completion Completion block that could be called on any thread
+ */
+- (void)fetchPublicURLForRecording:(JEFRecording *)recording completion:(void(^)(NSURL *url))completion {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        DBError *error;
+        NSString *link = [[DBFilesystem sharedFilesystem] fetchShareLinkForPath:recording.path shorten:NO error:&error];
+        if (!link && error) {
+            if (completion) completion(nil);
+        }
+
+        NSURL *directURL = [NSURL URLWithString:link];
+
+        // If file is not still uploading, convert public URL to direct URL
+        DBFile *file = [[DBFilesystem sharedFilesystem] openFile:recording.path error:NULL];
+        if (file.status.state != DBFileStateUploading) {
+            NSMutableString *directLink = [link mutableCopy];
+            [directLink replaceOccurrencesOfString:@"www.dropbox" withString:@"dl.dropboxusercontent" options:0 range:NSMakeRange(0, [directLink length])];
+            directURL = [NSURL URLWithString:directLink];
+        }
+
+        if (completion) completion(directURL);
+    });
+}
+
+- (void)copyURLStringToPasteboard:(JEFRecording *)recording completion:(void(^)())completion {
+    [self fetchPublicURLForRecording:recording completion:^(NSURL *url) {
+        NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+        [pasteboard clearContents];
+        [pasteboard setString:[url absoluteString] forType:NSStringPboardType];
+
+        if (completion) completion();
+    }];
 }
 
 #pragma mark - NSUserNotificationCenterDelegate
