@@ -20,6 +20,8 @@
 
 @implementation JEFRecording
 
+@synthesize uploadHandler = _uploadHandler;
+
 + (instancetype)recordingWithNewFile:(DBFile *)file {
     JEFRecording *recording = [[self alloc] init];
     [recording setValue:file forKey:@"file"];
@@ -76,6 +78,26 @@
 
 - (CGFloat)progress {
     return self.file.status.progress;
+}
+
+- (JEFRecordingUploadHandler)uploadHandler {
+    return _uploadHandler;
+}
+
+- (void)setUploadHandler:(JEFRecordingUploadHandler)uploadHandler {
+    if (_uploadHandler) {
+        [self.file removeObserver:self];
+    }
+    _uploadHandler = [uploadHandler copy];
+
+    __weak __typeof(self.file) weakFile = self.file;
+    __weak __typeof(self) weakSelf = self;
+    [self.file addObserver:self block:^{
+        if (weakFile.status.state == DBFileStateIdle) {
+            if (uploadHandler) uploadHandler(weakSelf);
+            [weakFile removeObserver:weakSelf];
+        }
+    }];
 }
 
 - (NSImage *)posterFrameImage {

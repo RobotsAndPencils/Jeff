@@ -286,9 +286,12 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
             [[self mutableArrayValueForKey:@"recentRecordings"] addObject:recording];
         });
 
-        [self copyURLStringToPasteboard:recording completion:^{
-            [self displaySharedUserNotificationForRecording:recording];
-        }];
+        __weak __typeof(self) weakSelf = self;
+        recording.uploadHandler = ^(JEFRecording *recording){
+            [weakSelf copyURLStringToPasteboard:recording completion:^{
+                [weakSelf displaySharedUserNotificationForRecording:recording];
+            }];
+        };
     }];
 }
 

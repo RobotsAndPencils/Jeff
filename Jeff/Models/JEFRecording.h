@@ -8,6 +8,10 @@
 
 #import <Dropbox/Dropbox.h>
 
+@class JEFRecording;
+
+typedef void(^JEFRecordingUploadHandler)(JEFRecording *);
+
 @interface JEFRecording : NSObject
 
 @property (nonatomic, strong, readonly) NSString *name;
@@ -17,6 +21,7 @@
 @property (nonatomic, assign, readonly) CGFloat progress;
 @property (nonatomic, strong, readonly) NSDate *createdAt;
 @property (nonatomic, assign, readonly) BOOL isFetchingPosterFrame;
+@property (nonatomic, copy) JEFRecordingUploadHandler uploadHandler;
 
 /**
  *  readwrite so that a temporary thumbnail can be set on new recordings before they're finished syncing
