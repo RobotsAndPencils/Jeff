@@ -8,18 +8,18 @@
 
 #import "JEFDropboxUploader.h"
 
-#import <DropboxOSX/DropboxOSX.h>
+#import <Dropbox/Dropbox.h>
 
-@interface JEFDropboxUploader () <DBRestClientDelegate>
+#import "JEFRecording.h"
 
-@property (strong, nonatomic, readonly) DBRestClient *restClient;
+@interface JEFDropboxUploader ()
+
 @property (strong, nonatomic) NSMutableDictionary *filenameCompletionBlocks;
 
 @end
 
-@implementation JEFDropboxUploader
 
-@synthesize restClient = _restClient;
+@implementation JEFDropboxUploader
 
 + (instancetype)uploader {
     static JEFDropboxUploader *uploader;
@@ -38,61 +38,24 @@
     return self;
 }
 
-- (void)uploadGIF:(NSURL *)url withName:(NSString *)name completion:(void (^)(BOOL succeeded, NSURL *publicURL, NSError *error))completion {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.restClient uploadFile:name toPath:@"/" withParentRev:nil fromPath:[url path]];
-        self.filenameCompletionBlocks[name] = [completion copy];
-    });
-}
-
-#pragma mark - DBRestClientDelegate
-
-// Success
-
-- (void)restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath from:(NSString *)srcPath metadata:(DBMetadata *)metadata {
-    [self.restClient loadSharableLinkForFile:metadata.path shortUrl:NO];
-}
-
-- (void)restClient:(DBRestClient*)restClient loadedSharableLink:(NSString*)link forFile:(NSString*)path {
-
-    NSMutableString *directLink = [link mutableCopy];
-    [directLink replaceOccurrencesOfString:@"www.dropbox" withString:@"dl.dropboxusercontent" options:0 range:NSMakeRange(0, [directLink length])];
-
-    NSString *filename = [path lastPathComponent];
-    JEFUploaderCompletionBlock completion = self.filenameCompletionBlocks[filename];
-    if (completion) completion(YES, [NSURL URLWithString:directLink], nil);
-}
-
-// Failures
-
-- (void)restClient:(DBRestClient *)client uploadFileFailedWithError:(NSError *)error {
-    NSLog(@"File upload failed with error: %@", error);
-
-    NSString *sourcePath = [error userInfo][@"sourcePath"];
-    NSString *filename = [sourcePath lastPathComponent];
-
-    JEFUploaderCompletionBlock completion = self.filenameCompletionBlocks[filename];
-    if (completion) completion(NO, nil, error);
-}
-
-- (void)restClient:(DBRestClient*)restClient loadSharableLinkFailedWithError:(NSError*)error {
-    NSLog(@"Shareable link creation failed with error: %@", error);
-
-    NSString *sourcePath = [error userInfo][@"sourcePath"];
-    NSString *filename = [sourcePath lastPathComponent];
-
-    JEFUploaderCompletionBlock completion = self.filenameCompletionBlocks[filename];
-    if (completion) completion(NO, nil, error);
-}
-
-#pragma mark - Properties
-
-- (DBRestClient *)restClient {
-    if (!_restClient) {
-        _restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-        _restClient.delegate = self;
+- (void)uploadGIF:(NSURL *)url withName:(NSString *)name completion:(JEFUploaderCompletionBlock)completion {
+    DBPath *filePath = [[DBPath root] childPath:url.lastPathComponent];
+    __block DBError *error;
+    DBFile *newFile = [[DBFilesystem sharedFilesystem] createFile:filePath error:&error];
+    if (!newFile || error) {
+        if (completion) completion(NO, nil, error);
+        return;
     }
-    return _restClient;
+
+    NSData *fileData = [NSData dataWithContentsOfURL:url];
+    BOOL success = [newFile writeData:fileData error:&error];
+    if (!success && error) {
+        if (completion) completion(NO, nil, error);
+        return;
+    }
+
+    JEFRecording *recording = [JEFRecording recordingWithNewFile:newFile];
+    if (completion) completion(YES, recording, nil);
 }
 
 @end

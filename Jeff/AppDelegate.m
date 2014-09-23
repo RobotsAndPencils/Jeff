@@ -9,13 +9,14 @@
 #import "AppDelegate.h"
 
 #import <HockeySDK/HockeySDK.h>
-#import <DropboxOSX/DropboxOSX.h>
+#import <Dropbox/Dropbox.h>
 
 #import "JEFPopoverRecordingsViewController.h"
 #import "INPopoverController.h"
 #import "JEFPopoverContentViewController.h"
 #import "JEFUploaderProtocol.h"
 
+NSString *const JEFOpenPopoverNotification = @"JEFOpenPopoverNotification";
 NSString *const JEFClosePopoverNotification = @"JEFClosePopoverNotification";
 NSString *const JEFSetStatusViewNotRecordingNotification = @"JEFSetStatusViewNotRecordingNotification";
 NSString *const JEFSetStatusViewRecordingNotification = @"JEFSetStatusViewRecordingNotification";
@@ -79,9 +80,8 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
 - (void)setupDropbox {
     NSString *appKey = @"***REMOVED***";
     NSString *appSecret = @"***REMOVED***";
-    NSString *root = kDBRootAppFolder;
-    DBSession *session = [[DBSession alloc] initWithAppKey:appKey appSecret:appSecret root:root];
-    [DBSession setSharedSession:session];
+    DBAccountManager *accountManager = [[DBAccountManager alloc] initWithAppKey:appKey secret:appSecret];
+    [DBAccountManager setSharedManager:accountManager];
 
     NSAppleEventManager *eventManager = [NSAppleEventManager sharedAppleEventManager];
     [eventManager setEventHandler:self andSelector:@selector(getUrl:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
