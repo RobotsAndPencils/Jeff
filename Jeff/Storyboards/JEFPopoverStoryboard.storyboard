@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6246" systemVersion="14A361c" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="czx-q9-v5M">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14A379a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="czx-q9-v5M">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6246"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
     </dependencies>
     <scenes>
         <!--Popover Content View Controller-->
@@ -82,7 +82,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="325" height="50"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="6zT-HO-9zX">
-                                                                            <rect key="frame" x="12" y="26" width="253" height="17"/>
+                                                                            <rect key="frame" x="12" y="26" width="224" height="17"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="17" id="6vM-vd-muc"/>
                                                                             </constraints>
@@ -96,7 +96,7 @@
                                                                             </connections>
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Jha-Mq-bwa">
-                                                                            <rect key="frame" x="12" y="6" width="253" height="17"/>
+                                                                            <rect key="frame" x="12" y="6" width="224" height="17"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="17" id="IbE-A4-0BH"/>
                                                                             </constraints>
@@ -116,7 +116,7 @@
                                                                                 <constraint firstAttribute="width" constant="21" id="gRx-yu-lml"/>
                                                                                 <constraint firstAttribute="height" constant="21" id="kVq-We-wRl"/>
                                                                             </constraints>
-                                                                            <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="ShareButton" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="sCm-Ag-FFJ">
+                                                                            <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="NSShareTemplate" imagePosition="only" alignment="center" state="on" transparent="YES" imageScaling="proportionallyDown" inset="2" id="sCm-Ag-FFJ">
                                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                 <font key="font" metaFont="cellTitle"/>
                                                                             </buttonCell>
@@ -130,7 +130,7 @@
                                                                                 <constraint firstAttribute="width" constant="21" id="DlX-IF-4l0"/>
                                                                                 <constraint firstAttribute="height" constant="21" id="eqF-AJ-gJp"/>
                                                                             </constraints>
-                                                                            <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="CopyLinkButton" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="RPg-Ws-8oc">
+                                                                            <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="CopyLinkButton" imagePosition="only" alignment="center" state="on" transparent="YES" imageScaling="proportionallyDown" inset="2" id="RPg-Ws-8oc">
                                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                 <font key="font" metaFont="cellTitle"/>
                                                                             </buttonCell>
@@ -138,8 +138,24 @@
                                                                                 <action selector="copyLinkToPasteboard:" target="gTI-EO-G1X" id="SYQ-E5-f1s"/>
                                                                             </connections>
                                                                         </button>
+                                                                        <button alphaValue="0.70000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="WI4-qh-hia" userLabel="Delete Button">
+                                                                            <rect key="frame" x="236" y="15" width="21" height="21"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="21" id="KAv-Gq-IkV"/>
+                                                                                <constraint firstAttribute="height" constant="21" id="jik-SF-2wv"/>
+                                                                            </constraints>
+                                                                            <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="NSTrashEmpty" imagePosition="only" alignment="center" state="on" transparent="YES" imageScaling="proportionallyDown" inset="2" id="CnR-5o-oUN">
+                                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                <font key="font" metaFont="cellTitle"/>
+                                                                            </buttonCell>
+                                                                            <connections>
+                                                                                <action selector="deleteRecording:" target="gTI-EO-G1X" id="qh2-BK-UBS"/>
+                                                                            </connections>
+                                                                        </button>
                                                                     </subviews>
                                                                     <constraints>
+                                                                        <constraint firstItem="Os0-PP-n7L" firstAttribute="leading" secondItem="WI4-qh-hia" secondAttribute="trailing" constant="8" id="0LR-dA-PyH"/>
+                                                                        <constraint firstItem="WI4-qh-hia" firstAttribute="leading" secondItem="6zT-HO-9zX" secondAttribute="trailing" constant="2" id="3KL-Ed-OF9"/>
                                                                         <constraint firstItem="6zT-HO-9zX" firstAttribute="top" secondItem="O9S-Hz-IkY" secondAttribute="top" constant="7" id="5wf-CO-krI"/>
                                                                         <constraint firstAttribute="trailing" secondItem="uBE-ho-exA" secondAttribute="trailing" constant="10" id="KPi-Pa-7qb"/>
                                                                         <constraint firstAttribute="centerY" secondItem="uBE-ho-exA" secondAttribute="centerY" id="Rmk-Hk-fEZ"/>
@@ -147,8 +163,8 @@
                                                                         <constraint firstAttribute="height" constant="50" id="e6f-zX-tku"/>
                                                                         <constraint firstItem="Os0-PP-n7L" firstAttribute="centerY" secondItem="uBE-ho-exA" secondAttribute="centerY" id="kdA-8C-717"/>
                                                                         <constraint firstItem="Jha-Mq-bwa" firstAttribute="leading" secondItem="6zT-HO-9zX" secondAttribute="leading" id="kvT-bT-CuP"/>
-                                                                        <constraint firstItem="Os0-PP-n7L" firstAttribute="leading" secondItem="6zT-HO-9zX" secondAttribute="trailing" constant="2" id="l9f-PV-1LH"/>
                                                                         <constraint firstItem="uBE-ho-exA" firstAttribute="leading" secondItem="Os0-PP-n7L" secondAttribute="trailing" constant="8" id="sXO-W2-Y5l"/>
+                                                                        <constraint firstItem="WI4-qh-hia" firstAttribute="centerY" secondItem="uBE-ho-exA" secondAttribute="centerY" id="vry-bn-1qC"/>
                                                                         <constraint firstItem="Jha-Mq-bwa" firstAttribute="trailing" secondItem="6zT-HO-9zX" secondAttribute="trailing" id="w7f-W4-TKv"/>
                                                                         <constraint firstItem="6zT-HO-9zX" firstAttribute="leading" secondItem="O9S-Hz-IkY" secondAttribute="leading" constant="14" id="xgD-jz-4BG"/>
                                                                     </constraints>
@@ -195,7 +211,6 @@
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
-                                                <binding destination="jGV-2I-igK" name="content" keyPath="arrangedObjects" id="cw1-su-NgB"/>
                                                 <outlet property="dataSource" destination="gTI-EO-G1X" id="D6L-1S-kao"/>
                                                 <outlet property="delegate" destination="gTI-EO-G1X" id="Lmw-Xs-vkH"/>
                                             </connections>
@@ -324,8 +339,9 @@
         <image name="500x500" width="500" height="500"/>
         <image name="CopyLinkButton" width="20" height="20"/>
         <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="NSShareTemplate" width="11" height="16"/>
+        <image name="NSTrashEmpty" width="32" height="32"/>
         <image name="PopoverButtonSeperator" width="1" height="48"/>
         <image name="RecordingsHeaderMask" width="325" height="62"/>
-        <image name="ShareButton" width="20" height="20"/>
     </resources>
 </document>
