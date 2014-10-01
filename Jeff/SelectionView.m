@@ -77,6 +77,8 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 @interface SelectionView ()
 
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
+@property (nonatomic, strong) CALayer *handlesLayer;
+@property (nonatomic, strong) CAShapeLayer *overlayLayer;
 @property (nonatomic, assign) NSPoint mouseDownPoint;
 @property (nonatomic, assign) NSRect selectionRect;
 @property (nonatomic, assign) BOOL hasMadeInitialSelection;
@@ -130,6 +132,14 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         _infoContainer = [[NSVisualEffectView alloc] initWithFrame:infoFrame];
         _infoContainer.appearance = [NSAppearance appearanceNamed:NSAppearanceNameVibrantDark];
         [_infoContainer addSubview:infoTextField];
+
+        self.overlayLayer = [CAShapeLayer layer];
+        self.overlayLayer.fillColor = [NSColor colorWithCalibratedWhite:0.5 alpha:0.5].CGColor;
+        CGMutablePathRef overlayPath = CGPathCreateMutable();
+        CGPathAddRect(overlayPath, NULL, self.frame);
+        CGPathAddRect(overlayPath, NULL, self.selectionRect);
+        self.overlayLayer.path = overlayPath;
+        [self.layer addSublayer:self.overlayLayer];
         
         infoTextField.frame = _infoContainer.bounds;
         [self addSubview:_infoContainer];
@@ -145,45 +155,6 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)theEvent {
     return YES;
-}
-
-- (void)drawRect:(NSRect)dirtyRect {
-    [[NSColor colorWithCalibratedWhite:0.5 alpha:0.5] setFill];
-
-    NSBezierPath *path = [NSBezierPath bezierPathWithRect:self.selectionRect];
-    [path appendBezierPath:[NSBezierPath bezierPathWithRect:self.frame]];
-    path.windingRule = NSEvenOddWindingRule;
-    [path fill];
-
-    // Draw the "marching ants" CAShapeLayer
-    [super drawRect:dirtyRect];
-
-    if (!self.hasConfirmedSelection) {
-        [self drawHandles];
-    }
-}
-
-- (void)drawHandles {
-    for (NSInteger handleIndex = JEFHandleIndexBottomLeft; handleIndex < JEFHandleIndexCount; handleIndex++) {
-        [self drawHandleAtIndex:(enum JEFHandleIndex)handleIndex];
-    }
-}
-
-- (void)drawHandleAtIndex:(enum JEFHandleIndex)handleIndex {
-    NSRect handleRect = [self rectForHandleAtIndex:handleIndex];
-    NSBezierPath *handlePath = [NSBezierPath bezierPathWithOvalInRect:handleRect];
-    [handlePath setLineWidth:3.0];
-
-    NSShadow *shadow = [[NSShadow alloc] init];
-    [shadow setShadowColor:[NSColor blackColor]];
-    [shadow setShadowBlurRadius:2.0f];
-    [shadow setShadowOffset:NSMakeSize(0.f, -1.f)];
-    [shadow set];
-
-    [[NSColor darkGrayColor] set];
-    [handlePath fill];
-    [[NSColor whiteColor] set];
-    [handlePath stroke];
 }
 
 - (void)confirmRect {
@@ -223,6 +194,19 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         self.shapeLayer.fillColor = [[NSColor clearColor] CGColor];
         self.shapeLayer.lineDashPattern = @[ @3, @3 ];
         [self.layer addSublayer:self.shapeLayer];
+
+        self.handlesLayer = [CALayer layer];
+        for (NSUInteger handleIndex = 0; handleIndex < 8; handleIndex += 1) {
+            CAShapeLayer *handleLayer = [CAShapeLayer layer];
+            handleLayer.lineWidth = 3.0;
+            handleLayer.fillColor = [[NSColor darkGrayColor] colorWithAlphaComponent:0.75].CGColor;
+            handleLayer.strokeColor = [NSColor whiteColor].CGColor;
+            handleLayer.shadowColor = [NSColor blackColor].CGColor;
+            handleLayer.shadowRadius = 2.0f;
+            handleLayer.shadowOffset = NSMakeSize(0, -1);
+            [self.handlesLayer addSublayer:handleLayer];
+        }
+        [self.layer addSublayer:self.handlesLayer];
 
         CABasicAnimation *dashAnimation;
         dashAnimation = [CABasicAnimation animationWithKeyPath:@"lineDashPhase"];
@@ -266,6 +250,9 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 
     [self updateConfirmRectButtonFrame];
     [self updateMarchingAntsPath];
+    [self updateHandlePaths];
+    [self updateOverlayPath];
+
     [self setNeedsDisplayInRect:[self bounds]];
 }
 
@@ -335,6 +322,26 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     CGPathAddRect(path, NULL, self.selectionRect);
     self.shapeLayer.path = path;
     CGPathRelease(path);
+}
+
+- (void)updateHandlePaths {
+    NSUInteger handleIndex = 0;
+    for (CAShapeLayer *handleLayer in self.handlesLayer.sublayers) {
+        NSRect handleRect = [self rectForHandleAtIndex:handleIndex];
+        CGPathRef handlePath = CGPathCreateWithEllipseInRect(handleRect, NULL);
+        handleLayer.path = handlePath;
+        handleLayer.shadowPath = handlePath;
+        handleIndex += 1;
+    }
+}
+
+- (void)updateOverlayPath {
+    CGMutablePathRef overlayPath = CGPathCreateMutable();
+    CGPathAddRect(overlayPath, NULL, CGRectMake(CGRectGetMinX(self.frame), CGRectGetMaxY(self.selectionRect), CGRectGetWidth(self.frame), CGRectGetMaxY(self.frame) - CGRectGetMaxY(self.selectionRect)));
+    CGPathAddRect(overlayPath, NULL, CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.selectionRect), CGRectGetMinX(self.frame) + CGRectGetMinX(self.selectionRect), CGRectGetHeight(self.selectionRect)));
+    CGPathAddRect(overlayPath, NULL, CGRectMake(CGRectGetMaxX(self.selectionRect), CGRectGetMinY(self.selectionRect), CGRectGetWidth(self.frame) - CGRectGetMaxX(self.selectionRect), CGRectGetHeight(self.selectionRect)));
+    CGPathAddRect(overlayPath, NULL, CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame), CGRectGetWidth(self.frame), CGRectGetMinY(self.frame) + CGRectGetMinY(self.selectionRect)));
+    self.overlayLayer.path = overlayPath;
 }
 
 - (void)offsetSelectionRectLocationByX:(CGFloat)x y:(CGFloat)y {
