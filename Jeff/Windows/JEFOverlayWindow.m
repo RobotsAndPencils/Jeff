@@ -36,6 +36,7 @@
     drawMouseBoxView.delegate = self;
     [self setContentView:drawMouseBoxView];
     [self makeKeyAndOrderFront:self];
+    self.ignoresMouseEvents = NO;
     
     return self;
 }
