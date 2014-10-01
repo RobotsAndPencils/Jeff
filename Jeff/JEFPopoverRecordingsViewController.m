@@ -92,8 +92,6 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
         [[NSNotificationCenter defaultCenter] addObserverForName:JEFStopRecordingNotification object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification *note) {
             [weakSelf stopRecording:nil];
         }];
-        
-        [self addObserver:self forKeyPath:@"recentRecordings" options:NSKeyValueObservingOptionInitial context:&PopoverContentViewControllerContext];
     });
 }
 
@@ -282,8 +280,10 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
         [[NSFileManager defaultManager] removeItemAtPath:[gifURL path] error:nil];
 
         recording.posterFrameImage = posterFrameImage;
+
+        [self.recentRecordingsArrayController addObject:recording];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[self mutableArrayValueForKey:@"recentRecordings"] addObject:recording];
+            [self.tableView insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:0] withAnimation:NSTableViewAnimationSlideLeft];
         });
 
         __weak __typeof(self) weakSelf = self;
@@ -337,6 +337,22 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     }];
 }
 
+- (IBAction)deleteRecording:(id)sender {
+    NSButton *button = (NSButton *)sender;
+    JEFRecording *recording = [(NSTableCellView *)[[button superview] superview] objectValue];
+
+    DBError *error;
+    BOOL success = [[DBFilesystem sharedFilesystem] deletePath:recording.path error:&error];
+    if (!success) {
+        NSLog(@"Error deleting recording: %@", error);
+        return;
+    }
+
+    NSIndexSet *recordingIndex = [NSIndexSet indexSetWithIndex:[self.recentRecordingsArrayController.arrangedObjects indexOfObject:recording]];
+    [self.tableView removeRowsAtIndexes:recordingIndex withAnimation:NSTableViewAnimationSlideLeft];
+    [self.recentRecordingsArrayController removeObject:recording];
+}
+
 #pragma mark - NSTableViewDelegate
 
 - (void)didDoubleClickRow:(NSTableView *)sender {
@@ -361,6 +377,14 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     [view setup];
 
     return view;
+}
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
+    return [self.recentRecordingsArrayController.arrangedObjects count];
+}
+
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+    return [self.recentRecordingsArrayController.arrangedObjects objectAtIndex:row];
 }
 
 #pragma mark - NSTableView Drag and Drop
@@ -411,17 +435,6 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
         }
     }
     return recordings;
-}
-
-#pragma mark - Recent Clips KVO
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"recentRecordings"]) {
-        __weak __typeof(self) weakSelf = self;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf.tableView reloadData];
-        });
-    }
 }
 
 #pragma mark - Private
