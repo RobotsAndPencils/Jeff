@@ -135,11 +135,8 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 
         self.overlayLayer = [CAShapeLayer layer];
         self.overlayLayer.fillColor = [NSColor colorWithCalibratedWhite:0.5 alpha:0.5].CGColor;
-        CGMutablePathRef overlayPath = CGPathCreateMutable();
-        CGPathAddRect(overlayPath, NULL, self.frame);
-        CGPathAddRect(overlayPath, NULL, self.selectionRect);
-        self.overlayLayer.path = overlayPath;
         [self.layer addSublayer:self.overlayLayer];
+        [self updateOverlayPath];
         
         infoTextField.frame = _infoContainer.bounds;
         [self addSubview:_infoContainer];
