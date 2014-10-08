@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "SelectionView.h"
+#import "JEFSelectionView.h"
 
 extern NSString *const JEFOpenPopoverNotification;
 extern NSString *const JEFClosePopoverNotification;
