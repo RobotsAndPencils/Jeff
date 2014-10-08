@@ -43,7 +43,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="201" horizontalPageScroll="10" verticalLineScroll="201" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="Gf6-NN-Iq2">
-                                <rect key="frame" x="0.0" y="0.0" width="325" height="284"/>
+                                <rect key="frame" x="0.0" y="0.0" width="325" height="279"/>
                                 <clipView key="contentView" wantsLayer="YES" copiesOnScroll="NO" id="jh4-2L-pST">
                                     <rect key="frame" x="0.0" y="0.0" width="325" height="176"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -71,7 +71,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="324" height="200"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="249" verticalCompressionResistancePriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="cYF-kf-3pq" userLabel="Preview Image View" customClass="JEFScaleToFillImageView">
+                                                                <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="249" verticalCompressionResistancePriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="cYF-kf-3pq" userLabel="Preview Image View" customClass="JEFScaleToFillImageView">
                                                                     <rect key="frame" x="0.0" y="0.0" width="324" height="200"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="500x500" id="46O-t5-ZYI"/>
                                                                 </imageView>
@@ -201,7 +201,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <visualEffectView appearanceType="vibrantLight" blendingMode="withinWindow" material="titlebar" state="followsWindowActiveState" maskImage="RecordingsHeaderMask" translatesAutoresizingMaskIntoConstraints="NO" id="M8f-DG-79k" userLabel="Header Container View">
+                            <visualEffectView wantsLayer="YES" appearanceType="vibrantLight" blendingMode="withinWindow" material="titlebar" state="followsWindowActiveState" maskImage="RecordingsHeaderMask" translatesAutoresizingMaskIntoConstraints="NO" id="M8f-DG-79k" userLabel="Header Container View">
                                 <rect key="frame" x="0.0" y="234" width="325" height="62"/>
                                 <subviews>
                                     <button wantsLayer="YES" verticalHuggingPriority="750" alphaValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="fat-ca-lbR" userLabel="Quit Button">
@@ -214,11 +214,11 @@
                                             <action selector="quit:" target="gTI-EO-G1X" id="Zdh-1H-viX"/>
                                         </connections>
                                     </button>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="peH-Y4-Nbb" userLabel="Left Button Separator">
+                                    <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="peH-Y4-Nbb" userLabel="Left Button Separator">
                                         <rect key="frame" x="46" y="0.0" width="1" height="48"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="PopoverButtonSeperator" id="zpa-xC-0ir"/>
                                     </imageView>
-                                    <button focusRingType="none" horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QCX-5M-k3c" userLabel="Record Button">
+                                    <button wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QCX-5M-k3c" userLabel="Record Button">
                                         <rect key="frame" x="38" y="0.0" width="249" height="50"/>
                                         <buttonCell key="cell" type="bevel" title="Record" bezelStyle="rounded" alignment="center" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="fLU-Pl-ibK">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -228,7 +228,7 @@
                                             <action selector="recordSelection:" target="gTI-EO-G1X" id="H5o-6W-A5l"/>
                                         </connections>
                                     </button>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hNM-Ou-Xat" userLabel="Right Button Separator">
+                                    <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hNM-Ou-Xat" userLabel="Right Button Separator">
                                         <rect key="frame" x="278" y="0.0" width="1" height="48"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="PopoverButtonSeperator" id="5V3-4l-vht"/>
                                     </imageView>
@@ -266,7 +266,7 @@
                             <constraint firstAttribute="bottom" secondItem="Gf6-NN-Iq2" secondAttribute="bottom" id="0vR-JB-EWu"/>
                             <constraint firstItem="M8f-DG-79k" firstAttribute="leading" secondItem="GUC-2g-azr" secondAttribute="leading" id="Mjo-th-87n"/>
                             <constraint firstAttribute="trailing" secondItem="M8f-DG-79k" secondAttribute="trailing" id="SyU-gQ-1pj"/>
-                            <constraint firstItem="Gf6-NN-Iq2" firstAttribute="top" secondItem="GUC-2g-azr" secondAttribute="top" constant="12" id="dr4-wN-Fpw"/>
+                            <constraint firstItem="Gf6-NN-Iq2" firstAttribute="top" secondItem="GUC-2g-azr" secondAttribute="top" constant="17" id="dr4-wN-Fpw"/>
                             <constraint firstItem="Gf6-NN-Iq2" firstAttribute="leading" secondItem="GUC-2g-azr" secondAttribute="leading" id="td7-Fj-tve"/>
                             <constraint firstAttribute="trailing" secondItem="Gf6-NN-Iq2" secondAttribute="trailing" id="zIM-pC-Lio"/>
                         </constraints>
@@ -275,7 +275,6 @@
                         <outlet property="headerContainerView" destination="M8f-DG-79k" id="vq2-Vj-WjK"/>
                         <outlet property="recentRecordingsArrayController" destination="jGV-2I-igK" id="ZnS-LR-kjU"/>
                         <outlet property="recordSelectionButton" destination="QCX-5M-k3c" id="Qns-u0-6j8"/>
-                        <outlet property="scrollView" destination="Gf6-NN-Iq2" id="Vbf-8J-6cU"/>
                         <outlet property="tableView" destination="cdU-1N-Oto" id="o1P-zZ-iYI"/>
                         <outlet property="view" destination="GUC-2g-azr" id="h6x-76-yAr"/>
                     </connections>

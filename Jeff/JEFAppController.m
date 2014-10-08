@@ -1,58 +1,42 @@
 //
-//  AppDelegate.m
+//  JEFAppController.m
 //  Jeff
 //
-//  Created by Brandon on 2/21/2014.
+//  Created by Brandon Evans on 2014-10-08.
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-#import "AppDelegate.h"
-
-#import <HockeySDK/HockeySDK.h>
-#import <Dropbox/Dropbox.h>
-#import "Mixpanel.h"
-
-#import "JEFPopoverRecordingsViewController.h"
-#import "INPopoverController.h"
 #import "JEFPopoverContentViewController.h"
-#import "JEFUploaderProtocol.h"
+#import "INPopoverController.h"
+#import "JEFAppController.h"
 
 NSString *const JEFOpenPopoverNotification = @"JEFOpenPopoverNotification";
 NSString *const JEFClosePopoverNotification = @"JEFClosePopoverNotification";
 NSString *const JEFSetStatusViewNotRecordingNotification = @"JEFSetStatusViewNotRecordingNotification";
 NSString *const JEFSetStatusViewRecordingNotification = @"JEFSetStatusViewRecordingNotification";
 NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
-
 CGFloat const JEFPopoverVerticalOffset = -3.0;
 
-@interface AppDelegate () <BITHockeyManagerDelegate>
+@interface JEFAppController ()
 
 @property (strong, nonatomic) NSStatusItem *statusItem;
 @property (strong, nonatomic) INPopoverController *popover;
 @property (strong, nonatomic) id popoverTransiencyMonitor;
-
 @end
 
-@implementation AppDelegate
+@implementation JEFAppController
 
-#pragma mark - NSApplicationDelegate
-
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    [self setupDropbox];
+- (instancetype)init {
+    self = [super init];
+    if (!self) return nil;
 
     [self setupStatusItem];
     [self setupPopover];
-    [self registerDefaults];
-
-    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"7651f7d7bbfce57dca36b225029130f2"];
-    [[BITHockeyManager sharedHockeyManager] startManager];
-    [[BITHockeyManager sharedHockeyManager].crashManager setAutoSubmitCrashReport:YES];
-
-    NSString *mixpanelToken = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Mixpanel Token"];
-    [Mixpanel sharedInstanceWithToken:mixpanelToken];
-    [[Mixpanel sharedInstance] track:@"App Launch"];
 
     __weak typeof(self) weakSelf = self;
+    [[NSNotificationCenter defaultCenter] addObserverForName:JEFOpenPopoverNotification object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification *note) {
+        [weakSelf showPopover:weakSelf.statusItem.button];
+    }];
     [[NSNotificationCenter defaultCenter] addObserverForName:JEFClosePopoverNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         [weakSelf closePopover:nil];
     }];
@@ -62,34 +46,7 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
     [[NSNotificationCenter defaultCenter] addObserverForName:JEFSetStatusViewRecordingNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         [weakSelf setStatusItemActionRecord:YES];
     }];
-}
-
-- (void)applicationWillTerminate:(NSNotification *)aNotification {
-    [self closePopover:nil];
-}
-
-- (void)applicationWillResignActive:(NSNotification *)aNotification {
-    [self closePopover:nil];
-}
-
-- (void)applicationWillHide:(NSNotification *)aNotification {
-    [self closePopover:nil];
-}
-
-- (void)getUrl:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
-    [self showPopover:self.statusItem.button];
-}
-
-#pragma mark - Setup
-
-- (void)setupDropbox {
-    NSString *appKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Dropbox Key"];
-    NSString *appSecret = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Dropbox Secret"];
-    DBAccountManager *accountManager = [[DBAccountManager alloc] initWithAppKey:appKey secret:appSecret];
-    [DBAccountManager setSharedManager:accountManager];
-
-    NSAppleEventManager *eventManager = [NSAppleEventManager sharedAppleEventManager];
-    [eventManager setEventHandler:self andSelector:@selector(getUrl:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
+    return self;
 }
 
 - (void)setupStatusItem {
@@ -101,19 +58,11 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
 
 - (void)setupPopover {
     self.popover = [[INPopoverController alloc] init];
-    self.popover.closesWhenApplicationBecomesInactive = YES;
     JEFPopoverContentViewController *popoverController = [[NSStoryboard storyboardWithName:@"JEFPopoverStoryboard" bundle:nil] instantiateInitialController];
     self.popover.contentViewController = popoverController;
-    self.popover.animates = YES;
-    self.popover.animationType = INPopoverAnimationTypeFadeOut;
-    self.popover.color = [NSColor colorWithCalibratedWhite:0.9 alpha:1.0];
+    self.popover.animates = NO;
+    self.popover.closesWhenApplicationBecomesInactive = YES;
 }
-
-- (void)registerDefaults {
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"selectedUploader": @(JEFUploaderTypeDropbox) }];
-}
-
-#pragma mark - Toggle popover
 
 - (void)showPopover:(NSStatusBarButton *)sender {
     if (self.popover.popoverIsVisible) {
@@ -155,5 +104,4 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
         self.statusItem.button.action = @selector(stopRecording:);
     }
 }
-
 @end
