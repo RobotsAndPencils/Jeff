@@ -58,12 +58,10 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
 
 - (void)setupPopover {
     self.popover = [[INPopoverController alloc] init];
-    self.popover.closesWhenApplicationBecomesInactive = YES;
     JEFPopoverContentViewController *popoverController = [[NSStoryboard storyboardWithName:@"JEFPopoverStoryboard" bundle:nil] instantiateInitialController];
     self.popover.contentViewController = popoverController;
-    self.popover.animates = YES;
-    self.popover.animationType = INPopoverAnimationTypeFadeOut;
-    self.popover.color = [NSColor colorWithCalibratedWhite:0.9 alpha:1.0];
+    self.popover.animates = NO;
+    self.popover.closesWhenApplicationBecomesInactive = YES;
 }
 
 - (void)showPopover:(NSStatusBarButton *)sender {
