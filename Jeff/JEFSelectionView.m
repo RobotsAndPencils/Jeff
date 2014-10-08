@@ -119,6 +119,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 - (void)confirmRect {
     self.confirmRectButton.hidden = YES;
     [self.shapeLayer removeFromSuperlayer];
+    [self.handlesLayer removeFromSuperlayer];
 
     [self display];
 

@@ -10,8 +10,7 @@
 
 #import <Dropbox/Dropbox.h>
 
-#import "AppDelegate.h"
-
+#import "JEFAppController.h"
 
 @interface JEFPopoverUploaderSetupViewController ()
 

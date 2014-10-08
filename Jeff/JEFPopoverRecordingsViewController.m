@@ -11,15 +11,15 @@
 #import <MASShortcut/MASShortcut+UserDefaults.h>
 #import <Dropbox/Dropbox.h>
 
-#import "JEFUploaderPreferencesViewController.h"
 #import "JEFRecording.h"
-#import "AppDelegate.h"
+#import "JEFAppDelegate.h"
 #import "JEFDropboxUploader.h"
 #import "Converter.h"
 #import "JEFRecordingCellView.h"
 #import "JEFQuartzRecorder.h"
 #import "JEFSelectionOverlayWindow.h"
 #import "Constants.h"
+#import "JEFAppController.h"
 
 static void *PopoverContentViewControllerContext = &PopoverContentViewControllerContext;
 
@@ -81,7 +81,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     [self.tableView setIntercellSpacing:NSMakeSize(0, 0)];
     
     self.tableView.enclosingScrollView.automaticallyAdjustsContentInsets = NO;
-    self.tableView.enclosingScrollView.contentInsets = NSEdgeInsetsMake(CGRectGetHeight(self.headerContainerView.frame) - 12, 0, CGRectGetHeight(self.footerContainerView.frame), 0);
+    self.tableView.enclosingScrollView.contentInsets = NSEdgeInsetsMake(CGRectGetHeight(self.headerContainerView.frame) - 17, 0, CGRectGetHeight(self.footerContainerView.frame), 0);
 
     [self setStyleForButton:self.recordScreenButton];
     [self setStyleForButton:self.recordSelectionButton];
