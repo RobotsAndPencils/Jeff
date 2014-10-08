@@ -11,15 +11,15 @@
 #import <MASShortcut/MASShortcut+UserDefaults.h>
 #import <Dropbox/Dropbox.h>
 
-#import "JEFUploaderPreferencesViewController.h"
 #import "JEFRecording.h"
-#import "AppDelegate.h"
+#import "JEFAppDelegate.h"
 #import "JEFDropboxUploader.h"
 #import "Converter.h"
 #import "JEFRecordingCellView.h"
 #import "JEFQuartzRecorder.h"
 #import "JEFSelectionOverlayWindow.h"
 #import "Constants.h"
+#import "JEFAppController.h"
 
 static void *PopoverContentViewControllerContext = &PopoverContentViewControllerContext;
 
