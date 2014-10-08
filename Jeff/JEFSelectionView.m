@@ -1,51 +1,12 @@
-/*
-     File: DrawMouseBoxView.m
- Abstract: Dims the screen and allows user to select a rectangle with a cross-hairs cursor
-  Version: 2.0
- 
- Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
- Inc. ("Apple") in consideration of your agreement to the following
- terms, and your use, installation, modification or redistribution of
- this Apple software constitutes acceptance of these terms.  If you do
- not agree with these terms, please do not use, install, modify or
- redistribute this Apple software.
- 
- In consideration of your agreement to abide by the following terms, and
- subject to these terms, Apple grants you a personal, non-exclusive
- license, under Apple's copyrights in this original Apple software (the
- "Apple Software"), to use, reproduce, modify and redistribute the Apple
- Software, with or without modifications, in source and/or binary forms;
- provided that if you redistribute the Apple Software in its entirety and
- without modifications, you must retain this notice and the following
- text and disclaimers in all such redistributions of the Apple Software.
- Neither the name, trademarks, service marks or logos of Apple Inc. may
- be used to endorse or promote products derived from the Apple Software
- without specific prior written permission from Apple.  Except as
- expressly stated in this notice, no other rights or licenses, express or
- implied, are granted by Apple herein, including but not limited to any
- patent rights that may be infringed by your derivative works or by other
- works in which the Apple Software may be incorporated.
- 
- The Apple Software is provided by Apple on an "AS IS" basis.  APPLE
- MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION
- THE IMPLIED WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS
- FOR A PARTICULAR PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND
- OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS.
- 
- IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL
- OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION,
- MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED
- AND WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE),
- STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE
- POSSIBILITY OF SUCH DAMAGE.
- 
- Copyright (C) 2012 Apple Inc. All Rights Reserved.
- 
- */
+//
+//  JEFSelectionView.m
+//  Jeff
+//
+//  Created by Brandon Evans on 2014-05-28.
+//  Copyright (c) 2014 Brandon Evans. All rights reserved.
+//
 
-#import "SelectionView.h"
+#import "JEFSelectionView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "RSVerticallyCenteredTextFieldCell.h"
 #import <tgmath.h>
@@ -55,6 +16,8 @@ const CGFloat HandleSize = 5.0;
 const CGFloat JEFSelectionMinimumWidth = 50.0;
 const CGFloat JEFSelectionMinimumHeight = 50.0;
 const CGFloat JEFSelectionViewInfoMargin = 20.0;
+const CGFloat JEFSelectionConfirmButtonMargin = 20.0;
+const CGFloat JEFSelectionConfirmButtonMinimumHeightToDisplayOutside = 50.0;
 
 CGFloat constrain(CGFloat value, CGFloat min, CGFloat max) {
     return fmin(fmax(value, min), max);
@@ -73,14 +36,14 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     JEFHandleIndexCount
 };
 
-
-@interface SelectionView ()
+@interface JEFSelectionView ()
 
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
+@property (nonatomic, strong) CALayer *handlesLayer;
+@property (nonatomic, strong) CAShapeLayer *overlayLayer;
 @property (nonatomic, assign) NSPoint mouseDownPoint;
 @property (nonatomic, assign) NSRect selectionRect;
 @property (nonatomic, assign) BOOL hasMadeInitialSelection;
-@property (nonatomic, assign) BOOL hasConfirmedSelection;
 
 @property (nonatomic, assign) enum JEFHandleIndex clickedHandle;
 @property (nonatomic, assign) NSPoint anchor;
@@ -91,7 +54,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 @end
 
 
-@implementation SelectionView
+@implementation JEFSelectionView
 
 #pragma mark - NSView
 
@@ -101,17 +64,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         self.wantsLayer = YES;
 
         _hasMadeInitialSelection = NO;
-        _hasConfirmedSelection = NO;
 
-        _confirmRectButton = [[NSButton alloc] initWithFrame:CGRectMake(0, 0, 100, 24)];
-        _confirmRectButton.buttonType = NSMomentaryLightButton;
-        _confirmRectButton.bezelStyle = NSRecessedBezelStyle;
-        _confirmRectButton.title = @"Record";
-        _confirmRectButton.alphaValue = 0.0;
-        [_confirmRectButton setTarget:self];
-        [_confirmRectButton setAction:@selector(confirmRect)];
-        [self addSubview:self.confirmRectButton];
-        
         NSTextField *infoTextField = [[NSTextField alloc] initWithFrame:CGRectZero];
         infoTextField.cell = [[RSVerticallyCenteredTextFieldCell alloc] init];
         infoTextField.font = [NSFont systemFontOfSize:18.0];
@@ -130,7 +83,22 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         _infoContainer = [[NSVisualEffectView alloc] initWithFrame:infoFrame];
         _infoContainer.appearance = [NSAppearance appearanceNamed:NSAppearanceNameVibrantDark];
         [_infoContainer addSubview:infoTextField];
-        
+
+        _overlayLayer = [CAShapeLayer layer];
+        _overlayLayer.fillColor = [NSColor colorWithCalibratedWhite:0.5 alpha:0.5].CGColor;
+        [self.layer addSublayer:_overlayLayer];
+        [self updateOverlayPath];
+
+        _confirmRectButton = [[NSButton alloc] initWithFrame:CGRectMake(0, 0, 100, 24)];
+        _confirmRectButton.wantsLayer = YES;
+        _confirmRectButton.buttonType = NSMomentaryLightButton;
+        _confirmRectButton.bezelStyle = NSRecessedBezelStyle;
+        _confirmRectButton.title = @"Record";
+        _confirmRectButton.alphaValue = 0.0;
+        [_confirmRectButton setTarget:self];
+        [_confirmRectButton setAction:@selector(confirmRect)];
+        [_overlayLayer addSublayer:_confirmRectButton.layer];
+
         infoTextField.frame = _infoContainer.bounds;
         [self addSubview:_infoContainer];
 
@@ -147,47 +115,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     return YES;
 }
 
-- (void)drawRect:(NSRect)dirtyRect {
-    [[NSColor colorWithCalibratedWhite:0.5 alpha:0.5] setFill];
-
-    NSBezierPath *path = [NSBezierPath bezierPathWithRect:self.selectionRect];
-    [path appendBezierPath:[NSBezierPath bezierPathWithRect:self.frame]];
-    path.windingRule = NSEvenOddWindingRule;
-    [path fill];
-
-    // Draw the "marching ants" CAShapeLayer
-    [super drawRect:dirtyRect];
-
-    if (!self.hasConfirmedSelection) {
-        [self drawHandles];
-    }
-}
-
-- (void)drawHandles {
-    for (NSInteger handleIndex = JEFHandleIndexBottomLeft; handleIndex < JEFHandleIndexCount; handleIndex++) {
-        [self drawHandleAtIndex:(enum JEFHandleIndex)handleIndex];
-    }
-}
-
-- (void)drawHandleAtIndex:(enum JEFHandleIndex)handleIndex {
-    NSRect handleRect = [self rectForHandleAtIndex:handleIndex];
-    NSBezierPath *handlePath = [NSBezierPath bezierPathWithOvalInRect:handleRect];
-    [handlePath setLineWidth:3.0];
-
-    NSShadow *shadow = [[NSShadow alloc] init];
-    [shadow setShadowColor:[NSColor blackColor]];
-    [shadow setShadowBlurRadius:2.0f];
-    [shadow setShadowOffset:NSMakeSize(0.f, -1.f)];
-    [shadow set];
-
-    [[NSColor darkGrayColor] set];
-    [handlePath fill];
-    [[NSColor whiteColor] set];
-    [handlePath stroke];
-}
-
 - (void)confirmRect {
-    self.hasConfirmedSelection = YES;
     self.confirmRectButton.hidden = YES;
     [self.shapeLayer removeFromSuperlayer];
 
@@ -223,6 +151,19 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         self.shapeLayer.fillColor = [[NSColor clearColor] CGColor];
         self.shapeLayer.lineDashPattern = @[ @3, @3 ];
         [self.layer addSublayer:self.shapeLayer];
+
+        self.handlesLayer = [CALayer layer];
+        for (NSUInteger handleIndex = 0; handleIndex < 8; handleIndex += 1) {
+            CAShapeLayer *handleLayer = [CAShapeLayer layer];
+            handleLayer.lineWidth = 3.0;
+            handleLayer.fillColor = [[NSColor darkGrayColor] colorWithAlphaComponent:0.75].CGColor;
+            handleLayer.strokeColor = [NSColor whiteColor].CGColor;
+            handleLayer.shadowColor = [NSColor blackColor].CGColor;
+            handleLayer.shadowRadius = 2.0f;
+            handleLayer.shadowOffset = NSMakeSize(0, -1);
+            [self.handlesLayer addSublayer:handleLayer];
+        }
+        [self.layer addSublayer:self.handlesLayer];
 
         CABasicAnimation *dashAnimation;
         dashAnimation = [CABasicAnimation animationWithKeyPath:@"lineDashPhase"];
@@ -266,6 +207,9 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 
     [self updateConfirmRectButtonFrame];
     [self updateMarchingAntsPath];
+    [self updateHandlePaths];
+    [self updateOverlayPath];
+
     [self setNeedsDisplayInRect:[self bounds]];
 }
 
@@ -302,16 +246,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         // We don't need to call hideInstructions here for that reason
         [[NSNotificationCenter defaultCenter] postNotificationName:@"JEFRecordingSelectionMadeNotification" object:self];
 
-        self.confirmRectButton.frame = ({
-            CGRect centeredRect = CGRectZero;
-            centeredRect.size = self.confirmRectButton.frame.size;
-            CGPoint origin = CGPointZero;
-            origin.x = CGRectGetMinX(self.selectionRect) + CGRectGetWidth(self.selectionRect) / 2 - CGRectGetWidth(centeredRect) / 2;
-            origin.y = CGRectGetMinY(self.selectionRect) + CGRectGetHeight(self.selectionRect) / 2 - CGRectGetHeight(centeredRect) / 2;
-            centeredRect.origin = origin;
-            centeredRect;
-        });
-
+        [self updateConfirmRectButtonFrame];
         [self showRecordButton];
     }
 }
@@ -319,15 +254,28 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 #pragma mark - Private
 
 - (void)updateConfirmRectButtonFrame {
-    self.confirmRectButton.frame = ({
-        CGRect centeredRect = CGRectZero;
-        centeredRect.size = self.confirmRectButton.frame.size;
-        CGPoint origin = CGPointZero;
-        origin.x = CGRectGetMinX(self.selectionRect) + CGRectGetWidth(self.selectionRect) / 2 - CGRectGetWidth(centeredRect) / 2;
-        origin.y = CGRectGetMinY(self.selectionRect) + CGRectGetHeight(self.selectionRect) / 2 - CGRectGetHeight(centeredRect) / 2;
-        centeredRect.origin = origin;
-        centeredRect;
-    });
+    CGRect newButtonRect = CGRectZero;
+    newButtonRect.size = self.confirmRectButton.frame.size;
+    CGPoint origin = CGPointZero;
+    // The button should always be centered horizontally
+    origin.x = CGRectGetMinX(self.selectionRect) + CGRectGetWidth(self.selectionRect) / 2 - CGRectGetWidth(newButtonRect) / 2;
+
+    // Position the button in this preferred order:
+    // Outside the bottom edge of the selection
+    if (CGRectGetMinY(self.selectionRect) > JEFSelectionConfirmButtonMinimumHeightToDisplayOutside) {
+        origin.y = CGRectGetMinY(self.selectionRect)  - CGRectGetHeight(newButtonRect) - JEFSelectionConfirmButtonMargin;
+    }
+    // Outside the top edge
+    else if (CGRectGetHeight(self.bounds) - CGRectGetMaxY(self.selectionRect) > JEFSelectionConfirmButtonMinimumHeightToDisplayOutside) {
+        origin.y = CGRectGetMaxY(self.selectionRect) + JEFSelectionConfirmButtonMargin;
+    }
+    // Inside the bottom edge
+    else {
+        origin.y = CGRectGetMinY(self.selectionRect) + JEFSelectionConfirmButtonMargin;
+    }
+    newButtonRect.origin = origin;
+
+    self.confirmRectButton.frame = newButtonRect;
 }
 
 - (void)updateMarchingAntsPath {
@@ -335,6 +283,26 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     CGPathAddRect(path, NULL, self.selectionRect);
     self.shapeLayer.path = path;
     CGPathRelease(path);
+}
+
+- (void)updateHandlePaths {
+    NSUInteger handleIndex = 0;
+    for (CAShapeLayer *handleLayer in self.handlesLayer.sublayers) {
+        NSRect handleRect = [self rectForHandleAtIndex:handleIndex];
+        CGPathRef handlePath = CGPathCreateWithEllipseInRect(handleRect, NULL);
+        handleLayer.path = handlePath;
+        handleLayer.shadowPath = handlePath;
+        handleIndex += 1;
+    }
+}
+
+- (void)updateOverlayPath {
+    CGMutablePathRef overlayPath = CGPathCreateMutable();
+    CGPathAddRect(overlayPath, NULL, CGRectMake(CGRectGetMinX(self.frame), CGRectGetMaxY(self.selectionRect), CGRectGetWidth(self.frame), CGRectGetMaxY(self.frame) - CGRectGetMaxY(self.selectionRect)));
+    CGPathAddRect(overlayPath, NULL, CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.selectionRect), CGRectGetMinX(self.frame) + CGRectGetMinX(self.selectionRect), CGRectGetHeight(self.selectionRect)));
+    CGPathAddRect(overlayPath, NULL, CGRectMake(CGRectGetMaxX(self.selectionRect), CGRectGetMinY(self.selectionRect), CGRectGetWidth(self.frame) - CGRectGetMaxX(self.selectionRect), CGRectGetHeight(self.selectionRect)));
+    CGPathAddRect(overlayPath, NULL, CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame), CGRectGetWidth(self.frame), CGRectGetMinY(self.frame) + CGRectGetMinY(self.selectionRect)));
+    self.overlayLayer.path = overlayPath;
 }
 
 - (void)offsetSelectionRectLocationByX:(CGFloat)x y:(CGFloat)y {
