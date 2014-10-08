@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14A379a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="czx-q9-v5M">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14A386a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="czx-q9-v5M">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
     </dependencies>
@@ -229,19 +229,23 @@
                             <visualEffectView appearanceType="vibrantLight" blendingMode="withinWindow" material="titlebar" state="followsWindowActiveState" maskImage="RecordingsHeaderMask" translatesAutoresizingMaskIntoConstraints="NO" id="M8f-DG-79k" userLabel="Header Container View">
                                 <rect key="frame" x="0.0" y="234" width="325" height="62"/>
                                 <subviews>
-                                    <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ygm-Fv-aCf">
-                                        <rect key="frame" x="0.0" y="0.0" width="162" height="50"/>
-                                        <buttonCell key="cell" type="bevel" title="Record screen" bezelStyle="rounded" alignment="center" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="rZ9-AW-bFA">
+                                    <button wantsLayer="YES" verticalHuggingPriority="750" alphaValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="fat-ca-lbR" userLabel="Quit Button">
+                                        <rect key="frame" x="8" y="17" width="30" height="17"/>
+                                        <buttonCell key="cell" type="bevel" title="Quit" bezelStyle="regularSquare" image="NSActionTemplate" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="ofr-6m-ocm">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="recordScreen:" target="gTI-EO-G1X" id="Xrh-vI-926"/>
+                                            <action selector="quit:" target="gTI-EO-G1X" id="Zdh-1H-viX"/>
                                         </connections>
                                     </button>
-                                    <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QCX-5M-k3c">
-                                        <rect key="frame" x="162" y="0.0" width="163" height="50"/>
-                                        <buttonCell key="cell" type="bevel" title="Record selection" bezelStyle="rounded" alignment="center" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="fLU-Pl-ibK">
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="peH-Y4-Nbb" userLabel="Left Button Separator">
+                                        <rect key="frame" x="46" y="0.0" width="1" height="48"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="PopoverButtonSeperator" id="zpa-xC-0ir"/>
+                                    </imageView>
+                                    <button focusRingType="none" horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QCX-5M-k3c" userLabel="Record Button">
+                                        <rect key="frame" x="38" y="0.0" width="249" height="50"/>
+                                        <buttonCell key="cell" type="bevel" title="Record" bezelStyle="rounded" alignment="center" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="fLU-Pl-ibK">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -249,43 +253,15 @@
                                             <action selector="recordSelection:" target="gTI-EO-G1X" id="H5o-6W-A5l"/>
                                         </connections>
                                     </button>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="peH-Y4-Nbb">
-                                        <rect key="frame" x="162" y="-10" width="1" height="48"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="PopoverButtonSeperator" id="zpa-xC-0ir"/>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hNM-Ou-Xat" userLabel="Right Button Separator">
+                                        <rect key="frame" x="278" y="0.0" width="1" height="48"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="PopoverButtonSeperator" id="5V3-4l-vht"/>
                                     </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="QCX-5M-k3c" firstAttribute="leading" secondItem="Ygm-Fv-aCf" secondAttribute="trailing" id="5bv-Vc-4Bs"/>
-                                    <constraint firstItem="Ygm-Fv-aCf" firstAttribute="top" secondItem="M8f-DG-79k" secondAttribute="top" constant="12" id="C7c-yZ-ApJ"/>
-                                    <constraint firstAttribute="trailing" secondItem="QCX-5M-k3c" secondAttribute="trailing" id="Cv6-4L-rvX"/>
-                                    <constraint firstAttribute="height" constant="62" id="NBd-5m-yv9"/>
-                                    <constraint firstItem="Ygm-Fv-aCf" firstAttribute="leading" secondItem="M8f-DG-79k" secondAttribute="leading" id="ac2-BB-SyL"/>
-                                    <constraint firstAttribute="bottom" secondItem="QCX-5M-k3c" secondAttribute="bottom" id="ezG-51-RZi"/>
-                                    <constraint firstItem="QCX-5M-k3c" firstAttribute="top" secondItem="M8f-DG-79k" secondAttribute="top" constant="12" id="h49-jT-h2u"/>
-                                    <constraint firstAttribute="centerY" secondItem="peH-Y4-Nbb" secondAttribute="centerY" constant="-17" id="hHd-hZ-El5"/>
-                                    <constraint firstAttribute="centerX" secondItem="peH-Y4-Nbb" secondAttribute="centerX" id="hNE-0E-Eac"/>
-                                    <constraint firstItem="QCX-5M-k3c" firstAttribute="width" secondItem="Ygm-Fv-aCf" secondAttribute="width" constant="1" id="kuP-7e-8CN"/>
-                                    <constraint firstAttribute="bottom" secondItem="Ygm-Fv-aCf" secondAttribute="bottom" id="vJD-DU-lHH"/>
-                                </constraints>
-                            </visualEffectView>
-                            <visualEffectView appearanceType="vibrantLight" blendingMode="withinWindow" material="titlebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="Feo-3H-2wR" userLabel="Footer Container View">
-                                <rect key="frame" x="0.0" y="0.0" width="325" height="24"/>
-                                <subviews>
-                                    <button wantsLayer="YES" verticalHuggingPriority="750" alphaValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="fat-ca-lbR" userLabel="Quit Button">
-                                        <rect key="frame" x="254" y="2" width="63" height="19"/>
-                                        <buttonCell key="cell" type="roundRect" title="Quit Jeff" bezelStyle="roundedRect" image="NSActionTemplate" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ofr-6m-ocm">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="cellTitle"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="quit:" target="gTI-EO-G1X" id="Zdh-1H-viX"/>
-                                        </connections>
-                                    </button>
                                     <button wantsLayer="YES" verticalHuggingPriority="750" alphaValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="HFB-N6-MP2" userLabel="Preferences Button">
-                                        <rect key="frame" x="8" y="2" width="83" height="19"/>
-                                        <buttonCell key="cell" type="roundRect" title="Preferences" bezelStyle="roundedRect" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WlW-JJ-qrc">
+                                        <rect key="frame" x="287" y="18" width="30" height="15"/>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="NSActionTemplate" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="WlW-JJ-qrc">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="cellTitle"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="showPreferencesMenu:" target="gTI-EO-G1X" id="K6C-PI-2TT"/>
@@ -293,32 +269,36 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="fat-ca-lbR" secondAttribute="trailing" constant="8" id="L2v-8y-wcA"/>
-                                    <constraint firstItem="HFB-N6-MP2" firstAttribute="leading" secondItem="Feo-3H-2wR" secondAttribute="leading" constant="8" id="M9s-xn-Uz5"/>
-                                    <constraint firstAttribute="height" constant="24" id="QDM-Wv-2K6"/>
-                                    <constraint firstAttribute="centerY" secondItem="HFB-N6-MP2" secondAttribute="centerY" id="dSm-kw-slN"/>
-                                    <constraint firstAttribute="centerY" secondItem="fat-ca-lbR" secondAttribute="centerY" id="oxf-iO-PB5"/>
+                                    <constraint firstAttribute="centerY" secondItem="fat-ca-lbR" secondAttribute="centerY" constant="-6" id="BwS-yf-GM9"/>
+                                    <constraint firstItem="HFB-N6-MP2" firstAttribute="leading" secondItem="QCX-5M-k3c" secondAttribute="trailing" id="GZU-LN-7Pm"/>
+                                    <constraint firstAttribute="height" constant="62" id="NBd-5m-yv9"/>
+                                    <constraint firstItem="peH-Y4-Nbb" firstAttribute="leading" secondItem="fat-ca-lbR" secondAttribute="trailing" constant="8" id="Ph3-8H-DdH"/>
+                                    <constraint firstAttribute="bottom" secondItem="hNM-Ou-Xat" secondAttribute="bottom" id="Py5-G2-5Sp"/>
+                                    <constraint firstItem="QCX-5M-k3c" firstAttribute="leading" secondItem="fat-ca-lbR" secondAttribute="trailing" id="U8B-SU-FCO"/>
+                                    <constraint firstAttribute="centerY" secondItem="HFB-N6-MP2" secondAttribute="centerY" constant="-6" id="ZnW-8V-KJY"/>
+                                    <constraint firstItem="fat-ca-lbR" firstAttribute="leading" secondItem="M8f-DG-79k" secondAttribute="leading" constant="8" id="drF-JP-SMh"/>
+                                    <constraint firstAttribute="bottom" secondItem="QCX-5M-k3c" secondAttribute="bottom" id="ezG-51-RZi"/>
+                                    <constraint firstItem="QCX-5M-k3c" firstAttribute="top" secondItem="M8f-DG-79k" secondAttribute="top" constant="12" id="h49-jT-h2u"/>
+                                    <constraint firstAttribute="trailing" secondItem="HFB-N6-MP2" secondAttribute="trailing" constant="8" id="j7s-bQ-gCF"/>
+                                    <constraint firstAttribute="bottom" secondItem="peH-Y4-Nbb" secondAttribute="bottom" id="kRu-8i-aOd"/>
+                                    <constraint firstItem="HFB-N6-MP2" firstAttribute="width" secondItem="fat-ca-lbR" secondAttribute="width" id="mGN-wb-Bjc"/>
+                                    <constraint firstItem="HFB-N6-MP2" firstAttribute="leading" secondItem="hNM-Ou-Xat" secondAttribute="trailing" constant="8" id="sbj-YF-MVu"/>
                                 </constraints>
                             </visualEffectView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="M8f-DG-79k" firstAttribute="top" secondItem="GUC-2g-azr" secondAttribute="top" id="07T-ob-yR5"/>
                             <constraint firstAttribute="bottom" secondItem="Gf6-NN-Iq2" secondAttribute="bottom" id="0vR-JB-EWu"/>
-                            <constraint firstAttribute="bottom" secondItem="Feo-3H-2wR" secondAttribute="bottom" id="6AM-23-dKh"/>
                             <constraint firstItem="M8f-DG-79k" firstAttribute="leading" secondItem="GUC-2g-azr" secondAttribute="leading" id="Mjo-th-87n"/>
                             <constraint firstAttribute="trailing" secondItem="M8f-DG-79k" secondAttribute="trailing" id="SyU-gQ-1pj"/>
                             <constraint firstItem="Gf6-NN-Iq2" firstAttribute="top" secondItem="GUC-2g-azr" secondAttribute="top" constant="12" id="dr4-wN-Fpw"/>
                             <constraint firstItem="Gf6-NN-Iq2" firstAttribute="leading" secondItem="GUC-2g-azr" secondAttribute="leading" id="td7-Fj-tve"/>
-                            <constraint firstAttribute="trailing" secondItem="Feo-3H-2wR" secondAttribute="trailing" id="tgz-zB-2cz"/>
-                            <constraint firstItem="Feo-3H-2wR" firstAttribute="leading" secondItem="GUC-2g-azr" secondAttribute="leading" id="xEL-t3-kaO"/>
                             <constraint firstAttribute="trailing" secondItem="Gf6-NN-Iq2" secondAttribute="trailing" id="zIM-pC-Lio"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="footerContainerView" destination="Feo-3H-2wR" id="ahX-8n-lUD"/>
                         <outlet property="headerContainerView" destination="M8f-DG-79k" id="vq2-Vj-WjK"/>
                         <outlet property="recentRecordingsArrayController" destination="jGV-2I-igK" id="ZnS-LR-kjU"/>
-                        <outlet property="recordScreenButton" destination="Ygm-Fv-aCf" id="qSk-ZD-GpR"/>
                         <outlet property="recordSelectionButton" destination="QCX-5M-k3c" id="Qns-u0-6j8"/>
                         <outlet property="scrollView" destination="Gf6-NN-Iq2" id="Vbf-8J-6cU"/>
                         <outlet property="tableView" destination="cdU-1N-Oto" id="o1P-zZ-iYI"/>
