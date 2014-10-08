@@ -16,7 +16,7 @@
 		CA455B3618B83EB900F9A541 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CA455B3418B83EB900F9A541 /* InfoPlist.strings */; };
 		CA455B3818B83EB900F9A541 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B3718B83EB900F9A541 /* main.m */; };
 		CA455B3C18B83EB900F9A541 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CA455B3A18B83EB900F9A541 /* Credits.rtf */; };
-		CA455B3F18B83EB900F9A541 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B3E18B83EB900F9A541 /* AppDelegate.m */; };
+		CA455B3F18B83EB900F9A541 /* JEFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B3E18B83EB900F9A541 /* JEFAppDelegate.m */; };
 		CA455B4218B83EBA00F9A541 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA455B4018B83EBA00F9A541 /* MainMenu.xib */; };
 		CA455B4418B83EBA00F9A541 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA455B4318B83EBA00F9A541 /* Images.xcassets */; };
 		CA455B4B18B83EBA00F9A541 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA455B4A18B83EBA00F9A541 /* XCTest.framework */; };
@@ -38,6 +38,7 @@
 		CA875EFC18B9974C009FC997 /* JEFSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA875EFB18B9974C009FC997 /* JEFSelectionView.m */; };
 		CAA79EAC192A725800A4299F /* JEFQuartzRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA79EAB192A725800A4299F /* JEFQuartzRecorder.m */; };
 		CAB110D4192C6C61000A04C0 /* NSEvent+MouseClamped.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB110D3192C6C61000A04C0 /* NSEvent+MouseClamped.m */; };
+		CAB77D4D19E5E2CF0049B6D8 /* JEFAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB77D4C19E5E2CF0049B6D8 /* JEFAppController.m */; };
 		CAB84C74199470B200EA0414 /* RBLTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB84C73199470B200EA0414 /* RBLTableView.m */; };
 		CAC40812199C391900833FAB /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC40811199C391900833FAB /* Dropbox.framework */; };
 		CAC40813199C4CEA00833FAB /* Dropbox.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAC40811199C391900833FAB /* Dropbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -127,8 +128,8 @@
 		CA455B3718B83EB900F9A541 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CA455B3918B83EB900F9A541 /* Jeff-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Jeff-Prefix.pch"; sourceTree = "<group>"; };
 		CA455B3B18B83EB900F9A541 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		CA455B3D18B83EB900F9A541 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		CA455B3E18B83EB900F9A541 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CA455B3D18B83EB900F9A541 /* JEFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JEFAppDelegate.h; sourceTree = "<group>"; };
+		CA455B3E18B83EB900F9A541 /* JEFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JEFAppDelegate.m; sourceTree = "<group>"; };
 		CA455B4118B83EBA00F9A541 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		CA455B4318B83EBA00F9A541 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CA455B4918B83EBA00F9A541 /* JeffTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JeffTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +164,8 @@
 		CAA79EAB192A725800A4299F /* JEFQuartzRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFQuartzRecorder.m; path = Recorders/JEFQuartzRecorder.m; sourceTree = "<group>"; };
 		CAB110D2192C6C61000A04C0 /* NSEvent+MouseClamped.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSEvent+MouseClamped.h"; path = "Categories/NSEvent+MouseClamped.h"; sourceTree = "<group>"; };
 		CAB110D3192C6C61000A04C0 /* NSEvent+MouseClamped.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSEvent+MouseClamped.m"; path = "Categories/NSEvent+MouseClamped.m"; sourceTree = "<group>"; };
+		CAB77D4B19E5E2CF0049B6D8 /* JEFAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFAppController.h; sourceTree = "<group>"; };
+		CAB77D4C19E5E2CF0049B6D8 /* JEFAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFAppController.m; sourceTree = "<group>"; };
 		CAB84C72199470B200EA0414 /* RBLTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBLTableView.h; sourceTree = "<group>"; };
 		CAB84C73199470B200EA0414 /* RBLTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBLTableView.m; sourceTree = "<group>"; };
 		CAC40811199C391900833FAB /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = Jeff/Frameworks/Dropbox.framework; sourceTree = "<group>"; };
@@ -314,8 +317,10 @@
 				CAF30B4F18D3E31D00D7BC9D /* Views */,
 				CAA79EAD192A725D00A4299F /* Recorders */,
 				83593406A410EF88B08D5442 /* Uploaders */,
-				CA455B3D18B83EB900F9A541 /* AppDelegate.h */,
-				CA455B3E18B83EB900F9A541 /* AppDelegate.m */,
+				CA455B3D18B83EB900F9A541 /* JEFAppDelegate.h */,
+				CA455B3E18B83EB900F9A541 /* JEFAppDelegate.m */,
+				CAB77D4B19E5E2CF0049B6D8 /* JEFAppController.h */,
+				CAB77D4C19E5E2CF0049B6D8 /* JEFAppController.m */,
 				CA455B7518B84ED200F9A541 /* Converter.h */,
 				CA455B7618B84ED200F9A541 /* Converter.m */,
 				CA455B4018B83EBA00F9A541 /* MainMenu.xib */,
@@ -730,7 +735,7 @@
 				CA7A1D991991E9FF008DA733 /* JEFCreditsTextView.m in Sources */,
 				CA455B7B18B882DB00F9A541 /* NSFileManager+Temporary.m in Sources */,
 				CA6E31B019E4D45E00C4B906 /* Mixpanel.m in Sources */,
-				CA455B3F18B83EB900F9A541 /* AppDelegate.m in Sources */,
+				CA455B3F18B83EB900F9A541 /* JEFAppDelegate.m in Sources */,
 				CAF30B6218D5281100D7BC9D /* INPopoverParentWindow.m in Sources */,
 				CAF30B6318D5281100D7BC9D /* INPopoverWindow.m in Sources */,
 				CAF30B4518D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.m in Sources */,
@@ -745,6 +750,7 @@
 				CAE8F9C71991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m in Sources */,
 				CA4D988418D6D2A900EFE4FD /* JEFRecordingCellView.m in Sources */,
 				CAF30B6418D5281100D7BC9D /* INPopoverWindowFrame.m in Sources */,
+				CAB77D4D19E5E2CF0049B6D8 /* JEFAppController.m in Sources */,
 				CA455B3818B83EB900F9A541 /* main.m in Sources */,
 				8359322E52C5BFFB013B4AC7 /* JEFDropboxUploader.m in Sources */,
 				CA6E31AF19E4D45E00C4B906 /* NSData+MPBase64.m in Sources */,
