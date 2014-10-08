@@ -44,6 +44,7 @@
     [self addObserver:self forKeyPath:@"objectValue.isFetchingPosterFrame" options:NSKeyValueObservingOptionInitial context:NULL];
     [self addObserver:self forKeyPath:@"objectValue.state" options:NSKeyValueObservingOptionInitial context:NULL];
     [self addObserver:self forKeyPath:@"objectValue.progress" options:NSKeyValueObservingOptionInitial context:NULL];
+    [self addObserver:self forKeyPath:@"objectValue.posterFrameImage" options:NSKeyValueObservingOptionInitial context:NULL];
 }
 
 - (void)teardown {
@@ -52,6 +53,7 @@
         [self removeObserver:self forKeyPath:@"objectValue.isFetchingPosterFrame"];
         [self removeObserver:self forKeyPath:@"objectValue.state"];
         [self removeObserver:self forKeyPath:@"objectValue.progress"];
+        [self removeObserver:self forKeyPath:@"objectValue.posterFrameImage"];
     }
 }
 
@@ -68,6 +70,7 @@
     CGFloat progress = 0;
     BOOL isFetchingPosterFrame = ([[object valueForKeyPath:@"objectValue.isFetchingPosterFrame"] boolValue] == YES);
     BOOL isUploading = ([[object valueForKeyPath:@"objectValue.state"] integerValue] == DBFileStateUploading);
+    NSImage *posterFrameImage = [object valueForKeyPath:@"objectValue.posterFrameImage"];
 
     if (isUploading) {
         progress = [[object valueForKeyPath:@"objectValue.progress"] floatValue] * 100;
@@ -81,6 +84,7 @@
         self.statusLabel.stringValue = statusString;
         self.progressIndicator.hidden = !isUploading;
         self.progressIndicator.doubleValue = progress;
+        self.previewImageView.image = posterFrameImage;
     });
 }
 

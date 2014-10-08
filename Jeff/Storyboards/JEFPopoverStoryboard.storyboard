@@ -74,9 +74,6 @@
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="249" verticalCompressionResistancePriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="cYF-kf-3pq" userLabel="Preview Image View" customClass="JEFScaleToFillImageView">
                                                                     <rect key="frame" x="0.0" y="30" width="324" height="130"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="500x500" id="46O-t5-ZYI"/>
-                                                                    <connections>
-                                                                        <binding destination="cVE-jQ-rxi" name="value" keyPath="objectValue.posterFrameImage" id="eg4-f3-F2P"/>
-                                                                    </connections>
                                                                 </imageView>
                                                                 <visualEffectView appearanceType="vibrantLight" blendingMode="withinWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="O9S-Hz-IkY">
                                                                     <rect key="frame" x="0.0" y="0.0" width="324" height="30"/>

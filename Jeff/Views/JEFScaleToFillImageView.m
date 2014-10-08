@@ -72,17 +72,13 @@
 
         [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
 
-        [image drawInRect:dstRect // Interestingly, here needs to be dstRect and not self.bounds
-         fromRect:srcRect
-         operation:NSCompositeCopy
-         fraction:1.0
-         respectFlipped:YES
-         hints:@{ NSImageHintInterpolation : @(NSImageInterpolationHigh) }];
+        [image drawInRect:dstRect fromRect:srcRect operation:NSCompositeCopy fraction:1.0 respectFlipped:YES hints:@{ NSImageHintInterpolation : @(NSImageInterpolationHigh) }];
 
         return YES;
     }];
 
-    [scaleToFillImage setCacheMode:NSImageCacheNever]; // Hence it will automatically redraw with new frame size of the image view.
+    // Automatically redraw with new frame size of the image view
+    [scaleToFillImage setCacheMode:NSImageCacheNever];
 
     [super setImage:scaleToFillImage];
 }
