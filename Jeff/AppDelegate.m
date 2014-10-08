@@ -10,6 +10,7 @@
 
 #import <HockeySDK/HockeySDK.h>
 #import <Dropbox/Dropbox.h>
+#import "Mixpanel.h"
 
 #import "JEFPopoverRecordingsViewController.h"
 #import "INPopoverController.h"
@@ -46,6 +47,10 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"***REMOVED***"];
     [[BITHockeyManager sharedHockeyManager] startManager];
     [[BITHockeyManager sharedHockeyManager].crashManager setAutoSubmitCrashReport:YES];
+
+    NSString *mixpanelToken = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Mixpanel Token"];
+    [Mixpanel sharedInstanceWithToken:mixpanelToken];
+    [[Mixpanel sharedInstance] track:@"App Launch"];
 
     __weak typeof(self) weakSelf = self;
     [[NSNotificationCenter defaultCenter] addObserverForName:JEFClosePopoverNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
