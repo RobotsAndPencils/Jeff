@@ -49,5 +49,7 @@
 	<string>${DROPBOX_KEY}</string>
 	<key>Dropbox Secret</key>
 	<string>${DROPBOX_SECRET}</string>
+	<key>Mixpanel Token</key>
+	<string>${MIXPANEL_TOKEN}</string>
 </dict>
 </plist>

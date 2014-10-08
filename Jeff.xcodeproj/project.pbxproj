@@ -31,6 +31,8 @@
 		CA54FCEE196E2DF4000C46CC /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = CA54FCED196E2DF4000C46CC /* Constants.m */; };
 		CA571B1C1936E371005E9C46 /* JEFSelectionOverlayWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CA571B1B1936E371005E9C46 /* JEFSelectionOverlayWindow.m */; };
 		CA6BF4DF1999B63A00E3C146 /* JeffLauncher.app in Copy Launcher */ = {isa = PBXBuildFile; fileRef = CA1F9905192F0A5F00C3EF33 /* JeffLauncher.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CA6E31AF19E4D45E00C4B906 /* NSData+MPBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6E31AC19E4D45E00C4B906 /* NSData+MPBase64.m */; };
+		CA6E31B019E4D45E00C4B906 /* Mixpanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6E31AE19E4D45E00C4B906 /* Mixpanel.m */; };
 		CA7A1D991991E9FF008DA733 /* JEFCreditsTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA7A1D981991E9FF008DA733 /* JEFCreditsTextView.m */; };
 		CA81B09C197777DF00761ECC /* JEFScaleToFillImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA81B09B197777DF00761ECC /* JEFScaleToFillImageView.m */; };
 		CA875EFC18B9974C009FC997 /* JEFSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA875EFB18B9974C009FC997 /* JEFSelectionView.m */; };
@@ -147,6 +149,10 @@
 		CA54FCED196E2DF4000C46CC /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		CA571B1A1936E371005E9C46 /* JEFSelectionOverlayWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFSelectionOverlayWindow.h; path = Windows/JEFSelectionOverlayWindow.h; sourceTree = "<group>"; };
 		CA571B1B1936E371005E9C46 /* JEFSelectionOverlayWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFSelectionOverlayWindow.m; path = Windows/JEFSelectionOverlayWindow.m; sourceTree = "<group>"; };
+		CA6E31AB19E4D45E00C4B906 /* NSData+MPBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MPBase64.h"; sourceTree = "<group>"; };
+		CA6E31AC19E4D45E00C4B906 /* NSData+MPBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MPBase64.m"; sourceTree = "<group>"; };
+		CA6E31AD19E4D45E00C4B906 /* Mixpanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mixpanel.h; sourceTree = "<group>"; };
+		CA6E31AE19E4D45E00C4B906 /* Mixpanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mixpanel.m; sourceTree = "<group>"; };
 		CA7A1D971991E9FF008DA733 /* JEFCreditsTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFCreditsTextView.h; sourceTree = "<group>"; };
 		CA7A1D981991E9FF008DA733 /* JEFCreditsTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFCreditsTextView.m; sourceTree = "<group>"; };
 		CA81B09A197777DF00761ECC /* JEFScaleToFillImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFScaleToFillImageView.h; path = Views/JEFScaleToFillImageView.h; sourceTree = "<group>"; };
@@ -229,6 +235,7 @@
 				CAE8F9C21991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell */,
 				CA1F9909192F0ACB00C3EF33 /* StartAtLoginController */,
 				CAF30B5418D5281100D7BC9D /* INPopoverController */,
+				CA6E31A819E4D45E00C4B906 /* Mixpanel */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -378,6 +385,33 @@
 				CA571B1B1936E371005E9C46 /* JEFSelectionOverlayWindow.m */,
 			);
 			name = Windows;
+			sourceTree = "<group>";
+		};
+		CA6E31A819E4D45E00C4B906 /* Mixpanel */ = {
+			isa = PBXGroup;
+			children = (
+				CA6E31A919E4D45E00C4B906 /* Library */,
+				CA6E31AD19E4D45E00C4B906 /* Mixpanel.h */,
+				CA6E31AE19E4D45E00C4B906 /* Mixpanel.m */,
+			);
+			path = Mixpanel;
+			sourceTree = "<group>";
+		};
+		CA6E31A919E4D45E00C4B906 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				CA6E31AA19E4D45E00C4B906 /* NSData_Base64 */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		CA6E31AA19E4D45E00C4B906 /* NSData_Base64 */ = {
+			isa = PBXGroup;
+			children = (
+				CA6E31AB19E4D45E00C4B906 /* NSData+MPBase64.h */,
+				CA6E31AC19E4D45E00C4B906 /* NSData+MPBase64.m */,
+			);
+			path = NSData_Base64;
 			sourceTree = "<group>";
 		};
 		CAA79EAD192A725D00A4299F /* Recorders */ = {
@@ -695,6 +729,7 @@
 				CAA79EAC192A725800A4299F /* JEFQuartzRecorder.m in Sources */,
 				CA7A1D991991E9FF008DA733 /* JEFCreditsTextView.m in Sources */,
 				CA455B7B18B882DB00F9A541 /* NSFileManager+Temporary.m in Sources */,
+				CA6E31B019E4D45E00C4B906 /* Mixpanel.m in Sources */,
 				CA455B3F18B83EB900F9A541 /* AppDelegate.m in Sources */,
 				CAF30B6218D5281100D7BC9D /* INPopoverParentWindow.m in Sources */,
 				CAF30B6318D5281100D7BC9D /* INPopoverWindow.m in Sources */,
@@ -712,6 +747,7 @@
 				CAF30B6418D5281100D7BC9D /* INPopoverWindowFrame.m in Sources */,
 				CA455B3818B83EB900F9A541 /* main.m in Sources */,
 				8359322E52C5BFFB013B4AC7 /* JEFDropboxUploader.m in Sources */,
+				CA6E31AF19E4D45E00C4B906 /* NSData+MPBase64.m in Sources */,
 				8359376F55CC63D6FE3DE740 /* JEFPopoverUploaderSetupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -874,6 +910,7 @@
 				);
 				INFOPLIST_FILE = "Jeff/Jeff-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MIXPANEL_TOKEN = 7b2541ad61657673ae4503d8fbf87972;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
@@ -905,6 +942,7 @@
 				);
 				INFOPLIST_FILE = "Jeff/Jeff-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MIXPANEL_TOKEN = 1356a1a6c978dac9c0a8a47449b8081e;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
@@ -1008,6 +1046,7 @@
 				);
 				INFOPLIST_FILE = "Jeff/Jeff-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MIXPANEL_TOKEN = 7b2541ad61657673ae4503d8fbf87972;
 				PRODUCT_NAME = "$(TARGET_NAME) Beta";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
