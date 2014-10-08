@@ -74,11 +74,6 @@
 
 @end
 
-static NSString *MPURLEncode(NSString *s)
-{
-    return (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (__bridge CFStringRef)s, NULL, CFSTR("!*'();:@&=+$,/?%#[]"), kCFStringEncodingUTF8));
-}
-
 @implementation Mixpanel
 
 static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReachabilityFlags flags, void *info)
@@ -159,10 +154,10 @@ static Mixpanel *sharedInstance = nil;
             NSLog(@"%@ failed to set up reachability callback: %s", self, SCErrorString(SCError()));
         }
 
-        NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
 
         // cellular info
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+        NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
         if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
             [self setCurrentRadio];
             [notificationCenter addObserver:self
@@ -173,6 +168,7 @@ static Mixpanel *sharedInstance = nil;
 #endif
         
 #ifndef TARGET_OS_IPHONE
+        NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
         [notificationCenter addObserver:self
                                selector:@selector(applicationWillTerminate:)
                                    name:NSApplicationWillTerminateNotification
