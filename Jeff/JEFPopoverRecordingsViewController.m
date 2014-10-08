@@ -18,7 +18,7 @@
 #import "Converter.h"
 #import "JEFRecordingCellView.h"
 #import "JEFQuartzRecorder.h"
-#import "JEFOverlayWindow.h"
+#import "JEFSelectionOverlayWindow.h"
 #import "Constants.h"
 
 static void *PopoverContentViewControllerContext = &PopoverContentViewControllerContext;
@@ -171,7 +171,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     __weak __typeof(self) weakSelf = self;
     for (NSScreen *screen in [NSScreen screens]) {
         NSRect frame = [screen frame];
-        JEFOverlayWindow *window = [[JEFOverlayWindow alloc] initWithContentRect:frame completion:^(SelectionView *view, NSRect rect, BOOL cancelled){
+        JEFSelectionOverlayWindow *window = [[JEFSelectionOverlayWindow alloc] initWithContentRect:frame completion:^(JEFSelectionView *view, NSRect rect, BOOL cancelled){
             if (!cancelled) {
                 [weakSelf selectionView:view didSelectRect:rect];
             }
@@ -199,7 +199,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 #pragma mark - DrawMouseBoxViewDelegate
 
-- (void)selectionView:(SelectionView *)view didSelectRect:(NSRect)rect {
+- (void)selectionView:(JEFSelectionView *)view didSelectRect:(NSRect)rect {
     [[NSNotificationCenter defaultCenter] postNotificationName:JEFSetStatusViewNotRecordingNotification object:self];
 
     for (NSWindow *window in self.overlayWindows) {
@@ -247,7 +247,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     self.showingSelection = NO;
 }
 
-- (void)selectionViewDidCancel:(SelectionView *)view {
+- (void)selectionViewDidCancel:(JEFSelectionView *)view {
     [[NSNotificationCenter defaultCenter] postNotificationName:JEFSetStatusViewRecordingNotification object:self];
     
     for (NSWindow *window in self.overlayWindows) {
