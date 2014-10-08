@@ -16,6 +16,8 @@ const CGFloat HandleSize = 5.0;
 const CGFloat JEFSelectionMinimumWidth = 50.0;
 const CGFloat JEFSelectionMinimumHeight = 50.0;
 const CGFloat JEFSelectionViewInfoMargin = 20.0;
+const CGFloat JEFSelectionConfirmButtonMargin = 20.0;
+const CGFloat JEFSelectionConfirmButtonMinimumHeightToDisplayOutside = 50.0;
 
 CGFloat constrain(CGFloat value, CGFloat min, CGFloat max) {
     return fmin(fmax(value, min), max);
@@ -34,7 +36,6 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     JEFHandleIndexCount
 };
 
-
 @interface JEFSelectionView ()
 
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
@@ -43,7 +44,6 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 @property (nonatomic, assign) NSPoint mouseDownPoint;
 @property (nonatomic, assign) NSRect selectionRect;
 @property (nonatomic, assign) BOOL hasMadeInitialSelection;
-@property (nonatomic, assign) BOOL hasConfirmedSelection;
 
 @property (nonatomic, assign) enum JEFHandleIndex clickedHandle;
 @property (nonatomic, assign) NSPoint anchor;
@@ -64,17 +64,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         self.wantsLayer = YES;
 
         _hasMadeInitialSelection = NO;
-        _hasConfirmedSelection = NO;
 
-        _confirmRectButton = [[NSButton alloc] initWithFrame:CGRectMake(0, 0, 100, 24)];
-        _confirmRectButton.buttonType = NSMomentaryLightButton;
-        _confirmRectButton.bezelStyle = NSRecessedBezelStyle;
-        _confirmRectButton.title = @"Record";
-        _confirmRectButton.alphaValue = 0.0;
-        [_confirmRectButton setTarget:self];
-        [_confirmRectButton setAction:@selector(confirmRect)];
-        [self addSubview:self.confirmRectButton];
-        
         NSTextField *infoTextField = [[NSTextField alloc] initWithFrame:CGRectZero];
         infoTextField.cell = [[RSVerticallyCenteredTextFieldCell alloc] init];
         infoTextField.font = [NSFont systemFontOfSize:18.0];
@@ -94,11 +84,21 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         _infoContainer.appearance = [NSAppearance appearanceNamed:NSAppearanceNameVibrantDark];
         [_infoContainer addSubview:infoTextField];
 
-        self.overlayLayer = [CAShapeLayer layer];
-        self.overlayLayer.fillColor = [NSColor colorWithCalibratedWhite:0.5 alpha:0.5].CGColor;
-        [self.layer addSublayer:self.overlayLayer];
+        _overlayLayer = [CAShapeLayer layer];
+        _overlayLayer.fillColor = [NSColor colorWithCalibratedWhite:0.5 alpha:0.5].CGColor;
+        [self.layer addSublayer:_overlayLayer];
         [self updateOverlayPath];
-        
+
+        _confirmRectButton = [[NSButton alloc] initWithFrame:CGRectMake(0, 0, 100, 24)];
+        _confirmRectButton.wantsLayer = YES;
+        _confirmRectButton.buttonType = NSMomentaryLightButton;
+        _confirmRectButton.bezelStyle = NSRecessedBezelStyle;
+        _confirmRectButton.title = @"Record";
+        _confirmRectButton.alphaValue = 0.0;
+        [_confirmRectButton setTarget:self];
+        [_confirmRectButton setAction:@selector(confirmRect)];
+        [_overlayLayer addSublayer:_confirmRectButton.layer];
+
         infoTextField.frame = _infoContainer.bounds;
         [self addSubview:_infoContainer];
 
@@ -116,7 +116,6 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 }
 
 - (void)confirmRect {
-    self.hasConfirmedSelection = YES;
     self.confirmRectButton.hidden = YES;
     [self.shapeLayer removeFromSuperlayer];
 
@@ -247,16 +246,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         // We don't need to call hideInstructions here for that reason
         [[NSNotificationCenter defaultCenter] postNotificationName:@"JEFRecordingSelectionMadeNotification" object:self];
 
-        self.confirmRectButton.frame = ({
-            CGRect centeredRect = CGRectZero;
-            centeredRect.size = self.confirmRectButton.frame.size;
-            CGPoint origin = CGPointZero;
-            origin.x = CGRectGetMinX(self.selectionRect) + CGRectGetWidth(self.selectionRect) / 2 - CGRectGetWidth(centeredRect) / 2;
-            origin.y = CGRectGetMinY(self.selectionRect) + CGRectGetHeight(self.selectionRect) / 2 - CGRectGetHeight(centeredRect) / 2;
-            centeredRect.origin = origin;
-            centeredRect;
-        });
-
+        [self updateConfirmRectButtonFrame];
         [self showRecordButton];
     }
 }
@@ -264,15 +254,28 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 #pragma mark - Private
 
 - (void)updateConfirmRectButtonFrame {
-    self.confirmRectButton.frame = ({
-        CGRect centeredRect = CGRectZero;
-        centeredRect.size = self.confirmRectButton.frame.size;
-        CGPoint origin = CGPointZero;
-        origin.x = CGRectGetMinX(self.selectionRect) + CGRectGetWidth(self.selectionRect) / 2 - CGRectGetWidth(centeredRect) / 2;
-        origin.y = CGRectGetMinY(self.selectionRect) + CGRectGetHeight(self.selectionRect) / 2 - CGRectGetHeight(centeredRect) / 2;
-        centeredRect.origin = origin;
-        centeredRect;
-    });
+    CGRect newButtonRect = CGRectZero;
+    newButtonRect.size = self.confirmRectButton.frame.size;
+    CGPoint origin = CGPointZero;
+    // The button should always be centered horizontally
+    origin.x = CGRectGetMinX(self.selectionRect) + CGRectGetWidth(self.selectionRect) / 2 - CGRectGetWidth(newButtonRect) / 2;
+
+    // Position the button in this preferred order:
+    // Outside the bottom edge of the selection
+    if (CGRectGetMinY(self.selectionRect) > JEFSelectionConfirmButtonMinimumHeightToDisplayOutside) {
+        origin.y = CGRectGetMinY(self.selectionRect)  - CGRectGetHeight(newButtonRect) - JEFSelectionConfirmButtonMargin;
+    }
+    // Outside the top edge
+    else if (CGRectGetHeight(self.bounds) - CGRectGetMaxY(self.selectionRect) > JEFSelectionConfirmButtonMinimumHeightToDisplayOutside) {
+        origin.y = CGRectGetMaxY(self.selectionRect) + JEFSelectionConfirmButtonMargin;
+    }
+    // Inside the bottom edge
+    else {
+        origin.y = CGRectGetMinY(self.selectionRect) + JEFSelectionConfirmButtonMargin;
+    }
+    newButtonRect.origin = origin;
+
+    self.confirmRectButton.frame = newButtonRect;
 }
 
 - (void)updateMarchingAntsPath {
