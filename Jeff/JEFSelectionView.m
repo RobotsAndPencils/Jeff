@@ -97,7 +97,8 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         _confirmRectButton.alphaValue = 0.0;
         [_confirmRectButton setTarget:self];
         [_confirmRectButton setAction:@selector(confirmRect)];
-        [_overlayLayer addSublayer:_confirmRectButton.layer];
+        [self addSubview:_confirmRectButton];
+        [self.layer addSublayer:_confirmRectButton.layer];
 
         infoTextField.frame = _infoContainer.bounds;
         [self addSubview:_infoContainer];
