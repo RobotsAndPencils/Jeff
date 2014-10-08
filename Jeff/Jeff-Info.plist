@@ -29,7 +29,7 @@
 			<string>Jeff</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>db-iugqsnjvza6fuub</string>
+				<string>${DROPBOX_CALLBACK_URI}</string>
 			</array>
 		</dict>
 	</array>
@@ -45,5 +45,9 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>BITCrashExceptionApplication</string>
+	<key>Dropbox Key</key>
+	<string>${DROPBOX_KEY}</string>
+	<key>Dropbox Secret</key>
+	<string>${DROPBOX_SECRET}</string>
 </dict>
 </plist>

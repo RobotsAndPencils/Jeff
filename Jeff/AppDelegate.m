@@ -78,8 +78,8 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
 #pragma mark - Setup
 
 - (void)setupDropbox {
-    NSString *appKey = @"iugqsnjvza6fuub";
-    NSString *appSecret = @"pucvuohcbvte3z8";
+    NSString *appKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Dropbox Key"];
+    NSString *appSecret = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Dropbox Secret"];
     DBAccountManager *accountManager = [[DBAccountManager alloc] initWithAppKey:appKey secret:appSecret];
     [DBAccountManager setSharedManager:accountManager];
 
