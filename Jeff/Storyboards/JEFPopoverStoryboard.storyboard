@@ -43,7 +43,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="201" horizontalPageScroll="10" verticalLineScroll="201" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="Gf6-NN-Iq2">
-                                <rect key="frame" x="0.0" y="0.0" width="325" height="284"/>
+                                <rect key="frame" x="0.0" y="0.0" width="325" height="279"/>
                                 <clipView key="contentView" wantsLayer="YES" copiesOnScroll="NO" id="jh4-2L-pST">
                                     <rect key="frame" x="0.0" y="0.0" width="325" height="176"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -266,7 +266,7 @@
                             <constraint firstAttribute="bottom" secondItem="Gf6-NN-Iq2" secondAttribute="bottom" id="0vR-JB-EWu"/>
                             <constraint firstItem="M8f-DG-79k" firstAttribute="leading" secondItem="GUC-2g-azr" secondAttribute="leading" id="Mjo-th-87n"/>
                             <constraint firstAttribute="trailing" secondItem="M8f-DG-79k" secondAttribute="trailing" id="SyU-gQ-1pj"/>
-                            <constraint firstItem="Gf6-NN-Iq2" firstAttribute="top" secondItem="GUC-2g-azr" secondAttribute="top" constant="12" id="dr4-wN-Fpw"/>
+                            <constraint firstItem="Gf6-NN-Iq2" firstAttribute="top" secondItem="GUC-2g-azr" secondAttribute="top" constant="17" id="dr4-wN-Fpw"/>
                             <constraint firstItem="Gf6-NN-Iq2" firstAttribute="leading" secondItem="GUC-2g-azr" secondAttribute="leading" id="td7-Fj-tve"/>
                             <constraint firstAttribute="trailing" secondItem="Gf6-NN-Iq2" secondAttribute="trailing" id="zIM-pC-Lio"/>
                         </constraints>
