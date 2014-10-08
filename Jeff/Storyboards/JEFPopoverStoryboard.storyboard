@@ -9,11 +9,11 @@
             <objects>
                 <viewController id="czx-q9-v5M" customClass="JEFPopoverContentViewController" sceneMemberID="viewController">
                     <view key="view" id="ZcF-bW-QvF">
-                        <rect key="frame" x="0.0" y="0.0" width="342" height="400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="342" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="OJS-DN-gfc">
-                                <rect key="frame" x="0.0" y="0.0" width="342" height="400"/>
+                                <rect key="frame" x="0.0" y="0.0" width="342" height="500"/>
                                 <connections>
                                     <segue destination="gTI-EO-G1X" kind="embed" identifier="EmbedRecordings" id="50q-f4-nh5"/>
                                 </connections>
@@ -42,13 +42,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="325" height="296"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="161" horizontalPageScroll="10" verticalLineScroll="161" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="Gf6-NN-Iq2">
+                            <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="201" horizontalPageScroll="10" verticalLineScroll="201" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="Gf6-NN-Iq2">
                                 <rect key="frame" x="0.0" y="0.0" width="325" height="284"/>
                                 <clipView key="contentView" wantsLayer="YES" copiesOnScroll="NO" id="jh4-2L-pST">
                                     <rect key="frame" x="0.0" y="0.0" width="325" height="176"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView wantsLayer="YES" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="160" viewBased="YES" id="cdU-1N-Oto" customClass="RBLTableView">
+                                        <tableView wantsLayer="YES" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="200" viewBased="YES" id="cdU-1N-Oto" customClass="RBLTableView">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="1" height="1"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -68,11 +68,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="JEFRecordingCellView" wantsLayer="YES" id="cVE-jQ-rxi" customClass="JEFRecordingCellView">
-                                                            <rect key="frame" x="0.0" y="0.0" width="324" height="160"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="324" height="200"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="249" verticalCompressionResistancePriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="cYF-kf-3pq" userLabel="Preview Image View" customClass="JEFScaleToFillImageView">
-                                                                    <rect key="frame" x="0.0" y="30" width="324" height="130"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="324" height="200"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="500x500" id="46O-t5-ZYI"/>
                                                                 </imageView>
                                                                 <visualEffectView appearanceType="vibrantLight" blendingMode="withinWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="O9S-Hz-IkY">
@@ -162,7 +162,6 @@
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="cYF-kf-3pq" firstAttribute="leading" secondItem="cVE-jQ-rxi" secondAttribute="leading" id="1w1-d1-1qj"/>
-                                                                <constraint firstItem="O9S-Hz-IkY" firstAttribute="top" secondItem="cYF-kf-3pq" secondAttribute="bottom" id="3Wd-A2-NJZ"/>
                                                                 <constraint firstItem="cYF-kf-3pq" firstAttribute="top" secondItem="cVE-jQ-rxi" secondAttribute="top" id="82X-xr-MoC"/>
                                                                 <constraint firstAttribute="centerX" secondItem="VT6-j5-hAw" secondAttribute="centerX" id="BMu-HI-5Au"/>
                                                                 <constraint firstAttribute="bottom" secondItem="O9S-Hz-IkY" secondAttribute="bottom" id="Dl9-33-ce1"/>
@@ -171,6 +170,7 @@
                                                                 <constraint firstAttribute="trailing" secondItem="cYF-kf-3pq" secondAttribute="trailing" id="hl3-ek-XhV"/>
                                                                 <constraint firstItem="O9S-Hz-IkY" firstAttribute="top" secondItem="h6Z-Do-gmH" secondAttribute="bottom" constant="40" id="mth-uo-5Qf"/>
                                                                 <constraint firstAttribute="trailing" secondItem="O9S-Hz-IkY" secondAttribute="trailing" id="muE-Jc-DFi"/>
+                                                                <constraint firstAttribute="bottom" secondItem="cYF-kf-3pq" secondAttribute="bottom" id="oT5-nn-czL"/>
                                                                 <constraint firstAttribute="centerX" secondItem="h6Z-Do-gmH" secondAttribute="centerX" id="r01-Nn-Gav"/>
                                                             </constraints>
                                                             <connections>
