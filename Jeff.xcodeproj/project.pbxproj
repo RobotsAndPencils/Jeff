@@ -31,6 +31,8 @@
 		CA54FCEE196E2DF4000C46CC /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = CA54FCED196E2DF4000C46CC /* Constants.m */; };
 		CA571B1C1936E371005E9C46 /* JEFSelectionOverlayWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CA571B1B1936E371005E9C46 /* JEFSelectionOverlayWindow.m */; };
 		CA6BF4DF1999B63A00E3C146 /* JeffLauncher.app in Copy Launcher */ = {isa = PBXBuildFile; fileRef = CA1F9905192F0A5F00C3EF33 /* JeffLauncher.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CA6E31AF19E4D45E00C4B906 /* NSData+MPBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6E31AC19E4D45E00C4B906 /* NSData+MPBase64.m */; };
+		CA6E31B019E4D45E00C4B906 /* Mixpanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6E31AE19E4D45E00C4B906 /* Mixpanel.m */; };
 		CA7A1D991991E9FF008DA733 /* JEFCreditsTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA7A1D981991E9FF008DA733 /* JEFCreditsTextView.m */; };
 		CA81B09C197777DF00761ECC /* JEFScaleToFillImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA81B09B197777DF00761ECC /* JEFScaleToFillImageView.m */; };
 		CA875EFC18B9974C009FC997 /* JEFSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA875EFB18B9974C009FC997 /* JEFSelectionView.m */; };
@@ -147,6 +149,10 @@
 		CA54FCED196E2DF4000C46CC /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		CA571B1A1936E371005E9C46 /* JEFSelectionOverlayWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFSelectionOverlayWindow.h; path = Windows/JEFSelectionOverlayWindow.h; sourceTree = "<group>"; };
 		CA571B1B1936E371005E9C46 /* JEFSelectionOverlayWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFSelectionOverlayWindow.m; path = Windows/JEFSelectionOverlayWindow.m; sourceTree = "<group>"; };
+		CA6E31AB19E4D45E00C4B906 /* NSData+MPBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MPBase64.h"; sourceTree = "<group>"; };
+		CA6E31AC19E4D45E00C4B906 /* NSData+MPBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MPBase64.m"; sourceTree = "<group>"; };
+		CA6E31AD19E4D45E00C4B906 /* Mixpanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mixpanel.h; sourceTree = "<group>"; };
+		CA6E31AE19E4D45E00C4B906 /* Mixpanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mixpanel.m; sourceTree = "<group>"; };
 		CA7A1D971991E9FF008DA733 /* JEFCreditsTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFCreditsTextView.h; sourceTree = "<group>"; };
 		CA7A1D981991E9FF008DA733 /* JEFCreditsTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFCreditsTextView.m; sourceTree = "<group>"; };
 		CA81B09A197777DF00761ECC /* JEFScaleToFillImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFScaleToFillImageView.h; path = Views/JEFScaleToFillImageView.h; sourceTree = "<group>"; };
@@ -229,6 +235,7 @@
 				CAE8F9C21991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell */,
 				CA1F9909192F0ACB00C3EF33 /* StartAtLoginController */,
 				CAF30B5418D5281100D7BC9D /* INPopoverController */,
+				CA6E31A819E4D45E00C4B906 /* Mixpanel */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -378,6 +385,33 @@
 				CA571B1B1936E371005E9C46 /* JEFSelectionOverlayWindow.m */,
 			);
 			name = Windows;
+			sourceTree = "<group>";
+		};
+		CA6E31A819E4D45E00C4B906 /* Mixpanel */ = {
+			isa = PBXGroup;
+			children = (
+				CA6E31A919E4D45E00C4B906 /* Library */,
+				CA6E31AD19E4D45E00C4B906 /* Mixpanel.h */,
+				CA6E31AE19E4D45E00C4B906 /* Mixpanel.m */,
+			);
+			path = Mixpanel;
+			sourceTree = "<group>";
+		};
+		CA6E31A919E4D45E00C4B906 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				CA6E31AA19E4D45E00C4B906 /* NSData_Base64 */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		CA6E31AA19E4D45E00C4B906 /* NSData_Base64 */ = {
+			isa = PBXGroup;
+			children = (
+				CA6E31AB19E4D45E00C4B906 /* NSData+MPBase64.h */,
+				CA6E31AC19E4D45E00C4B906 /* NSData+MPBase64.m */,
+			);
+			path = NSData_Base64;
 			sourceTree = "<group>";
 		};
 		CAA79EAD192A725D00A4299F /* Recorders */ = {
@@ -695,6 +729,7 @@
 				CAA79EAC192A725800A4299F /* JEFQuartzRecorder.m in Sources */,
 				CA7A1D991991E9FF008DA733 /* JEFCreditsTextView.m in Sources */,
 				CA455B7B18B882DB00F9A541 /* NSFileManager+Temporary.m in Sources */,
+				CA6E31B019E4D45E00C4B906 /* Mixpanel.m in Sources */,
 				CA455B3F18B83EB900F9A541 /* AppDelegate.m in Sources */,
 				CAF30B6218D5281100D7BC9D /* INPopoverParentWindow.m in Sources */,
 				CAF30B6318D5281100D7BC9D /* INPopoverWindow.m in Sources */,
@@ -712,6 +747,7 @@
 				CAF30B6418D5281100D7BC9D /* INPopoverWindowFrame.m in Sources */,
 				CA455B3818B83EB900F9A541 /* main.m in Sources */,
 				8359322E52C5BFFB013B4AC7 /* JEFDropboxUploader.m in Sources */,
+				CA6E31AF19E4D45E00C4B906 /* NSData+MPBase64.m in Sources */,
 				8359376F55CC63D6FE3DE740 /* JEFPopoverUploaderSetupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -857,6 +893,9 @@
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
+				DROPBOX_CALLBACK_URI = "db-iugqsnjvza6fuub";
+				DROPBOX_KEY = iugqsnjvza6fuub;
+				DROPBOX_SECRET = pucvuohcbvte3z8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
@@ -865,8 +904,13 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jeff/Jeff-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
 				INFOPLIST_FILE = "Jeff/Jeff-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MIXPANEL_TOKEN = 7b2541ad61657673ae4503d8fbf87972;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
@@ -881,6 +925,9 @@
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
+				DROPBOX_CALLBACK_URI = "db-nc3dkk8verxcjg7";
+				DROPBOX_KEY = nc3dkk8verxcjg7;
+				DROPBOX_SECRET = f3wi20oyuk4hl3i;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
@@ -889,8 +936,13 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jeff/Jeff-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
 				INFOPLIST_FILE = "Jeff/Jeff-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MIXPANEL_TOKEN = 1356a1a6c978dac9c0a8a47449b8081e;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
@@ -937,6 +989,88 @@
 			};
 			name = Release;
 		};
+		CA6E319F19E4CD3300C4B906 /* Beta Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = "Beta Release";
+		};
+		CA6E31A019E4CD3300C4B906 /* Beta Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F38F4DBF5A4643F2A390622E /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				DROPBOX_CALLBACK_URI = "db-iugqsnjvza6fuub";
+				DROPBOX_KEY = iugqsnjvza6fuub;
+				DROPBOX_SECRET = pucvuohcbvte3z8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Jeff/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Jeff/Jeff-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
+				INFOPLIST_FILE = "Jeff/Jeff-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MIXPANEL_TOKEN = 7b2541ad61657673ae4503d8fbf87972;
+				PRODUCT_NAME = "$(TARGET_NAME) Beta";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Beta Release";
+		};
+		CA6E31A119E4CD3300C4B906 /* Beta Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Jeff.app/Contents/MacOS/Jeff";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Jeff/Jeff-Prefix.pch";
+				INFOPLIST_FILE = "JeffTests/JeffTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = "Beta Release";
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -945,6 +1079,7 @@
 			buildConfigurations = (
 				CA455B5718B83EBA00F9A541 /* Debug */,
 				CA455B5818B83EBA00F9A541 /* Release */,
+				CA6E319F19E4CD3300C4B906 /* Beta Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -954,6 +1089,7 @@
 			buildConfigurations = (
 				CA455B5A18B83EBA00F9A541 /* Debug */,
 				CA455B5B18B83EBA00F9A541 /* Release */,
+				CA6E31A019E4CD3300C4B906 /* Beta Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -963,6 +1099,7 @@
 			buildConfigurations = (
 				CA455B5D18B83EBA00F9A541 /* Debug */,
 				CA455B5E18B83EBA00F9A541 /* Release */,
+				CA6E31A119E4CD3300C4B906 /* Beta Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
