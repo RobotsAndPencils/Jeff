@@ -10,6 +10,7 @@
 
 #import <HockeySDK/HockeySDK.h>
 #import <Dropbox/Dropbox.h>
+#import "Mixpanel.h"
 
 #import "JEFPopoverRecordingsViewController.h"
 #import "INPopoverController.h"
@@ -47,6 +48,10 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
     [[BITHockeyManager sharedHockeyManager] startManager];
     [[BITHockeyManager sharedHockeyManager].crashManager setAutoSubmitCrashReport:YES];
 
+    NSString *mixpanelToken = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Mixpanel Token"];
+    [Mixpanel sharedInstanceWithToken:mixpanelToken];
+    [[Mixpanel sharedInstance] track:@"App Launch"];
+
     __weak typeof(self) weakSelf = self;
     [[NSNotificationCenter defaultCenter] addObserverForName:JEFClosePopoverNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         [weakSelf closePopover:nil];
@@ -78,8 +83,8 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
 #pragma mark - Setup
 
 - (void)setupDropbox {
-    NSString *appKey = @"***REMOVED***";
-    NSString *appSecret = @"***REMOVED***";
+    NSString *appKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Dropbox Key"];
+    NSString *appSecret = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Dropbox Secret"];
     DBAccountManager *accountManager = [[DBAccountManager alloc] initWithAppKey:appKey secret:appSecret];
     [DBAccountManager setSharedManager:accountManager];
 
