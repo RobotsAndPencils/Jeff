@@ -1,3 +1,4 @@
+// Copyright (c) 2014 Brandon Evans
 // Copyright (c) 2011 Alex Zielenski
 // Copyright (c) 2012 Travis Tilley
 //
@@ -20,18 +21,14 @@
 // TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+@interface StartAtLoginController : NSObject
 
-@interface StartAtLoginController : NSObject {
-    NSString *_identifier;
-    NSURL    *_url;
-    BOOL _enabled;
-}
+@property (nonatomic, assign) BOOL startAtLogin;
+@property (nonatomic, assign) BOOL enabled;
+@property (nonatomic, copy) NSString *identifier;
 
-@property (assign, nonatomic, readwrite)   BOOL startAtLogin;
-@property (assign, nonatomic, readwrite)   BOOL enabled;
-@property (copy, nonatomic, readwrite)     NSString *identifier;
-
--(id)initWithIdentifier:(NSString*)identifier;
+// This method shouldn't need to be implemented, but there was a crash because it was sent to the StartAtLoginController object in the preferences storyboard when it was created. It seems like it might have been a bug with storyboard initialization, but I'm just being defensive here.
+- (instancetype)initWithCoder:(NSCoder *)aDecoder;
+- (instancetype)initWithIdentifier:(NSString *)identifier;
 
 @end
