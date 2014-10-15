@@ -11,7 +11,9 @@
 #import <Dropbox/Dropbox.h>
 #import <ServiceManagement/ServiceManagement.h>
 #import <MASShortcut/MASShortcutView.h>
+#import <MASShortcut/MASShortcut.h>
 #import <MASShortcut/MASShortcutView+UserDefaults.h>
+#import "Mixpanel.h"
 #import "Constants.h"
 
 
@@ -40,7 +42,18 @@
     self.recordSelectionShortcutView.associatedUserDefaultsKey = JEFRecordSelectionShortcutKey;
     self.recordScreenShortcutView.appearance = MASShortcutViewAppearanceTexturedRect;
     self.recordSelectionShortcutView.appearance = MASShortcutViewAppearanceTexturedRect;
-    
+
+    self.recordSelectionShortcutView.shortcutValueChange = ^(MASShortcutView *view) {
+        NSString *keyCodeString = [view.shortcutValue.modifierFlagsString stringByAppendingString:view.shortcutValue.keyCodeString];
+        if (!keyCodeString) return;
+        [[Mixpanel sharedInstance] track:@"Change Shortcut" properties:@{ @"Name": @"Record Selection", @"Value": keyCodeString }];
+    };
+    self.recordScreenShortcutView.shortcutValueChange = ^(MASShortcutView *view) {
+        NSString *keyCodeString = [view.shortcutValue.modifierFlagsString stringByAppendingString:view.shortcutValue.keyCodeString];
+        if (!keyCodeString) return;
+        [[Mixpanel sharedInstance] track:@"Change Shortcut" properties:@{ @"Name": @"Record Screen", @"Value": keyCodeString }];
+    };
+
     NSString *htmlString = NSLocalizedString(@"PreferencesOpenSourceCreditsHTML", @"An HTML string containing open source credits");
     NSData *htmlData = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableAttributedString *attributedCredits = [[NSMutableAttributedString alloc] initWithHTML:htmlData documentAttributes:NULL];
@@ -71,6 +84,11 @@
             [weakSelf updateLinkButton];
         }];
     }
+}
+
+- (IBAction)toggleLaunchAtLogin:(id)sender {
+    NSButton *checkButton = (NSButton *)sender;
+    [[Mixpanel sharedInstance] track:@"Toggle Launch At Login" properties:@{ @"State": @(checkButton.state) }];
 }
 
 - (void)updateLinkButton {
