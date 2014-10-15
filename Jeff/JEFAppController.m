@@ -9,6 +9,7 @@
 #import "JEFPopoverContentViewController.h"
 #import "INPopoverController.h"
 #import "JEFAppController.h"
+#import <Dropbox/DBAccountManager.h>
 
 NSString *const JEFOpenPopoverNotification = @"JEFOpenPopoverNotification";
 NSString *const JEFClosePopoverNotification = @"JEFClosePopoverNotification";
@@ -22,6 +23,7 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
 @property (strong, nonatomic) NSStatusItem *statusItem;
 @property (strong, nonatomic) INPopoverController *popover;
 @property (strong, nonatomic) id popoverTransiencyMonitor;
+
 @end
 
 @implementation JEFAppController
@@ -34,7 +36,7 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
     [self setupPopover];
 
     __weak typeof(self) weakSelf = self;
-    [[NSNotificationCenter defaultCenter] addObserverForName:JEFOpenPopoverNotification object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification *note) {
+    [[NSNotificationCenter defaultCenter] addObserverForName:JEFOpenPopoverNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         [weakSelf showPopover:weakSelf.statusItem.button];
     }];
     [[NSNotificationCenter defaultCenter] addObserverForName:JEFClosePopoverNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
@@ -46,6 +48,16 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
     [[NSNotificationCenter defaultCenter] addObserverForName:JEFSetStatusViewRecordingNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         [weakSelf setStatusItemActionRecord:YES];
     }];
+
+    // If Dropbox isn't set up yet, prompt the user by displaying the popover
+    BOOL dropboxLinked = ([[DBAccountManager sharedManager] linkedAccount] != nil);
+    if (!dropboxLinked) {
+        // Give it a run loop otherwise the popover presents from the wrong rect inside the status bar item's button
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self showPopover:self.statusItem.button];
+        });
+    }
+
     return self;
 }
 
