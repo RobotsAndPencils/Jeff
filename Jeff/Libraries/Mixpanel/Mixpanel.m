@@ -92,18 +92,22 @@ static Mixpanel *sharedInstance = nil;
 
 + (Mixpanel *)sharedInstanceWithToken:(NSString *)apiToken
 {
+#if !DEBUG
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[super alloc] initWithToken:apiToken andFlushInterval:60];
     });
+#endif
     return sharedInstance;
 }
 
 + (Mixpanel *)sharedInstance
 {
+#if !DEBUG
     if (sharedInstance == nil) {
         NSLog(@"%@ warning sharedInstance called before sharedInstanceWithToken:", self);
     }
+#endif
     return sharedInstance;
 }
 
@@ -167,7 +171,7 @@ static Mixpanel *sharedInstance = nil;
         }
 #endif
         
-#ifndef TARGET_OS_IPHONE
+#if !TARGET_OS_IPHONE
         NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
         [notificationCenter addObserver:self
                                selector:@selector(applicationWillTerminate:)
@@ -471,7 +475,10 @@ static Mixpanel *sharedInstance = nil;
 
 + (void)assertPropertyTypes:(NSDictionary *)properties
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-variable"
     for (id k in properties) {
+#pragma clang diagnostic pop
         NSAssert([k isKindOfClass: [NSString class]], @"%@ property keys must be NSString. got: %@ %@", self, [k class], k);
         // would be convenient to do: id v = [properties objectForKey:k]; ..but, when the NSAssert's are stripped out in release, it becomes an unused variable error
         NSAssert([[properties objectForKey:k] isKindOfClass:[NSString class]] ||
