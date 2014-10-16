@@ -10,6 +10,7 @@
 
 #import <MASShortcut/MASShortcut+UserDefaults.h>
 #import <Dropbox/Dropbox.h>
+#import "Mixpanel.h"
 
 #import "JEFRecording.h"
 #import "JEFAppDelegate.h"
@@ -266,11 +267,13 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     
     [[self uploader] uploadGIF:gifURL withName:[[gifURL path] lastPathComponent] completion:^(BOOL succeeded, JEFRecording *recording, NSError *error) {
         if (error || !succeeded) {
-            NSAlert *alert = [[NSAlert alloc] init];
-            alert.messageText = NSLocalizedString(@"UploadFailedAlertTitle", nil);
-            [alert addButtonWithTitle:@"OK"];
-            alert.informativeText = [NSString stringWithFormat:@"%@", [error localizedDescription]];
-            [alert runModal];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSAlert *alert = [[NSAlert alloc] init];
+                alert.messageText = NSLocalizedString(@"UploadFailedAlertTitle", nil);
+                [alert addButtonWithTitle:@"OK"];
+                alert.informativeText = [NSString stringWithFormat:@"%@", [error localizedDescription]];
+                [alert runModal];
+            });
             return;
         }
 
@@ -288,6 +291,9 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
             [weakSelf copyURLStringToPasteboard:recording completion:^{
                 [weakSelf displaySharedUserNotificationForRecording:recording];
             }];
+
+            [[Mixpanel sharedInstance] track:@"Create Recording"];
+            [[[Mixpanel sharedInstance] people] increment:@"Recordings" by:@1];
         };
     }];
 }
@@ -332,6 +338,8 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     [self copyURLStringToPasteboard:recording completion:^{
         [self displayCopiedUserNotification];
     }];
+
+    [[Mixpanel sharedInstance] track:@"Copy Link"];
 }
 
 - (IBAction)deleteRecording:(id)sender {
@@ -348,6 +356,8 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     NSIndexSet *recordingIndex = [NSIndexSet indexSetWithIndex:[self.recentRecordingsArrayController.arrangedObjects indexOfObject:recording]];
     [self.tableView removeRowsAtIndexes:recordingIndex withAnimation:NSTableViewAnimationSlideLeft];
     [self.recentRecordingsArrayController removeObject:recording];
+
+    [[Mixpanel sharedInstance] track:@"Delete Recording"];
 }
 
 #pragma mark - NSTableViewDelegate
@@ -361,6 +371,8 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
             [[NSWorkspace sharedWorkspace] openURL:url];
         });
     }];
+
+    [[Mixpanel sharedInstance] track:@"Double Click Recording"];
 }
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
@@ -400,6 +412,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 - (NSArray *)tableView:(NSTableView *)tableView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedRowsWithIndexes:(NSIndexSet *)indexSet {
     JEFRecording *draggedRecording = [[self.recentRecordingsArrayController.arrangedObjects objectsAtIndexes:indexSet] firstObject];
     [draggedRecording.data writeToFile:[dropDestination.path stringByAppendingPathComponent:draggedRecording.path.stringValue] atomically:YES];
+    [[Mixpanel sharedInstance] track:@"Drag Recording"];
     return @[ draggedRecording.path.stringValue ];
 }
 
@@ -525,6 +538,10 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     }];
     [services addObject:markdownURLService];
     return services;
+}
+
+- (void)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker didChooseSharingService:(NSSharingService *)service {
+    [[Mixpanel sharedInstance] track:@"Share Recording" properties:@{ @"Service": service.title }];
 }
 
 @end

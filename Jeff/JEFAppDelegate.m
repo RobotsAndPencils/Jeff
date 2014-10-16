@@ -55,7 +55,16 @@
 - (void)setupMixpanel {
     NSString *mixpanelToken = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Mixpanel Token"];
     [Mixpanel sharedInstanceWithToken:mixpanelToken];
-    [[Mixpanel sharedInstance] track:@"App Launch"];
+
+    NSString *key = @"Jeff Mixpanel User ID";
+    NSString *userUUID = [[NSUserDefaults standardUserDefaults] stringForKey:key];
+    if (!userUUID || userUUID.length == 0) {
+        userUUID = [[NSUUID UUID] UUIDString];
+        [[NSUserDefaults standardUserDefaults] setValue:userUUID forKey:key];
+    }
+
+    [[Mixpanel sharedInstance] identify:userUUID];
+    [[Mixpanel sharedInstance] track:@"Launch App"];
 }
 
 - (void)setupHockeyApp {

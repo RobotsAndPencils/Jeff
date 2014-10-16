@@ -194,7 +194,9 @@
 		CAF30B5D18D5281100D7BC9D /* INPopoverWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPopoverWindow.m; sourceTree = "<group>"; };
 		CAF30B5E18D5281100D7BC9D /* INPopoverWindowFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPopoverWindowFrame.h; sourceTree = "<group>"; };
 		CAF30B5F18D5281100D7BC9D /* INPopoverWindowFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPopoverWindowFrame.m; sourceTree = "<group>"; };
-		F38F4DBF5A4643F2A390622E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		CE897CD97646331471ECA091 /* Pods.beta release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods.beta release.xcconfig"; path = "Pods/Target Support Files/Pods/Pods.beta release.xcconfig"; sourceTree = "<group>"; };
+		D636F9A5A7EBC69C14961DD4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		E6C5AE497D011C67312AFC31 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +223,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		745F83224B23FED0B6DCA229 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D636F9A5A7EBC69C14961DD4 /* Pods.debug.xcconfig */,
+				E6C5AE497D011C67312AFC31 /* Pods.release.xcconfig */,
+				CE897CD97646331471ECA091 /* Pods.beta release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		83593406A410EF88B08D5442 /* Uploaders */ = {
 			isa = PBXGroup;
 			children = (
@@ -270,7 +282,7 @@
 				CA455B2A18B83EB900F9A541 /* Frameworks */,
 				CA455B7018B84E7700F9A541 /* Resources */,
 				CA455B2918B83EB900F9A541 /* Products */,
-				F38F4DBF5A4643F2A390622E /* Pods.xcconfig */,
+				745F83224B23FED0B6DCA229 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -688,7 +700,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CAF30B4018D3CF4A00D7BC9D /* Sign Bundles */ = {
@@ -878,7 +890,7 @@
 		};
 		CA455B5A18B83EBA00F9A541 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F38F4DBF5A4643F2A390622E /* Pods.xcconfig */;
+			baseConfigurationReference = D636F9A5A7EBC69C14961DD4 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
@@ -895,10 +907,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jeff/Jeff-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"COCOAPODS=1",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "Jeff/Jeff-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MIXPANEL_TOKEN = ***REMOVED***;
@@ -910,7 +919,7 @@
 		};
 		CA455B5B18B83EBA00F9A541 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F38F4DBF5A4643F2A390622E /* Pods.xcconfig */;
+			baseConfigurationReference = E6C5AE497D011C67312AFC31 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
@@ -927,10 +936,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jeff/Jeff-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"COCOAPODS=1",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "Jeff/Jeff-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MIXPANEL_TOKEN = ***REMOVED***;
@@ -1014,7 +1020,7 @@
 		};
 		CA6E31A019E4CD3300C4B906 /* Beta Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F38F4DBF5A4643F2A390622E /* Pods.xcconfig */;
+			baseConfigurationReference = CE897CD97646331471ECA091 /* Pods.beta release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
@@ -1033,7 +1039,7 @@
 				GCC_PREFIX_HEADER = "Jeff/Jeff-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
-					"COCOAPODS=1",
+					"BETA=1",
 				);
 				INFOPLIST_FILE = "Jeff/Jeff-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
