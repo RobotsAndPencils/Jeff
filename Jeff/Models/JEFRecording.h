@@ -31,4 +31,6 @@ typedef void(^JEFRecordingUploadHandler)(JEFRecording *);
 + (instancetype)recordingWithNewFile:(DBFile *)file;
 + (instancetype)recordingWithFileInfo:(DBFileInfo *)fileInfo;
 
+- (BOOL)isEqualToRecording:(JEFRecording *)recording;
+
 @end

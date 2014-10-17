@@ -54,6 +54,17 @@
     [self.file close];
 }
 
+- (BOOL)isEqual:(id)object {
+    if (!object) return NO;
+    if (object == self) return YES;
+    if (![object isKindOfClass:[self class]]) return NO;
+    return [self isEqualToRecording:object];
+}
+
+- (BOOL)isEqualToRecording:(JEFRecording *)recording {
+    return [self.path isEqual:recording.path];
+}
+
 #pragma mark Properties
 
 - (NSString *)name {

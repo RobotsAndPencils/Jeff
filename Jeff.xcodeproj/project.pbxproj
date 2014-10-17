@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		427E998F6E1D9AAAC52FA738 /* libPods-JeffTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE16058ADECD7238FD2B58 /* libPods-JeffTests.a */; };
 		8359322E52C5BFFB013B4AC7 /* JEFDropboxUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 835935E41B797539819CFB36 /* JEFDropboxUploader.m */; };
 		8359376F55CC63D6FE3DE740 /* JEFPopoverUploaderSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83593B5EA5926018F6E2110D /* JEFPopoverUploaderSetupViewController.m */; };
 		83593BA6023A48A43B1002E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83593BD28BA68D2EAD12CF1C /* Localizable.strings */; };
@@ -22,11 +23,12 @@
 		CA455B4B18B83EBA00F9A541 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA455B4A18B83EBA00F9A541 /* XCTest.framework */; };
 		CA455B4C18B83EBA00F9A541 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA455B2B18B83EB900F9A541 /* Cocoa.framework */; };
 		CA455B5418B83EBA00F9A541 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CA455B5218B83EBA00F9A541 /* InfoPlist.strings */; };
-		CA455B5618B83EBA00F9A541 /* JeffTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B5518B83EBA00F9A541 /* JeffTests.m */; };
+		CA455B5618B83EBA00F9A541 /* JEFRecordingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B5518B83EBA00F9A541 /* JEFRecordingTests.m */; };
 		CA455B6B18B848B700F9A541 /* JEFPopoverRecordingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B6918B848B700F9A541 /* JEFPopoverRecordingsViewController.m */; };
 		CA455B7418B84EC100F9A541 /* gifsicle in Resources */ = {isa = PBXBuildFile; fileRef = CA455B7318B84EC100F9A541 /* gifsicle */; };
 		CA455B7718B84ED200F9A541 /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B7618B84ED200F9A541 /* Converter.m */; };
 		CA455B7B18B882DB00F9A541 /* NSFileManager+Temporary.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B7A18B882DB00F9A541 /* NSFileManager+Temporary.m */; };
+		CA4BB84819F0B52A00CA04FB /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC40811199C391900833FAB /* Dropbox.framework */; };
 		CA4D988418D6D2A900EFE4FD /* JEFRecordingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4D988318D6D2A900EFE4FD /* JEFRecordingCellView.m */; };
 		CA54FCEE196E2DF4000C46CC /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = CA54FCED196E2DF4000C46CC /* Constants.m */; };
 		CA571B1C1936E371005E9C46 /* JEFSelectionOverlayWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CA571B1B1936E371005E9C46 /* JEFSelectionOverlayWindow.m */; };
@@ -36,6 +38,7 @@
 		CA7A1D991991E9FF008DA733 /* JEFCreditsTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA7A1D981991E9FF008DA733 /* JEFCreditsTextView.m */; };
 		CA81B09C197777DF00761ECC /* JEFScaleToFillImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA81B09B197777DF00761ECC /* JEFScaleToFillImageView.m */; };
 		CA875EFC18B9974C009FC997 /* JEFSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA875EFB18B9974C009FC997 /* JEFSelectionView.m */; };
+		CA8B297419F0BE3A00351C9E /* Dropbox.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAC40811199C391900833FAB /* Dropbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CAA79EAC192A725800A4299F /* JEFQuartzRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA79EAB192A725800A4299F /* JEFQuartzRecorder.m */; };
 		CAB110D4192C6C61000A04C0 /* NSEvent+MouseClamped.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB110D3192C6C61000A04C0 /* NSEvent+MouseClamped.m */; };
 		CAB77D4D19E5E2CF0049B6D8 /* JEFAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB77D4C19E5E2CF0049B6D8 /* JEFAppController.m */; };
@@ -93,6 +96,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CA8B297119F0BE2D00351C9E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CA8B297419F0BE3A00351C9E /* Dropbox.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CAB1334D1999B2350099CD56 /* Copy Launcher */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
@@ -136,7 +149,7 @@
 		CA455B4A18B83EBA00F9A541 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		CA455B5118B83EBA00F9A541 /* JeffTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JeffTests-Info.plist"; sourceTree = "<group>"; };
 		CA455B5318B83EBA00F9A541 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		CA455B5518B83EBA00F9A541 /* JeffTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JeffTests.m; sourceTree = "<group>"; };
+		CA455B5518B83EBA00F9A541 /* JEFRecordingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JEFRecordingTests.m; sourceTree = "<group>"; };
 		CA455B6818B848B700F9A541 /* JEFPopoverRecordingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFPopoverRecordingsViewController.h; sourceTree = "<group>"; };
 		CA455B6918B848B700F9A541 /* JEFPopoverRecordingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFPopoverRecordingsViewController.m; sourceTree = "<group>"; };
 		CA455B7318B84EC100F9A541 /* gifsicle */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = gifsicle; path = Jeff/Resources/gifsicle; sourceTree = "<group>"; };
@@ -197,6 +210,7 @@
 		CE897CD97646331471ECA091 /* Pods.beta release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods.beta release.xcconfig"; path = "Pods/Target Support Files/Pods/Pods.beta release.xcconfig"; sourceTree = "<group>"; };
 		D636F9A5A7EBC69C14961DD4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E6C5AE497D011C67312AFC31 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		ECEE16058ADECD7238FD2B58 /* libPods-JeffTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JeffTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +231,8 @@
 			files = (
 				CA455B4C18B83EBA00F9A541 /* Cocoa.framework in Frameworks */,
 				CA455B4B18B83EBA00F9A541 /* XCTest.framework in Frameworks */,
+				427E998F6E1D9AAAC52FA738 /* libPods-JeffTests.a in Frameworks */,
+				CA4BB84819F0B52A00CA04FB /* Dropbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +320,7 @@
 				CA455B4A18B83EBA00F9A541 /* XCTest.framework */,
 				CA455B2D18B83EB900F9A541 /* Other Frameworks */,
 				552FC149DE814638B883B810 /* libPods.a */,
+				ECEE16058ADECD7238FD2B58 /* libPods-JeffTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -360,7 +377,7 @@
 		CA455B4F18B83EBA00F9A541 /* JeffTests */ = {
 			isa = PBXGroup;
 			children = (
-				CA455B5518B83EBA00F9A541 /* JeffTests.m */,
+				CA455B5518B83EBA00F9A541 /* JEFRecordingTests.m */,
 				CA455B5018B83EBA00F9A541 /* Supporting Files */,
 			);
 			path = JeffTests;
@@ -568,6 +585,7 @@
 				CA455B4518B83EBA00F9A541 /* Sources */,
 				CA455B4618B83EBA00F9A541 /* Frameworks */,
 				CA455B4718B83EBA00F9A541 /* Resources */,
+				CA8B297119F0BE2D00351C9E /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -759,7 +777,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA455B5618B83EBA00F9A541 /* JeffTests.m in Sources */,
+				CA455B5618B83EBA00F9A541 /* JEFRecordingTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -850,7 +868,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -883,7 +901,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -954,6 +972,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Jeff/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jeff/Jeff-Prefix.pch";
@@ -976,6 +995,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Jeff/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jeff/Jeff-Prefix.pch";
@@ -1013,7 +1033,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SDKROOT = macosx;
 			};
 			name = "Beta Release";
@@ -1058,6 +1078,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Jeff/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jeff/Jeff-Prefix.pch";
