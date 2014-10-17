@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6205" systemVersion="14A314h" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14A388a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="101000" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6205"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="JEFPopoverUploaderSetupViewController">
@@ -16,12 +15,12 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe">
-            <rect key="frame" x="0.0" y="0.0" width="341" height="116"/>
+            <rect key="frame" x="0.0" y="0.0" width="292" height="500"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dg0-ZU-T1C">
-                    <rect key="frame" x="110" y="43" width="123" height="32"/>
-                    <buttonCell key="cell" type="push" title="Link Dropbox" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="De3-p0-mFj">
+                    <rect key="frame" x="84" y="181" width="125" height="54"/>
+                    <buttonCell key="cell" type="bevel" title="Link Dropbox" bezelStyle="regularSquare" image="Dropbox Logo" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="De3-p0-mFj">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -29,19 +28,22 @@
                         <action selector="linkDropbox:" target="-2" id="Muv-Oq-Ki7"/>
                     </connections>
                 </button>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QKg-uI-qs9">
-                    <rect key="frame" x="47" y="79" width="248" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Get ready to make some GIFs with Jeff." id="5Jm-1J-ceE">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QKg-uI-qs9">
+                    <rect key="frame" x="6" y="249" width="280" height="51"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="276" id="0k2-zb-KMx"/>
+                    </constraints>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Jeff really wants to make some GIFs, but first you need to link your Dropbox account by clicking that button there." id="5Jm-1J-ceE">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="yiZ-df-uD5">
-                    <rect key="frame" x="235" y="52" width="16" height="16"/>
+                    <rect key="frame" x="215" y="201" width="16" height="16"/>
                 </progressIndicator>
                 <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Y4A-GO-HpB">
-                    <rect key="frame" x="254" y="17" width="25" height="25"/>
+                    <rect key="frame" x="213" y="17" width="25" height="25"/>
                     <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ehe-1s-ROr">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -51,7 +53,7 @@
                     </connections>
                 </button>
                 <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zAz-2e-v9I">
-                    <rect key="frame" x="289" y="17" width="40" height="25"/>
+                    <rect key="frame" x="244" y="17" width="40" height="25"/>
                     <buttonCell key="cell" type="roundTextured" title="Quit" bezelStyle="texturedRounded" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gMI-3f-NUn">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -68,22 +70,38 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jNj-Ug-klf">
+                    <rect key="frame" x="6" y="57" width="280" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="276" id="CIt-fg-e2j"/>
+                    </constraints>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Jeff only sees GIFs you've recorded in your Dropbox account and nothing else." id="KlF-JS-FhZ">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
-                <constraint firstItem="yiZ-df-uD5" firstAttribute="centerY" secondItem="dg0-ZU-T1C" secondAttribute="centerY" constant="0.5" id="Al4-TB-xYq"/>
-                <constraint firstItem="zAz-2e-v9I" firstAttribute="leading" secondItem="Y4A-GO-HpB" secondAttribute="trailing" constant="12" id="Gdt-W6-rYO"/>
+                <constraint firstItem="dg0-ZU-T1C" firstAttribute="top" secondItem="QKg-uI-qs9" secondAttribute="bottom" constant="16" id="4jI-Sg-lCq"/>
+                <constraint firstItem="yiZ-df-uD5" firstAttribute="centerY" secondItem="dg0-ZU-T1C" secondAttribute="centerY" id="Al4-TB-xYq"/>
+                <constraint firstAttribute="centerX" secondItem="jNj-Ug-klf" secondAttribute="centerX" id="FxD-Qx-B8m"/>
+                <constraint firstItem="zAz-2e-v9I" firstAttribute="leading" secondItem="Y4A-GO-HpB" secondAttribute="trailing" constant="8" id="Gdt-W6-rYO"/>
                 <constraint firstAttribute="centerX" secondItem="QKg-uI-qs9" secondAttribute="centerX" id="J85-Ry-ItS"/>
-                <constraint firstItem="dg0-ZU-T1C" firstAttribute="top" secondItem="QKg-uI-qs9" secondAttribute="bottom" constant="8" id="W3o-l4-ZCe"/>
                 <constraint firstAttribute="bottom" secondItem="whM-Ee-LPG" secondAttribute="bottom" constant="23" id="YjT-Ws-N8d"/>
                 <constraint firstItem="whM-Ee-LPG" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="15" id="aH7-jx-OGp"/>
                 <constraint firstItem="whM-Ee-LPG" firstAttribute="centerY" secondItem="Y4A-GO-HpB" secondAttribute="centerY" id="bZu-vh-n6C"/>
+                <constraint firstItem="zAz-2e-v9I" firstAttribute="top" secondItem="jNj-Ug-klf" secondAttribute="bottom" constant="16" id="jdV-QI-pud"/>
                 <constraint firstItem="Y4A-GO-HpB" firstAttribute="centerY" secondItem="zAz-2e-v9I" secondAttribute="centerY" id="mbb-cH-1bu"/>
                 <constraint firstItem="yiZ-df-uD5" firstAttribute="leading" secondItem="dg0-ZU-T1C" secondAttribute="trailing" constant="8" id="mmG-7q-y36"/>
-                <constraint firstAttribute="trailing" secondItem="zAz-2e-v9I" secondAttribute="trailing" constant="12" id="nO2-8W-5Oh"/>
+                <constraint firstAttribute="trailing" secondItem="zAz-2e-v9I" secondAttribute="trailing" constant="8" id="nO2-8W-5Oh"/>
                 <constraint firstItem="QKg-uI-qs9" firstAttribute="centerX" secondItem="dg0-ZU-T1C" secondAttribute="centerX" id="nRv-OS-puf"/>
-                <constraint firstItem="QKg-uI-qs9" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" id="rlW-Ee-zSa"/>
+                <constraint firstItem="QKg-uI-qs9" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="200" id="rlW-Ee-zSa"/>
             </constraints>
-            <point key="canvasLocation" x="310.5" y="260"/>
+            <point key="canvasLocation" x="393" y="315"/>
         </customView>
     </objects>
+    <resources>
+        <image name="Dropbox Logo" width="115" height="44"/>
+    </resources>
 </document>
