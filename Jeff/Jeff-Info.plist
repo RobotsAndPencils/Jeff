@@ -34,22 +34,22 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>6</string>
+	<string>7</string>
+	<key>Dropbox Key</key>
+	<string>${DROPBOX_KEY}</string>
+	<key>Dropbox Secret</key>
+	<string>${DROPBOX_SECRET}</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>LSUIElement</key>
 	<true/>
+	<key>Mixpanel Token</key>
+	<string>${MIXPANEL_TOKEN}</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2014 Robots and Pencils. All rights reserved.</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>BITCrashExceptionApplication</string>
-	<key>Dropbox Key</key>
-	<string>${DROPBOX_KEY}</string>
-	<key>Dropbox Secret</key>
-	<string>${DROPBOX_SECRET}</string>
-	<key>Mixpanel Token</key>
-	<string>${MIXPANEL_TOKEN}</string>
 </dict>
 </plist>
