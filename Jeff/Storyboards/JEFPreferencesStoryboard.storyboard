@@ -31,11 +31,11 @@
                 <customObject id="R4X-zv-grB" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController title="Preferences" nibName="" id="hcX-tR-6FI" customClass="JEFUploaderPreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="01J-C7-M6j">
-                        <rect key="frame" x="0.0" y="0.0" width="437" height="381"/>
+                        <rect key="frame" x="0.0" y="0.0" width="437" height="403"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EYK-Pu-veP">
-                                <rect key="frame" x="14" y="299" width="136" height="32"/>
+                                <rect key="frame" x="14" y="321" width="136" height="32"/>
                                 <buttonCell key="cell" type="push" title="Unlink Dropbox" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ezq-Av-0gL">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -45,7 +45,7 @@
                                 </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="lPg-hI-bQi">
-                                <rect key="frame" x="18" y="345" width="143" height="18"/>
+                                <rect key="frame" x="18" y="367" width="143" height="18"/>
                                 <buttonCell key="cell" type="check" title="Launch Jeff at login" bezelStyle="regularSquare" imagePosition="left" inset="2" id="0Jt-kO-2z8">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -64,7 +64,7 @@
                                 </textFieldCell>
                             </textField>
                             <box autoresizesSubviews="NO" title="Shortcuts" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="BCk-9w-EPg">
-                                <rect key="frame" x="17" y="201" width="403" height="85"/>
+                                <rect key="frame" x="17" y="223" width="403" height="85"/>
                                 <view key="contentView">
                                     <rect key="frame" x="1" y="1" width="401" height="69"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -115,8 +115,51 @@
                                 <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </box>
+                            <scrollView verticalHuggingPriority="750" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j52-xg-lZd">
+                                <rect key="frame" x="17" y="133" width="400" height="20"/>
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="NFl-3J-jNF">
+                                    <rect key="frame" x="1" y="1" width="223" height="133"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView editable="NO" importsGraphics="NO" verticallyResizable="NO" baseWritingDirection="leftToRight" findStyle="panel" allowsNonContiguousLayout="YES" linkDetection="YES" spellingCorrection="YES" id="smz-nx-2kK" customClass="JEFCreditsTextView">
+                                            <rect key="frame" x="0.0" y="0.0" width="223" height="133"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                            <size key="minSize" width="400" height="20"/>
+                                            <size key="maxSize" width="481" height="10000000"/>
+                                            <attributedString key="textStorage">
+                                                <fragment content="Jeff is made by Brandon Evans at Robots and Pencils.">
+                                                    <attributes>
+                                                        <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                                        <real key="NSKern" value="0.0"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                            <tabStops/>
+                                                        </paragraphStyle>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <size key="minSize" width="400" height="20"/>
+                                            <size key="maxSize" width="481" height="10000000"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                </clipView>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="VPy-lr-H7A"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="k8S-X1-5e6"/>
+                                </constraints>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="8CR-kj-9v7">
+                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="K6a-SG-81j">
+                                    <rect key="frame" x="224" y="1" width="15" height="133"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
                             <scrollView verticalHuggingPriority="750" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67K-Ye-CXo">
-                                <rect key="frame" x="17" y="45" width="400" height="90"/>
+                                <rect key="frame" x="17" y="45" width="400" height="48"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="mU2-Uc-DIb">
                                     <rect key="frame" x="1" y="1" width="223" height="133"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -125,13 +168,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="223" height="133"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                            <size key="minSize" width="400" height="90"/>
+                                            <size key="minSize" width="400" height="48"/>
                                             <size key="maxSize" width="481" height="10000000"/>
                                             <attributedString key="textStorage">
-                                                <fragment>
-                                                    <string key="content">Jeff is made by Brandon Evans at Robots and Pencils.
-
-It's also made up of some code written by others: </string>
+                                                <fragment content="It's also made up of some code written by others: ">
                                                     <attributes>
                                                         <font key="NSFont" size="13" name="HelveticaNeue"/>
                                                         <real key="NSKern" value="0.0"/>
@@ -263,7 +303,7 @@ It's also made up of some code written by others: </string>
                                                 </fragment>
                                             </attributedString>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="400" height="90"/>
+                                            <size key="minSize" width="400" height="48"/>
                                             <size key="maxSize" width="481" height="10000000"/>
                                         </textView>
                                     </subviews>
@@ -271,7 +311,7 @@ It's also made up of some code written by others: </string>
                                 </clipView>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="CxJ-eI-8p3"/>
-                                    <constraint firstAttribute="height" constant="90" id="xQ8-6F-IlJ"/>
+                                    <constraint firstAttribute="height" constant="48" id="xQ8-6F-IlJ"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="y7v-IB-09T">
                                     <rect key="frame" x="-100" y="-100" width="87" height="18"/>
@@ -282,12 +322,35 @@ It's also made up of some code written by others: </string>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S87-Dg-CW4">
+                                <rect key="frame" x="16" y="101" width="139" height="32"/>
+                                <buttonCell key="cell" type="push" title="Email us" bezelStyle="rounded" image="Envelope" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Yj6-wV-IG7">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="sendEmail:" target="hcX-tR-6FI" id="rVf-Gc-fLT"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Re0-cz-No8">
+                                <rect key="frame" x="155" y="101" width="137" height="32"/>
+                                <buttonCell key="cell" type="push" title="lol email" bezelStyle="rounded" image="Twitter" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uZM-dI-qbZ">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="sendTweet:" target="hcX-tR-6FI" id="w10-Cy-rYq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="67K-Ye-CXo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="BCk-9w-EPg" secondAttribute="bottom" constant="40" id="65t-gX-BZF"/>
+                            <constraint firstItem="j52-xg-lZd" firstAttribute="top" relation="greaterThanOrEqual" secondItem="BCk-9w-EPg" secondAttribute="bottom" constant="45" id="0by-pB-LJH"/>
+                            <constraint firstItem="S87-Dg-CW4" firstAttribute="top" secondItem="j52-xg-lZd" secondAttribute="bottom" constant="4" id="5vZ-My-Gr7"/>
+                            <constraint firstItem="Re0-cz-No8" firstAttribute="leading" secondItem="S87-Dg-CW4" secondAttribute="trailing" constant="12" id="6n6-47-GhR"/>
                             <constraint firstItem="BCk-9w-EPg" firstAttribute="top" secondItem="EYK-Pu-veP" secondAttribute="bottom" constant="20" id="GfB-uQ-gDi"/>
                             <constraint firstItem="67K-Ye-CXo" firstAttribute="leading" secondItem="01J-C7-M6j" secondAttribute="leading" constant="17" id="H4r-1b-hsL"/>
                             <constraint firstItem="BCk-9w-EPg" firstAttribute="leading" secondItem="01J-C7-M6j" secondAttribute="leading" constant="20" id="HUe-pv-3IX"/>
+                            <constraint firstItem="67K-Ye-CXo" firstAttribute="top" secondItem="S87-Dg-CW4" secondAttribute="bottom" constant="15" id="LCD-cT-Co0"/>
                             <constraint firstItem="VHF-Su-JDS" firstAttribute="leading" secondItem="01J-C7-M6j" secondAttribute="leading" constant="22" id="Luh-Ln-GEI"/>
                             <constraint firstItem="EYK-Pu-veP" firstAttribute="leading" secondItem="01J-C7-M6j" secondAttribute="leading" constant="20" id="Wq1-BG-iwM"/>
                             <constraint firstAttribute="trailing" secondItem="67K-Ye-CXo" secondAttribute="trailing" constant="20" id="f74-2c-WSE"/>
@@ -296,14 +359,21 @@ It's also made up of some code written by others: </string>
                             <constraint firstAttribute="bottom" secondItem="VHF-Su-JDS" secondAttribute="bottom" constant="20" id="q2P-es-t1D"/>
                             <constraint firstItem="EYK-Pu-veP" firstAttribute="top" secondItem="lPg-hI-bQi" secondAttribute="bottom" constant="20" id="qIJ-Kg-GrH"/>
                             <constraint firstItem="lPg-hI-bQi" firstAttribute="leading" secondItem="01J-C7-M6j" secondAttribute="leading" constant="20" id="sKO-YX-xk1"/>
+                            <constraint firstItem="j52-xg-lZd" firstAttribute="leading" secondItem="01J-C7-M6j" secondAttribute="leading" constant="17" id="sPd-SP-mVl"/>
+                            <constraint firstItem="Re0-cz-No8" firstAttribute="centerY" secondItem="S87-Dg-CW4" secondAttribute="centerY" id="tAX-CE-eKu"/>
+                            <constraint firstItem="S87-Dg-CW4" firstAttribute="leading" secondItem="01J-C7-M6j" secondAttribute="leading" constant="22" id="wWE-9l-rxA"/>
+                            <constraint firstAttribute="trailing" secondItem="j52-xg-lZd" secondAttribute="trailing" constant="20" id="ykp-zn-rV3"/>
                             <constraint firstAttribute="trailing" secondItem="BCk-9w-EPg" secondAttribute="trailing" constant="20" id="z8p-pf-KnY"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="creditTextView" destination="smz-nx-2kK" id="SYC-2u-RVf"/>
+                        <outlet property="emailButton" destination="S87-Dg-CW4" id="dNt-vO-Tq7"/>
                         <outlet property="linkButton" destination="EYK-Pu-veP" id="7zF-jU-p2K"/>
                         <outlet property="openSourceCreditTextView" destination="NqH-GT-BHc" id="jg3-zG-2NB"/>
                         <outlet property="recordScreenShortcutView" destination="bZj-MY-CSg" id="IwK-Su-07l"/>
                         <outlet property="recordSelectionShortcutView" destination="69n-ax-ZZs" id="trb-Cp-rhf"/>
+                        <outlet property="tweetButton" destination="Re0-cz-No8" id="7ux-Yq-Sjj"/>
                         <outlet property="versionLabel" destination="VHF-Su-JDS" id="Sb6-HT-QTt"/>
                     </connections>
                 </viewController>
@@ -313,7 +383,11 @@ It's also made up of some code written by others: </string>
                     </userDefinedRuntimeAttributes>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="65.5" y="782.5"/>
+            <point key="canvasLocation" x="65.5" y="759.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Envelope" width="40" height="40"/>
+        <image name="Twitter" width="40" height="40"/>
+    </resources>
 </document>
