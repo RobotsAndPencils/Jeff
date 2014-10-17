@@ -40,6 +40,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 @property (weak, nonatomic) IBOutlet NSView *emptyStateContainerView;
 @property (weak, nonatomic) IBOutlet NSView *dropboxSyncingContainerView;
 @property (weak, nonatomic) IBOutlet NSProgressIndicator *dropboxSyncingProgressIndicator;
+@property (weak, nonatomic) IBOutlet NSTextField *emptyStateTextField;
 
 @end
 
@@ -92,6 +93,8 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     });
 
     [self addObserver:self forKeyPath:@"recentRecordings" options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
+    [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:[@"values." stringByAppendingString:JEFRecordScreenShortcutKey] options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
+    [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:[@"values." stringByAppendingString:JEFRecordSelectionShortcutKey] options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
 }
 
 - (void)viewDidAppear {
@@ -102,16 +105,25 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 - (void)dealloc {
     [[DBFilesystem sharedFilesystem] removeObserver:self];
     [self removeObserver:self forKeyPath:@"recentRecordings"];
+    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:[@"values." stringByAppendingString:JEFRecordScreenShortcutKey] context:PopoverContentViewControllerContext];
+    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:[@"values." stringByAppendingString:JEFRecordSelectionShortcutKey] context:PopoverContentViewControllerContext];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if (context != PopoverContentViewControllerContext) return;
+    if (context != PopoverContentViewControllerContext) {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        return;
+    }
 
     if ([keyPath isEqualToString:@"recentRecordings"]) {
         BOOL hasRecordings = self.recentRecordings.count > 0;
         dispatch_async(dispatch_get_main_queue(), ^{
             self.emptyStateContainerView.hidden = hasRecordings;
         });
+    }
+
+    if ([keyPath isEqualToString:[@"values." stringByAppendingString:JEFRecordScreenShortcutKey]] || [keyPath isEqualToString:[@"values." stringByAppendingString:JEFRecordSelectionShortcutKey]]) {
+        [self updateTableViewEmptyStateText];
     }
 }
 
@@ -560,6 +572,19 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     }
     self.recentRecordings = [self loadRecentRecordings];
     [self.tableView reloadData];
+}
+
+- (void)updateTableViewEmptyStateText {
+    NSData *screenData = [[NSUserDefaultsController sharedUserDefaultsController] valueForKeyPath:[@"values." stringByAppendingString:JEFRecordScreenShortcutKey]];
+    NSData *selectionData = [[NSUserDefaultsController sharedUserDefaultsController] valueForKeyPath:[@"values." stringByAppendingString:JEFRecordSelectionShortcutKey]];
+
+    MASShortcut *screenShortcut = [MASShortcut shortcutWithData:screenData];
+    MASShortcut *selectionShortcut = [MASShortcut shortcutWithData:selectionData];
+    NSString *screen = [screenShortcut.modifierFlagsString stringByAppendingString:screenShortcut.keyCodeString];
+    NSString *selection = [selectionShortcut.modifierFlagsString stringByAppendingString:selectionShortcut.keyCodeString];
+
+    NSString *emptyStateFormatString = NSLocalizedString(@"RecordingsTableViewEmptyStateMessage", @"Contains a usage message with two %@ format placeholders for the screen and selection recording shortcut strings");
+    self.emptyStateTextField.stringValue = [NSString stringWithFormat:emptyStateFormatString, screen, selection];
 }
 
 #pragma mark - NSUserNotificationCenterDelegate
