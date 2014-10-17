@@ -37,6 +37,9 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 @property (strong, nonatomic) NSMutableArray *overlayWindows;
 @property (strong, nonatomic) JEFQuartzRecorder *recorder;
 @property (assign, nonatomic, getter=isShowingSelection) BOOL showingSelection;
+@property (weak, nonatomic) IBOutlet NSView *emptyStateContainerView;
+@property (weak, nonatomic) IBOutlet NSView *dropboxSyncingContainerView;
+@property (weak, nonatomic) IBOutlet NSProgressIndicator *dropboxSyncingProgressIndicator;
 
 @end
 
@@ -64,6 +67,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     self.recorder = [[JEFQuartzRecorder alloc] init];
 
     self.overlayWindows = [NSMutableArray array];
+    [self.dropboxSyncingProgressIndicator startAnimation:nil];
 
     [NSUserNotificationCenter defaultUserNotificationCenter].delegate = self;
 
@@ -86,24 +90,8 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
             [weakSelf stopRecording:nil];
         }];
     });
-}
 
-- (void)setupDropboxFilesystem {
-    DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
-    BOOL alreadyHaveFilesystem = [[[DBFilesystem sharedFilesystem] account] isEqual:account];
-    if (account && !alreadyHaveFilesystem) {
-        DBFilesystem *filesystem = [[DBFilesystem alloc] initWithAccount:account];
-        [DBFilesystem setSharedFilesystem:filesystem];
-        self.recentRecordings = [self loadRecentRecordings];
-
-        // The purpose of watching the filesystem to update the list of recordings
-        // is just for cases where you link a Dropbox account that already has
-        // recordings in it.
-        [[DBFilesystem sharedFilesystem] addObserver:self block:^{
-            self.recentRecordings = [self loadRecentRecordings];
-            [self.tableView reloadData];
-        }];
-    }
+    [self addObserver:self forKeyPath:@"recentRecordings" options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
 }
 
 - (void)viewDidAppear {
@@ -113,6 +101,18 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (void)dealloc {
     [[DBFilesystem sharedFilesystem] removeObserver:self];
+    [self removeObserver:self forKeyPath:@"recentRecordings"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (context != PopoverContentViewControllerContext) return;
+
+    if ([keyPath isEqualToString:@"recentRecordings"]) {
+        BOOL hasRecordings = self.recentRecordings.count > 0;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.emptyStateContainerView.hidden = hasRecordings;
+        });
+    }
 }
 
 - (IBAction)showMenu:(NSButton *)sender {
@@ -446,7 +446,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 #pragma mark - Recording Persistence
 
 - (NSMutableArray *)loadRecentRecordings {
-    BOOL isShutdown =  [[DBFilesystem sharedFilesystem] isShutDown];
+    BOOL isShutdown = [[DBFilesystem sharedFilesystem] isShutDown];
     BOOL notFinishedSyncing = ![[DBFilesystem sharedFilesystem] completedFirstSync];
     if (isShutdown || notFinishedSyncing) return [NSMutableArray array];
 
@@ -537,6 +537,29 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
         if (completion) completion();
     }];
+}
+
+- (void)setupDropboxFilesystem {
+    DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
+    BOOL alreadyHaveFilesystem = [[[DBFilesystem sharedFilesystem] account] isEqual:account];
+    if (account && !alreadyHaveFilesystem) {
+        DBFilesystem *filesystem = [[DBFilesystem alloc] initWithAccount:account];
+        [DBFilesystem setSharedFilesystem:filesystem];
+
+        // The purpose of watching the filesystem to update the list of recordings
+        // is just for cases where you link a Dropbox account that already has
+        // recordings in it.
+        [[DBFilesystem sharedFilesystem] addObserver:self block:^{
+            self.recentRecordings = [self loadRecentRecordings];
+            [self.tableView reloadData];
+
+            BOOL stateIsSyncing = [DBFilesystem sharedFilesystem].status.download.inProgress;
+            BOOL hasRecordings = self.recentRecordings.count > 0;
+            self.dropboxSyncingContainerView.hidden = hasRecordings || !stateIsSyncing;
+        }];
+    }
+    self.recentRecordings = [self loadRecentRecordings];
+    [self.tableView reloadData];
 }
 
 #pragma mark - NSUserNotificationCenterDelegate
