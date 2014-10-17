@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14A386a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="czx-q9-v5M">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14A388a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="czx-q9-v5M">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
     </dependencies>
@@ -39,11 +39,11 @@
             <objects>
                 <viewController id="gTI-EO-G1X" customClass="JEFPopoverRecordingsViewController" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="GUC-2g-azr">
-                        <rect key="frame" x="0.0" y="0.0" width="325" height="296"/>
+                        <rect key="frame" x="0.0" y="0.0" width="325" height="506"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="201" horizontalPageScroll="10" verticalLineScroll="201" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="Gf6-NN-Iq2">
-                                <rect key="frame" x="0.0" y="0.0" width="325" height="279"/>
+                                <rect key="frame" x="0.0" y="0.0" width="325" height="489"/>
                                 <clipView key="contentView" wantsLayer="YES" copiesOnScroll="NO" id="jh4-2L-pST">
                                     <rect key="frame" x="0.0" y="0.0" width="325" height="176"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -202,7 +202,7 @@
                                 </scroller>
                             </scrollView>
                             <visualEffectView wantsLayer="YES" appearanceType="vibrantLight" blendingMode="withinWindow" material="titlebar" state="followsWindowActiveState" maskImage="RecordingsHeaderMask" translatesAutoresizingMaskIntoConstraints="NO" id="M8f-DG-79k" userLabel="Header Container View">
-                                <rect key="frame" x="0.0" y="234" width="325" height="62"/>
+                                <rect key="frame" x="0.0" y="444" width="325" height="62"/>
                                 <subviews>
                                     <button wantsLayer="YES" verticalHuggingPriority="750" alphaValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="fat-ca-lbR" userLabel="Quit Button">
                                         <rect key="frame" x="8" y="17" width="30" height="17"/>
@@ -260,18 +260,72 @@
                                     <constraint firstItem="HFB-N6-MP2" firstAttribute="leading" secondItem="hNM-Ou-Xat" secondAttribute="trailing" constant="8" id="sbj-YF-MVu"/>
                                 </constraints>
                             </visualEffectView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="njs-Kz-dle" userLabel="Empty State Container">
+                                <rect key="frame" x="13" y="178" width="300" height="150"/>
+                                <subviews>
+                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4rV-Ls-eAn">
+                                        <rect key="frame" x="-2" y="16" width="304" height="119"/>
+                                        <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" id="mLQ-mh-9Tj">
+                                            <font key="font" size="18" name="HelveticaNeue-Light"/>
+                                            <string key="title">Click the Record button above to, uh, record something. You could also press %@ to record a selection or %@ for the whole screen.</string>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="4rV-Ls-eAn" secondAttribute="centerY" id="FQP-iC-4QK"/>
+                                    <constraint firstAttribute="height" constant="150" id="U2m-xl-NSY"/>
+                                    <constraint firstItem="4rV-Ls-eAn" firstAttribute="width" secondItem="njs-Kz-dle" secondAttribute="width" id="clr-8G-95y"/>
+                                    <constraint firstAttribute="trailing" secondItem="4rV-Ls-eAn" secondAttribute="trailing" id="goG-Md-loQ"/>
+                                    <constraint firstAttribute="width" constant="300" id="hPU-GV-2rH"/>
+                                    <constraint firstItem="4rV-Ls-eAn" firstAttribute="leading" secondItem="njs-Kz-dle" secondAttribute="leading" id="tdn-LX-hk8"/>
+                                </constraints>
+                            </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="lgB-sO-C34" userLabel="Dropbox Syncing Container">
+                                <rect key="frame" x="88" y="28" width="150" height="150"/>
+                                <subviews>
+                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OAS-yr-WxU">
+                                        <rect key="frame" x="-2" y="67" width="154" height="17"/>
+                                        <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="Syncing with Dropbox" id="jTp-mO-ejH">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="nXh-t0-7D7">
+                                        <rect key="frame" x="67" y="87" width="16" height="16"/>
+                                    </progressIndicator>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="nXh-t0-7D7" firstAttribute="top" secondItem="OAS-yr-WxU" secondAttribute="bottom" constant="-36" id="2A1-ci-gGB"/>
+                                    <constraint firstAttribute="height" constant="150" id="DWR-wP-TMD"/>
+                                    <constraint firstAttribute="trailing" secondItem="OAS-yr-WxU" secondAttribute="trailing" id="Mpn-S8-ODa"/>
+                                    <constraint firstAttribute="centerX" secondItem="nXh-t0-7D7" secondAttribute="centerX" id="Rod-Gm-Q88"/>
+                                    <constraint firstAttribute="width" constant="150" id="r4c-Qs-MuA"/>
+                                    <constraint firstItem="OAS-yr-WxU" firstAttribute="leading" secondItem="lgB-sO-C34" secondAttribute="leading" id="tTA-9N-2hu"/>
+                                    <constraint firstAttribute="centerY" secondItem="OAS-yr-WxU" secondAttribute="centerY" id="ufy-Ju-j2g"/>
+                                </constraints>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="M8f-DG-79k" firstAttribute="top" secondItem="GUC-2g-azr" secondAttribute="top" id="07T-ob-yR5"/>
                             <constraint firstAttribute="bottom" secondItem="Gf6-NN-Iq2" secondAttribute="bottom" id="0vR-JB-EWu"/>
+                            <constraint firstAttribute="centerY" secondItem="lgB-sO-C34" secondAttribute="centerY" constant="-150" id="C7i-K6-lSF"/>
                             <constraint firstItem="M8f-DG-79k" firstAttribute="leading" secondItem="GUC-2g-azr" secondAttribute="leading" id="Mjo-th-87n"/>
                             <constraint firstAttribute="trailing" secondItem="M8f-DG-79k" secondAttribute="trailing" id="SyU-gQ-1pj"/>
                             <constraint firstItem="Gf6-NN-Iq2" firstAttribute="top" secondItem="GUC-2g-azr" secondAttribute="top" constant="17" id="dr4-wN-Fpw"/>
+                            <constraint firstAttribute="centerX" secondItem="lgB-sO-C34" secondAttribute="centerX" id="g14-ax-KBq"/>
+                            <constraint firstAttribute="centerY" secondItem="njs-Kz-dle" secondAttribute="centerY" id="ngB-Qp-sa0"/>
                             <constraint firstItem="Gf6-NN-Iq2" firstAttribute="leading" secondItem="GUC-2g-azr" secondAttribute="leading" id="td7-Fj-tve"/>
+                            <constraint firstAttribute="centerX" secondItem="njs-Kz-dle" secondAttribute="centerX" id="ys0-d4-UAb"/>
                             <constraint firstAttribute="trailing" secondItem="Gf6-NN-Iq2" secondAttribute="trailing" id="zIM-pC-Lio"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dropboxSyncingContainerView" destination="lgB-sO-C34" id="pEj-6G-F2w"/>
+                        <outlet property="dropboxSyncingProgressIndicator" destination="nXh-t0-7D7" id="EFi-6d-e0r"/>
+                        <outlet property="emptyStateContainerView" destination="njs-Kz-dle" id="KVX-zX-6A6"/>
                         <outlet property="headerContainerView" destination="M8f-DG-79k" id="vq2-Vj-WjK"/>
                         <outlet property="recentRecordingsArrayController" destination="jGV-2I-igK" id="ZnS-LR-kjU"/>
                         <outlet property="recordSelectionButton" destination="QCX-5M-k3c" id="Qns-u0-6j8"/>
@@ -286,7 +340,7 @@
                     </connections>
                 </arrayController>
             </objects>
-            <point key="canvasLocation" x="1420.5" y="-109"/>
+            <point key="canvasLocation" x="1420.5" y="-4"/>
         </scene>
     </scenes>
     <resources>
