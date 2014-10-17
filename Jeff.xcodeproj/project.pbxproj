@@ -607,7 +607,7 @@
 				ORGANIZATIONNAME = "Brandon Evans";
 				TargetAttributes = {
 					CA455B2718B83EB900F9A541 = {
-						DevelopmentTeam = Z2R9WCWER2;
+						DevelopmentTeam = PBH8V487HB;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 1;
