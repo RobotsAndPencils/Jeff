@@ -40,7 +40,7 @@
 
 - (void)uploadGIF:(NSURL *)url withName:(NSString *)name completion:(JEFUploaderCompletionBlock)completion {
     DBPath *filePath = [[DBPath root] childPath:url.lastPathComponent];
-    __block DBError *error;
+    DBError *error;
     DBFile *newFile = [[DBFilesystem sharedFilesystem] createFile:filePath error:&error];
     if (!newFile || error) {
         if (completion) completion(NO, nil, error);

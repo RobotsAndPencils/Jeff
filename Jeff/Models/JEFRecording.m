@@ -115,6 +115,8 @@
     if (!_posterFrameImage && !self.isFetchingPosterFrame && self.file.info.thumbExists) {
         self.isFetchingPosterFrame = YES;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            if ([[DBFilesystem sharedFilesystem] isShutDown]) return;
+
             DBError *openError;
             DBFile *thumbFile = [[DBFilesystem sharedFilesystem] openThumbnail:self.file.info.path ofSize:DBThumbSizeL inFormat:DBThumbFormatPNG error:&openError];
             if (openError) {

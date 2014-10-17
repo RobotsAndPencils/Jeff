@@ -11,11 +11,12 @@
 #import <Dropbox/Dropbox.h>
 
 #import "JEFPopoverUploaderSetupViewController.h"
+#import "JEFPopoverRecordingsViewController.h"
 
 
 @interface JEFPopoverContentViewController ()
 
-@property (nonatomic, strong) NSViewController *recordingsViewController;
+@property (nonatomic, strong) JEFPopoverRecordingsViewController *recordingsViewController;
 @property (nonatomic, strong) JEFPopoverUploaderSetupViewController *uploaderSetupViewController;
 @property (nonatomic, assign, getter=isShowingSetup) BOOL showingSetup;
 
@@ -59,7 +60,10 @@
     
     if (linked && self.isShowingSetup) {
         NSViewControllerTransitionOptions transition = immediately ? NSViewControllerTransitionNone : NSViewControllerTransitionSlideBackward;
-        [self transitionFromViewController:self.uploaderSetupViewController toViewController:self.recordingsViewController options:transition completionHandler:^(){}];
+        __weak __typeof(self) weakSelf = self;
+        [self transitionFromViewController:self.uploaderSetupViewController toViewController:self.recordingsViewController options:transition completionHandler:^(){
+            [weakSelf.recordingsViewController setupDropboxFilesystem];
+        }];
         self.showingSetup = NO;
     }
     else if (!linked && !self.isShowingSetup) {
