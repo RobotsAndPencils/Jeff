@@ -51,6 +51,14 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
         [DBFilesystem setSharedFilesystem:filesystem];
     }
 
+    // The purpose of watching the filesystem to update the list of recordings
+    // is just for cases where you link a Dropbox account that already has
+    // recordings in it.
+    [[DBFilesystem sharedFilesystem] addObserver:self block:^{
+        self.recentRecordings = [self loadRecentRecordings];
+        [self.tableView reloadData];
+    }];
+
     self.tableView.enclosingScrollView.layer.cornerRadius = 5.0;
     self.tableView.enclosingScrollView.layer.masksToBounds = YES;
 
@@ -428,7 +436,9 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 #pragma mark - Recording Persistence
 
 - (NSMutableArray *)loadRecentRecordings {
-    if (![[DBFilesystem sharedFilesystem] completedFirstSync]) return [NSMutableArray array];
+    BOOL isShutdown =  [[DBFilesystem sharedFilesystem] isShutDown];
+    BOOL notFinishedSyncing = ![[DBFilesystem sharedFilesystem] completedFirstSync];
+    if (isShutdown || notFinishedSyncing) return [NSMutableArray array];
 
     DBError *listError;
     NSArray *files = [[DBFilesystem sharedFilesystem] listFolder:[DBPath root] error:&listError];
@@ -440,7 +450,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     if (!recordings) recordings = [NSMutableArray array];
     for (DBFileInfo *fileInfo in files) {
         JEFRecording *newRecording = [JEFRecording recordingWithFileInfo:fileInfo];
-        if (newRecording) {
+        if (newRecording && ![recordings containsObject:newRecording]) {
             [recordings addObject:newRecording];
         }
     }
