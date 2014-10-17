@@ -326,6 +326,7 @@
                         <outlet property="dropboxSyncingContainerView" destination="lgB-sO-C34" id="pEj-6G-F2w"/>
                         <outlet property="dropboxSyncingProgressIndicator" destination="nXh-t0-7D7" id="EFi-6d-e0r"/>
                         <outlet property="emptyStateContainerView" destination="njs-Kz-dle" id="KVX-zX-6A6"/>
+                        <outlet property="emptyStateTextField" destination="4rV-Ls-eAn" id="xV2-Xc-sdt"/>
                         <outlet property="headerContainerView" destination="M8f-DG-79k" id="vq2-Vj-WjK"/>
                         <outlet property="recentRecordingsArrayController" destination="jGV-2I-igK" id="ZnS-LR-kjU"/>
                         <outlet property="recordSelectionButton" destination="QCX-5M-k3c" id="Qns-u0-6j8"/>
