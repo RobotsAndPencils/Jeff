@@ -561,7 +561,9 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 }
 
 - (void)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker didChooseSharingService:(NSSharingService *)service {
-    [[Mixpanel sharedInstance] track:@"Share Recording" properties:@{ @"Service": service.title }];
+    NSString *title = (service.title && service.title.length > 0) ? service.title : @"Unknown";
+    NSLog(@"%@", title);
+    [[Mixpanel sharedInstance] track:@"Share Recording" properties:@{ @"Service": title }];
 }
 
 @end
