@@ -9,4 +9,6 @@
 
 @interface JEFPopoverRecordingsViewController : NSViewController
 
+- (void)setupDropboxFilesystem;
+
 @end

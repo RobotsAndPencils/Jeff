@@ -45,19 +45,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
-    if (account) {
-        DBFilesystem *filesystem = [[DBFilesystem alloc] initWithAccount:account];
-        [DBFilesystem setSharedFilesystem:filesystem];
-    }
-
-    // The purpose of watching the filesystem to update the list of recordings
-    // is just for cases where you link a Dropbox account that already has
-    // recordings in it.
-    [[DBFilesystem sharedFilesystem] addObserver:self block:^{
-        self.recentRecordings = [self loadRecentRecordings];
-        [self.tableView reloadData];
-    }];
+    [self setupDropboxFilesystem];
 
     self.tableView.enclosingScrollView.layer.cornerRadius = 5.0;
     self.tableView.enclosingScrollView.layer.masksToBounds = YES;
@@ -76,7 +64,6 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     self.recorder = [[JEFQuartzRecorder alloc] init];
 
     self.overlayWindows = [NSMutableArray array];
-    self.recentRecordings = [self loadRecentRecordings];
 
     [NSUserNotificationCenter defaultUserNotificationCenter].delegate = self;
 
@@ -99,6 +86,29 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
             [weakSelf stopRecording:nil];
         }];
     });
+}
+
+- (void)setupDropboxFilesystem {
+    DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
+    BOOL alreadyHaveFilesystem = [[[DBFilesystem sharedFilesystem] account] isEqual:account];
+    if (account && !alreadyHaveFilesystem) {
+        DBFilesystem *filesystem = [[DBFilesystem alloc] initWithAccount:account];
+        [DBFilesystem setSharedFilesystem:filesystem];
+        self.recentRecordings = [self loadRecentRecordings];
+
+        // The purpose of watching the filesystem to update the list of recordings
+        // is just for cases where you link a Dropbox account that already has
+        // recordings in it.
+        [[DBFilesystem sharedFilesystem] addObserver:self block:^{
+            self.recentRecordings = [self loadRecentRecordings];
+            [self.tableView reloadData];
+        }];
+    }
+}
+
+- (void)viewDidAppear {
+    [super viewDidAppear];
+    [self setupDropboxFilesystem];
 }
 
 - (void)dealloc {
