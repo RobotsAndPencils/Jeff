@@ -82,6 +82,11 @@
 
     NSSharingService *twitterService = [NSSharingService sharingServiceNamed:NSSharingServiceNamePostOnTwitter];
     self.tweetButton.enabled = twitterService && [twitterService canPerformWithItems:nil];
+
+    // Prefer email contact when not in release mode
+#if DEBUG || BETA
+    self.tweetButton.enabled = NO;
+#endif
 }
 
 - (void)dealloc {
