@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "RSVerticallyCenteredTextFieldCell.h"
 #import <tgmath.h>
+#import <Carbon/Carbon.h>
 
 
 const CGFloat HandleSize = 5.0;
@@ -117,13 +118,17 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 }
 
 - (void)confirmRect {
+    if (CGRectEqualToRect(self.selectionRect, CGRectZero)) return;
+
     self.confirmRectButton.hidden = YES;
     [self.shapeLayer removeFromSuperlayer];
     [self.handlesLayer removeFromSuperlayer];
 
     [self display];
 
-    [self.delegate selectionView:self didSelectRect:self.selectionRect];
+    if ([self.delegate respondsToSelector:@selector(selectionView:didSelectRect:)]) {
+        [self.delegate selectionView:self didSelectRect:self.selectionRect];
+    }
 }
 
 #pragma mark - NSResponder
@@ -134,6 +139,14 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 
 - (void)cancelOperation:(id)sender {
     [self.delegate selectionViewDidCancel:self];
+}
+
+- (void)keyDown:(NSEvent *)theEvent {
+    if (theEvent.keyCode == kVK_Return) {
+        [self confirmRect];
+        return;
+    }
+    [super keyDown:theEvent];
 }
 
 #pragma mark - Mouse events
