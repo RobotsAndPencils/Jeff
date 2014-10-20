@@ -260,10 +260,10 @@
                                     <constraint firstItem="HFB-N6-MP2" firstAttribute="leading" secondItem="hNM-Ou-Xat" secondAttribute="trailing" constant="8" id="sbj-YF-MVu"/>
                                 </constraints>
                             </visualEffectView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="njs-Kz-dle" userLabel="Empty State Container">
+                            <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="njs-Kz-dle" userLabel="Empty State Container">
                                 <rect key="frame" x="13" y="178" width="300" height="150"/>
                                 <subviews>
-                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4rV-Ls-eAn">
+                                    <textField wantsLayer="YES" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4rV-Ls-eAn">
                                         <rect key="frame" x="-2" y="16" width="304" height="119"/>
                                         <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" id="mLQ-mh-9Tj">
                                             <font key="font" size="18" name="HelveticaNeue-Light"/>

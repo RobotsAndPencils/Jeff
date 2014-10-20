@@ -1,10 +1,12 @@
 PODS:
   - HockeySDK-Mac (2.1.0)
   - MASShortcut (1.2.3)
+  - pop (1.0.7)
 
 DEPENDENCIES:
   - HockeySDK-Mac (~> 2.1.0)
   - MASShortcut (from `git@github.com:RobotsAndPencils/MASShortcut.git`, branch `initWithCoder`)
+  - pop (~> 1.0)
 
 EXTERNAL SOURCES:
   MASShortcut:
@@ -14,5 +16,6 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   HockeySDK-Mac: b833b385b4fb66932d760fbcb47733a1544d867c
   MASShortcut: e67441d037a95c1978fae7405e5dae7f54afc2bd
+  pop: 2f14a1ea61339767af9e66741b418c831b3844df
 
 COCOAPODS: 0.34.2

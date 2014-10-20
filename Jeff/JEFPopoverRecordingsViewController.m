@@ -11,6 +11,8 @@
 #import <MASShortcut/MASShortcut+UserDefaults.h>
 #import <Dropbox/Dropbox.h>
 #import "Mixpanel.h"
+#import <pop/POP.h>
+#import <QuartzCore/CAMediaTimingFunction.h>
 
 #import "JEFRecording.h"
 #import "JEFAppDelegate.h"
@@ -118,7 +120,19 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     if ([keyPath isEqualToString:@"recentRecordings"]) {
         BOOL hasRecordings = self.recentRecordings.count > 0;
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.emptyStateContainerView.hidden = hasRecordings;
+            POPBasicAnimation *anim = [self.emptyStateContainerView.layer pop_animationForKey:@"opacity"];
+            if (anim) return;
+
+            anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
+            anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            anim.fromValue = @(self.emptyStateContainerView.layer.opacity);
+            if (hasRecordings) {
+                anim.toValue = @(0.0);
+            }
+            else {
+                anim.toValue = @(1.0);
+            }
+            [self.emptyStateContainerView.layer pop_addAnimation:anim forKey:@"opacity"];
         });
     }
 
