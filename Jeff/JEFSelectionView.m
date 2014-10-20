@@ -11,6 +11,8 @@
 #import "RSVerticallyCenteredTextFieldCell.h"
 #import <tgmath.h>
 #import <Carbon/Carbon.h>
+#import "Constants.h"
+#import "JEFColoredButton.h"
 
 
 const CGFloat HandleSize = 5.0;
@@ -19,10 +21,6 @@ const CGFloat JEFSelectionMinimumHeight = 50.0;
 const CGFloat JEFSelectionViewInfoMargin = 20.0;
 const CGFloat JEFSelectionConfirmButtonMargin = 20.0;
 const CGFloat JEFSelectionConfirmButtonMinimumHeightToDisplayOutside = 50.0;
-
-CGFloat constrain(CGFloat value, CGFloat min, CGFloat max) {
-    return fmin(fmax(value, min), max);
-}
 
 typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     JEFHandleIndexNone = -1,
@@ -49,7 +47,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 @property (nonatomic, assign) enum JEFHandleIndex clickedHandle;
 @property (nonatomic, assign) NSPoint anchor;
 
-@property (nonatomic, strong) NSButton *confirmRectButton;
+@property (nonatomic, strong) JEFColoredButton *confirmRectButton;
 @property (nonatomic, strong) NSVisualEffectView *infoContainer;
 
 @end
@@ -90,11 +88,20 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         [self.layer addSublayer:_overlayLayer];
         [self updateOverlayPath];
 
-        _confirmRectButton = [[NSButton alloc] initWithFrame:CGRectMake(0, 0, 100, 24)];
+        _confirmRectButton = [[JEFColoredButton alloc] initWithFrame:CGRectMake(0, 0, 100, 32)];
         _confirmRectButton.wantsLayer = YES;
         _confirmRectButton.buttonType = NSMomentaryLightButton;
+        _confirmRectButton.backgroundColor = [NSColor colorWithCalibratedRed:78.0/255.0 green:215.0/255.0 blue:0.0/255.0 alpha:1];
+        _confirmRectButton.cornerRadius = 5.0;
         _confirmRectButton.bezelStyle = NSRecessedBezelStyle;
-        _confirmRectButton.title = @"Record";
+        NSMutableParagraphStyle *centeredParagraphStyle = [[NSMutableParagraphStyle alloc] init];
+        centeredParagraphStyle.alignment = NSCenterTextAlignment;
+        NSShadow *shadow = [[NSShadow alloc] init];
+        shadow.shadowBlurRadius = 0.0;
+        shadow.shadowOffset = CGSizeMake(0.0, 0.5);
+        shadow.shadowColor = [[NSColor darkGrayColor] colorWithAlphaComponent:0.5];
+        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:@"Record" attributes:@{ NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName: [NSFont systemFontOfSize:16], NSParagraphStyleAttributeName: centeredParagraphStyle, NSShadowAttributeName: shadow }];
+        _confirmRectButton.attributedTitle = attributedTitle;
         _confirmRectButton.alphaValue = 0.0;
         [_confirmRectButton setTarget:self];
         [_confirmRectButton setAction:@selector(confirmRect)];
