@@ -28,12 +28,6 @@
     [outerGradient drawInRect:backgroundPath.bounds angle:90.0];
     [ctx restoreGraphicsState];
 
-    // Light stroke
-    [ctx saveGraphicsState];
-    [backgroundColor setStroke];
-    [[NSBezierPath bezierPathWithRoundedRect:frame xRadius:roundedRadius yRadius:roundedRadius] stroke];
-    [ctx restoreGraphicsState];
-
     // Draw darker overlay if button is pressed
     if ([self isHighlighted]) {
         [ctx saveGraphicsState];
@@ -42,6 +36,14 @@
         NSRectFillUsingOperation(frame, NSCompositeSourceOver);
         [ctx restoreGraphicsState];
     }
+}
+
+// This inset properly centers the title with the current font settings as specified in JEFSelectionView.
+// If this button gets used elsewhere with other settings it might be necessary to change how this is done.
+- (NSRect)drawTitle:(NSAttributedString *)title withFrame:(NSRect)frame inView:(NSView *)controlView {
+    frame = CGRectInset(frame, 0, 1.0);
+    [title drawInRect:frame];
+    return frame;
 }
 
 @end
