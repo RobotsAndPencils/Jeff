@@ -45,6 +45,7 @@
 		CAB84C74199470B200EA0414 /* RBLTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB84C73199470B200EA0414 /* RBLTableView.m */; };
 		CAC40812199C391900833FAB /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC40811199C391900833FAB /* Dropbox.framework */; };
 		CAC40813199C4CEA00833FAB /* Dropbox.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = CAC40811199C391900833FAB /* Dropbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CAC7AC1619F5784600F44010 /* NSColor+Darken.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC7AC1519F5784600F44010 /* NSColor+Darken.m */; };
 		CADF57B418C6F432006512E3 /* JEFRecording.m in Sources */ = {isa = PBXBuildFile; fileRef = CADF57B318C6F432006512E3 /* JEFRecording.m */; };
 		CAE8F9C61991CBFF00F24D4C /* MIT-License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CAE8F9C31991CBFF00F24D4C /* MIT-License.rtf */; };
 		CAE8F9C71991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE8F9C51991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m */; };
@@ -58,6 +59,8 @@
 		CAF30B6218D5281100D7BC9D /* INPopoverParentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF30B5A18D5281100D7BC9D /* INPopoverParentWindow.m */; };
 		CAF30B6318D5281100D7BC9D /* INPopoverWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF30B5D18D5281100D7BC9D /* INPopoverWindow.m */; };
 		CAF30B6418D5281100D7BC9D /* INPopoverWindowFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF30B5F18D5281100D7BC9D /* INPopoverWindowFrame.m */; };
+		CAF3913119F565BD009D5D9A /* JEFColoredButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF3913019F565BD009D5D9A /* JEFColoredButtonCell.m */; };
+		CAF3913619F566F4009D5D9A /* JEFColoredButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF3913519F566F4009D5D9A /* JEFColoredButton.m */; };
 		E0C4A7F96812441E8DA95076 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 552FC149DE814638B883B810 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -183,6 +186,8 @@
 		CAB84C72199470B200EA0414 /* RBLTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBLTableView.h; sourceTree = "<group>"; };
 		CAB84C73199470B200EA0414 /* RBLTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBLTableView.m; sourceTree = "<group>"; };
 		CAC40811199C391900833FAB /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = Jeff/Frameworks/Dropbox.framework; sourceTree = "<group>"; };
+		CAC7AC1419F5784600F44010 /* NSColor+Darken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSColor+Darken.h"; path = "Categories/NSColor+Darken.h"; sourceTree = "<group>"; };
+		CAC7AC1519F5784600F44010 /* NSColor+Darken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSColor+Darken.m"; path = "Categories/NSColor+Darken.m"; sourceTree = "<group>"; };
 		CADF57B218C6F432006512E3 /* JEFRecording.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecording.h; path = Models/JEFRecording.h; sourceTree = "<group>"; };
 		CADF57B318C6F432006512E3 /* JEFRecording.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFRecording.m; path = Models/JEFRecording.m; sourceTree = "<group>"; };
 		CADF57B518C70081006512E3 /* Jeff.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Jeff.entitlements; sourceTree = "<group>"; };
@@ -208,6 +213,10 @@
 		CAF30B5D18D5281100D7BC9D /* INPopoverWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPopoverWindow.m; sourceTree = "<group>"; };
 		CAF30B5E18D5281100D7BC9D /* INPopoverWindowFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPopoverWindowFrame.h; sourceTree = "<group>"; };
 		CAF30B5F18D5281100D7BC9D /* INPopoverWindowFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPopoverWindowFrame.m; sourceTree = "<group>"; };
+		CAF3912F19F565BD009D5D9A /* JEFColoredButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFColoredButtonCell.h; sourceTree = "<group>"; };
+		CAF3913019F565BD009D5D9A /* JEFColoredButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFColoredButtonCell.m; sourceTree = "<group>"; };
+		CAF3913419F566F4009D5D9A /* JEFColoredButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFColoredButton.h; path = Views/JEFColoredButton.h; sourceTree = "<group>"; };
+		CAF3913519F566F4009D5D9A /* JEFColoredButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFColoredButton.m; path = Views/JEFColoredButton.m; sourceTree = "<group>"; };
 		CE897CD97646331471ECA091 /* Pods.beta release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods.beta release.xcconfig"; path = "Pods/Target Support Files/Pods/Pods.beta release.xcconfig"; sourceTree = "<group>"; };
 		D636F9A5A7EBC69C14961DD4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E6C5AE497D011C67312AFC31 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -270,6 +279,15 @@
 				CA6E31A819E4D45E00C4B906 /* Mixpanel */,
 			);
 			path = Libraries;
+			sourceTree = "<group>";
+		};
+		CA04CAA719F56509006C9D47 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CAF3912F19F565BD009D5D9A /* JEFColoredButtonCell.h */,
+				CAF3913019F565BD009D5D9A /* JEFColoredButtonCell.m */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		CA1F9900192F0A5F00C3EF33 /* Products */ = {
@@ -343,6 +361,7 @@
 				CA571B191936E34D005E9C46 /* Windows */,
 				CAF30B4118D3D73E00D7BC9D /* View Controllers */,
 				CADF57B118C6F3E7006512E3 /* Models */,
+				CA04CAA719F56509006C9D47 /* Cells */,
 				CA455B7818B882A900F9A541 /* Categories */,
 				CAF30B4F18D3E31D00D7BC9D /* Views */,
 				CAA79EAD192A725D00A4299F /* Recorders */,
@@ -409,6 +428,8 @@
 				CA455B7A18B882DB00F9A541 /* NSFileManager+Temporary.m */,
 				CAB110D2192C6C61000A04C0 /* NSEvent+MouseClamped.h */,
 				CAB110D3192C6C61000A04C0 /* NSEvent+MouseClamped.m */,
+				CAC7AC1419F5784600F44010 /* NSColor+Darken.h */,
+				CAC7AC1519F5784600F44010 /* NSColor+Darken.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -532,6 +553,8 @@
 				CA81B09B197777DF00761ECC /* JEFScaleToFillImageView.m */,
 				CA7A1D971991E9FF008DA733 /* JEFCreditsTextView.h */,
 				CA7A1D981991E9FF008DA733 /* JEFCreditsTextView.m */,
+				CAF3913419F566F4009D5D9A /* JEFColoredButton.h */,
+				CAF3913519F566F4009D5D9A /* JEFColoredButton.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -748,6 +771,7 @@
 				CAB84C74199470B200EA0414 /* RBLTableView.m in Sources */,
 				CA455B7718B84ED200F9A541 /* Converter.m in Sources */,
 				CAA79EAC192A725800A4299F /* JEFQuartzRecorder.m in Sources */,
+				CAF3913119F565BD009D5D9A /* JEFColoredButtonCell.m in Sources */,
 				CA7A1D991991E9FF008DA733 /* JEFCreditsTextView.m in Sources */,
 				CA455B7B18B882DB00F9A541 /* NSFileManager+Temporary.m in Sources */,
 				CA6E31B019E4D45E00C4B906 /* Mixpanel.m in Sources */,
@@ -766,9 +790,11 @@
 				CAE8F9C71991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m in Sources */,
 				CA4D988418D6D2A900EFE4FD /* JEFRecordingCellView.m in Sources */,
 				CAF30B6418D5281100D7BC9D /* INPopoverWindowFrame.m in Sources */,
+				CAF3913619F566F4009D5D9A /* JEFColoredButton.m in Sources */,
 				CAB77D4D19E5E2CF0049B6D8 /* JEFAppController.m in Sources */,
 				CA455B3818B83EB900F9A541 /* main.m in Sources */,
 				8359322E52C5BFFB013B4AC7 /* JEFDropboxUploader.m in Sources */,
+				CAC7AC1619F5784600F44010 /* NSColor+Darken.m in Sources */,
 				CA6E31AF19E4D45E00C4B906 /* NSData+MPBase64.m in Sources */,
 				8359376F55CC63D6FE3DE740 /* JEFPopoverUploaderSetupViewController.m in Sources */,
 			);
