@@ -5,12 +5,12 @@ PODS:
 
 DEPENDENCIES:
   - HockeySDK-Mac (~> 2.1.0)
-  - MASShortcut (from `git@github.com:RobotsAndPencils/MASShortcut.git`, branch `initWithCoder`)
+  - MASShortcut (from `git@github.com:RobotsAndPencils/MASShortcut.git`, branch `Jeff`)
   - pop (~> 1.0)
 
 EXTERNAL SOURCES:
   MASShortcut:
-    :branch: initWithCoder
+    :branch: Jeff
     :git: git@github.com:RobotsAndPencils/MASShortcut.git
 
 SPEC CHECKSUMS:
