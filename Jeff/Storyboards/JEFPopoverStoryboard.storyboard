@@ -45,9 +45,28 @@
                                         <rect key="frame" x="46" y="0.0" width="1" height="48"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="PopoverButtonSeperator" id="zpa-xC-0ir"/>
                                     </imageView>
-                                    <button wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QCX-5M-k3c" userLabel="Record Button">
-                                        <rect key="frame" x="38" y="0.0" width="249" height="50"/>
-                                        <buttonCell key="cell" type="bevel" title="Record" bezelStyle="rounded" alignment="center" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="fLU-Pl-ibK">
+                                    <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="5f0-mj-EWi">
+                                        <rect key="frame" x="149" y="17" width="27" height="17"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" title="Jeff" id="Lwo-z8-7IZ">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="Uuo-KH-W1L">
+                                        <rect key="frame" x="224" y="17" width="78" height="17"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" title="Preferences" id="AsV-jB-UtU">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="249" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QCX-5M-k3c" userLabel="Record Button" customClass="JEFColoredButton">
+                                        <rect key="frame" x="124" y="2" width="97" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="97" id="QZD-Fp-SeO"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="push" title="Record" bezelStyle="rounded" image="Record" imagePosition="left" alignment="center" borderStyle="border" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="fLU-Pl-ibK" customClass="JEFColoredButtonCell">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -55,22 +74,6 @@
                                             <action selector="recordSelection:" target="czx-q9-v5M" id="gbt-jA-jqd"/>
                                         </connections>
                                     </button>
-                                    <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="Uuo-KH-W1L">
-                                        <rect key="frame" x="224" y="17" width="78" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Preferences" id="AsV-jB-UtU">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="5f0-mj-EWi">
-                                        <rect key="frame" x="149" y="17" width="27" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Jeff" id="Lwo-z8-7IZ">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
                                     <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hNM-Ou-Xat" userLabel="Right Button Separator">
                                         <rect key="frame" x="278" y="0.0" width="1" height="48"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="PopoverButtonSeperator" id="5V3-4l-vht"/>
@@ -90,19 +93,17 @@
                                     <constraint firstAttribute="centerX" secondItem="5f0-mj-EWi" secondAttribute="centerX" id="12x-66-HJ2"/>
                                     <constraint firstAttribute="centerY" secondItem="z9i-Az-Oxc" secondAttribute="centerY" constant="-6" id="8Jr-ux-LHh"/>
                                     <constraint firstAttribute="centerY" secondItem="fat-ca-lbR" secondAttribute="centerY" constant="-6" id="BwS-yf-GM9"/>
-                                    <constraint firstItem="HFB-N6-MP2" firstAttribute="leading" secondItem="QCX-5M-k3c" secondAttribute="trailing" id="GZU-LN-7Pm"/>
                                     <constraint firstAttribute="centerY" secondItem="Uuo-KH-W1L" secondAttribute="centerY" constant="-6" id="Hc6-hP-jME"/>
                                     <constraint firstAttribute="height" constant="62" id="NBd-5m-yv9"/>
                                     <constraint firstItem="peH-Y4-Nbb" firstAttribute="leading" secondItem="fat-ca-lbR" secondAttribute="trailing" constant="8" id="Ph3-8H-DdH"/>
                                     <constraint firstAttribute="bottom" secondItem="hNM-Ou-Xat" secondAttribute="bottom" id="Py5-G2-5Sp"/>
-                                    <constraint firstItem="QCX-5M-k3c" firstAttribute="leading" secondItem="fat-ca-lbR" secondAttribute="trailing" id="U8B-SU-FCO"/>
                                     <constraint firstAttribute="centerY" secondItem="HFB-N6-MP2" secondAttribute="centerY" constant="-6" id="ZnW-8V-KJY"/>
                                     <constraint firstItem="fat-ca-lbR" firstAttribute="leading" secondItem="M8f-DG-79k" secondAttribute="leading" constant="8" id="drF-JP-SMh"/>
-                                    <constraint firstAttribute="bottom" secondItem="QCX-5M-k3c" secondAttribute="bottom" id="ezG-51-RZi"/>
-                                    <constraint firstItem="QCX-5M-k3c" firstAttribute="top" secondItem="M8f-DG-79k" secondAttribute="top" constant="12" id="h49-jT-h2u"/>
                                     <constraint firstAttribute="trailing" secondItem="HFB-N6-MP2" secondAttribute="trailing" constant="8" id="j7s-bQ-gCF"/>
                                     <constraint firstItem="z9i-Az-Oxc" firstAttribute="leading" secondItem="M8f-DG-79k" secondAttribute="leading" constant="38" id="jBT-e8-cAY"/>
+                                    <constraint firstAttribute="centerX" secondItem="QCX-5M-k3c" secondAttribute="centerX" id="k9Q-tb-l1x"/>
                                     <constraint firstAttribute="bottom" secondItem="peH-Y4-Nbb" secondAttribute="bottom" id="kRu-8i-aOd"/>
+                                    <constraint firstAttribute="centerY" secondItem="QCX-5M-k3c" secondAttribute="centerY" constant="-6" id="lJu-bW-SlA"/>
                                     <constraint firstItem="HFB-N6-MP2" firstAttribute="width" secondItem="fat-ca-lbR" secondAttribute="width" id="mGN-wb-Bjc"/>
                                     <constraint firstAttribute="centerY" secondItem="5f0-mj-EWi" secondAttribute="centerY" constant="-6" id="rDE-Kb-1XZ"/>
                                     <constraint firstItem="HFB-N6-MP2" firstAttribute="leading" secondItem="hNM-Ou-Xat" secondAttribute="trailing" constant="8" id="sbj-YF-MVu"/>
@@ -145,6 +146,7 @@
         <image name="Back Chevron" width="25" height="25"/>
         <image name="NSActionTemplate" width="14" height="14"/>
         <image name="PopoverButtonSeperator" width="1" height="48"/>
+        <image name="Record" width="16" height="16"/>
         <image name="RecordingsHeaderMask" width="325" height="62"/>
     </resources>
 </document>
