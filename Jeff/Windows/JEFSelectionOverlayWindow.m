@@ -14,7 +14,7 @@
 #define kShadyWindowLevel (NSDockWindowLevel + 1000)
 
 
-@interface JEFSelectionOverlayWindow () <DrawMouseBoxViewDelegate>
+@interface JEFSelectionOverlayWindow () <JEFSelectionViewDelegate>
 
 @property (nonatomic, copy) void(^completion)(JEFSelectionView *, NSRect, BOOL);
 

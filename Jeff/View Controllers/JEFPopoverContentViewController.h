@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
-
-@class JEFPopoverUploaderSetupViewController;
+@class JEFRecordingsManager;
 
 @interface JEFPopoverContentViewController : NSViewController
+
+@property (nonatomic, strong) JEFRecordingsManager *recordingsManager;
 
 @end
