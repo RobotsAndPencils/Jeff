@@ -330,8 +330,8 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     self.selectionRect = ({
         CGRect selectionRect = self.selectionRect;
         CGPoint origin = self.selectionRect.origin;
-        origin.x += x;
-        origin.y += y;
+        origin.x = fmax(fmin(origin.x + x, CGRectGetWidth(self.window.screen.frame)), 0);
+        origin.y = fmax(fmin(origin.y + y, CGRectGetHeight(self.window.screen.frame)), 0);
         selectionRect.origin = origin;
         selectionRect;
     });
