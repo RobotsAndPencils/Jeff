@@ -88,7 +88,7 @@
         NSLog(@"Error listing files: %@", listError);
         return;
     }
-    NSMutableArray *recordings = [self mutableArrayValueForKey:@"recordings"];
+    NSMutableArray *recordings = [NSMutableArray array];
     for (DBFileInfo *fileInfo in files) {
         JEFRecording *newRecording = [JEFRecording recordingWithFileInfo:fileInfo];
         if (newRecording && ![recordings containsObject:newRecording]) {
@@ -98,6 +98,8 @@
 
     NSSortDescriptor *dateDescendingDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
     [recordings sortedArrayUsingDescriptors:@[ dateDescendingDescriptor ]];
+
+    [[self mutableArrayValueForKey:@"recordings"] addObjectsFromArray:recordings];
 }
 
 /**

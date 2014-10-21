@@ -51,7 +51,8 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     self.dropboxSyncingContainerView.layer.opacity = 0.0;
     [self.dropboxSyncingProgressIndicator startAnimation:nil];
 
-    [self.recordingsManager addObserver:self forKeyPath:@"recordings" options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
+    // If we get the initial value for recordings then we end up getting the same initial value (with n initial recordings) as both a setting change and a insertion change, and that doesn't work when using insertRowsAtIndexes:withAnimation:, so we just rely on reloadData in viewDidAppear instead.
+    [self.recordingsManager addObserver:self forKeyPath:@"recordings" options:0 context:PopoverContentViewControllerContext];
     [self.recordingsManager addObserver:self forKeyPath:@"isDoingInitialSync" options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:[@"values." stringByAppendingString:JEFRecordScreenShortcutKey] options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:[@"values." stringByAppendingString:JEFRecordSelectionShortcutKey] options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
@@ -80,14 +81,18 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
             [self updateEmptyStateView];
 
             NSKeyValueChange changeKind = [change[NSKeyValueChangeKindKey] integerValue];
-            if (changeKind == NSKeyValueChangeSetting || changeKind == NSKeyValueChangeReplacement) {
+            NSIndexSet *indexes = change[NSKeyValueChangeIndexesKey];
+            if (changeKind == NSKeyValueChangeSetting) {
                 [self.tableView reloadData];
             }
+            else if (changeKind == NSKeyValueChangeReplacement) {
+                [self.tableView reloadDataForRowIndexes:indexes columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+            }
             else if (changeKind == NSKeyValueChangeInsertion) {
-                [self.tableView insertRowsAtIndexes:change[NSKeyValueChangeIndexesKey] withAnimation:NSTableViewAnimationSlideRight];
+                [self.tableView insertRowsAtIndexes:indexes withAnimation:NSTableViewAnimationSlideRight];
             }
             else if (changeKind == NSKeyValueChangeRemoval) {
-                [self.tableView removeRowsAtIndexes:change[NSKeyValueChangeIndexesKey] withAnimation:NSTableViewAnimationSlideLeft];
+                [self.tableView removeRowsAtIndexes:indexes withAnimation:NSTableViewAnimationSlideLeft];
             }
         });
     }
