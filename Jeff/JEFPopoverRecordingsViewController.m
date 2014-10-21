@@ -28,6 +28,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 @property (weak, nonatomic) IBOutlet NSView *dropboxSyncingContainerView;
 @property (weak, nonatomic) IBOutlet NSProgressIndicator *dropboxSyncingProgressIndicator;
 @property (weak, nonatomic) IBOutlet NSTextField *emptyStateTextField;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *emptyStateCenterXConstraint;
 
 @end
 
@@ -47,7 +48,6 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     [self.tableView setDraggingSourceOperationMask:NSDragOperationCopy forLocal:NO];
     self.tableView.enclosingScrollView.contentInsets = self.contentInsets;
 
-    self.emptyStateContainerView.layer.opacity = 0.0;
     self.dropboxSyncingContainerView.layer.opacity = 0.0;
     [self.dropboxSyncingProgressIndicator startAnimation:nil];
 
@@ -60,6 +60,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (void)viewDidAppear {
     [super viewDidAppear];
+    [self updateEmptyStateView];
     [self.tableView reloadData];
 }
 
@@ -236,19 +237,20 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (void)updateEmptyStateView {
     BOOL hasRecordings = self.recordingsManager.recordings.count > 0;
-    POPBasicAnimation *anim = [self.emptyStateContainerView.layer pop_animationForKey:@"opacity"];
+    POPSpringAnimation *anim = [self.emptyStateCenterXConstraint pop_animationForKey:@"centerX"];
     if (anim) return;
 
-    anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
-    anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    anim.fromValue = @(self.emptyStateContainerView.layer.opacity);
+    anim = [POPSpringAnimation animationWithPropertyNamed:kPOPLayoutConstraintConstant];
+    anim.springSpeed = 10;
+    anim.springBounciness = 10;
+    anim.fromValue = @(self.emptyStateCenterXConstraint.constant);
     if (hasRecordings) {
-        anim.toValue = @(0.0);
+        anim.toValue = @(-CGRectGetWidth(self.view.frame));
     }
     else {
-        anim.toValue = @(1.0);
+        anim.toValue = @(0);
     }
-    [self.emptyStateContainerView.layer pop_addAnimation:anim forKey:@"opacity"];
+    [self.emptyStateCenterXConstraint pop_addAnimation:anim forKey:@"centerX"];
 }
 
 - (void)updateDropboxSyncingView:(BOOL)visible {

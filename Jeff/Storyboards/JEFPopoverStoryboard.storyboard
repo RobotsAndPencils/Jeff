@@ -327,6 +327,7 @@
                     <connections>
                         <outlet property="dropboxSyncingContainerView" destination="lgB-sO-C34" id="pEj-6G-F2w"/>
                         <outlet property="dropboxSyncingProgressIndicator" destination="nXh-t0-7D7" id="EFi-6d-e0r"/>
+                        <outlet property="emptyStateCenterXConstraint" destination="ys0-d4-UAb" id="7HY-73-epa"/>
                         <outlet property="emptyStateContainerView" destination="njs-Kz-dle" id="KVX-zX-6A6"/>
                         <outlet property="emptyStateTextField" destination="4rV-Ls-eAn" id="xV2-Xc-sdt"/>
                         <outlet property="tableView" destination="cdU-1N-Oto" id="o1P-zZ-iYI"/>
