@@ -10,8 +10,8 @@
 		427E998F6E1D9AAAC52FA738 /* libPods-JeffTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE16058ADECD7238FD2B58 /* libPods-JeffTests.a */; };
 		8359322E52C5BFFB013B4AC7 /* JEFDropboxUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 835935E41B797539819CFB36 /* JEFDropboxUploader.m */; };
 		8359376F55CC63D6FE3DE740 /* JEFPopoverUploaderSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83593B5EA5926018F6E2110D /* JEFPopoverUploaderSetupViewController.m */; };
+		83593B01FC89BA3C5EC32E7C /* JEFRecordingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83593370A12DC3B1E44F01F4 /* JEFRecordingsManager.m */; };
 		83593BA6023A48A43B1002E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83593BD28BA68D2EAD12CF1C /* Localizable.strings */; };
-		CA007B22196CD22000746934 /* JEFPreferencesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA007B21196CD22000746934 /* JEFPreferencesStoryboard.storyboard */; };
 		CA1F990C192F0ACB00C3EF33 /* StartAtLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1F990B192F0ACB00C3EF33 /* StartAtLoginController.m */; };
 		CA455B2C18B83EB900F9A541 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA455B2B18B83EB900F9A541 /* Cocoa.framework */; };
 		CA455B3618B83EB900F9A541 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CA455B3418B83EB900F9A541 /* InfoPlist.strings */; };
@@ -32,6 +32,8 @@
 		CA4D988418D6D2A900EFE4FD /* JEFRecordingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4D988318D6D2A900EFE4FD /* JEFRecordingCellView.m */; };
 		CA54FCEE196E2DF4000C46CC /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = CA54FCED196E2DF4000C46CC /* Constants.m */; };
 		CA571B1C1936E371005E9C46 /* JEFSelectionOverlayWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CA571B1B1936E371005E9C46 /* JEFSelectionOverlayWindow.m */; };
+		CA677E9E19F613C90087000A /* JEFUploaderPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA677E9D19F613C90087000A /* JEFUploaderPreferencesView.xib */; };
+		CA677EA419F6CF1D0087000A /* JEFPopoverRecordingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA677EA319F6CF1D0087000A /* JEFPopoverRecordingsView.xib */; };
 		CA6BF4DF1999B63A00E3C146 /* JeffLauncher.app in Copy Launcher */ = {isa = PBXBuildFile; fileRef = CA1F9905192F0A5F00C3EF33 /* JeffLauncher.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CA6E31AF19E4D45E00C4B906 /* NSData+MPBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6E31AC19E4D45E00C4B906 /* NSData+MPBase64.m */; };
 		CA6E31B019E4D45E00C4B906 /* Mixpanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6E31AE19E4D45E00C4B906 /* Mixpanel.m */; };
@@ -125,13 +127,14 @@
 
 /* Begin PBXFileReference section */
 		552FC149DE814638B883B810 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		83593370A12DC3B1E44F01F4 /* JEFRecordingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFRecordingsManager.m; sourceTree = "<group>"; };
 		835935E41B797539819CFB36 /* JEFDropboxUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFDropboxUploader.m; sourceTree = "<group>"; };
 		835938D219B64AF401E6EAEE /* JEFPopoverUploaderSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFPopoverUploaderSetupViewController.h; sourceTree = "<group>"; };
+		83593B4EEE534ED769A58AA8 /* JEFRecordingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFRecordingsManager.h; sourceTree = "<group>"; };
 		83593B5EA5926018F6E2110D /* JEFPopoverUploaderSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFPopoverUploaderSetupViewController.m; sourceTree = "<group>"; };
 		83593BB07DFAFBD9106DD41E /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		83593E3E69C23122FB40765D /* JEFUploaderProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFUploaderProtocol.h; path = ../JEFUploaderProtocol.h; sourceTree = "<group>"; };
 		83593F946B55E6E3610A19A4 /* JEFDropboxUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFDropboxUploader.h; sourceTree = "<group>"; };
-		CA007B21196CD22000746934 /* JEFPreferencesStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = JEFPreferencesStoryboard.storyboard; path = Storyboards/JEFPreferencesStoryboard.storyboard; sourceTree = "<group>"; };
 		CA1F98FF192F0A5F00C3EF33 /* JeffLauncher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JeffLauncher.xcodeproj; path = JeffLauncher/JeffLauncher.xcodeproj; sourceTree = "<group>"; };
 		CA1F990A192F0ACB00C3EF33 /* StartAtLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartAtLoginController.h; sourceTree = "<group>"; };
 		CA1F990B192F0ACB00C3EF33 /* StartAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartAtLoginController.m; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 		CA54FCED196E2DF4000C46CC /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		CA571B1A1936E371005E9C46 /* JEFSelectionOverlayWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFSelectionOverlayWindow.h; path = Windows/JEFSelectionOverlayWindow.h; sourceTree = "<group>"; };
 		CA571B1B1936E371005E9C46 /* JEFSelectionOverlayWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFSelectionOverlayWindow.m; path = Windows/JEFSelectionOverlayWindow.m; sourceTree = "<group>"; };
+		CA677E9D19F613C90087000A /* JEFUploaderPreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JEFUploaderPreferencesView.xib; path = "View Controllers/JEFUploaderPreferencesView.xib"; sourceTree = "<group>"; };
+		CA677EA319F6CF1D0087000A /* JEFPopoverRecordingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JEFPopoverRecordingsView.xib; path = "View Controllers/JEFPopoverRecordingsView.xib"; sourceTree = "<group>"; };
 		CA6E31AB19E4D45E00C4B906 /* NSData+MPBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MPBase64.h"; sourceTree = "<group>"; };
 		CA6E31AC19E4D45E00C4B906 /* NSData+MPBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MPBase64.m"; sourceTree = "<group>"; };
 		CA6E31AD19E4D45E00C4B906 /* Mixpanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mixpanel.h; sourceTree = "<group>"; };
@@ -443,6 +448,26 @@
 			name = Windows;
 			sourceTree = "<group>";
 		};
+		CA639EF419F6D2F80089D28D /* Recordings */ = {
+			isa = PBXGroup;
+			children = (
+				CA455B6818B848B700F9A541 /* JEFPopoverRecordingsViewController.h */,
+				CA455B6918B848B700F9A541 /* JEFPopoverRecordingsViewController.m */,
+				CA677EA319F6CF1D0087000A /* JEFPopoverRecordingsView.xib */,
+			);
+			name = Recordings;
+			sourceTree = "<group>";
+		};
+		CA677EA119F6168C0087000A /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				835938D219B64AF401E6EAEE /* JEFPopoverUploaderSetupViewController.h */,
+				83593B5EA5926018F6E2110D /* JEFPopoverUploaderSetupViewController.m */,
+				CAEC3FB51964D3FA004FDA19 /* JEFPopoverUploaderSetupViewController.xib */,
+			);
+			name = Setup;
+			sourceTree = "<group>";
+		};
 		CA6E31A819E4D45E00C4B906 /* Mixpanel */ = {
 			isa = PBXGroup;
 			children = (
@@ -502,6 +527,8 @@
 			children = (
 				CADF57B218C6F432006512E3 /* JEFRecording.h */,
 				CADF57B318C6F432006512E3 /* JEFRecording.m */,
+				83593370A12DC3B1E44F01F4 /* JEFRecordingsManager.m */,
+				83593B4EEE534ED769A58AA8 /* JEFRecordingsManager.h */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -519,15 +546,12 @@
 		CAF30B4118D3D73E00D7BC9D /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				CAF30B4218D3D75100D7BC9D /* Preferences */,
 				CAEC3FBB1964D683004FDA19 /* JEFPopoverStoryboard.storyboard */,
 				CAEC3FBF1964EBFD004FDA19 /* JEFPopoverContentViewController.h */,
 				CAEC3FC01964EBFD004FDA19 /* JEFPopoverContentViewController.m */,
-				CA455B6818B848B700F9A541 /* JEFPopoverRecordingsViewController.h */,
-				CA455B6918B848B700F9A541 /* JEFPopoverRecordingsViewController.m */,
-				835938D219B64AF401E6EAEE /* JEFPopoverUploaderSetupViewController.h */,
-				83593B5EA5926018F6E2110D /* JEFPopoverUploaderSetupViewController.m */,
-				CAEC3FB51964D3FA004FDA19 /* JEFPopoverUploaderSetupViewController.xib */,
+				CAF30B4218D3D75100D7BC9D /* Preferences */,
+				CA677EA119F6168C0087000A /* Setup */,
+				CA639EF419F6D2F80089D28D /* Recordings */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -535,9 +559,9 @@
 		CAF30B4218D3D75100D7BC9D /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				CA007B21196CD22000746934 /* JEFPreferencesStoryboard.storyboard */,
 				CAF30B4318D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.h */,
 				CAF30B4418D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.m */,
+				CA677E9D19F613C90087000A /* JEFUploaderPreferencesView.xib */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -690,8 +714,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA677EA419F6CF1D0087000A /* JEFPopoverRecordingsView.xib in Resources */,
 				CA455B7418B84EC100F9A541 /* gifsicle in Resources */,
-				CA007B22196CD22000746934 /* JEFPreferencesStoryboard.storyboard in Resources */,
 				CAF30B6018D5281100D7BC9D /* INPopoverController-Info.plist in Resources */,
 				CAEC3FBC1964D683004FDA19 /* JEFPopoverStoryboard.storyboard in Resources */,
 				CA455B3618B83EB900F9A541 /* InfoPlist.strings in Resources */,
@@ -699,6 +723,7 @@
 				CA455B4418B83EBA00F9A541 /* Images.xcassets in Resources */,
 				CA455B3C18B83EB900F9A541 /* Credits.rtf in Resources */,
 				CA455B4218B83EBA00F9A541 /* MainMenu.xib in Resources */,
+				CA677E9E19F613C90087000A /* JEFUploaderPreferencesView.xib in Resources */,
 				CAE8F9C61991CBFF00F24D4C /* MIT-License.rtf in Resources */,
 				83593BA6023A48A43B1002E8 /* Localizable.strings in Resources */,
 			);
@@ -797,6 +822,7 @@
 				CAC7AC1619F5784600F44010 /* NSColor+Darken.m in Sources */,
 				CA6E31AF19E4D45E00C4B906 /* NSData+MPBase64.m in Sources */,
 				8359376F55CC63D6FE3DE740 /* JEFPopoverUploaderSetupViewController.m in Sources */,
+				83593B01FC89BA3C5EC32E7C /* JEFRecordingsManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

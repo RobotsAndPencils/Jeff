@@ -9,7 +9,7 @@
 
 "RecordSelectionInfo" = "Click and drag over the part of the screen that you want Jeff to record.";
 
-"PreferencesCreditsHTML" = "Jeff is made by <a href=\"http://brandonevans.ca\">Brandon Evans</a> at <a href=\"http://www.robotsandpencils.com\">Robots and Pencils</a>.";
-"PreferencesOpenSourceCreditsHTML" = "It's also made up of some code written by others: <a href=\"https://github.com/AFNetworking/AFNetworking\">AFNetworking</a>, <a href=\"https://github.com/shpakovski/MASShortcut\">MASShortcut</a>, <a href=\"https://github.com/github/Rebel\">Rebel</a>, <a href=\"https://github.com/indragiek/INPopoverController\">INPopoverController</a> and <a href=\"http://www.red-sweater.com/blog/148/what-a-difference-a-cell-makes\">RSVerticallyCenteredTextFieldCell</a> (what a mouthful).";
+"PreferencesCreditsHTML" = "Jeff is made with love by <a href=\"http://www.robotsandpencils.com\">Robots and Pencils</a>.";
+"PreferencesOpenSourceCreditsHTML" = "It's also made up of some code written by others: <a href=\"https://github.com/shpakovski/MASShortcut\">MASShortcut</a>, <a href=\"https://github.com/github/Rebel\">Rebel</a>, <a href=\"https://github.com/indragiek/INPopoverController\">INPopoverController</a> and <a href=\"http://www.red-sweater.com/blog/148/what-a-difference-a-cell-makes\">RSVerticallyCenteredTextFieldCell</a> (what a mouthful).";
 
 "RecordingsTableViewEmptyStateMessage" = "Click the Record button above to, uh, record something. You could also press %@ to record a selection or %@ for the whole screen.";
