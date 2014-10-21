@@ -76,6 +76,7 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
     self.popover.contentViewController = popoverController;
     self.popover.animates = NO;
     self.popover.closesWhenApplicationBecomesInactive = YES;
+    self.popover.color = [self.popover.color colorWithAlphaComponent:1.0];
 }
 
 - (void)showPopover:(NSStatusBarButton *)sender {
