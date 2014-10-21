@@ -188,7 +188,7 @@
                             <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" id="jBT-cI-qCf">
                                 <font key="font" size="18" name="HelveticaNeue-Light"/>
                                 <string key="title">Click the Record button above to, uh, record something. You could also press %@ to record a selection or %@ for the whole screen.</string>
-                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
