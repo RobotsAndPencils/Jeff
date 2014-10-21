@@ -33,6 +33,7 @@
 		CA54FCEE196E2DF4000C46CC /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = CA54FCED196E2DF4000C46CC /* Constants.m */; };
 		CA571B1C1936E371005E9C46 /* JEFSelectionOverlayWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CA571B1B1936E371005E9C46 /* JEFSelectionOverlayWindow.m */; };
 		CA677E9E19F613C90087000A /* JEFUploaderPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA677E9D19F613C90087000A /* JEFUploaderPreferencesView.xib */; };
+		CA677EA419F6CF1D0087000A /* JEFPopoverRecordingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA677EA319F6CF1D0087000A /* JEFPopoverRecordingsView.xib */; };
 		CA6BF4DF1999B63A00E3C146 /* JeffLauncher.app in Copy Launcher */ = {isa = PBXBuildFile; fileRef = CA1F9905192F0A5F00C3EF33 /* JeffLauncher.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CA6E31AF19E4D45E00C4B906 /* NSData+MPBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6E31AC19E4D45E00C4B906 /* NSData+MPBase64.m */; };
 		CA6E31B019E4D45E00C4B906 /* Mixpanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6E31AE19E4D45E00C4B906 /* Mixpanel.m */; };
@@ -170,6 +171,7 @@
 		CA571B1A1936E371005E9C46 /* JEFSelectionOverlayWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFSelectionOverlayWindow.h; path = Windows/JEFSelectionOverlayWindow.h; sourceTree = "<group>"; };
 		CA571B1B1936E371005E9C46 /* JEFSelectionOverlayWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFSelectionOverlayWindow.m; path = Windows/JEFSelectionOverlayWindow.m; sourceTree = "<group>"; };
 		CA677E9D19F613C90087000A /* JEFUploaderPreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JEFUploaderPreferencesView.xib; path = "View Controllers/JEFUploaderPreferencesView.xib"; sourceTree = "<group>"; };
+		CA677EA319F6CF1D0087000A /* JEFPopoverRecordingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JEFPopoverRecordingsView.xib; path = "View Controllers/JEFPopoverRecordingsView.xib"; sourceTree = "<group>"; };
 		CA6E31AB19E4D45E00C4B906 /* NSData+MPBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MPBase64.h"; sourceTree = "<group>"; };
 		CA6E31AC19E4D45E00C4B906 /* NSData+MPBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MPBase64.m"; sourceTree = "<group>"; };
 		CA6E31AD19E4D45E00C4B906 /* Mixpanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mixpanel.h; sourceTree = "<group>"; };
@@ -446,6 +448,16 @@
 			name = Windows;
 			sourceTree = "<group>";
 		};
+		CA639EF419F6D2F80089D28D /* Recordings */ = {
+			isa = PBXGroup;
+			children = (
+				CA455B6818B848B700F9A541 /* JEFPopoverRecordingsViewController.h */,
+				CA455B6918B848B700F9A541 /* JEFPopoverRecordingsViewController.m */,
+				CA677EA319F6CF1D0087000A /* JEFPopoverRecordingsView.xib */,
+			);
+			name = Recordings;
+			sourceTree = "<group>";
+		};
 		CA677EA119F6168C0087000A /* Setup */ = {
 			isa = PBXGroup;
 			children = (
@@ -534,13 +546,12 @@
 		CAF30B4118D3D73E00D7BC9D /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				CAF30B4218D3D75100D7BC9D /* Preferences */,
-				CA677EA119F6168C0087000A /* Setup */,
 				CAEC3FBB1964D683004FDA19 /* JEFPopoverStoryboard.storyboard */,
 				CAEC3FBF1964EBFD004FDA19 /* JEFPopoverContentViewController.h */,
 				CAEC3FC01964EBFD004FDA19 /* JEFPopoverContentViewController.m */,
-				CA455B6818B848B700F9A541 /* JEFPopoverRecordingsViewController.h */,
-				CA455B6918B848B700F9A541 /* JEFPopoverRecordingsViewController.m */,
+				CAF30B4218D3D75100D7BC9D /* Preferences */,
+				CA677EA119F6168C0087000A /* Setup */,
+				CA639EF419F6D2F80089D28D /* Recordings */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -703,6 +714,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA677EA419F6CF1D0087000A /* JEFPopoverRecordingsView.xib in Resources */,
 				CA455B7418B84EC100F9A541 /* gifsicle in Resources */,
 				CAF30B6018D5281100D7BC9D /* INPopoverController-Info.plist in Resources */,
 				CAEC3FBC1964D683004FDA19 /* JEFPopoverStoryboard.storyboard in Resources */,

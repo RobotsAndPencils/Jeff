@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14A388a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A388a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="JEFPopoverUploaderSetupViewController">
@@ -15,11 +15,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe">
-            <rect key="frame" x="0.0" y="0.0" width="292" height="500"/>
+            <rect key="frame" x="0.0" y="0.0" width="325" height="500"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dg0-ZU-T1C">
-                    <rect key="frame" x="84" y="181" width="125" height="54"/>
+                    <rect key="frame" x="101" y="181" width="125" height="54"/>
                     <buttonCell key="cell" type="bevel" title="Link Dropbox" bezelStyle="regularSquare" image="Dropbox Logo" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="De3-p0-mFj">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -29,7 +29,7 @@
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QKg-uI-qs9">
-                    <rect key="frame" x="6" y="249" width="280" height="51"/>
+                    <rect key="frame" x="23" y="249" width="280" height="51"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="276" id="0k2-zb-KMx"/>
                     </constraints>
@@ -40,10 +40,10 @@
                     </textFieldCell>
                 </textField>
                 <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="yiZ-df-uD5">
-                    <rect key="frame" x="215" y="201" width="16" height="16"/>
+                    <rect key="frame" x="232" y="201" width="16" height="16"/>
                 </progressIndicator>
                 <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Y4A-GO-HpB">
-                    <rect key="frame" x="213" y="17" width="25" height="25"/>
+                    <rect key="frame" x="246" y="17" width="25" height="25"/>
                     <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ehe-1s-ROr">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -53,7 +53,7 @@
                     </connections>
                 </button>
                 <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zAz-2e-v9I">
-                    <rect key="frame" x="244" y="17" width="40" height="25"/>
+                    <rect key="frame" x="277" y="17" width="40" height="25"/>
                     <buttonCell key="cell" type="roundTextured" title="Quit" bezelStyle="texturedRounded" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gMI-3f-NUn">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -71,7 +71,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jNj-Ug-klf">
-                    <rect key="frame" x="6" y="57" width="280" height="34"/>
+                    <rect key="frame" x="23" y="57" width="280" height="34"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="276" id="CIt-fg-e2j"/>
                     </constraints>
