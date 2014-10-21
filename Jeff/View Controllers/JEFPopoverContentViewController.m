@@ -221,7 +221,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
             preferencesLabelPositionXAnimation.toValue = @(-CGRectGetWidth(self.view.frame) / 2.0 - CGRectGetWidth(self.preferencesLabel.frame) / 2.0);
             backOpacityAnimation.toValue = @0;
             preferencesLabelOpacityAnimation.toValue = @0;
-            rightButtonSeparatorOpacityAnimation.toValue = @1;
+            rightButtonSeparatorOpacityAnimation.toValue = @0;
             preferencesButtonOpacityAnimation.toValue = @1;
             leftButtonSeparatorOpacityAnimation.toValue = @0;
             jeffLabelOpacityAnimation.toValue = @0;
@@ -235,7 +235,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
             preferencesLabelOpacityAnimation.toValue = @1;
             rightButtonSeparatorOpacityAnimation.toValue = @0;
             preferencesButtonOpacityAnimation.toValue = @0;
-            leftButtonSeparatorOpacityAnimation.toValue = @1;
+            leftButtonSeparatorOpacityAnimation.toValue = @0;
             jeffLabelOpacityAnimation.toValue = @0;
             break;
     }
