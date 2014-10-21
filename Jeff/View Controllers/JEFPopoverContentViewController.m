@@ -24,6 +24,7 @@
 #import "JEFPopoverRecordingsViewController.h"
 #import "JEFUploaderPreferencesViewController.h"
 #import "Constants.h"
+#import "JEFColoredButton.h"
 
 typedef NS_ENUM(NSInteger, JEFPopoverContent) {
     JEFPopoverContentSetup = 0,
@@ -36,7 +37,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 // Header Outlets
 @property (weak, nonatomic) IBOutlet NSVisualEffectView *headerContainerView;
 @property (weak, nonatomic) IBOutlet NSButton *quitButton;
-@property (weak, nonatomic) IBOutlet NSButton *recordSelectionButton;
+@property (weak, nonatomic) IBOutlet JEFColoredButton *recordSelectionButton;
 @property (weak, nonatomic) IBOutlet NSImageView *rightButtonSeparatorImageView;
 @property (weak, nonatomic) IBOutlet NSImageView *leftButtonSeparator;
 @property (weak, nonatomic) IBOutlet NSButton *preferencesButton;
@@ -93,6 +94,10 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
             [weakSelf stopRecording:nil];
         }];
     });
+
+    self.recordSelectionButton.backgroundColor = [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.5];
+    self.recordSelectionButton.cornerRadius = CGRectGetHeight(self.recordSelectionButton.frame) / 2.0;
+    [self setStyleForButton:self.recordSelectionButton];
 
     // Setup child view controllers
     self.uploaderSetupViewController = [[JEFPopoverUploaderSetupViewController alloc] init];
@@ -383,12 +388,11 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 
 - (void)setStyleForButton:(NSButton *)button {
     NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowColor = [NSColor whiteColor];
-    shadow.shadowOffset = CGSizeMake(0.0, 1.0);
+    shadow.shadowColor = [[NSColor whiteColor] colorWithAlphaComponent:0.25];
+    shadow.shadowOffset = CGSizeMake(0.0, -1.0);
 
-    NSFont *font = [NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSRegularControlSize]];
-
-    NSColor *fontColor = [NSColor colorWithCalibratedWhite:0.2 alpha:1.0];
+    NSFont *font = [NSFont boldSystemFontOfSize:[NSFont systemFontSizeForControlSize:NSRegularControlSize]];
+    NSColor *fontColor = [NSColor labelColor];
 
     NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     [paragraphStyle setAlignment:NSCenterTextAlignment];
