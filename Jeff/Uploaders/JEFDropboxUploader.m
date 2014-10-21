@@ -8,10 +8,6 @@
 
 #import "JEFDropboxUploader.h"
 
-#import <Dropbox/Dropbox.h>
-
-#import "JEFRecording.h"
-
 @interface JEFDropboxUploader ()
 
 @property (strong, nonatomic) NSMutableDictionary *filenameCompletionBlocks;

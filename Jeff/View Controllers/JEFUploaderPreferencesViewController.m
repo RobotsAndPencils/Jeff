@@ -9,7 +9,6 @@
 #import "JEFUploaderPreferencesViewController.h"
 
 #import <Dropbox/Dropbox.h>
-#import <ServiceManagement/ServiceManagement.h>
 #import <MASShortcut/MASShortcutView.h>
 #import <MASShortcut/MASShortcut.h>
 #import <MASShortcut/MASShortcutView+UserDefaults.h>
