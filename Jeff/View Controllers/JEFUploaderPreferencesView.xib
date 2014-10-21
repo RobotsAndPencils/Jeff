@@ -7,6 +7,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="JEFUploaderPreferencesViewController">
             <connections>
                 <outlet property="creditTextView" destination="bqm-Y6-XGK" id="QFO-fj-2FW"/>
+                <outlet property="dropboxLinkExplanationLabel" destination="QDP-oW-vRd" id="Nfk-79-oBM"/>
                 <outlet property="emailButton" destination="m6v-vx-ix3" id="CDb-tZ-tHd"/>
                 <outlet property="linkButton" destination="cv6-7q-eI0" id="EnA-T7-Y4f"/>
                 <outlet property="openSourceCreditTextView" destination="Vmj-dQ-QLg" id="uyB-Ch-qCq"/>
@@ -53,7 +54,7 @@
                     </textFieldCell>
                 </textField>
                 <box autoresizesSubviews="NO" title="Shortcuts" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="jrp-Yj-84y">
-                    <rect key="frame" x="9" y="258" width="307" height="85"/>
+                    <rect key="frame" x="9" y="208" width="307" height="85"/>
                     <view key="contentView">
                         <rect key="frame" x="1" y="1" width="305" height="69"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -321,18 +322,29 @@
                         <action selector="sendTweet:" target="-2" id="g7g-uB-4OI"/>
                     </connections>
                 </button>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QDP-oW-vRd">
+                    <rect key="frame" x="10" y="313" width="305" height="42"/>
+                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Unlinking Dropbox won't delete any of your GIFs, but you'll need to link your account again to see them in Jeff." id="hic-qX-iAU">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="A1q-ak-pz7" secondAttribute="bottom" constant="20" id="57q-jm-Ui8"/>
+                <constraint firstItem="QDP-oW-vRd" firstAttribute="top" secondItem="cv6-7q-eI0" secondAttribute="bottom" constant="8" id="6A0-TJ-YEF"/>
                 <constraint firstItem="m6v-vx-ix3" firstAttribute="top" secondItem="yDd-kn-slv" secondAttribute="bottom" constant="4" id="7RT-Xm-2xg"/>
+                <constraint firstAttribute="trailing" secondItem="QDP-oW-vRd" secondAttribute="trailing" constant="12" id="CN7-cp-jBZ"/>
+                <constraint firstItem="cv6-7q-eI0" firstAttribute="leading" secondItem="QDP-oW-vRd" secondAttribute="leading" id="EYK-NW-Hy6"/>
                 <constraint firstItem="5VW-Vw-VWb" firstAttribute="leading" secondItem="wzT-7z-QAM" secondAttribute="leading" constant="12" id="JH8-Jx-tea"/>
                 <constraint firstItem="A1q-ak-pz7" firstAttribute="top" secondItem="pdJ-5L-JEq" secondAttribute="bottom" constant="8" id="NQg-dT-hev"/>
                 <constraint firstItem="yDd-kn-slv" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jrp-Yj-84y" secondAttribute="bottom" constant="45" id="OAO-0k-xGa"/>
                 <constraint firstItem="pdJ-5L-JEq" firstAttribute="leading" secondItem="A1q-ak-pz7" secondAttribute="leading" constant="-5" id="R67-RC-UZT"/>
                 <constraint firstItem="M2x-Cq-sIp" firstAttribute="centerY" secondItem="m6v-vx-ix3" secondAttribute="centerY" id="RY7-Nj-RP1"/>
                 <constraint firstItem="cv6-7q-eI0" firstAttribute="top" secondItem="5VW-Vw-VWb" secondAttribute="bottom" constant="20" id="SLA-Rk-iGq"/>
-                <constraint firstItem="jrp-Yj-84y" firstAttribute="top" secondItem="cv6-7q-eI0" secondAttribute="bottom" constant="20" id="WP8-ab-HgT"/>
                 <constraint firstItem="5VW-Vw-VWb" firstAttribute="top" secondItem="wzT-7z-QAM" secondAttribute="top" constant="82" id="WWf-6M-TLN"/>
+                <constraint firstItem="jrp-Yj-84y" firstAttribute="top" secondItem="QDP-oW-vRd" secondAttribute="bottom" constant="20" id="aIi-lQ-Bx8"/>
                 <constraint firstItem="jrp-Yj-84y" firstAttribute="leading" secondItem="yDd-kn-slv" secondAttribute="leading" constant="3" id="cv5-SA-leT"/>
                 <constraint firstItem="pdJ-5L-JEq" firstAttribute="trailing" secondItem="yDd-kn-slv" secondAttribute="trailing" id="grH-Ic-yYt"/>
                 <constraint firstItem="cv6-7q-eI0" firstAttribute="leading" secondItem="5VW-Vw-VWb" secondAttribute="leading" id="h6X-R5-uWa"/>
@@ -344,7 +356,7 @@
                 <constraint firstItem="m6v-vx-ix3" firstAttribute="leading" secondItem="pdJ-5L-JEq" secondAttribute="leading" constant="5" id="rjI-4g-ZHJ"/>
                 <constraint firstItem="M2x-Cq-sIp" firstAttribute="leading" secondItem="m6v-vx-ix3" secondAttribute="trailing" constant="12" id="znl-bu-iy6"/>
             </constraints>
-            <point key="canvasLocation" x="308.5" y="279.5"/>
+            <point key="canvasLocation" x="308.5" y="279"/>
         </view>
         <customObject id="EZ0-Sx-so2" customClass="StartAtLoginController">
             <userDefinedRuntimeAttributes>

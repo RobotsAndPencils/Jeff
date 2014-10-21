@@ -26,6 +26,7 @@
 @property (nonatomic, strong) IBOutlet NSTextView *creditTextView;
 @property (nonatomic, weak) IBOutlet NSButton *emailButton;
 @property (nonatomic, weak) IBOutlet NSButton *tweetButton;
+@property (nonatomic, weak) IBOutlet NSTextField *dropboxLinkExplanationLabel;
 
 @end
 
@@ -37,12 +38,11 @@
     // Initialize Dropbox link button
     __weak __typeof(self) weakSelf = self;
     [[DBAccountManager sharedManager] addObserver:self block:^(DBAccount *account) {
-        weakSelf.dropboxLinked = account != nil;
         [weakSelf updateLinkButton];
+        [self updateLinkExplanationLabel];
     }];
-
-    self.dropboxLinked = [[DBAccountManager sharedManager] linkedAccount] != nil;
     [self updateLinkButton];
+    [self updateLinkExplanationLabel];
 
     // Initialize MASShortcut views
     self.recordScreenShortcutView.associatedUserDefaultsKey = JEFRecordScreenShortcutKey;
@@ -75,6 +75,9 @@
 - (void)viewDidAppear {
     [super viewDidAppear];
 
+    [self updateLinkButton];
+    [self updateLinkExplanationLabel];
+
     // Update these each time the view appears in case the user has changed the accounts that are set up
     NSSharingService *emailService = [NSSharingService sharingServiceNamed:NSSharingServiceNameComposeEmail];
     self.emailButton.enabled = emailService && [emailService canPerformWithItems:nil];
@@ -98,6 +101,7 @@
     if ([[DBAccountManager sharedManager] linkedAccount]) {
         [[[DBAccountManager sharedManager] linkedAccount] unlink];
         [self updateLinkButton];
+        [self updateLinkExplanationLabel];
     } else {
         __weak __typeof(self) weakSelf = self;
         [[DBAccountManager sharedManager] linkFromWindow:self.view.window withCompletionBlock:^(DBAccount *account) {
@@ -145,6 +149,15 @@
         self.linkButton.title = @"Unlink Dropbox";
     } else {
         self.linkButton.title = @"Link Dropbox";
+    }
+}
+
+- (void)updateLinkExplanationLabel {
+    if ([[DBAccountManager sharedManager] linkedAccount]) {
+        self.dropboxLinkExplanationLabel.stringValue = NSLocalizedString(@"PreferencesDropboxExplanationUnlink", nil);
+    }
+    else {
+        self.dropboxLinkExplanationLabel.stringValue = NSLocalizedString(@"PreferencesDropboxExplanationLink", nil);
     }
 }
 
