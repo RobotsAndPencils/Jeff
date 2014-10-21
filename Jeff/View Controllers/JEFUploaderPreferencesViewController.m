@@ -31,8 +31,8 @@
 
 @implementation JEFUploaderPreferencesViewController
 
-- (void)loadView {
-    [super loadView];
+- (void)viewDidLoad {
+    [super viewDidLoad];
 
     // Initialize Dropbox link button
     __weak __typeof(self) weakSelf = self;
