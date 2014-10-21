@@ -131,6 +131,14 @@
     [twitterService performWithItems:nil];
 }
 
+- (IBAction)quit:(id)sender {
+    [NSApp terminate:self];
+}
+
+- (IBAction)showFAQ:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://robotsandpencils.com/jeff#faq"]];
+}
+
 #pragma mark Private
 
 - (void)setupTextView:(NSTextView *)view withHTMLStringWithKey:(NSString *)key fontSize:(CGFloat)fontSize color:(NSColor *)color {

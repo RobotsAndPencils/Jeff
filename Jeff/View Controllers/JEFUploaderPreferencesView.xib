@@ -46,7 +46,7 @@
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A1q-ak-pz7">
-                    <rect key="frame" x="12" y="20" width="43" height="14"/>
+                    <rect key="frame" x="12" y="24" width="43" height="14"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Version" id="aMa-DD-UtC">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -106,7 +106,7 @@
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </box>
                 <scrollView verticalHuggingPriority="750" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDd-kn-slv">
-                    <rect key="frame" x="9" y="132" width="304" height="24"/>
+                    <rect key="frame" x="9" y="143" width="304" height="24"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="Bvi-PN-Pyp">
                         <rect key="frame" x="1" y="1" width="223" height="133"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -149,7 +149,7 @@
                     </scroller>
                 </scrollView>
                 <scrollView verticalHuggingPriority="750" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdJ-5L-JEq">
-                    <rect key="frame" x="9" y="42" width="304" height="45"/>
+                    <rect key="frame" x="9" y="46" width="304" height="52"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="gbJ-Rw-lOJ">
                         <rect key="frame" x="1" y="1" width="223" height="133"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -158,7 +158,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="223" height="133"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                <size key="minSize" width="304" height="45"/>
+                                <size key="minSize" width="304" height="52"/>
                                 <size key="maxSize" width="481" height="10000000"/>
                                 <attributedString key="textStorage">
                                     <fragment content="It's also made up of some code written by others: ">
@@ -249,7 +249,7 @@
                                             <integer key="NSUnderline" value="1"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content=" and ">
+                                    <fragment content=",  ">
                                         <attributes>
                                             <font key="NSFont" size="11" name="HelveticaNeue"/>
                                             <real key="NSKern" value="0.0"/>
@@ -271,7 +271,7 @@
                                             <integer key="NSUnderline" value="1"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content=" (what a mouthful).">
+                                    <fragment content=" (what a mouthful) and Gifsicle.">
                                         <attributes>
                                             <font key="NSFont" size="11" name="HelveticaNeue"/>
                                             <real key="NSKern" value="0.0"/>
@@ -283,7 +283,7 @@
                                     </fragment>
                                 </attributedString>
                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <size key="minSize" width="304" height="45"/>
+                                <size key="minSize" width="304" height="52"/>
                                 <size key="maxSize" width="481" height="10000000"/>
                             </textView>
                         </subviews>
@@ -291,7 +291,7 @@
                     </clipView>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="288" id="iuF-QO-Zxs"/>
-                        <constraint firstAttribute="height" constant="45" id="ubb-t1-dbz"/>
+                        <constraint firstAttribute="height" constant="52" id="ubb-t1-dbz"/>
                     </constraints>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="ISM-hh-saT">
                         <rect key="frame" x="-100" y="-100" width="87" height="18"/>
@@ -303,23 +303,13 @@
                     </scroller>
                 </scrollView>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m6v-vx-ix3">
-                    <rect key="frame" x="8" y="100" width="119" height="32"/>
-                    <buttonCell key="cell" type="push" title="Email us" bezelStyle="rounded" image="Envelope" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UVc-5r-Jj8">
+                    <rect key="frame" x="8" y="111" width="176" height="32"/>
+                    <buttonCell key="cell" type="push" title="Tell us nice things" bezelStyle="rounded" image="Envelope" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UVc-5r-Jj8">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
                         <action selector="sendEmail:" target="-2" id="OjK-EP-4a8"/>
-                    </connections>
-                </button>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M2x-Cq-sIp">
-                    <rect key="frame" x="127" y="100" width="117" height="32"/>
-                    <buttonCell key="cell" type="push" title="lol email" bezelStyle="rounded" image="Twitter" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tmG-eV-CAZ">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="sendTweet:" target="-2" id="g7g-uB-4OI"/>
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QDP-oW-vRd">
@@ -330,19 +320,52 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Ky-Kb-Irl">
+                    <rect key="frame" x="246" y="17" width="25" height="25"/>
+                    <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5Ff-K6-tPM">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="showFAQ:" target="-2" id="Rds-6X-N9E"/>
+                    </connections>
+                </button>
+                <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9GO-j4-2p9">
+                    <rect key="frame" x="277" y="18" width="40" height="25"/>
+                    <buttonCell key="cell" type="roundTextured" title="Quit" bezelStyle="texturedRounded" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="n4m-90-Xt5">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="quit:" target="-2" id="LSf-xF-skp"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M2x-Cq-sIp">
+                    <rect key="frame" x="184" y="111" width="117" height="32"/>
+                    <buttonCell key="cell" type="push" title="lol email" bezelStyle="rounded" image="Twitter" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tmG-eV-CAZ">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="sendTweet:" target="-2" id="g7g-uB-4OI"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="A1q-ak-pz7" secondAttribute="bottom" constant="20" id="57q-jm-Ui8"/>
+                <constraint firstAttribute="bottom" secondItem="A1q-ak-pz7" secondAttribute="bottom" constant="24" id="57q-jm-Ui8"/>
                 <constraint firstItem="QDP-oW-vRd" firstAttribute="top" secondItem="cv6-7q-eI0" secondAttribute="bottom" constant="8" id="6A0-TJ-YEF"/>
                 <constraint firstItem="m6v-vx-ix3" firstAttribute="top" secondItem="yDd-kn-slv" secondAttribute="bottom" constant="4" id="7RT-Xm-2xg"/>
                 <constraint firstAttribute="trailing" secondItem="QDP-oW-vRd" secondAttribute="trailing" constant="12" id="CN7-cp-jBZ"/>
                 <constraint firstItem="cv6-7q-eI0" firstAttribute="leading" secondItem="QDP-oW-vRd" secondAttribute="leading" id="EYK-NW-Hy6"/>
+                <constraint firstItem="A1q-ak-pz7" firstAttribute="centerY" secondItem="9GO-j4-2p9" secondAttribute="centerY" id="FkI-WD-1ir"/>
                 <constraint firstItem="5VW-Vw-VWb" firstAttribute="leading" secondItem="wzT-7z-QAM" secondAttribute="leading" constant="12" id="JH8-Jx-tea"/>
+                <constraint firstItem="9GO-j4-2p9" firstAttribute="leading" secondItem="5Ky-Kb-Irl" secondAttribute="trailing" constant="8" id="LDg-4c-xTG"/>
                 <constraint firstItem="A1q-ak-pz7" firstAttribute="top" secondItem="pdJ-5L-JEq" secondAttribute="bottom" constant="8" id="NQg-dT-hev"/>
                 <constraint firstItem="yDd-kn-slv" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jrp-Yj-84y" secondAttribute="bottom" constant="45" id="OAO-0k-xGa"/>
                 <constraint firstItem="pdJ-5L-JEq" firstAttribute="leading" secondItem="A1q-ak-pz7" secondAttribute="leading" constant="-5" id="R67-RC-UZT"/>
                 <constraint firstItem="M2x-Cq-sIp" firstAttribute="centerY" secondItem="m6v-vx-ix3" secondAttribute="centerY" id="RY7-Nj-RP1"/>
                 <constraint firstItem="cv6-7q-eI0" firstAttribute="top" secondItem="5VW-Vw-VWb" secondAttribute="bottom" constant="20" id="SLA-Rk-iGq"/>
+                <constraint firstAttribute="trailing" secondItem="9GO-j4-2p9" secondAttribute="trailing" constant="8" id="T9B-XI-vIw"/>
                 <constraint firstItem="5VW-Vw-VWb" firstAttribute="top" secondItem="wzT-7z-QAM" secondAttribute="top" constant="82" id="WWf-6M-TLN"/>
                 <constraint firstItem="jrp-Yj-84y" firstAttribute="top" secondItem="QDP-oW-vRd" secondAttribute="bottom" constant="20" id="aIi-lQ-Bx8"/>
                 <constraint firstItem="jrp-Yj-84y" firstAttribute="leading" secondItem="yDd-kn-slv" secondAttribute="leading" constant="3" id="cv5-SA-leT"/>
@@ -354,6 +377,7 @@
                 <constraint firstItem="jrp-Yj-84y" firstAttribute="leading" secondItem="cv6-7q-eI0" secondAttribute="leading" id="qsu-ej-va3"/>
                 <constraint firstAttribute="trailing" secondItem="jrp-Yj-84y" secondAttribute="trailing" constant="12" id="rCU-aK-gcW"/>
                 <constraint firstItem="m6v-vx-ix3" firstAttribute="leading" secondItem="pdJ-5L-JEq" secondAttribute="leading" constant="5" id="rjI-4g-ZHJ"/>
+                <constraint firstItem="5Ky-Kb-Irl" firstAttribute="centerY" secondItem="9GO-j4-2p9" secondAttribute="centerY" id="zVC-hP-MIu"/>
                 <constraint firstItem="M2x-Cq-sIp" firstAttribute="leading" secondItem="m6v-vx-ix3" secondAttribute="trailing" constant="12" id="znl-bu-iy6"/>
             </constraints>
             <point key="canvasLocation" x="308.5" y="279"/>
