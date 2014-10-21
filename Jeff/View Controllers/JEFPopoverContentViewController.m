@@ -11,6 +11,7 @@
 #import <MASShortcut/MASShortcut.h>
 #import <MASShortcut/MASShortcut+UserDefaults.h>
 #import "Mixpanel.h"
+#import "pop/POP.h"
 
 #import "JEFRecording.h"
 #import "JEFQuartzRecorder.h"
@@ -27,12 +28,18 @@
 @interface JEFPopoverContentViewController () <JEFSelectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet NSVisualEffectView *headerContainerView;
+@property (weak, nonatomic) IBOutlet NSButton *quitButton;
 @property (weak, nonatomic) IBOutlet NSButton *recordSelectionButton;
+@property (weak, nonatomic) IBOutlet NSImageView *rightButtonSeparatorImageView;
+@property (weak, nonatomic) IBOutlet NSButton *preferencesButton;
+@property (weak, nonatomic) IBOutlet NSButton *backButton;
+@property (weak, nonatomic) IBOutlet NSTextField *preferencesLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *backButtonCenterXConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *preferencesLabelCenterXConstraint;
 
 @property (nonatomic, strong) JEFPopoverRecordingsViewController *recordingsViewController;
 @property (nonatomic, strong) JEFPopoverUploaderSetupViewController *uploaderSetupViewController;
 @property (nonatomic, strong) JEFUploaderPreferencesViewController *preferencesViewController;
-@property (strong, nonatomic) NSWindowController *preferencesWindowController;
 @property (strong, nonatomic) NSMutableArray *overlayWindows;
 @property (strong, nonatomic) JEFQuartzRecorder *recorder;
 @property (nonatomic, assign, getter=isShowingSetup) BOOL showingSetup;
@@ -134,7 +141,48 @@
 
 - (IBAction)showPreferencesMenu:(id)sender {
     NSViewController *currentViewController = self.isShowingSetup ? self.uploaderSetupViewController : self.recordingsViewController;
-    [self transitionFromViewController:currentViewController toViewController:self.preferencesViewController options:NSViewControllerTransitionSlideBackward completionHandler:^{}];
+    [self showPreferencesHeader:YES];
+    [self transitionFromViewController:currentViewController toViewController:self.preferencesViewController options:NSViewControllerTransitionSlideForward completionHandler:^{}];
+}
+
+- (IBAction)hidePreferencesMenu:(id)sender {
+    NSViewController *currentViewController = self.isShowingSetup ? self.uploaderSetupViewController : self.recordingsViewController;
+    [self showPreferencesHeader:NO];
+    [self transitionFromViewController:self.preferencesViewController toViewController:currentViewController options:NSViewControllerTransitionSlideBackward completionHandler:^{}];
+}
+
+- (void)showPreferencesHeader:(BOOL)showPreferences {
+    POPBasicAnimation *quitOpacityAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
+    POPBasicAnimation *recordOpacityAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
+    POPBasicAnimation *backPositionXAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayoutConstraintConstant];
+    POPBasicAnimation *preferencesLabelPositionXAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayoutConstraintConstant];
+    POPBasicAnimation *backOpacityAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
+    POPBasicAnimation *preferencesLabelOpacityAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
+    POPBasicAnimation *rightButtonSeparatorOpacityAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
+    POPBasicAnimation *preferencesButtonOpacityAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
+
+    quitOpacityAnimation.toValue = showPreferences ? @0 : @1;
+    recordOpacityAnimation.toValue = showPreferences ? @0 : @1;
+    backPositionXAnimation.toValue = showPreferences ? @8 : @38;
+    preferencesLabelPositionXAnimation.toValue = showPreferences ? @0 : @(-CGRectGetWidth(self.view.frame) / 2.0 - CGRectGetWidth(self.preferencesLabel.frame) / 2.0);
+    backOpacityAnimation.toValue = showPreferences ? @1 : @0;
+    preferencesLabelOpacityAnimation.toValue = showPreferences ? @1 : @0;
+    rightButtonSeparatorOpacityAnimation.toValue = showPreferences ? @0 : @1;
+    preferencesButtonOpacityAnimation.toValue = showPreferences ? @0 : @1;
+
+    [self.quitButton.layer pop_addAnimation:quitOpacityAnimation forKey:@"opacity"];
+    [self.recordSelectionButton.layer pop_addAnimation:recordOpacityAnimation forKey:@"opacity"];
+    [self.backButtonCenterXConstraint pop_addAnimation:backPositionXAnimation forKey:@"positionX"];
+    [self.preferencesLabelCenterXConstraint pop_addAnimation:preferencesLabelPositionXAnimation forKey:@"positionX"];
+    [self.backButton.layer pop_addAnimation:backOpacityAnimation forKey:@"opacity"];
+    [self.preferencesLabel.layer pop_addAnimation:preferencesLabelOpacityAnimation forKey:@"opacity"];
+    [self.rightButtonSeparatorImageView.layer pop_addAnimation:rightButtonSeparatorOpacityAnimation forKey:@"opacity"];
+    [self.preferencesButton.layer pop_addAnimation:preferencesButtonOpacityAnimation forKey:@"opacity"];
+
+    self.quitButton.enabled = !showPreferences;
+    self.recordSelectionButton.enabled = !showPreferences;
+    self.preferencesButton.enabled = !showPreferences;
+    self.backButton.enabled = showPreferences;
 }
 
 - (IBAction)quit:(id)sender {
