@@ -14,7 +14,6 @@
 #import "Constants.h"
 #import "JEFColoredButton.h"
 
-
 const CGFloat HandleSize = 5.0;
 const CGFloat JEFSelectionMinimumWidth = 50.0;
 const CGFloat JEFSelectionMinimumHeight = 50.0;
