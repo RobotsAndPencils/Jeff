@@ -13,7 +13,6 @@
 #import <Carbon/Carbon.h>
 #import "Constants.h"
 #import "JEFColoredButton.h"
-#import "JEFPopoverContentViewController.h"
 
 const CGFloat HandleSize = 5.0;
 const CGFloat JEFSelectionMinimumWidth = 50.0;

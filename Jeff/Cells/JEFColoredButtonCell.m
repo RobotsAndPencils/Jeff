@@ -8,7 +8,6 @@
 
 #import "JEFColoredButtonCell.h"
 #import "JEFColoredButton.h"
-#import "Constants.h"
 #import "NSColor+Darken.h"
 
 @implementation JEFColoredButtonCell

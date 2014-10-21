@@ -16,7 +16,6 @@
 #import "JEFQuartzRecorder.h"
 #import "JEFRecordingsManager.h"
 #import "Converter.h"
-#import "JEFDropboxUploader.h"
 #import "JEFAppController.h"
 #import "JEFSelectionOverlayWindow.h"
 #import "JEFAppDelegate.h"

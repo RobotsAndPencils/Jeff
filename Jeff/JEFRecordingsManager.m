@@ -5,7 +5,6 @@
 
 #import "JEFRecording.h"
 #import "JEFRecordingsManager.h"
-#import <Dropbox/Dropbox.h>
 #import "JEFDropboxUploader.h"
 
 @interface JEFRecordingsManager () <NSUserNotificationCenterDelegate>
