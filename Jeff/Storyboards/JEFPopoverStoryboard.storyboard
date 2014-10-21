@@ -21,14 +21,24 @@
                             <visualEffectView wantsLayer="YES" appearanceType="vibrantLight" blendingMode="withinWindow" material="titlebar" state="followsWindowActiveState" maskImage="RecordingsHeaderMask" translatesAutoresizingMaskIntoConstraints="NO" id="M8f-DG-79k" userLabel="Header Container View">
                                 <rect key="frame" x="0.0" y="438" width="325" height="62"/>
                                 <subviews>
-                                    <button wantsLayer="YES" verticalHuggingPriority="750" alphaValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="fat-ca-lbR" userLabel="Quit Button">
+                                    <button wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fat-ca-lbR" userLabel="Quit Button">
                                         <rect key="frame" x="8" y="17" width="30" height="17"/>
-                                        <buttonCell key="cell" type="bevel" title="Quit" bezelStyle="regularSquare" image="NSActionTemplate" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="ofr-6m-ocm">
+                                        <buttonCell key="cell" type="bevel" title="Quit" bezelStyle="regularSquare" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="ofr-6m-ocm">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="quit:" target="czx-q9-v5M" id="Cci-NB-n5n"/>
+                                        </connections>
+                                    </button>
+                                    <button wantsLayer="YES" verticalHuggingPriority="750" misplaced="YES" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="z9i-Az-Oxc" userLabel="Back Button">
+                                        <rect key="frame" x="38" y="17" width="30" height="17"/>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="Back Chevron" imagePosition="only" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="z1L-tS-FCY">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="hidePreferencesMenu:" target="czx-q9-v5M" id="CIh-l6-z7g"/>
                                         </connections>
                                     </button>
                                     <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="peH-Y4-Nbb" userLabel="Left Button Separator">
@@ -45,11 +55,19 @@
                                             <action selector="recordSelection:" target="czx-q9-v5M" id="gbt-jA-jqd"/>
                                         </connections>
                                     </button>
+                                    <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="Uuo-KH-W1L">
+                                        <rect key="frame" x="224" y="17" width="78" height="17"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Preferences" id="AsV-jB-UtU">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                     <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hNM-Ou-Xat" userLabel="Right Button Separator">
                                         <rect key="frame" x="278" y="0.0" width="1" height="48"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="PopoverButtonSeperator" id="5V3-4l-vht"/>
                                     </imageView>
-                                    <button wantsLayer="YES" verticalHuggingPriority="750" alphaValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="HFB-N6-MP2" userLabel="Preferences Button">
+                                    <button wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HFB-N6-MP2" userLabel="Preferences Button">
                                         <rect key="frame" x="287" y="18" width="30" height="15"/>
                                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="NSActionTemplate" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="WlW-JJ-qrc">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -61,8 +79,10 @@
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="z9i-Az-Oxc" secondAttribute="centerY" constant="-6" id="8Jr-ux-LHh"/>
                                     <constraint firstAttribute="centerY" secondItem="fat-ca-lbR" secondAttribute="centerY" constant="-6" id="BwS-yf-GM9"/>
                                     <constraint firstItem="HFB-N6-MP2" firstAttribute="leading" secondItem="QCX-5M-k3c" secondAttribute="trailing" id="GZU-LN-7Pm"/>
+                                    <constraint firstAttribute="centerY" secondItem="Uuo-KH-W1L" secondAttribute="centerY" constant="-6" id="Hc6-hP-jME"/>
                                     <constraint firstAttribute="height" constant="62" id="NBd-5m-yv9"/>
                                     <constraint firstItem="peH-Y4-Nbb" firstAttribute="leading" secondItem="fat-ca-lbR" secondAttribute="trailing" constant="8" id="Ph3-8H-DdH"/>
                                     <constraint firstAttribute="bottom" secondItem="hNM-Ou-Xat" secondAttribute="bottom" id="Py5-G2-5Sp"/>
@@ -72,9 +92,11 @@
                                     <constraint firstAttribute="bottom" secondItem="QCX-5M-k3c" secondAttribute="bottom" id="ezG-51-RZi"/>
                                     <constraint firstItem="QCX-5M-k3c" firstAttribute="top" secondItem="M8f-DG-79k" secondAttribute="top" constant="12" id="h49-jT-h2u"/>
                                     <constraint firstAttribute="trailing" secondItem="HFB-N6-MP2" secondAttribute="trailing" constant="8" id="j7s-bQ-gCF"/>
+                                    <constraint firstItem="z9i-Az-Oxc" firstAttribute="leading" secondItem="M8f-DG-79k" secondAttribute="leading" constant="38" id="jBT-e8-cAY"/>
                                     <constraint firstAttribute="bottom" secondItem="peH-Y4-Nbb" secondAttribute="bottom" id="kRu-8i-aOd"/>
                                     <constraint firstItem="HFB-N6-MP2" firstAttribute="width" secondItem="fat-ca-lbR" secondAttribute="width" id="mGN-wb-Bjc"/>
                                     <constraint firstItem="HFB-N6-MP2" firstAttribute="leading" secondItem="hNM-Ou-Xat" secondAttribute="trailing" constant="8" id="sbj-YF-MVu"/>
+                                    <constraint firstAttribute="centerX" secondItem="Uuo-KH-W1L" secondAttribute="centerX" constant="-100" id="yxx-E1-tcG"/>
                                 </constraints>
                             </visualEffectView>
                         </subviews>
@@ -89,8 +111,15 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="z9i-Az-Oxc" id="zyb-rQ-9fg"/>
+                        <outlet property="backButtonCenterXConstraint" destination="jBT-e8-cAY" id="gTK-dV-0lD"/>
                         <outlet property="headerContainerView" destination="M8f-DG-79k" id="dsa-JU-mKN"/>
+                        <outlet property="preferencesButton" destination="HFB-N6-MP2" id="rLP-QQ-PYO"/>
+                        <outlet property="preferencesLabel" destination="Uuo-KH-W1L" id="Jk9-cF-QRW"/>
+                        <outlet property="preferencesLabelCenterXConstraint" destination="yxx-E1-tcG" id="F2A-Aa-QY2"/>
+                        <outlet property="quitButton" destination="fat-ca-lbR" id="9A4-ww-jLn"/>
                         <outlet property="recordSelectionButton" destination="QCX-5M-k3c" id="ytb-fm-pmA"/>
+                        <outlet property="rightButtonSeparatorImageView" destination="hNM-Ou-Xat" id="Yea-tx-1Rd"/>
                         <outlet property="view" destination="ZcF-bW-QvF" id="eQX-90-OI9"/>
                     </connections>
                 </viewController>
@@ -341,6 +370,7 @@
     </scenes>
     <resources>
         <image name="500x500" width="500" height="500"/>
+        <image name="Back Chevron" width="25" height="25"/>
         <image name="CopyLinkButton" width="20" height="20"/>
         <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSShareTemplate" width="11" height="16"/>

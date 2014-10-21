@@ -62,8 +62,8 @@
     };
 
     // Initialize rich text credit views
-    [self setupTextView:self.openSourceCreditTextView withHTMLStringWithKey:@"PreferencesOpenSourceCreditsHTML"];
-    [self setupTextView:self.creditTextView withHTMLStringWithKey:@"PreferencesCreditsHTML"];
+    [self setupTextView:self.creditTextView withHTMLStringWithKey:@"PreferencesCreditsHTML" fontSize:[NSFont systemFontSize] color:[NSColor labelColor]];
+    [self setupTextView:self.openSourceCreditTextView withHTMLStringWithKey:@"PreferencesOpenSourceCreditsHTML" fontSize:[NSFont smallSystemFontSize] color:[NSColor secondaryLabelColor]];
 
     // Initialize version label
     NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
@@ -129,13 +129,13 @@
 
 #pragma mark Private
 
-- (void)setupTextView:(NSTextView *)view withHTMLStringWithKey:(NSString *)key {
+- (void)setupTextView:(NSTextView *)view withHTMLStringWithKey:(NSString *)key fontSize:(CGFloat)fontSize color:(NSColor *)color {
     NSString *htmlString = NSLocalizedString(key, nil);
     NSData *htmlData = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableAttributedString *attributedCredits = [[NSMutableAttributedString alloc] initWithHTML:htmlData documentAttributes:NULL];
-    NSDictionary *attributes = @{ NSFontAttributeName : [NSFont systemFontOfSize:[NSFont systemFontSize]], NSForegroundColorAttributeName: [NSColor labelColor] };
+    NSDictionary *attributes = @{ NSFontAttributeName : [NSFont systemFontOfSize:fontSize], NSForegroundColorAttributeName: color };
     [attributedCredits addAttributes:attributes range:NSMakeRange(0, attributedCredits.string.length - 1)];
-    view.linkTextAttributes = @{ NSForegroundColorAttributeName: [NSColor labelColor], NSCursorAttributeName: [NSCursor pointingHandCursor] };
+    view.linkTextAttributes = @{ NSForegroundColorAttributeName: color, NSCursorAttributeName: [NSCursor pointingHandCursor] };
     view.textStorage.attributedString = attributedCredits;
 
 }
