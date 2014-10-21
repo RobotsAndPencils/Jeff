@@ -9,6 +9,8 @@
 
 "RecordSelectionInfo" = "Click and drag over the part of the screen that you want Jeff to record.";
 
+"PreferencesDropboxExplanationUnlink" = "Unlinking Dropbox won't delete any of your GIFs, but you'll need to link your account again to see them in Jeff.";
+"PreferencesDropboxExplanationLink" = "If you had any recordings before unlinking your Dropbox account, they'll still be in the Apps folder inside Dropbox.";
 "PreferencesCreditsHTML" = "Jeff is made with love by <a href=\"http://www.robotsandpencils.com\">Robots and Pencils</a>.";
 "PreferencesOpenSourceCreditsHTML" = "It's also made up of some code written by others: <a href=\"https://github.com/shpakovski/MASShortcut\">MASShortcut</a>, <a href=\"https://github.com/github/Rebel\">Rebel</a>, <a href=\"https://github.com/indragiek/INPopoverController\">INPopoverController</a> and <a href=\"http://www.red-sweater.com/blog/148/what-a-difference-a-cell-makes\">RSVerticallyCenteredTextFieldCell</a> (what a mouthful).";
 
