@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="201" horizontalPageScroll="10" verticalLineScroll="201" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="thx-7Z-F9n">
-                    <rect key="frame" x="0.0" y="0.0" width="325" height="480"/>
+                    <rect key="frame" x="0.0" y="12" width="325" height="468"/>
                     <clipView key="contentView" wantsLayer="YES" copiesOnScroll="NO" id="xPE-qo-x8O">
                         <rect key="frame" x="0.0" y="0.0" width="325" height="176"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -234,7 +234,7 @@
                 <constraint firstAttribute="trailing" secondItem="thx-7Z-F9n" secondAttribute="trailing" id="AHY-sn-r7q"/>
                 <constraint firstItem="thx-7Z-F9n" firstAttribute="top" secondItem="Pmv-Ml-QCh" secondAttribute="top" constant="20" id="K1K-yr-YsI"/>
                 <constraint firstItem="thx-7Z-F9n" firstAttribute="leading" secondItem="Pmv-Ml-QCh" secondAttribute="leading" id="MY1-uL-F8W"/>
-                <constraint firstAttribute="bottom" secondItem="thx-7Z-F9n" secondAttribute="bottom" id="Nlf-ko-F9Y"/>
+                <constraint firstAttribute="bottom" secondItem="thx-7Z-F9n" secondAttribute="bottom" constant="12" id="Nlf-ko-F9Y"/>
                 <constraint firstAttribute="centerX" secondItem="hKh-z2-7WR" secondAttribute="centerX" id="WJM-e5-HPo"/>
                 <constraint firstAttribute="centerY" secondItem="r6R-T0-HlB" secondAttribute="centerY" constant="-150" id="oWJ-xs-w70"/>
             </constraints>
