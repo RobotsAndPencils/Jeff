@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A388a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="JEFUploaderPreferencesViewController">
+            <connections>
+                <outlet property="creditTextView" destination="bqm-Y6-XGK" id="QFO-fj-2FW"/>
+                <outlet property="emailButton" destination="m6v-vx-ix3" id="CDb-tZ-tHd"/>
+                <outlet property="linkButton" destination="cv6-7q-eI0" id="EnA-T7-Y4f"/>
+                <outlet property="openSourceCreditTextView" destination="Vmj-dQ-QLg" id="uyB-Ch-qCq"/>
+                <outlet property="recordScreenShortcutView" destination="Rzu-ZG-ibH" id="Lso-h4-Oqe"/>
+                <outlet property="recordSelectionShortcutView" destination="mT5-FQ-Xyi" id="33r-4P-Nft"/>
+                <outlet property="tweetButton" destination="M2x-Cq-sIp" id="2yd-oZ-X8c"/>
+                <outlet property="versionLabel" destination="A1q-ak-pz7" id="pok-bM-MVe"/>
+                <outlet property="view" destination="wzT-7z-QAM" id="WHs-Zx-cLl"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <view id="wzT-7z-QAM">
+            <rect key="frame" x="0.0" y="0.0" width="325" height="480"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cv6-7q-eI0">
+                    <rect key="frame" x="6" y="356" width="136" height="32"/>
+                    <buttonCell key="cell" type="push" title="Unlink Dropbox" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0kx-by-kCD">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="toggleLinkDropbox:" target="-2" id="4Up-zq-jWc"/>
+                    </connections>
+                </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="5VW-Vw-VWb">
+                    <rect key="frame" x="10" y="402" width="143" height="18"/>
+                    <buttonCell key="cell" type="check" title="Launch Jeff at login" bezelStyle="regularSquare" imagePosition="left" inset="2" id="BJ5-Yv-KiW">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="toggleLaunchAtLogin:" target="-2" id="eKW-sC-yoJ"/>
+                        <binding destination="EZ0-Sx-so2" name="value" keyPath="startAtLogin" id="EpA-Zs-cBf"/>
+                    </connections>
+                </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A1q-ak-pz7">
+                    <rect key="frame" x="12" y="20" width="50" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Version" id="aMa-DD-UtC">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <box autoresizesSubviews="NO" title="Shortcuts" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="jrp-Yj-84y">
+                    <rect key="frame" x="9" y="258" width="307" height="85"/>
+                    <view key="contentView">
+                        <rect key="frame" x="1" y="1" width="305" height="69"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vDZ-4U-VVc">
+                                <rect key="frame" x="16" y="41" width="96" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Record Screen" id="Qmb-gd-2jG">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="U5d-eI-dCG">
+                                <rect key="frame" x="16" y="16" width="110" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Record Selection" id="1Nl-Ra-jdM">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="mT5-FQ-Xyi" customClass="MASShortcutView">
+                                <rect key="frame" x="132" y="11" width="151" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="FY1-Fv-3p4"/>
+                                </constraints>
+                            </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="Rzu-ZG-ibH" customClass="MASShortcutView">
+                                <rect key="frame" x="132" y="37" width="151" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="gWO-AG-3Ov"/>
+                                </constraints>
+                            </customView>
+                        </subviews>
+                    </view>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="U5d-eI-dCG" secondAttribute="bottom" constant="13" id="0V0-xU-Ryq"/>
+                        <constraint firstAttribute="trailing" secondItem="Rzu-ZG-ibH" secondAttribute="trailing" constant="20" id="2tI-jZ-vBB"/>
+                        <constraint firstItem="vDZ-4U-VVc" firstAttribute="leading" secondItem="jrp-Yj-84y" secondAttribute="leading" constant="16" id="FYb-Ok-46n"/>
+                        <constraint firstItem="mT5-FQ-Xyi" firstAttribute="leading" secondItem="U5d-eI-dCG" secondAttribute="trailing" constant="8" id="HRJ-uL-A9w"/>
+                        <constraint firstItem="Rzu-ZG-ibH" firstAttribute="leading" secondItem="vDZ-4U-VVc" secondAttribute="trailing" constant="22" id="JXo-et-2id"/>
+                        <constraint firstItem="Rzu-ZG-ibH" firstAttribute="centerY" secondItem="vDZ-4U-VVc" secondAttribute="centerY" id="L3M-ku-icT"/>
+                        <constraint firstItem="U5d-eI-dCG" firstAttribute="top" secondItem="vDZ-4U-VVc" secondAttribute="bottom" constant="8" id="VxW-ZC-Hic"/>
+                        <constraint firstItem="U5d-eI-dCG" firstAttribute="centerY" secondItem="mT5-FQ-Xyi" secondAttribute="centerY" constant="-1" id="Xnr-BT-k3Y"/>
+                        <constraint firstItem="vDZ-4U-VVc" firstAttribute="top" secondItem="jrp-Yj-84y" secondAttribute="top" constant="26" id="lZE-je-5Pj"/>
+                        <constraint firstItem="Rzu-ZG-ibH" firstAttribute="width" secondItem="mT5-FQ-Xyi" secondAttribute="width" id="my1-XH-Y5A"/>
+                        <constraint firstItem="U5d-eI-dCG" firstAttribute="leading" secondItem="jrp-Yj-84y" secondAttribute="leading" constant="16" id="pUZ-V9-4UK"/>
+                    </constraints>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </box>
+                <scrollView verticalHuggingPriority="750" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDd-kn-slv">
+                    <rect key="frame" x="9" y="165" width="304" height="32"/>
+                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="Bvi-PN-Pyp">
+                        <rect key="frame" x="1" y="1" width="223" height="133"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView editable="NO" importsGraphics="NO" verticallyResizable="NO" baseWritingDirection="leftToRight" findStyle="panel" allowsNonContiguousLayout="YES" linkDetection="YES" spellingCorrection="YES" id="bqm-Y6-XGK" customClass="JEFCreditsTextView">
+                                <rect key="frame" x="0.0" y="0.0" width="223" height="133"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <size key="minSize" width="304" height="32"/>
+                                <size key="maxSize" width="481" height="10000000"/>
+                                <attributedString key="textStorage">
+                                    <fragment content="Jeff is with love made by Robots and Pencils.">
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <size key="minSize" width="304" height="32"/>
+                                <size key="maxSize" width="481" height="10000000"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                    </clipView>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="288" id="69v-Zt-IK7"/>
+                        <constraint firstAttribute="height" constant="32" id="dKI-5p-XAj"/>
+                    </constraints>
+                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="6VC-gz-KgY">
+                        <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="R3t-5s-dAR">
+                        <rect key="frame" x="224" y="1" width="15" height="133"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
+                <scrollView verticalHuggingPriority="750" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdJ-5L-JEq">
+                    <rect key="frame" x="9" y="45" width="304" height="80"/>
+                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="gbJ-Rw-lOJ">
+                        <rect key="frame" x="1" y="1" width="223" height="133"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView editable="NO" importsGraphics="NO" verticallyResizable="NO" baseWritingDirection="leftToRight" findStyle="panel" allowsNonContiguousLayout="YES" linkDetection="YES" spellingCorrection="YES" id="Vmj-dQ-QLg" customClass="JEFCreditsTextView">
+                                <rect key="frame" x="0.0" y="0.0" width="223" height="133"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <size key="minSize" width="304" height="80"/>
+                                <size key="maxSize" width="481" height="10000000"/>
+                                <attributedString key="textStorage">
+                                    <fragment content="It's also made up of some code written by others: ">
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="AFNetworking">
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <url key="NSLink" string="https://github.com/AFNetworking/AFNetworking"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=", ">
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="MASShortcut">
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <url key="NSLink" string="https://github.com/shpakovski/MASShortcut"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=", ">
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Rebel">
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <url key="NSLink" string="https://github.com/github/Rebel"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=", ">
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="INPopoverController">
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <url key="NSLink" string="https://github.com/indragiek/INPopoverController"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" and ">
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="RSVerticallyCenteredTextFieldCell">
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <url key="NSLink" string="http://www.red-sweater.com/blog/148/what-a-difference-a-cell-makes"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" (what a mouthful)">
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=".">
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Times-Roman"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <size key="minSize" width="304" height="80"/>
+                                <size key="maxSize" width="481" height="10000000"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                    </clipView>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="288" id="iuF-QO-Zxs"/>
+                        <constraint firstAttribute="height" constant="80" id="ubb-t1-dbz"/>
+                    </constraints>
+                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="ISM-hh-saT">
+                        <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="rbd-oO-Xcr">
+                        <rect key="frame" x="224" y="1" width="15" height="133"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m6v-vx-ix3">
+                    <rect key="frame" x="8" y="133" width="119" height="32"/>
+                    <buttonCell key="cell" type="push" title="Email us" bezelStyle="rounded" image="Envelope" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UVc-5r-Jj8">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="sendEmail:" target="-2" id="OjK-EP-4a8"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M2x-Cq-sIp">
+                    <rect key="frame" x="127" y="133" width="117" height="32"/>
+                    <buttonCell key="cell" type="push" title="lol email" bezelStyle="rounded" image="Twitter" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tmG-eV-CAZ">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="sendTweet:" target="-2" id="g7g-uB-4OI"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="A1q-ak-pz7" secondAttribute="bottom" constant="20" id="57q-jm-Ui8"/>
+                <constraint firstItem="m6v-vx-ix3" firstAttribute="top" secondItem="yDd-kn-slv" secondAttribute="bottom" constant="4" id="7RT-Xm-2xg"/>
+                <constraint firstItem="5VW-Vw-VWb" firstAttribute="leading" secondItem="wzT-7z-QAM" secondAttribute="leading" constant="12" id="JH8-Jx-tea"/>
+                <constraint firstItem="A1q-ak-pz7" firstAttribute="top" secondItem="pdJ-5L-JEq" secondAttribute="bottom" constant="8" id="NQg-dT-hev"/>
+                <constraint firstItem="yDd-kn-slv" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jrp-Yj-84y" secondAttribute="bottom" constant="45" id="OAO-0k-xGa"/>
+                <constraint firstItem="pdJ-5L-JEq" firstAttribute="leading" secondItem="A1q-ak-pz7" secondAttribute="leading" constant="-5" id="R67-RC-UZT"/>
+                <constraint firstItem="M2x-Cq-sIp" firstAttribute="centerY" secondItem="m6v-vx-ix3" secondAttribute="centerY" id="RY7-Nj-RP1"/>
+                <constraint firstItem="cv6-7q-eI0" firstAttribute="top" secondItem="5VW-Vw-VWb" secondAttribute="bottom" constant="20" id="SLA-Rk-iGq"/>
+                <constraint firstItem="jrp-Yj-84y" firstAttribute="top" secondItem="cv6-7q-eI0" secondAttribute="bottom" constant="20" id="WP8-ab-HgT"/>
+                <constraint firstItem="5VW-Vw-VWb" firstAttribute="top" secondItem="wzT-7z-QAM" secondAttribute="top" constant="62" id="WWf-6M-TLN"/>
+                <constraint firstItem="jrp-Yj-84y" firstAttribute="leading" secondItem="yDd-kn-slv" secondAttribute="leading" constant="3" id="cv5-SA-leT"/>
+                <constraint firstItem="pdJ-5L-JEq" firstAttribute="trailing" secondItem="yDd-kn-slv" secondAttribute="trailing" id="grH-Ic-yYt"/>
+                <constraint firstItem="cv6-7q-eI0" firstAttribute="leading" secondItem="5VW-Vw-VWb" secondAttribute="leading" id="h6X-R5-uWa"/>
+                <constraint firstItem="pdJ-5L-JEq" firstAttribute="top" secondItem="m6v-vx-ix3" secondAttribute="bottom" constant="15" id="iHt-g0-cNe"/>
+                <constraint firstItem="m6v-vx-ix3" firstAttribute="leading" secondItem="yDd-kn-slv" secondAttribute="leading" constant="5" id="jpB-Qe-Rpw"/>
+                <constraint firstItem="jrp-Yj-84y" firstAttribute="trailing" secondItem="yDd-kn-slv" secondAttribute="trailing" id="keq-G0-IEV"/>
+                <constraint firstItem="jrp-Yj-84y" firstAttribute="leading" secondItem="cv6-7q-eI0" secondAttribute="leading" id="qsu-ej-va3"/>
+                <constraint firstAttribute="trailing" secondItem="jrp-Yj-84y" secondAttribute="trailing" constant="12" id="rCU-aK-gcW"/>
+                <constraint firstItem="m6v-vx-ix3" firstAttribute="leading" secondItem="pdJ-5L-JEq" secondAttribute="leading" constant="5" id="rjI-4g-ZHJ"/>
+                <constraint firstItem="M2x-Cq-sIp" firstAttribute="leading" secondItem="m6v-vx-ix3" secondAttribute="trailing" constant="12" id="znl-bu-iy6"/>
+            </constraints>
+            <point key="canvasLocation" x="308.5" y="279.5"/>
+        </view>
+        <customObject id="EZ0-Sx-so2" customClass="StartAtLoginController">
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="com.robotsandpencils.JeffLauncher"/>
+            </userDefinedRuntimeAttributes>
+        </customObject>
+    </objects>
+    <resources>
+        <image name="Envelope" width="19.862068176269531" height="19.862068176269531"/>
+        <image name="Twitter" width="19.862068176269531" height="19.862068176269531"/>
+    </resources>
+</document>

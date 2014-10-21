@@ -21,6 +21,7 @@
 #import "JEFAppDelegate.h"
 #import "JEFPopoverUploaderSetupViewController.h"
 #import "JEFPopoverRecordingsViewController.h"
+#import "JEFUploaderPreferencesViewController.h"
 #import "Constants.h"
 
 @interface JEFPopoverContentViewController () <JEFSelectionViewDelegate>
@@ -30,6 +31,7 @@
 
 @property (nonatomic, strong) JEFPopoverRecordingsViewController *recordingsViewController;
 @property (nonatomic, strong) JEFPopoverUploaderSetupViewController *uploaderSetupViewController;
+@property (nonatomic, strong) JEFUploaderPreferencesViewController *preferencesViewController;
 @property (strong, nonatomic) NSWindowController *preferencesWindowController;
 @property (strong, nonatomic) NSMutableArray *overlayWindows;
 @property (strong, nonatomic) JEFQuartzRecorder *recorder;
@@ -70,6 +72,9 @@
 
     self.uploaderSetupViewController = [[JEFPopoverUploaderSetupViewController alloc] init];
     [self addChildViewController:self.uploaderSetupViewController];
+
+    self.preferencesViewController = [[JEFUploaderPreferencesViewController alloc] initWithNibName:@"JEFUploaderPreferencesView" bundle:nil];
+    [self addChildViewController:self.preferencesViewController];
 }
 
 - (void)dealloc {
@@ -87,15 +92,6 @@
         self.recordingsViewController.recordingsManager = self.recordingsManager;
         self.recordingsViewController.contentInsets = NSEdgeInsetsMake(CGRectGetHeight(self.headerContainerView.frame) - 20, 0, 0, 0);
     }
-}
-
-#pragma mark Properties
-
-- (NSWindowController *)preferencesWindowController {
-    if (!_preferencesWindowController) {
-        _preferencesWindowController = [[NSStoryboard storyboardWithName:@"JEFPreferencesStoryboard" bundle:nil] instantiateInitialController];
-    }
-    return _preferencesWindowController;
 }
 
 #pragma mark Recording
@@ -137,8 +133,8 @@
 #pragma mark Actions
 
 - (IBAction)showPreferencesMenu:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:JEFClosePopoverNotification object:self];
-    [self.preferencesWindowController showWindow:sender];
+    NSViewController *currentViewController = self.isShowingSetup ? self.uploaderSetupViewController : self.recordingsViewController;
+    [self transitionFromViewController:currentViewController toViewController:self.preferencesViewController options:NSViewControllerTransitionSlideBackward completionHandler:^{}];
 }
 
 - (IBAction)quit:(id)sender {
