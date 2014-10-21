@@ -9,7 +9,7 @@
 @class JEFSelectionView;
 
 
-@protocol DrawMouseBoxViewDelegate<NSObject>
+@protocol JEFSelectionViewDelegate <NSObject>
 
 - (void)selectionView:(JEFSelectionView *)view didSelectRect:(NSRect)rect;
 - (void)selectionViewDidCancel:(JEFSelectionView *)view;
@@ -19,7 +19,7 @@
 
 @interface JEFSelectionView : NSView
 
-@property (nonatomic, weak) id<DrawMouseBoxViewDelegate> delegate;
+@property (nonatomic, weak) id<JEFSelectionViewDelegate> delegate;
 
 - (instancetype)initWithFrame:(NSRect)frameRect screen:(NSScreen *)screen;
 

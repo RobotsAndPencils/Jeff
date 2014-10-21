@@ -6,9 +6,11 @@
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
+@class JEFRecordingsManager;
 
 @interface JEFPopoverRecordingsViewController : NSViewController
 
-- (void)setupDropboxFilesystem;
+@property (nonatomic, strong) JEFRecordingsManager *recordingsManager;
+@property (nonatomic, assign) NSEdgeInsets contentInsets;
 
 @end

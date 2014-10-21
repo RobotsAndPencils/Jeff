@@ -9,6 +9,7 @@
 #import "JEFPopoverContentViewController.h"
 #import "INPopoverController.h"
 #import "JEFAppController.h"
+#import "JEFRecordingsManager.h"
 #import <Dropbox/DBAccountManager.h>
 
 NSString *const JEFOpenPopoverNotification = @"JEFOpenPopoverNotification";
@@ -71,6 +72,7 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
 - (void)setupPopover {
     self.popover = [[INPopoverController alloc] init];
     JEFPopoverContentViewController *popoverController = [[NSStoryboard storyboardWithName:@"JEFPopoverStoryboard" bundle:nil] instantiateInitialController];
+    popoverController.recordingsManager = [[JEFRecordingsManager alloc] init];
     self.popover.contentViewController = popoverController;
     self.popover.animates = NO;
     self.popover.closesWhenApplicationBecomesInactive = YES;
@@ -86,7 +88,7 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
 
     if (!self.popoverTransiencyMonitor) {
         __weak __typeof(self) weakSelf = self;
-        self.popoverTransiencyMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDownMask|NSRightMouseDownMask handler:^(NSEvent* event) {
+        self.popoverTransiencyMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDownMask | NSRightMouseDownMask handler:^(NSEvent *event) {
             [weakSelf closePopover:sender];
         }];
     }
