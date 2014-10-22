@@ -70,42 +70,42 @@
                                                                 </connections>
                                                             </textField>
                                                             <button alphaValue="0.70000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="5Ld-mQ-MwS" userLabel="Share Button">
-                                                                <rect key="frame" x="293" y="5" width="21" height="21"/>
+                                                                <rect key="frame" x="292" y="6" width="22" height="18"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="21" id="J45-b9-EFf"/>
-                                                                    <constraint firstAttribute="height" constant="21" id="Tvf-K8-BYI"/>
+                                                                    <constraint firstAttribute="width" constant="22" id="J45-b9-EFf"/>
+                                                                    <constraint firstAttribute="height" constant="18" id="Tvf-K8-BYI"/>
                                                                 </constraints>
-                                                                <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="NSShareTemplate" imagePosition="only" alignment="center" state="on" transparent="YES" imageScaling="proportionallyDown" inset="2" id="XSY-qa-dgU">
+                                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSShareTemplate" imagePosition="only" alignment="center" state="on" transparent="YES" imageScaling="proportionallyUpOrDown" inset="2" id="XSY-qa-dgU">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                    <font key="font" metaFont="cellTitle"/>
+                                                                    <font key="font" metaFont="system"/>
                                                                 </buttonCell>
                                                                 <connections>
                                                                     <action selector="showShareMenu:" target="-2" id="jtr-27-cSA"/>
                                                                 </connections>
                                                             </button>
                                                             <button alphaValue="0.70000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="fF6-Gn-aas" userLabel="Link Button">
-                                                                <rect key="frame" x="264" y="5" width="21" height="21"/>
+                                                                <rect key="frame" x="262" y="4" width="22" height="22"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="21" id="Bee-nT-RrM"/>
-                                                                    <constraint firstAttribute="height" constant="21" id="J7b-xM-oDw"/>
+                                                                    <constraint firstAttribute="width" constant="22" id="Bee-nT-RrM"/>
+                                                                    <constraint firstAttribute="height" constant="22" id="J7b-xM-oDw"/>
                                                                 </constraints>
-                                                                <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="CopyLinkButton" imagePosition="only" alignment="center" state="on" transparent="YES" imageScaling="proportionallyDown" inset="2" id="eBI-7G-eYe">
+                                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="CopyLinkButton" imagePosition="only" alignment="center" state="on" transparent="YES" imageScaling="proportionallyUpOrDown" inset="2" id="eBI-7G-eYe">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                    <font key="font" metaFont="cellTitle"/>
+                                                                    <font key="font" metaFont="system"/>
                                                                 </buttonCell>
                                                                 <connections>
                                                                     <action selector="copyLinkToPasteboard:" target="-2" id="bxy-AQ-xuJ"/>
                                                                 </connections>
                                                             </button>
                                                             <button alphaValue="0.70000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="zJG-h5-Uva" userLabel="Delete Button">
-                                                                <rect key="frame" x="235" y="5" width="21" height="21"/>
+                                                                <rect key="frame" x="232" y="4" width="22" height="22"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="21" id="BLa-hS-UDZ"/>
-                                                                    <constraint firstAttribute="height" constant="21" id="ove-Ja-M6x"/>
+                                                                    <constraint firstAttribute="width" constant="22" id="BLa-hS-UDZ"/>
+                                                                    <constraint firstAttribute="height" constant="22" id="ove-Ja-M6x"/>
                                                                 </constraints>
-                                                                <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="NSTrashEmpty" imagePosition="only" alignment="center" state="on" transparent="YES" imageScaling="proportionallyDown" inset="2" id="20F-d2-jUp">
+                                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Delete" imagePosition="only" alignment="center" state="on" transparent="YES" imageScaling="proportionallyUpOrDown" inset="2" id="20F-d2-jUp">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                    <font key="font" metaFont="cellTitle"/>
+                                                                    <font key="font" metaFont="system"/>
                                                                 </buttonCell>
                                                                 <connections>
                                                                     <action selector="deleteRecording:" target="-2" id="ooH-NC-9kS"/>
@@ -256,8 +256,8 @@
     </objects>
     <resources>
         <image name="500x500" width="500" height="500"/>
-        <image name="CopyLinkButton" width="20" height="20"/>
+        <image name="CopyLinkButton" width="16" height="16"/>
+        <image name="Delete" width="16" height="16"/>
         <image name="NSShareTemplate" width="11" height="16"/>
-        <image name="NSTrashEmpty" width="32" height="32"/>
     </resources>
 </document>
