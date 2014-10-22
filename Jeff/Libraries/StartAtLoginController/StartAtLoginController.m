@@ -85,7 +85,7 @@
     CFArrayRef cfJobDicts = SMCopyAllJobDictionaries(kSMDomainUserLaunchd);
     NSArray *jobDicts = CFBridgingRelease(cfJobDicts);
 
-    if (jobDicts && [jobDicts count] > 0) {
+    if (jobDicts && jobDicts.count > 0) {
         for (NSDictionary *job in jobDicts) {
             if ([_identifier isEqualToString:job[@"Label"]]) {
                 isEnabled = [job[@"OnDemand"] boolValue];
@@ -127,7 +127,7 @@
 }
 
 - (void)setEnabled:(BOOL)enabled {
-    [self setStartAtLogin:enabled];
+    self.startAtLogin = enabled;
 }
 
 @end

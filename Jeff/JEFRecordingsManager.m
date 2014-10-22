@@ -47,29 +47,25 @@
     [self.openRecordingPaths removeObject:recording.path.stringValue];
 }
 
-- (NSUInteger)numberOfRecordings {
-    return self.recordings.count;
-}
-
 - (void)uploadNewRecordingWithGIFURL:(NSURL *)gifURL posterFrameURL:(NSURL *)posterFrameURL completion:(void (^)(JEFRecording *))completion {
     NSImage *posterFrameImage;
-    if ([[NSFileManager defaultManager] fileExistsAtPath:[posterFrameURL path]]) {
-        posterFrameImage = [[NSImage alloc] initWithContentsOfFile:[posterFrameURL path]];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:posterFrameURL.path]) {
+        posterFrameImage = [[NSImage alloc] initWithContentsOfFile:posterFrameURL.path];
     }
 
-    [[self uploader] uploadGIF:gifURL withName:[[gifURL path] lastPathComponent] completion:^(BOOL succeeded, JEFRecording *recording, NSError *error) {
+    [[self uploader] uploadGIF:gifURL withName:gifURL.path.lastPathComponent completion:^(BOOL succeeded, JEFRecording *recording, NSError *error) {
         if (error || !succeeded) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSAlert *alert = [[NSAlert alloc] init];
                 alert.messageText = NSLocalizedString(@"UploadFailedAlertTitle", @"The title for the message that the recording upload failed");
                 [alert addButtonWithTitle:@"OK"];
-                alert.informativeText = [NSString stringWithFormat:@"%@", [error localizedDescription]];
+                alert.informativeText = [NSString stringWithFormat:@"%@", error.localizedDescription];
                 [alert runModal];
             });
             return;
         }
 
-        [[NSFileManager defaultManager] removeItemAtPath:[gifURL path] error:nil];
+        [[NSFileManager defaultManager] removeItemAtPath:gifURL.path error:nil];
 
         recording.posterFrameImage = posterFrameImage;
 
@@ -87,12 +83,13 @@
 }
 
 - (void)loadRecordings {
-    BOOL isShutdown = [[DBFilesystem sharedFilesystem] isShutDown];
-    BOOL notFinishedSyncing = ![[DBFilesystem sharedFilesystem] completedFirstSync];
+    DBFilesystem *sharedFilesystem = [DBFilesystem sharedFilesystem];
+    BOOL isShutdown = sharedFilesystem.isShutDown;
+    BOOL notFinishedSyncing = !sharedFilesystem.completedFirstSync;
     if (isShutdown || notFinishedSyncing) return;
 
     DBError *listError;
-    NSArray *files = [[DBFilesystem sharedFilesystem] listFolder:[DBPath root] error:&listError];
+    NSArray *files = [sharedFilesystem listFolder:[DBPath root] error:&listError];
     if (listError) {
         RBKLog(@"Error listing files: %@", listError);
         return;
@@ -144,7 +141,7 @@
     [self fetchPublicURLForRecording:recording completion:^(NSURL *url) {
         NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
         [pasteboard clearContents];
-        [pasteboard setString:[url absoluteString] forType:NSStringPboardType];
+        [pasteboard setString:url.absoluteString forType:NSStringPboardType];
 
         if (completion) completion();
     }];
@@ -171,8 +168,8 @@
 }
 
 - (void)setupDropboxFilesystem {
-    DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
-    BOOL alreadyHaveFilesystem = [[[DBFilesystem sharedFilesystem] account] isEqual:account];
+    DBAccount *account = [DBAccountManager sharedManager].linkedAccount;
+    BOOL alreadyHaveFilesystem = [[DBFilesystem sharedFilesystem].account isEqual:account];
     if (account && !alreadyHaveFilesystem) {
         DBFilesystem *filesystem = [[DBFilesystem alloc] initWithAccount:account];
         [DBFilesystem setSharedFilesystem:filesystem];
@@ -182,7 +179,7 @@
         [self loadRecordings];
 
         BOOL stateIsSyncing = [DBFilesystem sharedFilesystem].status.download.inProgress;
-        BOOL hasRecordings = self.numberOfRecordings > 0;
+        BOOL hasRecordings = self.recordings.count > 0;
         self.isDoingInitialSync = stateIsSyncing && !hasRecordings;
     }];
 }

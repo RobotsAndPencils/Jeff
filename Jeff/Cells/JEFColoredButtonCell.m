@@ -28,7 +28,7 @@
     [ctx restoreGraphicsState];
 
     // Draw darker overlay if button is pressed
-    if ([self isHighlighted]) {
+    if (self.highlighted) {
         [ctx saveGraphicsState];
         [backgroundPath setClip];
         [[NSColor colorWithCalibratedWhite:0.0f alpha:0.35] setFill];

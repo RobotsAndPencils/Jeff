@@ -285,7 +285,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 
     __weak __typeof(self) weakSelf = self;
     for (NSScreen *screen in [NSScreen screens]) {
-        NSRect frame = [screen frame];
+        NSRect frame = screen.frame;
         JEFSelectionOverlayWindow *window = [[JEFSelectionOverlayWindow alloc] initWithContentRect:frame completion:^(JEFSelectionView *view, NSRect rect, BOOL cancelled) {
             if (!cancelled) {
                 [weakSelf selectionView:view didSelectRect:rect];
@@ -318,11 +318,11 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 
             [weakSelf.recordingsManager uploadNewRecordingWithGIFURL:gifURL posterFrameURL:firstFrameURL completion:^(JEFRecording *recording) {
                 [[Mixpanel sharedInstance] track:@"Create Recording"];
-                [[[Mixpanel sharedInstance] people] increment:@"Recordings" by:@1];
+                [[Mixpanel sharedInstance].people increment:@"Recordings" by:@1];
             }];
 
             // Really don't care about removeItemAtPath:error: failing since it's in a temp directory anyways
-            [[NSFileManager defaultManager] removeItemAtPath:[framesURL path] error:nil];
+            [[NSFileManager defaultManager] removeItemAtPath:framesURL.path error:nil];
         }];
     }];
 
@@ -476,15 +476,15 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
     NSColor *fontColor = [NSColor labelColor];
 
     NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-    [paragraphStyle setAlignment:NSCenterTextAlignment];
+    paragraphStyle.alignment = NSCenterTextAlignment;
 
     NSDictionary *attrsDictionary = @{ NSShadowAttributeName : shadow, NSFontAttributeName : font, NSParagraphStyleAttributeName : paragraphStyle, NSForegroundColorAttributeName : fontColor };
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:button.title ?: @"" attributes:attrsDictionary];
-    [button setAttributedTitle:attrString];
+    button.attributedTitle = attrString;
 }
 
 - (JEFPopoverContent)contentTypeForCurrentAccountState {
-    BOOL linked = ([[DBAccountManager sharedManager] linkedAccount] != nil);
+    BOOL linked = ([DBAccountManager sharedManager].linkedAccount != nil);
     JEFPopoverContent popoverContent;
 
     if (linked) {
@@ -502,7 +502,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
     [[NSNotificationCenter defaultCenter] postNotificationName:JEFSetStatusViewNotRecordingNotification object:self];
 
     for (NSWindow *window in self.overlayWindows) {
-        [window setIgnoresMouseEvents:YES];
+        window.ignoresMouseEvents = YES;
     }
 
     // Map point into global CG coordinates.
@@ -511,7 +511,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
     // Get a list of online displays with bounds that include the specified point.
     NSScreen *selectedScreen;
     for (NSScreen *screen in [NSScreen screens]) {
-        if (CGRectContainsPoint([screen frame], globalRect.origin)) {
+        if (CGRectContainsPoint(screen.frame, globalRect.origin)) {
             selectedScreen = screen;
             break;
         }
@@ -536,11 +536,11 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
             [JEFConverter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
                 [self.recordingsManager uploadNewRecordingWithGIFURL:gifURL posterFrameURL:firstFrameURL completion:^(JEFRecording *recording) {
                     [[Mixpanel sharedInstance] track:@"Create Recording"];
-                    [[[Mixpanel sharedInstance] people] increment:@"Recordings" by:@1];
+                    [[Mixpanel sharedInstance].people increment:@"Recordings" by:@1];
                 }];
 
                 // Really don't care about removeItemAtPath:error: failing since it's in a temp directory anyways
-                [[NSFileManager defaultManager] removeItemAtPath:[framesURL path] error:nil];
+                [[NSFileManager defaultManager] removeItemAtPath:framesURL.path error:nil];
             }];
         }];
     }

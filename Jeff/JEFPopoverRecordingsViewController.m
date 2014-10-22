@@ -41,9 +41,9 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     // Setup the table view
     self.tableView.enclosingScrollView.layer.cornerRadius = 5.0;
     self.tableView.enclosingScrollView.layer.masksToBounds = YES;
-    [self.tableView setTarget:self];
-    [self.tableView setDoubleAction:@selector(didDoubleClickRow:)];
-    [self.tableView setIntercellSpacing:NSMakeSize(0, 0)];
+    self.tableView.target = self;
+    self.tableView.doubleAction = @selector(didDoubleClickRow:);
+    self.tableView.intercellSpacing = NSMakeSize(0, 0);
     self.tableView.enclosingScrollView.automaticallyAdjustsContentInsets = NO;
     // Display the green + bubble cursor when dragging into something that accepts the drag
     [self.tableView setDraggingSourceOperationMask:NSDragOperationCopy forLocal:NO];
@@ -117,7 +117,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (IBAction)showShareMenu:(id)sender {
     NSButton *button = (NSButton *)sender;
-    JEFRecording *recording = [(NSTableCellView *)[[button superview] superview] objectValue];
+    JEFRecording *recording = ((NSTableCellView *)button.superview.superview).objectValue;
 
     [self.recordingsManager fetchPublicURLForRecording:recording completion:^(NSURL *url) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -130,7 +130,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (IBAction)copyLinkToPasteboard:(id)sender {
     NSButton *button = (NSButton *)sender;
-    JEFRecording *recording = [(NSTableCellView *)[[button superview] superview] objectValue];
+    JEFRecording *recording = ((NSTableCellView *)button.superview.superview).objectValue;
 
     __weak __typeof(self) weakSelf = self;
     [self.recordingsManager copyURLStringToPasteboard:recording completion:^{
@@ -142,7 +142,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (IBAction)deleteRecording:(id)sender {
     NSButton *button = (NSButton *)sender;
-    JEFRecording *recording = [(NSTableCellView *)[[button superview] superview] objectValue];
+    JEFRecording *recording = ((NSTableCellView *)button.superview.superview).objectValue;
 
     DBError *error;
     BOOL success = [[DBFilesystem sharedFilesystem] deletePath:recording.path error:&error];
@@ -160,7 +160,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 #pragma mark - NSTableViewDelegate
 
 - (void)didDoubleClickRow:(NSTableView *)sender {
-    NSInteger clickedRow = [sender selectedRow];
+    NSInteger clickedRow = sender.selectedRow;
     JEFRecording *recording = self.recordingsManager.recordings[clickedRow];
 
     [self.recordingsManager fetchPublicURLForRecording:recording completion:^(NSURL *url) {
@@ -201,7 +201,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     JEFRecording *draggedRecording = self.recordingsManager.recordings[rowIndexes.firstIndex];
     [pboard declareTypes:@[ NSCreateFileContentsPboardType(@"gif"), NSFilesPromisePboardType, NSPasteboardTypeString ] owner:self];
     [pboard setData:draggedRecording.data forType:NSCreateFileContentsPboardType(@"gif")];
-    [pboard setPropertyList:@[ [draggedRecording.path.stringValue pathExtension] ] forType:NSFilesPromisePboardType];
+    [pboard setPropertyList:@[ draggedRecording.path.stringValue.pathExtension ] forType:NSFilesPromisePboardType];
     [pboard setString:draggedRecording.path.stringValue forType:NSPasteboardTypeString];
 
     return YES;

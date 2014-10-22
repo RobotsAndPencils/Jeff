@@ -28,13 +28,13 @@
 
     _completion = completion;
 
-    [self setBackgroundColor:[NSColor clearColor]];
-    [self setOpaque:NO];
-    [self setLevel:kShadyWindowLevel];
-    [self setReleasedWhenClosed:NO];
+    self.backgroundColor = [NSColor clearColor];
+    self.opaque = NO;
+    self.level = kShadyWindowLevel;
+    self.releasedWhenClosed = NO;
     JEFSelectionView *drawMouseBoxView = [[JEFSelectionView alloc] initWithFrame:contentRect screen:self.screen];
     drawMouseBoxView.delegate = self;
-    [self setContentView:drawMouseBoxView];
+    self.contentView = drawMouseBoxView;
     [self makeKeyAndOrderFront:self];
     self.ignoresMouseEvents = NO;
     

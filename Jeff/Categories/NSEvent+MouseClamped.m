@@ -21,7 +21,7 @@
     BOOL screenFound = NO;
     NSUInteger screenIndex = 0;
     for (NSScreen *screen in [NSScreen screens]) {
-        NSRect screenFrame = [screen frame];
+        NSRect screenFrame = screen.frame;
         if (NSPointInRect(mouseLocation, screenFrame)) {
             screenFound = YES;
             break;
@@ -54,16 +54,16 @@
     if (screenFound) {
         // get the scaling factor from the screen that was found
         NSScreen *screen = [NSScreen screens][screenIndex];
-        backingScaleFactor = [screen backingScaleFactor];
+        backingScaleFactor = screen.backingScaleFactor;
     }
     else {
         // get the scaling factor from the closest screen
         NSScreen *screen = [NSScreen screens][closestScreenIndex];
-        backingScaleFactor = [screen backingScaleFactor];
+        backingScaleFactor = screen.backingScaleFactor;
 
         // clamp the mouse location to bounds of that closest screen
         CGFloat inset = 1.0 / backingScaleFactor;
-        NSRect screenFrame = [screen frame];
+        NSRect screenFrame = screen.frame;
         if (mouseLocation.x > (NSMaxX(screenFrame) - inset)) {
             mouseLocation.x = (NSMaxX(screenFrame) - inset);
         }
