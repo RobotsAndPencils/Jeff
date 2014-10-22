@@ -7,7 +7,8 @@
 //
 
 #import "JEFRecording.h"
-
+#import "RBKCommonUtils.h"
+#import <libextobjc/EXTKeyPathCoding.h>
 
 @interface JEFRecording ()
 
@@ -24,7 +25,7 @@
 
 + (instancetype)recordingWithNewFile:(DBFile *)file {
     JEFRecording *recording = [[self alloc] init];
-    [recording setValue:file forKey:@"file"];
+    [recording setValue:file forKey:@keypath(recording, file)];
     __weak DBFile *weakFile = file;
     [file addObserver:self block:^{
         recording.progress = weakFile.status.progress;
@@ -37,11 +38,11 @@
     DBError *error;
     DBFile *file = [[DBFilesystem sharedFilesystem] openFile:fileInfo.path error:&error];
     if (!file || error) {
-        NSLog(@"Error opening file: %@", error);
+        RBKLog(@"Error opening file: %@", error);
         [file close];
         return nil;
     }
-    [recording setValue:file forKey:@"file"];
+    [recording setValue:file forKey:@keypath(recording, file)];
     __weak DBFile *weakFile = file;
     [file addObserver:self block:^{
         recording.progress = weakFile.status.progress;
@@ -65,6 +66,10 @@
     return [self.path isEqual:recording.path];
 }
 
+- (NSUInteger)hash {
+    return self.path.hash;
+}
+
 #pragma mark Properties
 
 - (NSString *)name {
@@ -85,10 +90,6 @@
 
 - (DBFileState)state {
     return self.file.status.state;
-}
-
-- (CGFloat)progress {
-    return self.file.status.progress;
 }
 
 - (JEFRecordingUploadHandler)uploadHandler {
@@ -115,12 +116,12 @@
     if (!_posterFrameImage && !self.isFetchingPosterFrame && self.file.info.thumbExists) {
         self.isFetchingPosterFrame = YES;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            if ([[DBFilesystem sharedFilesystem] isShutDown]) return;
+            if ([DBFilesystem sharedFilesystem].isShutDown) return;
 
             DBError *openError;
             DBFile *thumbFile = [[DBFilesystem sharedFilesystem] openThumbnail:self.file.info.path ofSize:DBThumbSizeL inFormat:DBThumbFormatPNG error:&openError];
             if (openError) {
-                NSLog(@"Error loading thumbnail: %@", openError);
+                RBKLog(@"Error loading thumbnail: %@", openError);
                 return;
             }
 
@@ -129,7 +130,7 @@
 
             [thumbFile close];
 
-            [self setPosterFrameImage:thumbImage];
+            self.posterFrameImage = thumbImage;
             self.isFetchingPosterFrame = NO;
         });
     }

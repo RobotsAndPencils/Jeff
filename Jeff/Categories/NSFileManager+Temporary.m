@@ -10,9 +10,9 @@
 
 @implementation NSFileManager (Temporary)
 
-- (NSString *)createTemporaryDirectory {
+- (NSString *)jef_createTemporaryDirectory {
     // Create a unique directory in the system temporary directory
-    NSString *guid = [[NSProcessInfo processInfo] globallyUniqueString];
+    NSString *guid = [NSProcessInfo processInfo].globallyUniqueString;
     NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:guid];
     if (![[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:NO attributes:nil error:nil]) {
         return nil;
@@ -20,9 +20,9 @@
     return path;
 }
 
-- (NSString *)createTemporaryFileWithExtension:(NSString *)extension {
+- (NSString *)jef_createTemporaryFileWithExtension:(NSString *)extension {
     // Create a unique directory in the system temporary directory
-    NSString *guid = [[NSProcessInfo processInfo] globallyUniqueString];
+    NSString *guid = [NSProcessInfo processInfo].globallyUniqueString;
     NSString *path = [[NSTemporaryDirectory() stringByAppendingPathComponent:guid] stringByAppendingPathExtension:extension];
     if (![[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]) {
         return nil;

@@ -61,8 +61,8 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="249" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QCX-5M-k3c" userLabel="Record Button" customClass="JEFColoredButton">
-                                        <rect key="frame" x="124" y="2" width="97" height="32"/>
+                                    <button wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QCX-5M-k3c" userLabel="Record Button" customClass="JEFColoredButton">
+                                        <rect key="frame" x="108" y="8" width="109" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="97" id="QZD-Fp-SeO"/>
                                         </constraints>

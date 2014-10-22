@@ -7,8 +7,10 @@
 //
 
 #import "JEFRecordingCellView.h"
-#import <Dropbox/Dropbox.h>
+#import "JEFRecording.h"
 #import <pop/POP.h>
+
+static void *JEFRecordingCellViewContext = &JEFRecordingCellViewContext;
 
 @interface JEFRecordingCellView ()
 
@@ -27,7 +29,7 @@
 
 // Use vibrant dark material to denote selected state
 - (void)setBackgroundStyle:(NSBackgroundStyle)backgroundStyle {
-    [super setBackgroundStyle:backgroundStyle];
+    super.backgroundStyle = backgroundStyle;
     
     switch (backgroundStyle) {
         case NSBackgroundStyleDark:
@@ -42,13 +44,13 @@
 
 - (void)setup {
     self.isSetup = YES;
-    [self addObserver:self forKeyPath:@"objectValue.isFetchingPosterFrame" options:NSKeyValueObservingOptionInitial context:NULL];
-    [self addObserver:self forKeyPath:@"objectValue.state" options:NSKeyValueObservingOptionInitial context:NULL];
-    [self addObserver:self forKeyPath:@"objectValue.progress" options:NSKeyValueObservingOptionInitial context:NULL];
-    [self addObserver:self forKeyPath:@"objectValue.posterFrameImage" options:NSKeyValueObservingOptionInitial context:NULL];
+    [self addObserver:self forKeyPath:@"objectValue.isFetchingPosterFrame" options:NSKeyValueObservingOptionInitial context:JEFRecordingCellViewContext];
+    [self addObserver:self forKeyPath:@"objectValue.state" options:NSKeyValueObservingOptionInitial context:JEFRecordingCellViewContext];
+    [self addObserver:self forKeyPath:@"objectValue.progress" options:NSKeyValueObservingOptionInitial context:JEFRecordingCellViewContext];
+    [self addObserver:self forKeyPath:@"objectValue.posterFrameImage" options:NSKeyValueObservingOptionInitial context:JEFRecordingCellViewContext];
 
     // Make immediate changes so there isn't an animation when the popover is shown
-    BOOL isFetchingPosterFrame = ([[self valueForKeyPath:@"objectValue.isFetchingPosterFrame"] boolValue] == YES);
+    BOOL isFetchingPosterFrame = [[self valueForKeyPath:@"objectValue.isFetchingPosterFrame"] boolValue];
     BOOL isUploading = ([[self valueForKeyPath:@"objectValue.state"] integerValue] == DBFileStateUploading);
     if (!isFetchingPosterFrame && !isUploading) {
         self.syncStatusContainerView.layer.opacity = 0;
@@ -82,9 +84,14 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (context != JEFRecordingCellViewContext) {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        return;
+    }
+
     NSString *statusString = @"";
     CGFloat progress = 0;
-    BOOL isFetchingPosterFrame = ([[object valueForKeyPath:@"objectValue.isFetchingPosterFrame"] boolValue] == YES);
+    BOOL isFetchingPosterFrame = [[object valueForKeyPath:@"objectValue.isFetchingPosterFrame"] boolValue];
     BOOL isUploading = ([[object valueForKeyPath:@"objectValue.state"] integerValue] == DBFileStateUploading);
     NSImage *posterFrameImage = [object valueForKeyPath:@"objectValue.posterFrameImage"];
 

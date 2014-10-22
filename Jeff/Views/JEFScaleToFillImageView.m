@@ -13,7 +13,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        [super setImageScaling:NSImageScaleAxesIndependently];
+        super.imageScaling = NSImageScaleAxesIndependently;
     }
 
     return self;
@@ -22,7 +22,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [super setImageScaling:NSImageScaleAxesIndependently];
+        super.imageScaling = NSImageScaleAxesIndependently;
     }
 
     return self;
@@ -31,14 +31,14 @@
 - (id)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
     if (self) {
-        [super setImageScaling:NSImageScaleAxesIndependently];
+        super.imageScaling = NSImageScaleAxesIndependently;
     }
 
     return self;
 }
 
 - (void)setImageScaling:(NSImageScaling)newScaling {
-    [super setImageScaling:NSImageScaleAxesIndependently];
+    super.imageScaling = NSImageScaleAxesIndependently;
 }
 
 - (void)setImage:(NSImage *)image {
@@ -70,7 +70,7 @@
                                     newImageSize.width,
                                     newImageSize.height);
 
-        [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
+        [NSGraphicsContext currentContext].imageInterpolation = NSImageInterpolationHigh;
 
         [image drawInRect:dstRect fromRect:srcRect operation:NSCompositeCopy fraction:1.0 respectFlipped:YES hints:@{ NSImageHintInterpolation : @(NSImageInterpolationHigh) }];
 
@@ -78,7 +78,7 @@
     }];
 
     // Automatically redraw with new frame size of the image view
-    [scaleToFillImage setCacheMode:NSImageCacheNever];
+    scaleToFillImage.cacheMode = NSImageCacheNever;
 
     [super setImage:scaleToFillImage];
 }

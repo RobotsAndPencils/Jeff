@@ -66,8 +66,9 @@
     [self setupTextView:self.openSourceCreditTextView withHTMLStringWithKey:@"PreferencesOpenSourceCreditsHTML" fontSize:[NSFont smallSystemFontSize] color:[NSColor secondaryLabelColor]];
 
     // Initialize version label
-    NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
-    NSString *buildNumber = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    NSString *version = mainBundle.infoDictionary[@"CFBundleShortVersionString"];
+    NSString *buildNumber = mainBundle.infoDictionary[@"CFBundleVersion"];
     self.versionLabel.stringValue = [NSString stringWithFormat:@"You've got Jeff version %@ (Build %@)", version, buildNumber];
 }
 
@@ -98,13 +99,14 @@
 #pragma mark Actions
 
 - (IBAction)toggleLinkDropbox:(id)sender {
-    if ([[DBAccountManager sharedManager] linkedAccount]) {
-        [[[DBAccountManager sharedManager] linkedAccount] unlink];
+    DBAccountManager *accountManager = [DBAccountManager sharedManager];
+    if (accountManager.linkedAccount) {
+        [accountManager.linkedAccount unlink];
         [self updateLinkButton];
         [self updateLinkExplanationLabel];
     } else {
         __weak __typeof(self) weakSelf = self;
-        [[DBAccountManager sharedManager] linkFromWindow:self.view.window withCompletionBlock:^(DBAccount *account) {
+        [accountManager linkFromWindow:self.view.window withCompletionBlock:^(DBAccount *account) {
             [weakSelf updateLinkButton];
         }];
     }
@@ -142,7 +144,7 @@
 #pragma mark Private
 
 - (void)setupTextView:(NSTextView *)view withHTMLStringWithKey:(NSString *)key fontSize:(CGFloat)fontSize color:(NSColor *)color {
-    NSString *htmlString = NSLocalizedString(key, nil);
+    NSString *htmlString = NSLocalizedString(key, @"The HTML string to parse as an attributed string");
     NSData *htmlData = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableAttributedString *attributedCredits = [[NSMutableAttributedString alloc] initWithHTML:htmlData documentAttributes:NULL];
     NSDictionary *attributes = @{ NSFontAttributeName : [NSFont systemFontOfSize:fontSize], NSForegroundColorAttributeName: color };
@@ -153,7 +155,7 @@
 }
 
 - (void)updateLinkButton {
-    if ([[DBAccountManager sharedManager] linkedAccount]) {
+    if ([DBAccountManager sharedManager].linkedAccount) {
         self.linkButton.title = @"Unlink Dropbox";
     } else {
         self.linkButton.title = @"Link Dropbox";
@@ -161,11 +163,11 @@
 }
 
 - (void)updateLinkExplanationLabel {
-    if ([[DBAccountManager sharedManager] linkedAccount]) {
-        self.dropboxLinkExplanationLabel.stringValue = NSLocalizedString(@"PreferencesDropboxExplanationUnlink", nil);
+    if ([DBAccountManager sharedManager].linkedAccount) {
+        self.dropboxLinkExplanationLabel.stringValue = NSLocalizedString(@"PreferencesDropboxExplanationUnlink", @"Explains what happens when you unlink your account");
     }
     else {
-        self.dropboxLinkExplanationLabel.stringValue = NSLocalizedString(@"PreferencesDropboxExplanationLink", nil);
+        self.dropboxLinkExplanationLabel.stringValue = NSLocalizedString(@"PreferencesDropboxExplanationLink", @"Explains what happens when you link your account");
     }
 }
 

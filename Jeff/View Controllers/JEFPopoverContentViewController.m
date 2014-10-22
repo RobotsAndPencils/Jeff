@@ -18,7 +18,7 @@
 #import "JEFRecording.h"
 #import "JEFQuartzRecorder.h"
 #import "JEFRecordingsManager.h"
-#import "Converter.h"
+#import "JEFConverter.h"
 #import "JEFAppController.h"
 #import "JEFSelectionOverlayWindow.h"
 #import "JEFAppDelegate.h"
@@ -27,6 +27,7 @@
 #import "JEFUploaderPreferencesViewController.h"
 #import "Constants.h"
 #import "JEFColoredButton.h"
+#import "RBKCommonUtils.h"
 
 typedef NS_ENUM(NSInteger, JEFPopoverContent) {
     JEFPopoverContentSetup = 0,
@@ -61,6 +62,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 @property (strong, nonatomic) NSMutableArray *overlayWindows;
 @property (strong, nonatomic) JEFQuartzRecorder *recorder;
 @property (assign, nonatomic, getter=isShowingSelection) BOOL showingSelection;
+@property (strong, nonatomic) id stopRecordingObserver;
 
 @end
 
@@ -89,13 +91,10 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
         [self toggleRecordingSelection];
     }];
 
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        __weak __typeof(self) weakSelf = self;
-        [[NSNotificationCenter defaultCenter] addObserverForName:JEFStopRecordingNotification object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification *note) {
-            [weakSelf stopRecording:nil];
-        }];
-    });
+    __weak __typeof(self) weakSelf = self;
+    self.stopRecordingObserver = [[NSNotificationCenter defaultCenter] addObserverForName:JEFStopRecordingNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        [weakSelf stopRecording:nil];
+    }];
 
     self.recordSelectionButton.backgroundColor = [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.5];
     self.recordSelectionButton.cornerRadius = CGRectGetHeight(self.recordSelectionButton.frame) / 2.0;
@@ -123,6 +122,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 
 - (void)dealloc {
     [[DBAccountManager sharedManager] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self.stopRecordingObserver];
 }
 
 - (void)viewDidAppear {
@@ -285,7 +285,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 
     __weak __typeof(self) weakSelf = self;
     for (NSScreen *screen in [NSScreen screens]) {
-        NSRect frame = [screen frame];
+        NSRect frame = screen.frame;
         JEFSelectionOverlayWindow *window = [[JEFSelectionOverlayWindow alloc] initWithContentRect:frame completion:^(JEFSelectionView *view, NSRect rect, BOOL cancelled) {
             if (!cancelled) {
                 [weakSelf selectionView:view didSelectRect:rect];
@@ -308,21 +308,21 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 
     __weak __typeof(self) weakSelf = self;
     [self.recorder recordScreen:[NSScreen mainScreen] completion:^(NSURL *framesURL) {
-        [Converter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
+        [JEFConverter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
             NSError *framesError;
             NSArray *frames = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:framesURL includingPropertiesForKeys:nil options:0 error:&framesError];
             if (!frames && framesError) {
-                NSLog(@"Error fetching frames for poster frame image: %@", framesError);
+                RBKLog(@"Error fetching frames for poster frame image: %@", framesError);
             }
             NSURL *firstFrameURL = frames.firstObject;
 
             [weakSelf.recordingsManager uploadNewRecordingWithGIFURL:gifURL posterFrameURL:firstFrameURL completion:^(JEFRecording *recording) {
                 [[Mixpanel sharedInstance] track:@"Create Recording"];
-                [[[Mixpanel sharedInstance] people] increment:@"Recordings" by:@1];
+                [[Mixpanel sharedInstance].people increment:@"Recordings" by:@1];
             }];
 
             // Really don't care about removeItemAtPath:error: failing since it's in a temp directory anyways
-            [[NSFileManager defaultManager] removeItemAtPath:[framesURL path] error:nil];
+            [[NSFileManager defaultManager] removeItemAtPath:framesURL.path error:nil];
         }];
     }];
 
@@ -408,7 +408,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 
     // Here we're figuring out what the initial and final positions for the two views should be
     // This is hard-coded for position animations, but it should support RTL and LTR UI
-    CGFloat fromViewToOffset;
+    CGFloat fromViewToOffset = 0;
     switch (options) {
         case NSViewControllerTransitionSlideBackward:
             if ([NSApp userInterfaceLayoutDirection] == NSUserInterfaceLayoutDirectionLeftToRight) {
@@ -476,15 +476,15 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
     NSColor *fontColor = [NSColor labelColor];
 
     NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-    [paragraphStyle setAlignment:NSCenterTextAlignment];
+    paragraphStyle.alignment = NSCenterTextAlignment;
 
     NSDictionary *attrsDictionary = @{ NSShadowAttributeName : shadow, NSFontAttributeName : font, NSParagraphStyleAttributeName : paragraphStyle, NSForegroundColorAttributeName : fontColor };
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:button.title ?: @"" attributes:attrsDictionary];
-    [button setAttributedTitle:attrString];
+    button.attributedTitle = attrString;
 }
 
 - (JEFPopoverContent)contentTypeForCurrentAccountState {
-    BOOL linked = ([[DBAccountManager sharedManager] linkedAccount] != nil);
+    BOOL linked = ([DBAccountManager sharedManager].linkedAccount != nil);
     JEFPopoverContent popoverContent;
 
     if (linked) {
@@ -502,7 +502,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
     [[NSNotificationCenter defaultCenter] postNotificationName:JEFSetStatusViewNotRecordingNotification object:self];
 
     for (NSWindow *window in self.overlayWindows) {
-        [window setIgnoresMouseEvents:YES];
+        window.ignoresMouseEvents = YES;
     }
 
     // Map point into global CG coordinates.
@@ -511,7 +511,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
     // Get a list of online displays with bounds that include the specified point.
     NSScreen *selectedScreen;
     for (NSScreen *screen in [NSScreen screens]) {
-        if (CGRectContainsPoint([screen frame], globalRect.origin)) {
+        if (CGRectContainsPoint(screen.frame, globalRect.origin)) {
             selectedScreen = screen;
             break;
         }
@@ -529,18 +529,18 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
             NSError *framesError;
             NSArray *frames = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:framesURL includingPropertiesForKeys:nil options:0 error:&framesError];
             if (!frames && framesError) {
-                NSLog(@"Error fetching frames for poster frame image: %@", framesError);
+                RBKLog(@"Error fetching frames for poster frame image: %@", framesError);
             }
             NSURL *firstFrameURL = frames.firstObject;
 
-            [Converter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
+            [JEFConverter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
                 [self.recordingsManager uploadNewRecordingWithGIFURL:gifURL posterFrameURL:firstFrameURL completion:^(JEFRecording *recording) {
                     [[Mixpanel sharedInstance] track:@"Create Recording"];
-                    [[[Mixpanel sharedInstance] people] increment:@"Recordings" by:@1];
+                    [[Mixpanel sharedInstance].people increment:@"Recordings" by:@1];
                 }];
 
                 // Really don't care about removeItemAtPath:error: failing since it's in a temp directory anyways
-                [[NSFileManager defaultManager] removeItemAtPath:[framesURL path] error:nil];
+                [[NSFileManager defaultManager] removeItemAtPath:framesURL.path error:nil];
             }];
         }];
     }

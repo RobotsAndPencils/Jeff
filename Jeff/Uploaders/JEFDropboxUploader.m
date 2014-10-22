@@ -29,7 +29,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.filenameCompletionBlocks = [NSMutableDictionary dictionary];
+        _filenameCompletionBlocks = [NSMutableDictionary dictionary];
     }
     return self;
 }
