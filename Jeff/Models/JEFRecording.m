@@ -65,6 +65,10 @@
     return [self.path isEqual:recording.path];
 }
 
+- (NSUInteger)hash {
+    return [self.path hash];
+}
+
 #pragma mark Properties
 
 - (NSString *)name {
