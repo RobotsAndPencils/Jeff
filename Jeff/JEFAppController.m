@@ -34,7 +34,7 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
     self = [super init];
     if (!self) return nil;
 
-    self.observers = [NSMutableArray array];
+    _observers = [NSMutableArray array];
 
     [self setupStatusItem];
     [self setupPopover];

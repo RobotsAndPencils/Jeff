@@ -25,8 +25,8 @@
     if (!self) return nil;
 
     [NSUserNotificationCenter defaultUserNotificationCenter].delegate = self;
-    self.recordings = @[ ];
-    self.openRecordingPaths = [NSMutableSet set];
+    _recordings = @[ ];
+    _openRecordingPaths = [NSMutableSet set];
 
     [self setupDropboxFilesystem];
     [self loadRecordings];
