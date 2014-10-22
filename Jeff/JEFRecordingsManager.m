@@ -61,7 +61,7 @@
         if (error || !succeeded) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSAlert *alert = [[NSAlert alloc] init];
-                alert.messageText = NSLocalizedString(@"UploadFailedAlertTitle", nil);
+                alert.messageText = NSLocalizedString(@"UploadFailedAlertTitle", @"The title for the message that the recording upload failed");
                 [alert addButtonWithTitle:@"OK"];
                 alert.informativeText = [NSString stringWithFormat:@"%@", [error localizedDescription]];
                 [alert runModal];
@@ -152,7 +152,7 @@
 
 - (void)displaySharedUserNotificationForRecording:(JEFRecording *)recording {
     NSUserNotification *publishedNotification = [[NSUserNotification alloc] init];
-    publishedNotification.title = NSLocalizedString(@"GIFSharedSuccessNotificationTitle", nil);
+    publishedNotification.title = NSLocalizedString(@"GIFSharedSuccessNotificationTitle", @"The title for the message that the recording was shared");
     publishedNotification.informativeText = NSLocalizedString(@"GIFPasteboardNotificationBody", nil);
     publishedNotification.contentImage = recording.posterFrameImage;
     [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:publishedNotification];
