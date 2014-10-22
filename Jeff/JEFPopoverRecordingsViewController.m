@@ -218,8 +218,8 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (void)displayCopiedUserNotification {
     NSUserNotification *publishedNotification = [[NSUserNotification alloc] init];
-    publishedNotification.title = NSLocalizedString(@"GIFCopiedSuccessNotificationTitle", @"The title for the message");
-    publishedNotification.informativeText = NSLocalizedString(@"GIFPasteboardNotificationBody", @"The body for the message");
+    publishedNotification.title = NSLocalizedString(@"GIFCopiedSuccessNotificationTitle", @"The title for the successful link copy message");
+    publishedNotification.informativeText = NSLocalizedString(@"GIFPasteboardNotificationBody", @"The body for the successful link copy message");
     [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:publishedNotification];
 }
 
