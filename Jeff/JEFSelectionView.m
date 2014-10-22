@@ -11,6 +11,7 @@
 #import "RSVerticallyCenteredTextFieldCell.h"
 #import <tgmath.h>
 #import <Carbon/Carbon.h>
+#import <libextobjc/EXTKeyPathCoding.h>
 #import "Constants.h"
 #import "JEFColoredButton.h"
 
@@ -187,7 +188,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         [self.layer addSublayer:self.handlesLayer];
 
         CABasicAnimation *dashAnimation;
-        dashAnimation = [CABasicAnimation animationWithKeyPath:@"lineDashPhase"];
+        dashAnimation = [CABasicAnimation animationWithKeyPath:@keypath(self.shapeLayer, lineDashPhase)];
         [dashAnimation setFromValue:@0.0f];
         [dashAnimation setToValue:@6.0f];
         [dashAnimation setDuration:0.75f];
