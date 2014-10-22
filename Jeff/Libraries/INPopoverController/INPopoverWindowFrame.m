@@ -42,7 +42,7 @@
 
 	if (self.topHighlightColor) {
 		[self.topHighlightColor set];
-		NSRect bounds = NSInsetRect([self bounds], arrowHeight, arrowHeight);
+		bounds = NSInsetRect([self bounds], arrowHeight, arrowHeight);
 		NSRect lineRect = NSMakeRect(floor(NSMinX(bounds) + (radius / 2.0)), NSMaxY(bounds) - self.borderWidth - 1, NSWidth(bounds) - radius, 1.0);
 
 		if (self.arrowDirection == INPopoverArrowDirectionUp) {
