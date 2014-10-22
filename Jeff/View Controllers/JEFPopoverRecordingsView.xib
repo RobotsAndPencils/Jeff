@@ -54,7 +54,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="324" height="200"/>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="500x500" id="3dK-hT-Qdd"/>
                                                     </imageView>
-                                                    <visualEffectView appearanceType="vibrantLight" blendingMode="withinWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="nW7-FR-CwG">
+                                                    <visualEffectView appearanceType="vibrantLight" blendingMode="withinWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="nW7-FR-CwG" userLabel="Info Container Visual Effect View">
                                                         <rect key="frame" x="0.0" y="0.0" width="324" height="30"/>
                                                         <subviews>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y5q-Dv-tnu">
@@ -124,33 +124,44 @@
                                                             <constraint firstAttribute="height" constant="30" id="upT-gq-do0"/>
                                                         </constraints>
                                                     </visualEffectView>
-                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2Zv-da-qr5" userLabel="Status Label">
-                                                        <rect key="frame" x="158" y="90" width="8" height="17"/>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="Zvj-8b-Wnk">
-                                                            <font key="font" metaFont="system"/>
-                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                        </textFieldCell>
-                                                    </textField>
-                                                    <progressIndicator hidden="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="n2f-rC-qYm">
-                                                        <rect key="frame" x="112" y="69" width="100" height="20"/>
+                                                    <visualEffectView wantsLayer="YES" appearanceType="vibrantLight" blendingMode="withinWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="ehu-xK-uYs" userLabel="Sync Status Container Visual Effect View">
+                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="200"/>
+                                                        <subviews>
+                                                            <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2Zv-da-qr5" userLabel="Status Label">
+                                                                <rect key="frame" x="158" y="66" width="8" height="17"/>
+                                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="Zvj-8b-Wnk">
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                </textFieldCell>
+                                                            </textField>
+                                                            <progressIndicator hidden="YES" wantsLayer="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="n2f-rC-qYm">
+                                                                <rect key="frame" x="112" y="90" width="100" height="20"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="100" id="HJf-cQ-31P"/>
+                                                                </constraints>
+                                                            </progressIndicator>
+                                                        </subviews>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="100" id="HJf-cQ-31P"/>
+                                                            <constraint firstAttribute="centerX" secondItem="2Zv-da-qr5" secondAttribute="centerX" id="2mJ-3G-YDK"/>
+                                                            <constraint firstItem="n2f-rC-qYm" firstAttribute="centerY" secondItem="2Zv-da-qr5" secondAttribute="centerY" constant="-26" id="8y1-a0-6bW"/>
+                                                            <constraint firstItem="n2f-rC-qYm" firstAttribute="centerX" secondItem="2Zv-da-qr5" secondAttribute="centerX" id="SJW-Tx-V8K"/>
+                                                            <constraint firstAttribute="centerY" secondItem="n2f-rC-qYm" secondAttribute="centerY" id="uge-Zm-H6f"/>
                                                         </constraints>
-                                                    </progressIndicator>
+                                                    </visualEffectView>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="4It-IS-v7G" firstAttribute="top" secondItem="Hyu-Hf-Cds" secondAttribute="top" id="HYZ-Qb-ogy"/>
-                                                    <constraint firstItem="nW7-FR-CwG" firstAttribute="top" secondItem="n2f-rC-qYm" secondAttribute="bottom" constant="40" id="KSW-v0-u4C"/>
+                                                    <constraint firstItem="ehu-xK-uYs" firstAttribute="top" secondItem="Hyu-Hf-Cds" secondAttribute="top" id="Hxp-T9-Ncb"/>
                                                     <constraint firstAttribute="trailing" secondItem="nW7-FR-CwG" secondAttribute="trailing" id="PHj-qQ-tmZ"/>
                                                     <constraint firstAttribute="bottom" secondItem="nW7-FR-CwG" secondAttribute="bottom" id="cPE-dG-qmw"/>
-                                                    <constraint firstAttribute="centerX" secondItem="n2f-rC-qYm" secondAttribute="centerX" id="g5G-Lp-SMS"/>
+                                                    <constraint firstAttribute="bottom" secondItem="ehu-xK-uYs" secondAttribute="bottom" id="gGx-35-wy3"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ehu-xK-uYs" secondAttribute="trailing" id="gMu-a6-HHO"/>
                                                     <constraint firstItem="4It-IS-v7G" firstAttribute="leading" secondItem="Hyu-Hf-Cds" secondAttribute="leading" id="hcN-xd-nk7"/>
-                                                    <constraint firstAttribute="centerX" secondItem="2Zv-da-qr5" secondAttribute="centerX" id="oTx-yl-rGj"/>
                                                     <constraint firstItem="nW7-FR-CwG" firstAttribute="leading" secondItem="Hyu-Hf-Cds" secondAttribute="leading" id="pLO-5w-NY4"/>
                                                     <constraint firstAttribute="bottom" secondItem="4It-IS-v7G" secondAttribute="bottom" id="sLb-bz-AEi"/>
                                                     <constraint firstAttribute="trailing" secondItem="4It-IS-v7G" secondAttribute="trailing" id="w7D-jk-9UT"/>
-                                                    <constraint firstItem="nW7-FR-CwG" firstAttribute="top" secondItem="2Zv-da-qr5" secondAttribute="bottom" constant="60" id="wkQ-Ks-axX"/>
+                                                    <constraint firstItem="ehu-xK-uYs" firstAttribute="leading" secondItem="Hyu-Hf-Cds" secondAttribute="leading" id="yCY-7A-G6b"/>
                                                 </constraints>
                                                 <connections>
                                                     <outlet property="infoContainerVisualEffectView" destination="nW7-FR-CwG" id="u5w-ld-UTl"/>
@@ -159,6 +170,8 @@
                                                     <outlet property="progressIndicator" destination="n2f-rC-qYm" id="UyC-Vh-7RR"/>
                                                     <outlet property="shareButton" destination="5Ld-mQ-MwS" id="g9o-AU-fPf"/>
                                                     <outlet property="statusLabel" destination="2Zv-da-qr5" id="SpY-w4-CTE"/>
+                                                    <outlet property="syncStatusContainerView" destination="ehu-xK-uYs" id="biM-O7-RAI"/>
+                                                    <outlet property="syncStatusLabelVerticalSpaceConstraint" destination="8y1-a0-6bW" id="uNL-1c-XRm"/>
                                                 </connections>
                                             </tableCellView>
                                         </prototypeCellViews>
