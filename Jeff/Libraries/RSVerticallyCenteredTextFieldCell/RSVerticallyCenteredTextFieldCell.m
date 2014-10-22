@@ -10,7 +10,7 @@
 
 @interface RSVerticallyCenteredTextFieldCell ()
 
-@property (nonatomic, assign) BOOL mIsEditingOrSelecting;
+@property (nonatomic, assign) BOOL isEditingOrSelecting;
 
 @end
 
@@ -25,7 +25,7 @@
     // the configuration of the field editor.  We sneak around this by
     // intercepting selectWithFrame and editWithFrame and sneaking a
     // reduced, centered rect in at the last minute.
-    if (!self.mIsEditingOrSelecting) {
+    if (!self.isEditingOrSelecting) {
         // Get our ideal size for current text
         NSSize textSize = [self cellSizeForBounds:theRect];
 
@@ -42,16 +42,16 @@
 
 - (void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(NSInteger)selStart length:(NSInteger)selLength {
     aRect = [self drawingRectForBounds:aRect];
-    self.mIsEditingOrSelecting = YES;
+    self.isEditingOrSelecting = YES;
     [super selectWithFrame:aRect inView:controlView editor:textObj delegate:anObject start:selStart length:selLength];
-    self.mIsEditingOrSelecting = NO;
+    self.isEditingOrSelecting = NO;
 }
 
 - (void)editWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject event:(NSEvent *)theEvent {
     aRect = [self drawingRectForBounds:aRect];
-    self.mIsEditingOrSelecting = YES;
+    self.isEditingOrSelecting = YES;
     [super editWithFrame:aRect inView:controlView editor:textObj delegate:anObject event:theEvent];
-    self.mIsEditingOrSelecting = NO;
+    self.isEditingOrSelecting = NO;
 }
 
 @end
