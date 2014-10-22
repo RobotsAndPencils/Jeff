@@ -142,7 +142,7 @@
 #pragma mark Private
 
 - (void)setupTextView:(NSTextView *)view withHTMLStringWithKey:(NSString *)key fontSize:(CGFloat)fontSize color:(NSColor *)color {
-    NSString *htmlString = NSLocalizedString(key, nil);
+    NSString *htmlString = NSLocalizedString(key, @"The HTML string to parse as an attributed string");
     NSData *htmlData = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableAttributedString *attributedCredits = [[NSMutableAttributedString alloc] initWithHTML:htmlData documentAttributes:NULL];
     NSDictionary *attributes = @{ NSFontAttributeName : [NSFont systemFontOfSize:fontSize], NSForegroundColorAttributeName: color };
@@ -162,10 +162,10 @@
 
 - (void)updateLinkExplanationLabel {
     if ([[DBAccountManager sharedManager] linkedAccount]) {
-        self.dropboxLinkExplanationLabel.stringValue = NSLocalizedString(@"PreferencesDropboxExplanationUnlink", nil);
+        self.dropboxLinkExplanationLabel.stringValue = NSLocalizedString(@"PreferencesDropboxExplanationUnlink", @"Explains what happens when you unlink your account");
     }
     else {
-        self.dropboxLinkExplanationLabel.stringValue = NSLocalizedString(@"PreferencesDropboxExplanationLink", nil);
+        self.dropboxLinkExplanationLabel.stringValue = NSLocalizedString(@"PreferencesDropboxExplanationLink", @"Explains what happens when you link your account");
     }
 }
 
