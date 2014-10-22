@@ -19,7 +19,6 @@ DerivedData
 *.hmap
 *.ipa
 
-# CocoaPods
-Pods
+*.swp
 
 .idea
