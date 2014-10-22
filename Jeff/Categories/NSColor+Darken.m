@@ -11,7 +11,7 @@
 
 @implementation NSColor (Darken)
 
-- (NSColor *)darken:(CGFloat)amount {
+- (NSColor *)jef_darken:(CGFloat)amount {
     CGFloat red, green, blue;
     amount = constrain(amount, 0.0, 1.0);
 

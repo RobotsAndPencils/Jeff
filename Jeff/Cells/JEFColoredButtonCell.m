@@ -23,7 +23,7 @@
     [ctx saveGraphicsState];
     NSBezierPath *backgroundPath = [NSBezierPath bezierPathWithRoundedRect:frame xRadius:roundedRadius yRadius:roundedRadius];
     [backgroundPath setClip];
-    NSGradient *outerGradient = [[NSGradient alloc] initWithColorsAndLocations:backgroundColor, 0.0, [backgroundColor darken:0.1], 1.0, nil];
+    NSGradient *outerGradient = [[NSGradient alloc] initWithColorsAndLocations:backgroundColor, 0.0, [backgroundColor jef_darken:0.1], 1.0, nil];
     [outerGradient drawInRect:backgroundPath.bounds angle:90.0];
     [ctx restoreGraphicsState];
 

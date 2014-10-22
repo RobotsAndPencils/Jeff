@@ -10,7 +10,7 @@
 
 @implementation NSEvent (MouseClamped)
 
-+ (NSPoint)clampedMouseLocation {
++ (NSPoint)jef_clampedMouseLocation {
 	// BUG: http://www.openradar.me/11905408 - nasty hack to make sure mouse location is within screen bounds
     
 	NSPoint mouseLocation = [self mouseLocation];
@@ -85,8 +85,8 @@
 	return mouseLocation;
 }
 
-+ (NSPoint)integralMouseLocation {
-	NSPoint mouseLocation = [self clampedMouseLocation];
++ (NSPoint)jef_integralMouseLocation {
+	NSPoint mouseLocation = [self jef_clampedMouseLocation];
     
 	mouseLocation.x = floor(mouseLocation.x);
 	mouseLocation.y = floor(mouseLocation.y);
@@ -94,9 +94,9 @@
 	return mouseLocation;
 }
 
-+ (NSPoint)clampedMouseLocationUsingBackingScaleFactor:(CGFloat)backingScaleFactor {
++ (NSPoint)jef_clampedMouseLocationUsingBackingScaleFactor:(CGFloat)backingScaleFactor {
 	// the mouse location is clamped to the screen where the mouse is located
-	NSPoint mouseLocation = [self clampedMouseLocation];
+	NSPoint mouseLocation = [self jef_clampedMouseLocation];
     
 	// there are cases where you want to clamp the mouse's location to another scale factor (for example, a window that spans multiple screens)
 	mouseLocation.x = floor(mouseLocation.x * backingScaleFactor) / backingScaleFactor;

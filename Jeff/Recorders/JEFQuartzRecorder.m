@@ -96,7 +96,7 @@
     NSImage *cursorImage = [cursor image];
     NSPoint hotspot = [cursor hotSpot];
     CGImageRef cursorImageRef = [cursorImage CGImageForProposedRect:NULL context:[NSGraphicsContext currentContext] hints:nil];
-    CGPoint cursorLocation = [NSEvent clampedMouseLocation];
+    CGPoint cursorLocation = [NSEvent jef_clampedMouseLocation];
     // Convert top-left rect space to bottom-left
     CGFloat rectY = CGRectGetHeight(self.screenFrame) - CGRectGetMaxY(self.rect);
     CGFloat cursorX = cursorLocation.x - CGRectGetMinX(self.screenFrame) - CGRectGetMinX(self.rect) - hotspot.x;

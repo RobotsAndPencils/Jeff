@@ -12,7 +12,7 @@
 @implementation Converter
 
 + (void)convertFramesAtURL:(NSURL *)framesURL completion:(void (^)(NSURL *))completion {
-    NSURL *outputURL = [NSURL fileURLWithPath:[[NSFileManager defaultManager] createTemporaryFileWithExtension:@"gif"]];
+    NSURL *outputURL = [NSURL fileURLWithPath:[[NSFileManager defaultManager] jef_createTemporaryFileWithExtension:@"gif"]];
     NSFileHandle *outputFileHandle = [NSFileHandle fileHandleForWritingToURL:outputURL error:nil];
     
     NSTask *gifsicleTask = [[NSTask alloc] init];
