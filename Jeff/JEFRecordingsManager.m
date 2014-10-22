@@ -11,6 +11,8 @@
 
 @property (nonatomic, strong, readwrite) NSArray *recordings;
 @property (nonatomic, assign, readwrite) BOOL isDoingInitialSync;
+// In order to prevent a "deep-filter" when loading recordings in loadRecordings triggered by a FS change, we keep track of the file info objects that have been opened in order to prevent the DB SDK spewing errors about trying to open a file more than once. By deep-filter I mean, when we have a fileInfo object we'd like to open, if we didn't keep track of those in a set (for fast membership checks) specifically, then we'd need to iterate over all of the recordings and check equality with their file info objects to see if we should open it.
+@property (nonatomic, strong) NSMutableSet *openRecordingPaths;
 
 @end
 
@@ -22,6 +24,7 @@
 
     [NSUserNotificationCenter defaultUserNotificationCenter].delegate = self;
     self.recordings = @[ ];
+    self.openRecordingPaths = [NSMutableSet set];
 
     [self setupDropboxFilesystem];
     [self loadRecordings];
@@ -36,7 +39,10 @@
 #pragma mark Recordings
 
 - (void)removeRecordingAtIndex:(NSUInteger)recordingIndex {
-    [[self mutableArrayValueForKey:@"recordings"] removeObjectAtIndex:recordingIndex];
+    NSMutableArray *recordings = [self mutableArrayValueForKey:@"recordings"];
+    JEFRecording *recording = [recordings objectAtIndex:recordingIndex];
+    [recordings removeObjectAtIndex:recordingIndex];
+    [self.openRecordingPaths removeObject:recording.file.info.path.stringValue];
 }
 
 - (NSUInteger)numberOfRecordings {
@@ -66,6 +72,7 @@
         recording.posterFrameImage = posterFrameImage;
 
         [[self mutableArrayValueForKey:@"recordings"] insertObject:recording atIndex:0];
+        [self.openRecordingPaths addObject:recording.file.info.path.stringValue];
 
         __weak __typeof(self) weakSelf = self;
         recording.uploadHandler = ^(JEFRecording *uploadedRecording) {
@@ -90,9 +97,11 @@
     }
     NSMutableArray *recordings = [NSMutableArray array];
     for (DBFileInfo *fileInfo in files) {
+        if ([self.openRecordingPaths containsObject:fileInfo.path.stringValue]) continue;
         JEFRecording *newRecording = [JEFRecording recordingWithFileInfo:fileInfo];
-        if (newRecording && ![recordings containsObject:newRecording]) {
+        if (newRecording) {
             [recordings addObject:newRecording];
+            [self.openRecordingPaths addObject:fileInfo.path.stringValue];
         }
     }
 
@@ -119,8 +128,7 @@
         NSURL *directURL = [NSURL URLWithString:link];
 
         // If file is not still uploading, convert public URL to direct URL
-        DBFile *file = [[DBFilesystem sharedFilesystem] openFile:recording.path error:NULL];
-        if (file.status.state != DBFileStateUploading) {
+        if (recording.state != DBFileStateUploading) {
             NSMutableString *directLink = [link mutableCopy];
             [directLink replaceOccurrencesOfString:@"www.dropbox" withString:@"dl.dropboxusercontent" options:0 range:NSMakeRange(0, [directLink length])];
             directURL = [NSURL URLWithString:directLink];
