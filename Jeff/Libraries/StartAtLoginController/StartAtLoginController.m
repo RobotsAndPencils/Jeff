@@ -24,6 +24,7 @@
 #import "StartAtLoginController.h"
 #import "RBKCommonUtils.h"
 #import <ServiceManagement/ServiceManagement.h>
+#import <libextobjc/EXTKeyPathCoding.h>
 
 @implementation StartAtLoginController
 
@@ -52,10 +53,10 @@
 + (BOOL)automaticallyNotifiesObserversForKey:(NSString *)theKey {
     BOOL automatic = NO;
 
-    if ([theKey isEqualToString:@"startAtLogin"]) {
+    if ([theKey isEqualToString:@keypath(StartAtLoginController.new, startAtLogin)]) {
         automatic = NO;
     }
-    else if ([theKey isEqualToString:@"enabled"]) {
+    else if ([theKey isEqualToString:@keypath(StartAtLoginController.new, enabled)]) {
         automatic = NO;
     }
     else {
@@ -70,9 +71,7 @@
 - (void)setIdentifier:(NSString *)identifier {
     _identifier = identifier;
     [self startAtLogin];
-#if !defined(NDEBUG)
     RBKLog(@"Launcher '%@' %@ configured to start at login", _identifier, (self.enabled ? @"is" : @"is not"));
-#endif
 }
 
 - (BOOL)startAtLogin {
@@ -88,17 +87,17 @@
 
     if (jobDicts && [jobDicts count] > 0) {
         for (NSDictionary *job in jobDicts) {
-            if ([_identifier isEqualToString:[job objectForKey:@"Label"]]) {
-                isEnabled = [[job objectForKey:@"OnDemand"] boolValue];
+            if ([_identifier isEqualToString:job[@"Label"]]) {
+                isEnabled = [job[@"OnDemand"] boolValue];
                 break;
             }
         }
     }
 
     if (isEnabled != _enabled) {
-        [self willChangeValueForKey:@"enabled"];
+        [self willChangeValueForKey:@keypath(self, enabled)];
         _enabled = isEnabled;
-        [self didChangeValueForKey:@"enabled"];
+        [self didChangeValueForKey:@keypath(self, enabled)];
     }
 
     return isEnabled;
@@ -109,22 +108,22 @@
         return;
     }
 
-    [self willChangeValueForKey:@"startAtLogin"];
+    [self willChangeValueForKey:@keypath(self, startAtLogin)];
 
     if (!SMLoginItemSetEnabled((__bridge CFStringRef)_identifier, (flag) ? true : false)) {
         RBKLog(@"SMLoginItemSetEnabled failed!");
 
-        [self willChangeValueForKey:@"enabled"];
+        [self willChangeValueForKey:@keypath(self, enabled)];
         _enabled = NO;
-        [self didChangeValueForKey:@"enabled"];
+        [self didChangeValueForKey:@keypath(self, enabled)];
     }
     else {
-        [self willChangeValueForKey:@"enabled"];
+        [self willChangeValueForKey:@keypath(self, enabled)];
         _enabled = YES;
-        [self didChangeValueForKey:@"enabled"];
+        [self didChangeValueForKey:@keypath(self, enabled)];
     }
 
-    [self didChangeValueForKey:@"startAtLogin"];
+    [self didChangeValueForKey:@keypath(self, startAtLogin)];
 }
 
 - (void)setEnabled:(BOOL)enabled {

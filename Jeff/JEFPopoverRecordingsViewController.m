@@ -13,7 +13,7 @@
 #import <Dropbox/Dropbox.h>
 #import "Mixpanel.h"
 #import <pop/POP.h>
-#import <QuartzCore/CAMediaTimingFunction.h>
+#import <libextobjc/EXTKeyPathCoding.h>
 
 #import "JEFRecording.h"
 #import "JEFRecordingCellView.h"
@@ -53,8 +53,8 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     [self.dropboxSyncingProgressIndicator startAnimation:nil];
 
     // If we get the initial value for recordings then we end up getting the same initial value (with n initial recordings) as both a setting change and a insertion change, and that doesn't work when using insertRowsAtIndexes:withAnimation:, so we just rely on reloadData in viewDidAppear instead.
-    [self.recordingsManager addObserver:self forKeyPath:@"recordings" options:0 context:PopoverContentViewControllerContext];
-    [self.recordingsManager addObserver:self forKeyPath:@"isDoingInitialSync" options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
+    [self.recordingsManager addObserver:self forKeyPath:@keypath(self.recordingsManager, recordings) options:0 context:PopoverContentViewControllerContext];
+    [self.recordingsManager addObserver:self forKeyPath:@keypath(self.recordingsManager, isDoingInitialSync) options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:[@"values." stringByAppendingString:JEFRecordScreenShortcutKey] options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:[@"values." stringByAppendingString:JEFRecordSelectionShortcutKey] options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
 }
@@ -67,7 +67,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (void)dealloc {
     [[DBFilesystem sharedFilesystem] removeObserver:self];
-    [self.recordingsManager removeObserver:self forKeyPath:@"recordings"];
+    [self.recordingsManager removeObserver:self forKeyPath:@keypath(self.recordingsManager, recordings)];
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:[@"values." stringByAppendingString:JEFRecordScreenShortcutKey] context:PopoverContentViewControllerContext];
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:[@"values." stringByAppendingString:JEFRecordSelectionShortcutKey] context:PopoverContentViewControllerContext];
 }
@@ -78,7 +78,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
         return;
     }
 
-    if ([keyPath isEqualToString:@"recordings"]) {
+    if ([keyPath isEqualToString:@keypath(self.recordingsManager, recordings)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self updateEmptyStateView];
 
@@ -99,7 +99,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
         });
     }
 
-    if ([keyPath isEqualToString:@"isDoingInitialSync"]) {
+    if ([keyPath isEqualToString:@keypath(self.recordingsManager, isDoingInitialSync)]) {
         BOOL isDoingInitialSync = [[object valueForKeyPath:keyPath] boolValue];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self updateDropboxSyncingView:isDoingInitialSync];

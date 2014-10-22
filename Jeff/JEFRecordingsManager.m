@@ -7,6 +7,7 @@
 #import "JEFRecordingsManager.h"
 #import "JEFDropboxUploader.h"
 #import "RBKCommonUtils.h"
+#import <libextobjc/EXTKeyPathCoding.h>
 
 @interface JEFRecordingsManager () <NSUserNotificationCenterDelegate>
 
@@ -40,7 +41,7 @@
 #pragma mark Recordings
 
 - (void)removeRecordingAtIndex:(NSUInteger)recordingIndex {
-    NSMutableArray *recordings = [self mutableArrayValueForKey:@"recordings"];
+    NSMutableArray *recordings = [self mutableArrayValueForKey:@keypath(self, recordings)];
     JEFRecording *recording = [recordings objectAtIndex:recordingIndex];
     [recordings removeObjectAtIndex:recordingIndex];
     [self.openRecordingPaths removeObject:recording.path.stringValue];
@@ -72,7 +73,7 @@
 
         recording.posterFrameImage = posterFrameImage;
 
-        [[self mutableArrayValueForKey:@"recordings"] insertObject:recording atIndex:0];
+        [[self mutableArrayValueForKey:@keypath(self, recordings)] insertObject:recording atIndex:0];
         [self.openRecordingPaths addObject:recording.path.stringValue];
 
         __weak __typeof(self) weakSelf = self;
@@ -106,10 +107,10 @@
         }
     }
 
-    NSSortDescriptor *dateDescendingDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
+    NSSortDescriptor *dateDescendingDescriptor = [[NSSortDescriptor alloc] initWithKey:@keypath(JEFRecording.new, createdAt) ascending:NO];
     [recordings sortedArrayUsingDescriptors:@[ dateDescendingDescriptor ]];
 
-    [[self mutableArrayValueForKey:@"recordings"] addObjectsFromArray:recordings];
+    [[self mutableArrayValueForKey:@keypath(self, recordings)] addObjectsFromArray:recordings];
 }
 
 /**

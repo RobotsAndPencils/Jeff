@@ -8,6 +8,7 @@
 
 #import "JEFRecording.h"
 #import "RBKCommonUtils.h"
+#import <libextobjc/EXTKeyPathCoding.h>
 
 @interface JEFRecording ()
 
@@ -24,7 +25,7 @@
 
 + (instancetype)recordingWithNewFile:(DBFile *)file {
     JEFRecording *recording = [[self alloc] init];
-    [recording setValue:file forKey:@"file"];
+    [recording setValue:file forKey:@keypath(recording, file)];
     __weak DBFile *weakFile = file;
     [file addObserver:self block:^{
         recording.progress = weakFile.status.progress;
@@ -41,7 +42,7 @@
         [file close];
         return nil;
     }
-    [recording setValue:file forKey:@"file"];
+    [recording setValue:file forKey:@keypath(recording, file)];
     __weak DBFile *weakFile = file;
     [file addObserver:self block:^{
         recording.progress = weakFile.status.progress;
