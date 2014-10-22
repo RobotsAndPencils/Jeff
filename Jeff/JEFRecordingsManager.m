@@ -6,6 +6,7 @@
 #import "JEFRecording.h"
 #import "JEFRecordingsManager.h"
 #import "JEFDropboxUploader.h"
+#import "RBKCommonUtils.h"
 
 @interface JEFRecordingsManager () <NSUserNotificationCenterDelegate>
 
@@ -92,7 +93,7 @@
     DBError *listError;
     NSArray *files = [[DBFilesystem sharedFilesystem] listFolder:[DBPath root] error:&listError];
     if (listError) {
-        NSLog(@"Error listing files: %@", listError);
+        RBKLog(@"Error listing files: %@", listError);
         return;
     }
     NSMutableArray *recordings = [NSMutableArray array];

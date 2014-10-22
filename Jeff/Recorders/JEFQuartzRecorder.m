@@ -9,7 +9,7 @@
 #import "JEFQuartzRecorder.h"
 
 #import "NSEvent+MouseClamped.h"
-
+#import "RBKCommonUtils.h"
 
 @interface JEFQuartzRecorder ()
 
@@ -56,7 +56,7 @@
         while ((filePath = [directoryEnumerator nextObject])) {
             removeSuccess = [fileManager removeItemAtPath:[self.path stringByAppendingPathComponent:filePath] error:&error];
             if (!removeSuccess && error) {
-                NSLog(@"Error removing file in Frames directory: %@", error);
+                RBKLog(@"Error removing file in Frames directory: %@", error);
             }
         }
     }

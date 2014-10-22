@@ -18,6 +18,7 @@
 #import "JEFRecording.h"
 #import "JEFRecordingCellView.h"
 #import "Constants.h"
+#import "RBKCommonUtils.h"
 
 static void *PopoverContentViewControllerContext = &PopoverContentViewControllerContext;
 
@@ -146,7 +147,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     DBError *error;
     BOOL success = [[DBFilesystem sharedFilesystem] deletePath:recording.path error:&error];
     if (!success) {
-        NSLog(@"Error deleting recording: %@", error);
+        RBKLog(@"Error deleting recording: %@", error);
         return;
     }
 
@@ -274,7 +275,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (void)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker didChooseSharingService:(NSSharingService *)service {
     NSString *title = (service.title && service.title.length > 0) ? service.title : @"Unknown";
-    NSLog(@"%@", title);
+    RBKLog(@"%@", title);
     [[Mixpanel sharedInstance] track:@"Share Recording" properties:@{ @"Service" : title }];
 }
 
