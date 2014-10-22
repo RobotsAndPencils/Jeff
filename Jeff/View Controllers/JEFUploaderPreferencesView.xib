@@ -171,28 +171,6 @@
                                             <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="AFNetworking">
-                                        <attributes>
-                                            <font key="NSFont" size="11" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <url key="NSLink" string="https://github.com/AFNetworking/AFNetworking"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
-                                            <integer key="NSUnderline" value="1"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=", ">
-                                        <attributes>
-                                            <font key="NSFont" size="11" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
                                     <fragment content="MASShortcut">
                                         <attributes>
                                             <font key="NSFont" size="11" name="HelveticaNeue"/>
@@ -249,7 +227,7 @@
                                             <integer key="NSUnderline" value="1"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content=",  ">
+                                    <fragment content=", ">
                                         <attributes>
                                             <font key="NSFont" size="11" name="HelveticaNeue"/>
                                             <real key="NSKern" value="0.0"/>
@@ -271,7 +249,7 @@
                                             <integer key="NSUnderline" value="1"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content=" (what a mouthful) and Gifsicle.">
+                                    <fragment content=" (what a mouthful), Pop and Gifsicle.">
                                         <attributes>
                                             <font key="NSFont" size="11" name="HelveticaNeue"/>
                                             <real key="NSKern" value="0.0"/>
