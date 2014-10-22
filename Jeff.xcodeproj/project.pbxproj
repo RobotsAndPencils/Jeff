@@ -26,7 +26,7 @@
 		CA455B5618B83EBA00F9A541 /* JEFRecordingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B5518B83EBA00F9A541 /* JEFRecordingTests.m */; };
 		CA455B6B18B848B700F9A541 /* JEFPopoverRecordingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B6918B848B700F9A541 /* JEFPopoverRecordingsViewController.m */; };
 		CA455B7418B84EC100F9A541 /* gifsicle in Resources */ = {isa = PBXBuildFile; fileRef = CA455B7318B84EC100F9A541 /* gifsicle */; };
-		CA455B7718B84ED200F9A541 /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B7618B84ED200F9A541 /* Converter.m */; };
+		CA455B7718B84ED200F9A541 /* JEFConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B7618B84ED200F9A541 /* JEFConverter.m */; };
 		CA455B7B18B882DB00F9A541 /* NSFileManager+Temporary.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B7A18B882DB00F9A541 /* NSFileManager+Temporary.m */; };
 		CA4BB84819F0B52A00CA04FB /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC40811199C391900833FAB /* Dropbox.framework */; };
 		CA4D988418D6D2A900EFE4FD /* JEFRecordingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4D988318D6D2A900EFE4FD /* JEFRecordingCellView.m */; };
@@ -160,8 +160,8 @@
 		CA455B6818B848B700F9A541 /* JEFPopoverRecordingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFPopoverRecordingsViewController.h; sourceTree = "<group>"; };
 		CA455B6918B848B700F9A541 /* JEFPopoverRecordingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFPopoverRecordingsViewController.m; sourceTree = "<group>"; };
 		CA455B7318B84EC100F9A541 /* gifsicle */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = gifsicle; path = Jeff/Resources/gifsicle; sourceTree = "<group>"; };
-		CA455B7518B84ED200F9A541 /* Converter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Converter.h; sourceTree = "<group>"; };
-		CA455B7618B84ED200F9A541 /* Converter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Converter.m; sourceTree = "<group>"; };
+		CA455B7518B84ED200F9A541 /* JEFConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFConverter.h; sourceTree = "<group>"; };
+		CA455B7618B84ED200F9A541 /* JEFConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFConverter.m; sourceTree = "<group>"; };
 		CA455B7918B882DB00F9A541 /* NSFileManager+Temporary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileManager+Temporary.h"; path = "Categories/NSFileManager+Temporary.h"; sourceTree = "<group>"; };
 		CA455B7A18B882DB00F9A541 /* NSFileManager+Temporary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileManager+Temporary.m"; path = "Categories/NSFileManager+Temporary.m"; sourceTree = "<group>"; };
 		CA4D988218D6D2A900EFE4FD /* JEFRecordingCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecordingCellView.h; path = Views/JEFRecordingCellView.h; sourceTree = "<group>"; };
@@ -375,8 +375,8 @@
 				CA455B3E18B83EB900F9A541 /* JEFAppDelegate.m */,
 				CAB77D4B19E5E2CF0049B6D8 /* JEFAppController.h */,
 				CAB77D4C19E5E2CF0049B6D8 /* JEFAppController.m */,
-				CA455B7518B84ED200F9A541 /* Converter.h */,
-				CA455B7618B84ED200F9A541 /* Converter.m */,
+				CA455B7518B84ED200F9A541 /* JEFConverter.h */,
+				CA455B7618B84ED200F9A541 /* JEFConverter.m */,
 				CA455B4018B83EBA00F9A541 /* MainMenu.xib */,
 				CA54FCEA196E2B50000C46CC /* Constants.h */,
 				CA54FCED196E2DF4000C46CC /* Constants.m */,
@@ -795,7 +795,7 @@
 				CA875EFC18B9974C009FC997 /* JEFSelectionView.m in Sources */,
 				CADF57B418C6F432006512E3 /* JEFRecording.m in Sources */,
 				CAB84C74199470B200EA0414 /* RBLTableView.m in Sources */,
-				CA455B7718B84ED200F9A541 /* Converter.m in Sources */,
+				CA455B7718B84ED200F9A541 /* JEFConverter.m in Sources */,
 				CAA79EAC192A725800A4299F /* JEFQuartzRecorder.m in Sources */,
 				CAF3913119F565BD009D5D9A /* JEFColoredButtonCell.m in Sources */,
 				CA7A1D991991E9FF008DA733 /* JEFCreditsTextView.m in Sources */,

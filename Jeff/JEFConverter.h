@@ -1,5 +1,5 @@
 //
-//  Converter.h
+//  JEFConverter.h
 //  Jeff
 //
 //  Created by Brandon on 2/21/2014.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Converter : NSObject
+@interface JEFConverter : NSObject
 
 + (void)convertFramesAtURL:(NSURL *)framesURL completion:(void (^)(NSURL *))completion;
 

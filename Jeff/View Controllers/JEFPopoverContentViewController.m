@@ -18,7 +18,7 @@
 #import "JEFRecording.h"
 #import "JEFQuartzRecorder.h"
 #import "JEFRecordingsManager.h"
-#import "Converter.h"
+#import "JEFConverter.h"
 #import "JEFAppController.h"
 #import "JEFSelectionOverlayWindow.h"
 #import "JEFAppDelegate.h"
@@ -308,7 +308,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 
     __weak __typeof(self) weakSelf = self;
     [self.recorder recordScreen:[NSScreen mainScreen] completion:^(NSURL *framesURL) {
-        [Converter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
+        [JEFConverter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
             NSError *framesError;
             NSArray *frames = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:framesURL includingPropertiesForKeys:nil options:0 error:&framesError];
             if (!frames && framesError) {
@@ -533,7 +533,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
             }
             NSURL *firstFrameURL = frames.firstObject;
 
-            [Converter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
+            [JEFConverter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
                 [self.recordingsManager uploadNewRecordingWithGIFURL:gifURL posterFrameURL:firstFrameURL completion:^(JEFRecording *recording) {
                     [[Mixpanel sharedInstance] track:@"Create Recording"];
                     [[[Mixpanel sharedInstance] people] increment:@"Recordings" by:@1];

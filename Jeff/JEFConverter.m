@@ -1,15 +1,15 @@
 //
-//  Converter.m
+//  JEFConverter.m
 //  Jeff
 //
 //  Created by Brandon on 2/21/2014.
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-#import "Converter.h"
+#import "JEFConverter.h"
 #import "NSFileManager+Temporary.h"
 
-@implementation Converter
+@implementation JEFConverter
 
 + (void)convertFramesAtURL:(NSURL *)framesURL completion:(void (^)(NSURL *))completion {
     NSURL *outputURL = [NSURL fileURLWithPath:[[NSFileManager defaultManager] jef_createTemporaryFileWithExtension:@"gif"]];
