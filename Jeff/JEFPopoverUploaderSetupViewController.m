@@ -30,9 +30,10 @@
     [[DBAccountManager sharedManager] addObserver:self block:^(DBAccount *account) {
         [weakSelf updateView];
     }];
-    
-    NSString *version = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
-    NSString *buildNumber = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
+
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    NSString *version = mainBundle.infoDictionary[@"CFBundleShortVersionString"];
+    NSString *buildNumber = mainBundle.infoDictionary[@"CFBundleVersion"];
     self.versionLabel.stringValue = [NSString stringWithFormat:@"You've got Jeff version %@ (Build %@)", version, buildNumber];
 }
 

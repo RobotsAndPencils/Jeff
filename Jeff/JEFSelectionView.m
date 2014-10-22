@@ -160,17 +160,17 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 
 - (void)mouseDown:(NSEvent *)theEvent {
     if (self.hasMadeInitialSelection) {
-        NSPoint mousePoint = [theEvent locationInWindow];
+        NSPoint mousePoint = theEvent.locationInWindow;
         self.clickedHandle = [self handleAtPoint:mousePoint];
         self.anchor = mousePoint;
     }
     else {
-        self.mouseDownPoint = [theEvent locationInWindow];
+        self.mouseDownPoint = theEvent.locationInWindow;
 
         self.shapeLayer = [CAShapeLayer layer];
         self.shapeLayer.lineWidth = 1.0;
-        self.shapeLayer.strokeColor = [[NSColor blackColor] CGColor];
-        self.shapeLayer.fillColor = [[NSColor clearColor] CGColor];
+        self.shapeLayer.strokeColor = [NSColor blackColor].CGColor;
+        self.shapeLayer.fillColor = [NSColor clearColor].CGColor;
         self.shapeLayer.lineDashPattern = @[ @3, @3 ];
         [self.layer addSublayer:self.shapeLayer];
 
@@ -189,17 +189,17 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 
         CABasicAnimation *dashAnimation;
         dashAnimation = [CABasicAnimation animationWithKeyPath:@keypath(self.shapeLayer, lineDashPhase)];
-        [dashAnimation setFromValue:@0.0f];
-        [dashAnimation setToValue:@6.0f];
-        [dashAnimation setDuration:0.75f];
-        [dashAnimation setRepeatCount:HUGE_VALF];
+        dashAnimation.fromValue = @0.0f;
+        dashAnimation.toValue = @6.0f;
+        dashAnimation.duration = 0.75f;
+        dashAnimation.repeatCount = HUGE_VALF;
         [self.shapeLayer addAnimation:dashAnimation forKey:@"linePhase"];
     }
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent {
     if (self.hasMadeInitialSelection) {
-        NSPoint mousePoint = [theEvent locationInWindow];
+        NSPoint mousePoint = theEvent.locationInWindow;
         NSPoint newPoint;
         
 
@@ -232,7 +232,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     [self updateHandlePaths];
     [self updateOverlayPath];
 
-    [self setNeedsDisplayInRect:[self bounds]];
+    self.needsDisplayInRect = self.bounds;
 }
 
 - (NSPoint)constrainMousePoint:(NSPoint)mousePoint onHandle:(JEFHandleIndex)handle inRect:(NSRect)rect {
@@ -357,7 +357,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 
 - (NSRect)rectForHandleAtIndex:(enum JEFHandleIndex)handleIndex {
     NSPoint handleCenter = NSZeroPoint;
-    NSRect selectionBounds = [self selectionRect];
+    NSRect selectionBounds = self.selectionRect;
 
     switch (handleIndex) {
         case JEFHandleIndexBottomLeft:

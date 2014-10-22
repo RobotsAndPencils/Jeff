@@ -70,7 +70,7 @@
 - (void)setupHockeyApp {
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"***REMOVED***"];
     [[BITHockeyManager sharedHockeyManager] startManager];
-    [[BITHockeyManager sharedHockeyManager].crashManager setAutoSubmitCrashReport:YES];
+    [BITHockeyManager sharedHockeyManager].crashManager.autoSubmitCrashReport = YES;
 }
 
 - (void)setupDropbox {

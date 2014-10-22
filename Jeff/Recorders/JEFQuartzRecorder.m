@@ -32,7 +32,7 @@
 @implementation JEFQuartzRecorder
 
 - (void)recordScreen:(NSScreen *)screen completion:(void (^)(NSURL *))completion {
-    [self recordRect:[screen visibleFrame] screen:screen completion:completion];
+    [self recordRect:screen.visibleFrame screen:screen completion:completion];
 }
 
 - (void)recordRect:(CGRect)rect screen:(NSScreen *)screen completion:(void (^)(NSURL *))completion {
@@ -94,8 +94,8 @@
     CGContextDrawImage(context, CGRectMake(0, 0, width, height), screenImageRef);
     
     NSCursor *cursor = [NSCursor currentSystemCursor];
-    NSImage *cursorImage = [cursor image];
-    NSPoint hotspot = [cursor hotSpot];
+    NSImage *cursorImage = cursor.image;
+    NSPoint hotspot = cursor.hotSpot;
     CGImageRef cursorImageRef = [cursorImage CGImageForProposedRect:NULL context:[NSGraphicsContext currentContext] hints:nil];
     CGPoint cursorLocation = [NSEvent jef_clampedMouseLocation];
     // Convert top-left rect space to bottom-left

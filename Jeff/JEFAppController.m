@@ -54,7 +54,7 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
     }]];
 
     // If Dropbox isn't set up yet, prompt the user by displaying the popover
-    BOOL dropboxLinked = ([[DBAccountManager sharedManager] linkedAccount] != nil);
+    BOOL dropboxLinked = ([DBAccountManager sharedManager].linkedAccount != nil);
     if (!dropboxLinked) {
         // Give it a run loop otherwise the popover presents from the wrong rect inside the status bar item's button
         dispatch_async(dispatch_get_main_queue(), ^{

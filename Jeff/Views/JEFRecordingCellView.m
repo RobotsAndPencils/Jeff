@@ -29,7 +29,7 @@ static void *JEFRecordingCellViewContext = &JEFRecordingCellViewContext;
 
 // Use vibrant dark material to denote selected state
 - (void)setBackgroundStyle:(NSBackgroundStyle)backgroundStyle {
-    [super setBackgroundStyle:backgroundStyle];
+    super.backgroundStyle = backgroundStyle;
     
     switch (backgroundStyle) {
         case NSBackgroundStyleDark:
