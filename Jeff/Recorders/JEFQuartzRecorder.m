@@ -10,6 +10,7 @@
 
 #import "NSEvent+MouseClamped.h"
 #import "RBKCommonUtils.h"
+#import <tgmath.h>
 
 @interface JEFQuartzRecorder ()
 
@@ -86,8 +87,8 @@
 - (void)captureFrame {
     CGImageRef screenImageRef = CGDisplayCreateImageForRect(self.displayID, self.rect);
     
-    CGFloat width = CGRectGetWidth(self.rect);
-    CGFloat height = CGRectGetHeight(self.rect);
+    NSInteger width = llround(CGRectGetWidth(self.rect));
+    NSInteger height = llround(CGRectGetHeight(self.rect));
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGContextRef context = CGBitmapContextCreate(NULL, width, height, 8, 0, colorSpace, (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
     CGContextDrawImage(context, CGRectMake(0, 0, width, height), screenImageRef);
