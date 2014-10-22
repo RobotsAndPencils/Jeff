@@ -42,7 +42,7 @@
 
 - (void)removeRecordingAtIndex:(NSUInteger)recordingIndex {
     NSMutableArray *recordings = [self mutableArrayValueForKey:@keypath(self, recordings)];
-    JEFRecording *recording = [recordings objectAtIndex:recordingIndex];
+    JEFRecording *recording = recordings[recordingIndex];
     [recordings removeObjectAtIndex:recordingIndex];
     [self.openRecordingPaths removeObject:recording.path.stringValue];
 }
