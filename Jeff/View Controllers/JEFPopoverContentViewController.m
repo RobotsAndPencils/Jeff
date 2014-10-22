@@ -408,7 +408,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 
     // Here we're figuring out what the initial and final positions for the two views should be
     // This is hard-coded for position animations, but it should support RTL and LTR UI
-    CGFloat fromViewToOffset;
+    CGFloat fromViewToOffset = 0;
     switch (options) {
         case NSViewControllerTransitionSlideBackward:
             if ([NSApp userInterfaceLayoutDirection] == NSUserInterfaceLayoutDirectionLeftToRight) {

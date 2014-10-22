@@ -313,6 +313,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         CGPathRef handlePath = CGPathCreateWithEllipseInRect(handleRect, NULL);
         handleLayer.path = handlePath;
         handleLayer.shadowPath = handlePath;
+        CGPathRelease(handlePath);
         handleIndex += 1;
     }
 }
@@ -324,6 +325,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     CGPathAddRect(overlayPath, NULL, CGRectMake(CGRectGetMaxX(self.selectionRect), CGRectGetMinY(self.selectionRect), CGRectGetWidth(self.frame) - CGRectGetMaxX(self.selectionRect), CGRectGetHeight(self.selectionRect)));
     CGPathAddRect(overlayPath, NULL, CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame), CGRectGetWidth(self.frame), CGRectGetMinY(self.frame) + CGRectGetMinY(self.selectionRect)));
     self.overlayLayer.path = overlayPath;
+    CGPathRelease(overlayPath);
 }
 
 - (void)offsetSelectionRectLocationByX:(CGFloat)x y:(CGFloat)y {
