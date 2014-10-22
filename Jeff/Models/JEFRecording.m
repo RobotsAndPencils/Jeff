@@ -92,10 +92,6 @@
     return self.file.status.state;
 }
 
-- (CGFloat)progress {
-    return self.file.status.progress;
-}
-
 - (JEFRecordingUploadHandler)uploadHandler {
     return _uploadHandler;
 }
