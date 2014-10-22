@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-#pragma once
-
 #import <tgmath.h>
 
 extern NSString *const JEFRecordScreenShortcutKey;
