@@ -8,10 +8,12 @@
 
 #import "JEFPopoverContentViewController.h"
 
+#import <QuartzCore/CAMediaTimingFunction.h>
 #import <MASShortcut/MASShortcut.h>
 #import <MASShortcut/MASShortcut+UserDefaults.h>
 #import "Mixpanel.h"
 #import "pop/POP.h"
+#import "pop/POPCGUtils.h"
 
 #import "JEFRecording.h"
 #import "JEFQuartzRecorder.h"
@@ -338,7 +340,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
     switch (targetPopoverContent) {
         case JEFPopoverContentSetup: {
             transition = immediately ? NSViewControllerTransitionNone : NSViewControllerTransitionSlideBackward;
-            [self transitionFromViewController:currentChildViewController toViewController:self.uploaderSetupViewController options:transition completionHandler:^() {}];
+            [self transitionFromViewController:currentChildViewController toViewController:self.uploaderSetupViewController options:transition completionHandler:nil];
             self.popoverContent = JEFPopoverContentSetup;
             break;
         }
@@ -366,13 +368,92 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
         }
         case JEFPopoverContentPreferences: {
             transition = immediately ? NSViewControllerTransitionNone : NSViewControllerTransitionSlideForward;
-            [self transitionFromViewController:currentChildViewController toViewController:self.preferencesViewController options:transition completionHandler:^() {}];
+            [self transitionFromViewController:currentChildViewController toViewController:self.preferencesViewController options:transition completionHandler:nil];
             self.popoverContent = JEFPopoverContentPreferences;
             break;
         }
     }
 
     [self updatePreferencesHeaderState:targetPopoverContent immediately:immediately];
+}
+
+/**
+ *  This API is great at first but the animation is really slow and you can't change it, so here we are overriding it.
+ *  I only care about the options that I'm using, so don't pass crossfade and expect it to work.
+ *  Oh, and this one will accept nil completion blocks (!?)
+ *
+ *  @param fromViewController
+ *  @param toViewController
+ *  @param options
+ *  @param completion
+ */
+- (void)transitionFromViewController:(NSViewController *)fromViewController toViewController:(NSViewController *)toViewController options:(NSViewControllerTransitionOptions)options completionHandler:(void (^)(void))completion {
+    // Pop only comes with layer support for OS X, and we can't animate the layer position because we'd lose interactivity, so make an animatable property for the view's origin
+    static POPAnimatableProperty *viewOriginAnimatableProperty;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        viewOriginAnimatableProperty = [POPAnimatableProperty propertyWithName:@"frame.origin" initializer:^(POPMutableAnimatableProperty *prop) {
+            prop.readBlock = ^(NSView *obj, CGFloat values[]) {
+                values_from_point(values, obj.frame.origin);
+            };
+            prop.writeBlock = ^(NSView *obj, const CGFloat values[]) {
+                CGRect frame = obj.frame;
+                frame.origin.x = values[0];
+                frame.origin.y = values[1];
+                obj.frame = frame;
+            };
+            prop.threshold = 0.01;
+        }];
+    });
+
+    // Here we're figuring out what the initial and final positions for the two views should be
+    // This is hard-coded for position animations, but it should support RTL and LTR UI
+    CGFloat fromViewToOffset;
+    switch (options) {
+        case NSViewControllerTransitionSlideBackward:
+            if ([NSApp userInterfaceLayoutDirection] == NSUserInterfaceLayoutDirectionLeftToRight) {
+                toViewController.view.frame = CGRectOffset(fromViewController.view.frame, -CGRectGetWidth(fromViewController.view.frame), 0);
+                fromViewToOffset = CGRectGetWidth(fromViewController.view.frame);
+            }
+            else {
+                toViewController.view.frame = CGRectOffset(fromViewController.view.frame, CGRectGetWidth(fromViewController.view.frame), 0);
+                fromViewToOffset = -CGRectGetWidth(fromViewController.view.frame);
+            }
+            break;
+        case NSViewControllerTransitionSlideForward:
+            if ([NSApp userInterfaceLayoutDirection] == NSUserInterfaceLayoutDirectionLeftToRight) {
+                toViewController.view.frame = CGRectOffset(fromViewController.view.frame, CGRectGetWidth(fromViewController.view.frame), 0);
+                fromViewToOffset = -CGRectGetWidth(fromViewController.view.frame);
+            }
+            else {
+                toViewController.view.frame = CGRectOffset(fromViewController.view.frame, -CGRectGetWidth(fromViewController.view.frame), 0);
+                fromViewToOffset = CGRectGetWidth(fromViewController.view.frame);
+            }
+            break;
+        default:
+            break;
+    }
+    [fromViewController.view.superview addSubview:toViewController.view];
+
+    POPBasicAnimation *fromViewPositionAnimation = [POPBasicAnimation animation];
+    fromViewPositionAnimation.property = viewOriginAnimatableProperty;
+    fromViewPositionAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(fromViewToOffset, 0)];
+    if (options == NSViewControllerTransitionNone) {
+        fromViewPositionAnimation.duration = 0.0;
+    }
+    [fromViewController.view pop_addAnimation:fromViewPositionAnimation forKey:@"positionX"];
+
+    POPBasicAnimation *toViewPositionAnimation = [POPBasicAnimation animation];
+    toViewPositionAnimation.property = viewOriginAnimatableProperty;
+    toViewPositionAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(0, 0)];
+    if (options == NSViewControllerTransitionNone) {
+        toViewPositionAnimation.duration = 0.0;
+    }
+    toViewPositionAnimation.completionBlock = ^(POPAnimation *animation, BOOL finished) {
+        [fromViewController.view removeFromSuperview];
+        if (completion) completion();
+    };
+    [toViewController.view pop_addAnimation:toViewPositionAnimation forKey:@"positionX"];
 }
 
 - (NSViewController *)childViewControllerForContentType:(JEFPopoverContent)popoverContent {
