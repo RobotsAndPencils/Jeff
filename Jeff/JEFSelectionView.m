@@ -14,6 +14,9 @@
 #import <libextobjc/EXTKeyPathCoding.h>
 #import "Constants.h"
 #import "JEFColoredButton.h"
+#import <pop/POP.h>
+#import "pop/POPCGUtils.h"
+#import "JEFAppController.h"
 
 const CGFloat HandleSize = 5.0;
 const CGFloat JEFSelectionMinimumWidth = 50.0;
@@ -43,6 +46,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 @property (nonatomic, assign) NSPoint mouseDownPoint;
 @property (nonatomic, assign) NSRect selectionRect;
 @property (nonatomic, assign) BOOL hasMadeInitialSelection;
+@property (nonatomic, assign) BOOL hasConfirmedSelection;
 
 @property (nonatomic, assign) enum JEFHandleIndex clickedHandle;
 @property (nonatomic, assign) NSPoint anchor;
@@ -63,6 +67,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         self.wantsLayer = YES;
 
         _hasMadeInitialSelection = NO;
+        _hasConfirmedSelection = NO;
 
         NSTextField *infoTextField = [[NSTextField alloc] initWithFrame:CGRectZero];
         infoTextField.cell = [[RSVerticallyCenteredTextFieldCell alloc] init];
@@ -91,20 +96,13 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         _confirmRectButton = [[JEFColoredButton alloc] initWithFrame:CGRectMake(0, 0, 100, 32)];
         _confirmRectButton.wantsLayer = YES;
         _confirmRectButton.buttonType = NSMomentaryLightButton;
-        _confirmRectButton.backgroundColor = [NSColor colorWithCalibratedRed:78.0/255.0 green:215.0/255.0 blue:0.0/255.0 alpha:1];
-        _confirmRectButton.cornerRadius = 5.0;
+        _confirmRectButton.backgroundColor = [NSColor redColor];
+        _confirmRectButton.cornerRadius = CGRectGetHeight(_confirmRectButton.frame) / 2.0;
         _confirmRectButton.bezelStyle = NSRecessedBezelStyle;
-        NSMutableParagraphStyle *centeredParagraphStyle = [[NSMutableParagraphStyle alloc] init];
-        centeredParagraphStyle.alignment = NSCenterTextAlignment;
-        NSShadow *shadow = [[NSShadow alloc] init];
-        shadow.shadowBlurRadius = 0.0;
-        shadow.shadowOffset = CGSizeMake(0.0, 0.5);
-        shadow.shadowColor = [[NSColor darkGrayColor] colorWithAlphaComponent:0.5];
-        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:@"Record" attributes:@{ NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName: [NSFont systemFontOfSize:16], NSParagraphStyleAttributeName: centeredParagraphStyle, NSShadowAttributeName: shadow }];
-        _confirmRectButton.attributedTitle = attributedTitle;
         _confirmRectButton.alphaValue = 0.0;
         [_confirmRectButton setTarget:self];
         [_confirmRectButton setAction:@selector(confirmRect)];
+        [self switchRecordToStopButtonState:NO];
         [self addSubview:_confirmRectButton];
         [self.layer addSublayer:_confirmRectButton.layer];
 
@@ -126,8 +124,8 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 
 - (void)confirmRect {
     if (CGRectEqualToRect(self.selectionRect, CGRectZero)) return;
+    self.hasConfirmedSelection = YES;
 
-    self.confirmRectButton.hidden = YES;
     [self.shapeLayer removeFromSuperlayer];
     [self.handlesLayer removeFromSuperlayer];
 
@@ -136,6 +134,12 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     if ([self.delegate respondsToSelector:@selector(selectionView:didSelectRect:)]) {
         [self.delegate selectionView:self didSelectRect:self.selectionRect];
     }
+
+    [self.delegate placeStopButtonInChildWindow:self.confirmRectButton];
+    [self switchRecordToStopButtonState:YES];
+    self.confirmRectButton.action = @selector(stopRecording:);
+
+    // We can't both allow the user to click through to applications behind the overlay window (that hosts this view) *and* click the stop button if it's in this view. To get around this we'll put the stop button in a sibling window that doesn't ignore mouse events.
 }
 
 #pragma mark - NSResponder
@@ -273,6 +277,12 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     }
 }
 
+#pragma mark - Actions
+
+- (IBAction)stopRecording:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:JEFStopRecordingNotification object:nil];
+}
+
 #pragma mark - Private
 
 - (void)updateConfirmRectButtonFrame {
@@ -351,6 +361,68 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 - (void)showRecordButton {
     [NSAnimationContext currentContext].duration = 0.1;
     self.confirmRectButton.animator.alphaValue = 1.0;
+}
+
+- (void)switchRecordToStopButtonState:(BOOL)stop {
+    NSMutableParagraphStyle *centeredParagraphStyle = [[NSMutableParagraphStyle alloc] init];
+    centeredParagraphStyle.alignment = NSCenterTextAlignment;
+
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowOffset = CGSizeMake(0.0, 1.0);
+    shadow.shadowColor = [[NSColor darkGrayColor] colorWithAlphaComponent:0.25];
+
+    NSFont *font = [NSFont boldSystemFontOfSize:[NSFont systemFontSizeForControlSize:NSRegularControlSize]];
+
+    NSString *title = stop ? NSLocalizedString(@"StopButtonTitle", @"Stop") : NSLocalizedString(@"RecordButtonTitle", @"Record");
+
+    NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:@{ NSForegroundColorAttributeName: [NSColor whiteColor], NSFontAttributeName: font, NSParagraphStyleAttributeName: centeredParagraphStyle, NSShadowAttributeName: shadow }];
+    self.confirmRectButton.attributedTitle = attributedTitle;
+
+    // We're not going to animate the layer, but cornerRadius is the key to the animateable property (pre-defined struct) we want
+    POPBasicAnimation *recordButtonCornerRadiusAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerCornerRadius];
+    recordButtonCornerRadiusAnimation.toValue = stop ? @(5) : @(CGRectGetHeight(self.confirmRectButton.frame) / 2.0);
+    [self.confirmRectButton pop_addAnimation:recordButtonCornerRadiusAnimation forKey:@"cornerRadius"];
+
+    POPAnimatableProperty *viewSizeAnimatableProperty = [POPAnimatableProperty propertyWithName:@"frame.size" initializer:^(POPMutableAnimatableProperty *prop) {
+        prop.readBlock = ^(NSView *obj, CGFloat values[]) {
+            values_from_size(values, obj.frame.size);
+        };
+        prop.writeBlock = ^(NSView *obj, const CGFloat values[]) {
+            CGRect frame = obj.frame;
+            frame.size.width = values[0];
+            frame.size.height = values[1];
+            obj.frame = frame;
+        };
+        prop.threshold = 0.01;
+    }];
+    POPAnimatableProperty *viewOriginAnimatableProperty = [POPAnimatableProperty propertyWithName:@"frame.origin" initializer:^(POPMutableAnimatableProperty *prop) {
+        prop.readBlock = ^(NSView *obj, CGFloat values[]) {
+            values_from_point(values, obj.frame.origin);
+        };
+        prop.writeBlock = ^(NSView *obj, const CGFloat values[]) {
+            CGRect frame = obj.frame;
+            frame.origin.x = values[0];
+            frame.origin.y = values[1];
+            obj.frame = frame;
+        };
+        prop.threshold = 0.01;
+    }];
+    POPBasicAnimation *recordButtonSizeAnimation = [POPBasicAnimation animation];
+    recordButtonSizeAnimation.property = viewSizeAnimatableProperty;
+    recordButtonSizeAnimation.toValue = stop ? [NSValue valueWithSize:CGSizeMake(60, 32)] : [NSValue valueWithSize:CGSizeMake(100, 32)];
+    [self.confirmRectButton pop_addAnimation:recordButtonSizeAnimation forKey:@"size"];
+
+    POPBasicAnimation *recordButtonOriginAnimation = [POPBasicAnimation animation];
+    recordButtonOriginAnimation.property = viewOriginAnimatableProperty;
+    CGPoint origin = CGPointZero;
+    if (stop) {
+        origin = CGPointMake(CGRectGetMinX(self.confirmRectButton.frame) + 20, CGRectGetMinY(self.confirmRectButton.frame));
+    }
+    else {
+        origin = CGPointMake(CGRectGetMinX(self.confirmRectButton.frame) - 20, CGRectGetMinY(self.confirmRectButton.frame));
+    }
+    recordButtonOriginAnimation.toValue = [NSValue valueWithPoint:origin];
+    [self.confirmRectButton pop_addAnimation:recordButtonOriginAnimation forKey:@"origin"];
 }
 
 #pragma mark - Handles
