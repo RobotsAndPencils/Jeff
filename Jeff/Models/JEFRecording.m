@@ -7,7 +7,7 @@
 //
 
 #import "JEFRecording.h"
-
+#import "RBKCommonUtils.h"
 
 @interface JEFRecording ()
 
@@ -37,7 +37,7 @@
     DBError *error;
     DBFile *file = [[DBFilesystem sharedFilesystem] openFile:fileInfo.path error:&error];
     if (!file || error) {
-        NSLog(@"Error opening file: %@", error);
+        RBKLog(@"Error opening file: %@", error);
         [file close];
         return nil;
     }
@@ -120,7 +120,7 @@
             DBError *openError;
             DBFile *thumbFile = [[DBFilesystem sharedFilesystem] openThumbnail:self.file.info.path ofSize:DBThumbSizeL inFormat:DBThumbFormatPNG error:&openError];
             if (openError) {
-                NSLog(@"Error loading thumbnail: %@", openError);
+                RBKLog(@"Error loading thumbnail: %@", openError);
                 return;
             }
 

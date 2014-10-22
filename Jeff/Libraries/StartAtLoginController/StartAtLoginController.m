@@ -22,6 +22,7 @@
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "StartAtLoginController.h"
+#import "RBKCommonUtils.h"
 #import <ServiceManagement/ServiceManagement.h>
 
 @implementation StartAtLoginController
@@ -70,7 +71,7 @@
     _identifier = identifier;
     [self startAtLogin];
 #if !defined(NDEBUG)
-    NSLog(@"Launcher '%@' %@ configured to start at login", _identifier, (self.enabled ? @"is" : @"is not"));
+    RBKLog(@"Launcher '%@' %@ configured to start at login", _identifier, (self.enabled ? @"is" : @"is not"));
 #endif
 }
 
@@ -111,7 +112,7 @@
     [self willChangeValueForKey:@"startAtLogin"];
 
     if (!SMLoginItemSetEnabled((__bridge CFStringRef)_identifier, (flag) ? true : false)) {
-        NSLog(@"SMLoginItemSetEnabled failed!");
+        RBKLog(@"SMLoginItemSetEnabled failed!");
 
         [self willChangeValueForKey:@"enabled"];
         _enabled = NO;

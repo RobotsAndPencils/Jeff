@@ -27,6 +27,7 @@
 #import "JEFUploaderPreferencesViewController.h"
 #import "Constants.h"
 #import "JEFColoredButton.h"
+#import "RBKCommonUtils.h"
 
 typedef NS_ENUM(NSInteger, JEFPopoverContent) {
     JEFPopoverContentSetup = 0,
@@ -312,7 +313,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
             NSError *framesError;
             NSArray *frames = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:framesURL includingPropertiesForKeys:nil options:0 error:&framesError];
             if (!frames && framesError) {
-                NSLog(@"Error fetching frames for poster frame image: %@", framesError);
+                RBKLog(@"Error fetching frames for poster frame image: %@", framesError);
             }
             NSURL *firstFrameURL = frames.firstObject;
 
@@ -529,7 +530,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
             NSError *framesError;
             NSArray *frames = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:framesURL includingPropertiesForKeys:nil options:0 error:&framesError];
             if (!frames && framesError) {
-                NSLog(@"Error fetching frames for poster frame image: %@", framesError);
+                RBKLog(@"Error fetching frames for poster frame image: %@", framesError);
             }
             NSURL *firstFrameURL = frames.firstObject;
 
