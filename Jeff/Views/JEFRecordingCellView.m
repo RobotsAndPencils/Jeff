@@ -8,6 +8,7 @@
 
 #import "JEFRecordingCellView.h"
 #import <Dropbox/Dropbox.h>
+#import <pop/POP.h>
 
 @interface JEFRecordingCellView ()
 
@@ -45,6 +46,19 @@
     [self addObserver:self forKeyPath:@"objectValue.state" options:NSKeyValueObservingOptionInitial context:NULL];
     [self addObserver:self forKeyPath:@"objectValue.progress" options:NSKeyValueObservingOptionInitial context:NULL];
     [self addObserver:self forKeyPath:@"objectValue.posterFrameImage" options:NSKeyValueObservingOptionInitial context:NULL];
+
+    // Make immediate changes so there isn't an animation when the popover is shown
+    BOOL isFetchingPosterFrame = ([[self valueForKeyPath:@"objectValue.isFetchingPosterFrame"] boolValue] == YES);
+    BOOL isUploading = ([[self valueForKeyPath:@"objectValue.state"] integerValue] == DBFileStateUploading);
+    if (!isFetchingPosterFrame && !isUploading) {
+        self.syncStatusContainerView.layer.opacity = 0;
+    }
+    if (isFetchingPosterFrame) {
+        self.syncStatusLabelVerticalSpaceConstraint.constant = 0;
+    }
+    else {
+        self.syncStatusLabelVerticalSpaceConstraint.constant = -26;
+    }
 }
 
 - (void)teardown {
@@ -59,6 +73,8 @@
 
 - (void)prepareForReuse {
     [self teardown];
+    self.syncStatusContainerView.layer.opacity = 1;
+    self.syncStatusLabelVerticalSpaceConstraint.constant = -26;
 }
 
 - (void)dealloc {
@@ -80,8 +96,25 @@
         statusString = @"Loading thumbnail...";
     }
 
+    POPBasicAnimation *containerOpacityAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
+
+    if (statusString && statusString.length > 0) {
+        containerOpacityAnimation.toValue = @1;
+        containerOpacityAnimation.duration = 0;
+    }
+    else {
+        containerOpacityAnimation.toValue = @0;
+    }
+
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self.syncStatusContainerView.layer pop_addAnimation:containerOpacityAnimation forKey:@"opacity"];
         self.statusLabel.stringValue = statusString;
+        if (isFetchingPosterFrame) {
+            self.syncStatusLabelVerticalSpaceConstraint.constant = 0;
+        }
+        else {
+            self.syncStatusLabelVerticalSpaceConstraint.constant = -26;
+        }
         self.progressIndicator.hidden = !isUploading;
         self.progressIndicator.doubleValue = progress;
         self.previewImageView.image = posterFrameImage;

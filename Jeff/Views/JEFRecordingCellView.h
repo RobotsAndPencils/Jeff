@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet JEFScaleToFillImageView *previewImageView;
 @property (weak, nonatomic) IBOutlet NSTextField *statusLabel;
 @property (weak, nonatomic) IBOutlet NSProgressIndicator *progressIndicator;
+@property (weak, nonatomic) IBOutlet NSVisualEffectView *syncStatusContainerView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *syncStatusLabelVerticalSpaceConstraint;
 
 - (void)setup;
 
