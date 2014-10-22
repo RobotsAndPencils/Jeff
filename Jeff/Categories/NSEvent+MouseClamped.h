@@ -8,8 +8,8 @@
 
 @interface NSEvent (MouseClamped)
 
-+ (NSPoint)clampedMouseLocation;
-+ (NSPoint)integralMouseLocation;
-+ (NSPoint)clampedMouseLocationUsingBackingScaleFactor:(CGFloat)backingScaleFactor;
++ (NSPoint)jef_clampedMouseLocation;
++ (NSPoint)jef_integralMouseLocation;
++ (NSPoint)jef_clampedMouseLocationUsingBackingScaleFactor:(CGFloat)backingScaleFactor;
 
 @end

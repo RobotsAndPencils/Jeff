@@ -8,10 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-
 @interface RSVerticallyCenteredTextFieldCell : NSTextFieldCell
-{
-	BOOL mIsEditingOrSelecting;
-}
 
 @end

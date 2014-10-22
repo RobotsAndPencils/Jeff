@@ -24,6 +24,7 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
 @property (strong, nonatomic) NSStatusItem *statusItem;
 @property (strong, nonatomic) INPopoverController *popover;
 @property (strong, nonatomic) id popoverTransiencyMonitor;
+@property (strong, nonatomic) NSMutableArray *observers;
 
 @end
 
@@ -33,25 +34,27 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
     self = [super init];
     if (!self) return nil;
 
+    _observers = [NSMutableArray array];
+
     [self setupStatusItem];
     [self setupPopover];
 
     __weak typeof(self) weakSelf = self;
-    [[NSNotificationCenter defaultCenter] addObserverForName:JEFOpenPopoverNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+    [self.observers addObject:[[NSNotificationCenter defaultCenter] addObserverForName:JEFOpenPopoverNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         [weakSelf showPopover:weakSelf.statusItem.button];
-    }];
-    [[NSNotificationCenter defaultCenter] addObserverForName:JEFClosePopoverNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+    }]];
+    [self.observers addObject:[[NSNotificationCenter defaultCenter] addObserverForName:JEFClosePopoverNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         [weakSelf closePopover:nil];
-    }];
-    [[NSNotificationCenter defaultCenter] addObserverForName:JEFSetStatusViewNotRecordingNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+    }]];
+    [self.observers addObject:[[NSNotificationCenter defaultCenter] addObserverForName:JEFSetStatusViewNotRecordingNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         [weakSelf setStatusItemActionRecord:NO];
-    }];
-    [[NSNotificationCenter defaultCenter] addObserverForName:JEFSetStatusViewRecordingNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+    }]];
+    [self.observers addObject:[[NSNotificationCenter defaultCenter] addObserverForName:JEFSetStatusViewRecordingNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         [weakSelf setStatusItemActionRecord:YES];
-    }];
+    }]];
 
     // If Dropbox isn't set up yet, prompt the user by displaying the popover
-    BOOL dropboxLinked = ([[DBAccountManager sharedManager] linkedAccount] != nil);
+    BOOL dropboxLinked = ([DBAccountManager sharedManager].linkedAccount != nil);
     if (!dropboxLinked) {
         // Give it a run loop otherwise the popover presents from the wrong rect inside the status bar item's button
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -60,6 +63,12 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
     }
 
     return self;
+}
+
+- (void)dealloc {
+    for (id observer in self.observers) {
+        [[NSNotificationCenter defaultCenter] removeObserver:observer];
+    }
 }
 
 - (void)setupStatusItem {

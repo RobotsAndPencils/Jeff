@@ -9,7 +9,8 @@
 #import "JEFQuartzRecorder.h"
 
 #import "NSEvent+MouseClamped.h"
-
+#import "RBKCommonUtils.h"
+#import <tgmath.h>
 
 @interface JEFQuartzRecorder ()
 
@@ -31,7 +32,7 @@
 @implementation JEFQuartzRecorder
 
 - (void)recordScreen:(NSScreen *)screen completion:(void (^)(NSURL *))completion {
-    [self recordRect:[screen visibleFrame] screen:screen completion:completion];
+    [self recordRect:screen.visibleFrame screen:screen completion:completion];
 }
 
 - (void)recordRect:(CGRect)rect screen:(NSScreen *)screen completion:(void (^)(NSURL *))completion {
@@ -56,7 +57,7 @@
         while ((filePath = [directoryEnumerator nextObject])) {
             removeSuccess = [fileManager removeItemAtPath:[self.path stringByAppendingPathComponent:filePath] error:&error];
             if (!removeSuccess && error) {
-                NSLog(@"Error removing file in Frames directory: %@", error);
+                RBKLog(@"Error removing file in Frames directory: %@", error);
             }
         }
     }
@@ -86,17 +87,17 @@
 - (void)captureFrame {
     CGImageRef screenImageRef = CGDisplayCreateImageForRect(self.displayID, self.rect);
     
-    CGFloat width = CGRectGetWidth(self.rect);
-    CGFloat height = CGRectGetHeight(self.rect);
+    NSInteger width = llround(CGRectGetWidth(self.rect));
+    NSInteger height = llround(CGRectGetHeight(self.rect));
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGContextRef context = CGBitmapContextCreate(NULL, width, height, 8, 0, colorSpace, (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
     CGContextDrawImage(context, CGRectMake(0, 0, width, height), screenImageRef);
     
     NSCursor *cursor = [NSCursor currentSystemCursor];
-    NSImage *cursorImage = [cursor image];
-    NSPoint hotspot = [cursor hotSpot];
+    NSImage *cursorImage = cursor.image;
+    NSPoint hotspot = cursor.hotSpot;
     CGImageRef cursorImageRef = [cursorImage CGImageForProposedRect:NULL context:[NSGraphicsContext currentContext] hints:nil];
-    CGPoint cursorLocation = [NSEvent clampedMouseLocation];
+    CGPoint cursorLocation = [NSEvent jef_clampedMouseLocation];
     // Convert top-left rect space to bottom-left
     CGFloat rectY = CGRectGetHeight(self.screenFrame) - CGRectGetMaxY(self.rect);
     CGFloat cursorX = cursorLocation.x - CGRectGetMinX(self.screenFrame) - CGRectGetMinX(self.rect) - hotspot.x;

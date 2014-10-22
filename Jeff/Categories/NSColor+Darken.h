@@ -8,6 +8,6 @@
 
 @interface NSColor (Darken)
 
-- (NSColor *)darken:(CGFloat)amount;
+- (NSColor *)jef_darken:(CGFloat)amount;
 
 @end
