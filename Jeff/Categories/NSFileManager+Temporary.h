@@ -10,7 +10,7 @@
 
 @interface NSFileManager (Temporary)
 
-- (NSString *)createTemporaryDirectory;
-- (NSString *)createTemporaryFileWithExtension:(NSString *)extension;
+- (NSString *)jef_createTemporaryDirectory;
+- (NSString *)jef_createTemporaryFileWithExtension:(NSString *)extension;
 
 @end
