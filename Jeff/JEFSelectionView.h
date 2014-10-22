@@ -13,6 +13,7 @@
 
 - (void)selectionView:(JEFSelectionView *)view didSelectRect:(NSRect)rect;
 - (void)selectionViewDidCancel:(JEFSelectionView *)view;
+- (void)placeStopButtonInChildWindow:(NSButton *)stopButton;
 
 @end
 

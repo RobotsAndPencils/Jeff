@@ -32,9 +32,9 @@
     self.opaque = NO;
     self.level = kShadyWindowLevel;
     self.releasedWhenClosed = NO;
-    JEFSelectionView *drawMouseBoxView = [[JEFSelectionView alloc] initWithFrame:contentRect screen:self.screen];
-    drawMouseBoxView.delegate = self;
-    self.contentView = drawMouseBoxView;
+    JEFSelectionView *selectionView = [[JEFSelectionView alloc] initWithFrame:contentRect screen:self.screen];
+    selectionView.delegate = self;
+    self.contentView = selectionView;
     [self makeKeyAndOrderFront:self];
     self.ignoresMouseEvents = NO;
     
@@ -45,7 +45,7 @@
     return YES;
 }
 
-#pragma mark - DrawMouseBoxViewDelegate
+#pragma mark - JEFSelectionViewDelegate
 
 - (void)selectionView:(JEFSelectionView *)view didSelectRect:(NSRect)rect {
     if (self.completion) self.completion(view, rect, NO);
@@ -53,6 +53,17 @@
 
 - (void)selectionViewDidCancel:(JEFSelectionView *)view {
     if (self.completion) self.completion(view, NSZeroRect, YES);
+}
+
+- (void)placeStopButtonInChildWindow:(NSButton *)stopButton {
+    NSWindow *siblingOverlayWindow = [[NSWindow alloc] initWithContentRect:CGRectOffset(stopButton.frame, CGRectGetMinX(stopButton.window.frame), CGRectGetMinY(stopButton.window.frame)) styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
+    siblingOverlayWindow.backgroundColor = [NSColor clearColor];
+    siblingOverlayWindow.opaque = NO;
+    siblingOverlayWindow.level = self.level + 1;
+    siblingOverlayWindow.releasedWhenClosed = NO;
+    siblingOverlayWindow.contentView = stopButton;
+    siblingOverlayWindow.ignoresMouseEvents = NO;
+    [self addChildWindow:siblingOverlayWindow ordered:NSWindowAbove];
 }
 
 @end

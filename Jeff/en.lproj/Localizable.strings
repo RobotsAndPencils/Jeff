@@ -8,6 +8,8 @@
 "UploadFailedAlertTitle" = "Jeff couldn't upload your GIF";
 
 "RecordSelectionInfo" = "Click and drag over the part of the screen that you want Jeff to record.";
+"RecordButtonTitle" = "Record";
+"StopButtonTitle" = "Stop";
 
 "PreferencesDropboxExplanationUnlink" = "Unlinking Dropbox won't delete any of your GIFs, but you'll need to link your account again to see them in Jeff.";
 "PreferencesDropboxExplanationLink" = "If you had any recordings before unlinking your Dropbox account, they'll still be in the Apps folder inside Dropbox.";

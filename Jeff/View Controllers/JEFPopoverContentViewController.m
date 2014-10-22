@@ -35,7 +35,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
     JEFPopoverContentPreferences
 };
 
-@interface JEFPopoverContentViewController () <JEFSelectionViewDelegate>
+@interface JEFPopoverContentViewController ()
 
 // Header Outlets
 @property (weak, nonatomic) IBOutlet NSVisualEffectView *headerContainerView;
@@ -389,22 +389,18 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
  */
 - (void)transitionFromViewController:(NSViewController *)fromViewController toViewController:(NSViewController *)toViewController options:(NSViewControllerTransitionOptions)options completionHandler:(void (^)(void))completion {
     // Pop only comes with layer support for OS X, and we can't animate the layer position because we'd lose interactivity, so make an animatable property for the view's origin
-    static POPAnimatableProperty *viewOriginAnimatableProperty;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        viewOriginAnimatableProperty = [POPAnimatableProperty propertyWithName:@"frame.origin" initializer:^(POPMutableAnimatableProperty *prop) {
-            prop.readBlock = ^(NSView *obj, CGFloat values[]) {
-                values_from_point(values, obj.frame.origin);
-            };
-            prop.writeBlock = ^(NSView *obj, const CGFloat values[]) {
-                CGRect frame = obj.frame;
-                frame.origin.x = values[0];
-                frame.origin.y = values[1];
-                obj.frame = frame;
-            };
-            prop.threshold = 0.01;
-        }];
-    });
+    POPAnimatableProperty *viewOriginAnimatableProperty = [POPAnimatableProperty propertyWithName:@"frame.origin" initializer:^(POPMutableAnimatableProperty *prop) {
+        prop.readBlock = ^(NSView *obj, CGFloat values[]) {
+            values_from_point(values, obj.frame.origin);
+        };
+        prop.writeBlock = ^(NSView *obj, const CGFloat values[]) {
+            CGRect frame = obj.frame;
+            frame.origin.x = values[0];
+            frame.origin.y = values[1];
+            obj.frame = frame;
+        };
+        prop.threshold = 0.01;
+    }];
 
     // Here we're figuring out what the initial and final positions for the two views should be
     // This is hard-coded for position animations, but it should support RTL and LTR UI

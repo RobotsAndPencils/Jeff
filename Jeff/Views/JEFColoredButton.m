@@ -15,4 +15,14 @@
     return [JEFColoredButtonCell class];
 }
 
+- (void)setBackgroundColor:(NSColor *)backgroundColor {
+    _backgroundColor = backgroundColor;
+    self.needsDisplay = YES;
+}
+
+- (void)setCornerRadius:(CGFloat)cornerRadius {
+    _cornerRadius = cornerRadius;
+    self.needsDisplay = YES;
+}
+
 @end
