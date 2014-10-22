@@ -1009,7 +1009,10 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jeff/Jeff-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					DNDEBUG,
+				);
 				INFOPLIST_FILE = "Jeff/Jeff-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MIXPANEL_TOKEN = ***REMOVED***;
