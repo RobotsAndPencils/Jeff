@@ -651,6 +651,7 @@
 		CA455B2018B83EB900F9A541 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = JEF;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Brandon Evans";
 				TargetAttributes = {
