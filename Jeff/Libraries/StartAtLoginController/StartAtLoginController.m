@@ -42,7 +42,7 @@
 - (id)initWithIdentifier:(NSString *)identifier {
     self = [self init];
     if (self) {
-        self.identifier = identifier;
+        _identifier = identifier;
     }
 
     return self;
