@@ -62,6 +62,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 @property (strong, nonatomic) NSMutableArray *overlayWindows;
 @property (strong, nonatomic) JEFQuartzRecorder *recorder;
 @property (assign, nonatomic, getter=isShowingSelection) BOOL showingSelection;
+@property (strong, nonatomic) id stopRecordingObserver;
 
 @end
 
@@ -90,13 +91,10 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
         [self toggleRecordingSelection];
     }];
 
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        __weak __typeof(self) weakSelf = self;
-        [[NSNotificationCenter defaultCenter] addObserverForName:JEFStopRecordingNotification object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification *note) {
-            [weakSelf stopRecording:nil];
-        }];
-    });
+    __weak __typeof(self) weakSelf = self;
+    self.stopRecordingObserver = [[NSNotificationCenter defaultCenter] addObserverForName:JEFStopRecordingNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        [weakSelf stopRecording:nil];
+    }];
 
     self.recordSelectionButton.backgroundColor = [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.5];
     self.recordSelectionButton.cornerRadius = CGRectGetHeight(self.recordSelectionButton.frame) / 2.0;
@@ -124,6 +122,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 
 - (void)dealloc {
     [[DBAccountManager sharedManager] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self.stopRecordingObserver];
 }
 
 - (void)viewDidAppear {
