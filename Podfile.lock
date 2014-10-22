@@ -1,11 +1,15 @@
 PODS:
   - HockeySDK-Mac (2.1.0)
+  - libextobjc/EXTKeyPathCoding (0.4.1):
+    - libextobjc/RuntimeExtensions
+  - libextobjc/RuntimeExtensions (0.4.1)
   - MASShortcut (1.2.3)
   - pop (1.0.7)
   - RoboKit (0.3.3)
 
 DEPENDENCIES:
   - HockeySDK-Mac (~> 2.1.0)
+  - libextobjc/EXTKeyPathCoding
   - MASShortcut (from `git@github.com:RobotsAndPencils/MASShortcut.git`, branch `Jeff`)
   - pop (~> 1.0)
   - RoboKit (from `git@github.com:RobotsAndPencils/RoboKit.git`)
@@ -19,6 +23,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   HockeySDK-Mac: b833b385b4fb66932d760fbcb47733a1544d867c
+  libextobjc: d6146fce3ebea986b7f75fcb4c967639200b88b0
   MASShortcut: e67441d037a95c1978fae7405e5dae7f54afc2bd
   pop: 2f14a1ea61339767af9e66741b418c831b3844df
   RoboKit: e5ab6328a12bc9795bcde2d5f0f30bc1556718d4
