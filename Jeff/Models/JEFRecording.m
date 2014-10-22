@@ -11,7 +11,7 @@
 
 @interface JEFRecording ()
 
-@property (nonatomic, strong) DBFile *file;
+@property (nonatomic, strong, readwrite) DBFile *file;
 @property (nonatomic, assign, readwrite) BOOL isFetchingPosterFrame;
 @property (nonatomic, assign, readwrite) CGFloat progress;
 
