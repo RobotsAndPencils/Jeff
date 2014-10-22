@@ -14,7 +14,6 @@ typedef void(^JEFRecordingUploadHandler)(JEFRecording *);
 
 @interface JEFRecording : NSObject
 
-@property (nonatomic, strong, readonly) DBFile *file;
 @property (nonatomic, strong, readonly) NSString *name;
 @property (nonatomic, strong, readonly) DBPath *path;
 @property (nonatomic, strong, readonly) NSData *data;

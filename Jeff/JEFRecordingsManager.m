@@ -43,7 +43,7 @@
     NSMutableArray *recordings = [self mutableArrayValueForKey:@"recordings"];
     JEFRecording *recording = [recordings objectAtIndex:recordingIndex];
     [recordings removeObjectAtIndex:recordingIndex];
-    [self.openRecordingPaths removeObject:recording.file.info.path.stringValue];
+    [self.openRecordingPaths removeObject:recording.path.stringValue];
 }
 
 - (NSUInteger)numberOfRecordings {
@@ -73,7 +73,7 @@
         recording.posterFrameImage = posterFrameImage;
 
         [[self mutableArrayValueForKey:@"recordings"] insertObject:recording atIndex:0];
-        [self.openRecordingPaths addObject:recording.file.info.path.stringValue];
+        [self.openRecordingPaths addObject:recording.path.stringValue];
 
         __weak __typeof(self) weakSelf = self;
         recording.uploadHandler = ^(JEFRecording *uploadedRecording) {
