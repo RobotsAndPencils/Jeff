@@ -104,10 +104,10 @@
         }
     }
 
+    NSMutableArray *mutableRecordings = [self mutableArrayValueForKey:@keypath(self, recordings)];
+    [mutableRecordings addObjectsFromArray:recordings];
     NSSortDescriptor *dateDescendingDescriptor = [[NSSortDescriptor alloc] initWithKey:@keypath(JEFRecording.new, createdAt) ascending:NO];
-    [recordings sortedArrayUsingDescriptors:@[ dateDescendingDescriptor ]];
-
-    [[self mutableArrayValueForKey:@keypath(self, recordings)] addObjectsFromArray:recordings];
+    [mutableRecordings sortUsingDescriptors:@[ dateDescendingDescriptor ]];
 }
 
 /**
