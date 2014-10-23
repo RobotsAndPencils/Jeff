@@ -47,15 +47,15 @@
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
                                             <tableCellView identifier="JEFRecordingCellView" wantsLayer="YES" id="Hyu-Hf-Cds" customClass="JEFRecordingCellView">
-                                                <rect key="frame" x="0.0" y="0.0" width="324" height="200"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="325" height="200"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="249" verticalCompressionResistancePriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="4It-IS-v7G" userLabel="Preview Image View" customClass="JEFScaleToFillImageView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="200"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="325" height="200"/>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="500x500" id="3dK-hT-Qdd"/>
                                                     </imageView>
                                                     <visualEffectView appearanceType="vibrantLight" blendingMode="withinWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="nW7-FR-CwG" userLabel="Info Container Visual Effect View">
-                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="30"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="325" height="30"/>
                                                         <subviews>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y5q-Dv-tnu">
                                                                 <rect key="frame" x="12" y="8" width="77" height="14"/>
@@ -70,7 +70,7 @@
                                                                 </connections>
                                                             </textField>
                                                             <button alphaValue="0.70000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="5Ld-mQ-MwS" userLabel="Share Button">
-                                                                <rect key="frame" x="292" y="6" width="22" height="18"/>
+                                                                <rect key="frame" x="293" y="6" width="22" height="18"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="22" id="J45-b9-EFf"/>
                                                                     <constraint firstAttribute="height" constant="18" id="Tvf-K8-BYI"/>
@@ -84,7 +84,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button alphaValue="0.70000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="fF6-Gn-aas" userLabel="Link Button">
-                                                                <rect key="frame" x="262" y="4" width="22" height="22"/>
+                                                                <rect key="frame" x="263" y="4" width="22" height="22"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="22" id="Bee-nT-RrM"/>
                                                                     <constraint firstAttribute="height" constant="22" id="J7b-xM-oDw"/>
@@ -98,7 +98,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button alphaValue="0.70000000000000007" translatesAutoresizingMaskIntoConstraints="NO" id="zJG-h5-Uva" userLabel="Delete Button">
-                                                                <rect key="frame" x="232" y="4" width="22" height="22"/>
+                                                                <rect key="frame" x="233" y="4" width="22" height="22"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="22" id="BLa-hS-UDZ"/>
                                                                     <constraint firstAttribute="height" constant="22" id="ove-Ja-M6x"/>
@@ -125,7 +125,7 @@
                                                         </constraints>
                                                     </visualEffectView>
                                                     <visualEffectView wantsLayer="YES" appearanceType="vibrantLight" blendingMode="withinWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="ehu-xK-uYs" userLabel="Sync Status Container Visual Effect View">
-                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="200"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="325" height="200"/>
                                                         <subviews>
                                                             <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2Zv-da-qr5" userLabel="Status Label">
                                                                 <rect key="frame" x="158" y="66" width="8" height="17"/>
@@ -164,14 +164,15 @@
                                                     <constraint firstItem="ehu-xK-uYs" firstAttribute="leading" secondItem="Hyu-Hf-Cds" secondAttribute="leading" id="yCY-7A-G6b"/>
                                                 </constraints>
                                                 <connections>
+                                                    <outlet property="imageView" destination="4It-IS-v7G" id="JcE-rN-Blv"/>
                                                     <outlet property="infoContainerVisualEffectView" destination="nW7-FR-CwG" id="u5w-ld-UTl"/>
                                                     <outlet property="linkButton" destination="fF6-Gn-aas" id="IlE-vt-xmd"/>
-                                                    <outlet property="previewImageView" destination="4It-IS-v7G" id="HRb-Vn-YYh"/>
                                                     <outlet property="progressIndicator" destination="n2f-rC-qYm" id="UyC-Vh-7RR"/>
                                                     <outlet property="shareButton" destination="5Ld-mQ-MwS" id="g9o-AU-fPf"/>
                                                     <outlet property="statusLabel" destination="2Zv-da-qr5" id="SpY-w4-CTE"/>
                                                     <outlet property="syncStatusContainerView" destination="ehu-xK-uYs" id="biM-O7-RAI"/>
                                                     <outlet property="syncStatusLabelVerticalSpaceConstraint" destination="8y1-a0-6bW" id="uNL-1c-XRm"/>
+                                                    <outlet property="textField" destination="y5q-Dv-tnu" id="FdB-6x-hNr"/>
                                                 </connections>
                                             </tableCellView>
                                         </prototypeCellViews>
@@ -185,7 +186,7 @@
                         </subviews>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
-                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="ayN-Mx-o50">
+                    <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="ayN-Mx-o50">
                         <rect key="frame" x="1" y="107" width="324" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>

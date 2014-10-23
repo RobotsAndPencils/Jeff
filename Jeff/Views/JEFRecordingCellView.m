@@ -124,7 +124,7 @@ static void *JEFRecordingCellViewContext = &JEFRecordingCellViewContext;
         }
         self.progressIndicator.hidden = !isUploading;
         self.progressIndicator.doubleValue = progress;
-        self.previewImageView.image = posterFrameImage;
+        self.imageView.image = posterFrameImage;
     });
 }
 

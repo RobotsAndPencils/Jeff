@@ -13,7 +13,6 @@
 @property (weak, nonatomic) IBOutlet NSVisualEffectView *infoContainerVisualEffectView;
 @property (weak, nonatomic) IBOutlet NSButton *linkButton;
 @property (weak, nonatomic) IBOutlet NSButton *shareButton;
-@property (weak, nonatomic) IBOutlet JEFScaleToFillImageView *previewImageView;
 @property (weak, nonatomic) IBOutlet NSTextField *statusLabel;
 @property (weak, nonatomic) IBOutlet NSProgressIndicator *progressIndicator;
 @property (weak, nonatomic) IBOutlet NSVisualEffectView *syncStatusContainerView;
