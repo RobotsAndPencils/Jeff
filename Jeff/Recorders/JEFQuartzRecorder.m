@@ -32,9 +32,17 @@
 @implementation JEFQuartzRecorder
 
 - (void)recordScreen:(NSScreen *)screen completion:(void (^)(NSURL *))completion {
-    [self recordRect:screen.visibleFrame screen:screen completion:completion];
+    CGRect screenRectInDisplaySpace = screen.visibleFrame;
+    [self recordRect:CGRectMake(0, 0, screenRectInDisplaySpace.size.width, screenRectInDisplaySpace.size.height) screen:screen completion:completion];
 }
 
+/**
+ *  Starts recording a portion of a screen
+ *
+ *  @param rect       The desired recording portion, in the local space of the provided screen
+ *  @param screen     The screen to record
+ *  @param completion Called when recording is stopped
+ */
 - (void)recordRect:(CGRect)rect screen:(NSScreen *)screen completion:(void (^)(NSURL *))completion {
     self.isRecording = YES;
     self.rect = rect;
