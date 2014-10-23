@@ -108,9 +108,9 @@
     CGImageRef compositeImageRef = CGBitmapContextCreateImage(context);
     
     NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:compositeImageRef];
-    NSData *pngData = [imageRep representationUsingType:NSGIFFileType properties:nil];
+    NSData *gifData = [imageRep representationUsingType:NSGIFFileType properties:nil];
     NSString *filename = [self.path stringByAppendingPathComponent:[NSString stringWithFormat:@"JeffFrame%ld.gif", self.frameCount]];
-    [pngData writeToFile:filename atomically:YES];
+    [gifData writeToFile:filename atomically:NO];
 
     CGContextRelease(context);
     CGColorSpaceRelease(colorSpace);
