@@ -1,2 +1,0 @@
-Dropbox Sync/Datastore API for OS X
-3.0.2

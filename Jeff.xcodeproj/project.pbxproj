@@ -46,7 +46,7 @@
 		CAB77D4D19E5E2CF0049B6D8 /* JEFAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB77D4C19E5E2CF0049B6D8 /* JEFAppController.m */; };
 		CAB84C74199470B200EA0414 /* RBLTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB84C73199470B200EA0414 /* RBLTableView.m */; };
 		CAC40812199C391900833FAB /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC40811199C391900833FAB /* Dropbox.framework */; };
-		CAC40813199C4CEA00833FAB /* Dropbox.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = CAC40811199C391900833FAB /* Dropbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CAC40813199C4CEA00833FAB /* Dropbox.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = CAC40811199C391900833FAB /* Dropbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CAC7AC1619F5784600F44010 /* NSColor+Darken.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC7AC1519F5784600F44010 /* NSColor+Darken.m */; };
 		CADF57B418C6F432006512E3 /* JEFRecording.m in Sources */ = {isa = PBXBuildFile; fileRef = CADF57B318C6F432006512E3 /* JEFRecording.m */; };
 		CAE8F9C61991CBFF00F24D4C /* MIT-License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CAE8F9C31991CBFF00F24D4C /* MIT-License.rtf */; };
@@ -91,15 +91,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		CA4C528A18C828CC00C5EAE4 /* Copy Files */ = {
+		CA4C528A18C828CC00C5EAE4 /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CAC40813199C4CEA00833FAB /* Dropbox.framework in Copy Files */,
+				CAC40813199C4CEA00833FAB /* Dropbox.framework in Copy Frameworks */,
 			);
-			name = "Copy Files";
+			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		CA8B297119F0BE2D00351C9E /* CopyFiles */ = {
@@ -613,9 +613,9 @@
 				CA455B2518B83EB900F9A541 /* Frameworks */,
 				CA455B2618B83EB900F9A541 /* Resources */,
 				6AF62D2B5DAE422889FA4895 /* Copy Pods Resources */,
-				CA4C528A18C828CC00C5EAE4 /* Copy Files */,
+				CA4C528A18C828CC00C5EAE4 /* Copy Frameworks */,
 				CAB1334D1999B2350099CD56 /* Copy Launcher */,
-				CAF30B4018D3CF4A00D7BC9D /* Sign Bundles */,
+				CAF30B4018D3CF4A00D7BC9D /* Sign Launcher */,
 			);
 			buildRules = (
 			);
@@ -771,19 +771,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CAF30B4018D3CF4A00D7BC9D /* Sign Bundles */ = {
+		CAF30B4018D3CF4A00D7BC9D /* Sign Launcher */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Sign Bundles";
+			name = "Sign Launcher";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "IDENTITY=\"Developer ID Application: Brandon Evans\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"${BUILT_PRODUCTS_DIR}/Jeff.app/Contents/Library/LoginItems/JeffLauncher.app\"";
+			shellScript = "IDENTITY=\"Developer ID Application: Robots and Pencils\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"${BUILT_PRODUCTS_DIR}/Jeff.app/Contents/Library/LoginItems/JeffLauncher.app\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -971,7 +971,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Robots and Pencils Inc. (PBH8V487HB)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DROPBOX_CALLBACK_URI = "db-***REMOVED***";
 				DROPBOX_KEY = ***REMOVED***;
@@ -1009,7 +1009,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Robots and Pencils Inc. (PBH8V487HB)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DROPBOX_CALLBACK_URI = "db-***REMOVED***";
 				DROPBOX_KEY = ***REMOVED***;
@@ -1124,7 +1124,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Robots and Pencils Inc. (PBH8V487HB)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DROPBOX_CALLBACK_URI = "db-***REMOVED***";
 				DROPBOX_KEY = ***REMOVED***;
