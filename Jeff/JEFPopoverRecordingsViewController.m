@@ -274,6 +274,8 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 }
 
 - (void)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker didChooseSharingService:(NSSharingService *)service {
+    // rdar://18754049 This is getting called when the NSSharingServicePicker is dismissed without selecting a picker
+    if (!service) return;
     NSString *title = (service.title && service.title.length > 0) ? service.title : @"Unknown";
     RBKLog(@"%@", title);
     [[Mixpanel sharedInstance] track:@"Share Recording" properties:@{ @"Service" : title }];
