@@ -232,8 +232,18 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     NSString *screen = [screenShortcut.modifierFlagsString stringByAppendingString:screenShortcut.keyCodeString];
     NSString *selection = [selectionShortcut.modifierFlagsString stringByAppendingString:selectionShortcut.keyCodeString];
 
-    NSString *emptyStateFormatString = NSLocalizedString(@"RecordingsTableViewEmptyStateMessage", @"Contains a usage message with two %@ format placeholders for the screen and selection recording shortcut strings");
-    self.emptyStateTextField.stringValue = [NSString stringWithFormat:emptyStateFormatString, screen, selection];
+    NSString *emptyStateFormatString = NSLocalizedString(@"RecordingsTableViewEmptyStateMessage", @"Contains instructions on how to record with the record button");
+    NSString *shortcutInstructions = @"";
+    if (!RBKIsEmpty(screen) && !RBKIsEmpty(selection)) {
+        shortcutInstructions = [NSString stringWithFormat:NSLocalizedString(@"RecordingsTableViewEmptyStateBothShortcutsFormat", @"A string format for instructions on both screen and selection shortcuts"), selection, screen];
+    }
+    else if (!RBKIsEmpty(screen)) {
+        shortcutInstructions = [NSString stringWithFormat:NSLocalizedString(@"RecordingsTableViewEmptyStateScreenShortcutFormat", @"A string format for instructions on the screen shortcut"), screen];
+    }
+    else if (!RBKIsEmpty(selection)) {
+        shortcutInstructions = [NSString stringWithFormat:NSLocalizedString(@"RecordingsTableViewEmptyStateSelectionShortcutFormat", @"A string format for instructions on the selection shortcut"), selection];
+    }
+    self.emptyStateTextField.stringValue = [@[emptyStateFormatString, shortcutInstructions] componentsJoinedByString:@" "];
 }
 
 - (void)updateEmptyStateView {

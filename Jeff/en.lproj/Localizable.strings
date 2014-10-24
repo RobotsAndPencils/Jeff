@@ -16,4 +16,7 @@
 "PreferencesCreditsHTML" = "Jeff is made with love by <a href=\"http://www.robotsandpencils.com\">Robots and Pencils</a>.";
 "PreferencesOpenSourceCreditsHTML" = "It's also made up of some code written by others: <a href=\"https://github.com/shpakovski/MASShortcut\">MASShortcut</a>, <a href=\"https://github.com/github/Rebel\">Rebel</a>, <a href=\"https://github.com/indragiek/INPopoverController\">INPopoverController</a>, <a href=\"http://www.red-sweater.com/blog/148/what-a-difference-a-cell-makes\">RSVerticallyCenteredTextFieldCell</a> (what a mouthful), <a href=\"https://github.com/facebook/pop\">Pop</a> and <a href=\"http://www.lcdf.org/gifsicle/man.html\">Gifsicle</a>.";
 
-"RecordingsTableViewEmptyStateMessage" = "Click the Record button above to, uh, record something. You could also press %@ to record a selection or %@ for the whole screen.";
+"RecordingsTableViewEmptyStateMessage" = "Click the Record button above to, uh, record something.";
+"RecordingsTableViewEmptyStateSelectionShortcutFormat" = "You can also press %@ to record a selection.";
+"RecordingsTableViewEmptyStateScreenShortcutFormat" = "You can also press %@ to record the whole screen.";
+"RecordingsTableViewEmptyStateBothShortcutsFormat" = "You can also press %@ to record a selection or %@ for the whole screen.";
