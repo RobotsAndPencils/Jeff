@@ -225,12 +225,17 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (void)updateTableViewEmptyStateText {
     NSData *screenData = [[NSUserDefaultsController sharedUserDefaultsController] valueForKeyPath:[@"values." stringByAppendingString:JEFRecordScreenShortcutKey]];
+    NSString *screen;
+    if (!RBKIsEmpty(screenData)) {
+        MASShortcut *screenShortcut = [MASShortcut shortcutWithData:screenData];
+        screen = [screenShortcut.modifierFlagsString stringByAppendingString:screenShortcut.keyCodeString];
+    }
     NSData *selectionData = [[NSUserDefaultsController sharedUserDefaultsController] valueForKeyPath:[@"values." stringByAppendingString:JEFRecordSelectionShortcutKey]];
-
-    MASShortcut *screenShortcut = [MASShortcut shortcutWithData:screenData];
-    MASShortcut *selectionShortcut = [MASShortcut shortcutWithData:selectionData];
-    NSString *screen = [screenShortcut.modifierFlagsString stringByAppendingString:screenShortcut.keyCodeString];
-    NSString *selection = [selectionShortcut.modifierFlagsString stringByAppendingString:selectionShortcut.keyCodeString];
+    NSString *selection;
+    if (!RBKIsEmpty(selectionData)) {
+        MASShortcut *selectionShortcut = [MASShortcut shortcutWithData:selectionData];
+        selection = [selectionShortcut.modifierFlagsString stringByAppendingString:selectionShortcut.keyCodeString];
+    }
 
     NSString *emptyStateFormatString = NSLocalizedString(@"RecordingsTableViewEmptyStateMessage", @"Contains instructions on how to record with the record button");
     NSString *shortcutInstructions = @"";

@@ -11,9 +11,11 @@
 #import <HockeySDK/HockeySDK.h>
 #import <Dropbox/Dropbox.h>
 #import "Mixpanel.h"
+#import <MASShortcut/MASShortcut.h>
 
 #import "JEFAppController.h"
 #import "JEFUploaderProtocol.h"
+#import "Constants.h"
 
 @interface JEFAppDelegate () <BITHockeyManagerDelegate>
 
@@ -84,7 +86,10 @@
 }
 
 - (void)registerDefaults {
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"selectedUploader": @(JEFUploaderTypeDropbox) }];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"selectedUploader": @(JEFUploaderTypeDropbox),
+                                                               JEFRecordScreenShortcutKey: [MASShortcut shortcutWithKeyCode:kVK_ANSI_5 modifierFlags:NSCommandKeyMask | NSShiftKeyMask].data,
+                                                               JEFRecordSelectionShortcutKey: [MASShortcut shortcutWithKeyCode:kVK_ANSI_6 modifierFlags:NSCommandKeyMask | NSShiftKeyMask].data
+                                                               }];
 }
 
 @end
