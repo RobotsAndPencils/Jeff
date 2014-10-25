@@ -6,4 +6,5 @@ HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public
 LD_RUNPATH_SEARCH_PATHS = @loader_path/../Frameworks
 OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/HockeySDK-Mac" -isystem "${PODS_ROOT}/Headers/Public/MASShortcut" -isystem "${PODS_ROOT}/Headers/Public/RoboKit" -isystem "${PODS_ROOT}/Headers/Public/libextobjc" -isystem "${PODS_ROOT}/Headers/Public/pop"
 OTHER_LDFLAGS = -ObjC -l"Pods-HockeySDK-Mac" -l"Pods-MASShortcut" -l"Pods-RoboKit" -l"Pods-libextobjc" -l"Pods-pop" -l"c++" -framework "Carbon" -framework "Cocoa" -framework "Foundation" -framework "HockeySDK"
+OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
 PODS_ROOT = ${SRCROOT}/Pods

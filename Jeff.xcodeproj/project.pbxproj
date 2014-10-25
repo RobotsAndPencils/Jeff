@@ -44,10 +44,11 @@
 		CAA79EAC192A725800A4299F /* JEFQuartzRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA79EAB192A725800A4299F /* JEFQuartzRecorder.m */; };
 		CAB110D4192C6C61000A04C0 /* NSEvent+MouseClamped.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB110D3192C6C61000A04C0 /* NSEvent+MouseClamped.m */; };
 		CAB77D4D19E5E2CF0049B6D8 /* JEFAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB77D4C19E5E2CF0049B6D8 /* JEFAppController.m */; };
-		CAB84C74199470B200EA0414 /* RBLTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB84C73199470B200EA0414 /* RBLTableView.m */; };
 		CAC40812199C391900833FAB /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC40811199C391900833FAB /* Dropbox.framework */; };
 		CAC40813199C4CEA00833FAB /* Dropbox.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = CAC40811199C391900833FAB /* Dropbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CAC7AC1619F5784600F44010 /* NSColor+Darken.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC7AC1519F5784600F44010 /* NSColor+Darken.m */; };
+		CAC8D92819FC5A27007BD04F /* RBLScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC8D92519FC5A27007BD04F /* RBLScrolling.m */; };
+		CAC8D92919FC5A27007BD04F /* RBLTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC8D92719FC5A27007BD04F /* RBLTableView.m */; };
 		CADF57B418C6F432006512E3 /* JEFRecording.m in Sources */ = {isa = PBXBuildFile; fileRef = CADF57B318C6F432006512E3 /* JEFRecording.m */; };
 		CAE8F9C61991CBFF00F24D4C /* MIT-License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CAE8F9C31991CBFF00F24D4C /* MIT-License.rtf */; };
 		CAE8F9C71991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE8F9C51991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m */; };
@@ -188,11 +189,13 @@
 		CAB110D3192C6C61000A04C0 /* NSEvent+MouseClamped.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSEvent+MouseClamped.m"; path = "Categories/NSEvent+MouseClamped.m"; sourceTree = "<group>"; };
 		CAB77D4B19E5E2CF0049B6D8 /* JEFAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFAppController.h; sourceTree = "<group>"; };
 		CAB77D4C19E5E2CF0049B6D8 /* JEFAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFAppController.m; sourceTree = "<group>"; };
-		CAB84C72199470B200EA0414 /* RBLTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBLTableView.h; sourceTree = "<group>"; };
-		CAB84C73199470B200EA0414 /* RBLTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBLTableView.m; sourceTree = "<group>"; };
 		CAC40811199C391900833FAB /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = Jeff/Frameworks/Dropbox.framework; sourceTree = "<group>"; };
 		CAC7AC1419F5784600F44010 /* NSColor+Darken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSColor+Darken.h"; path = "Categories/NSColor+Darken.h"; sourceTree = "<group>"; };
 		CAC7AC1519F5784600F44010 /* NSColor+Darken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSColor+Darken.m"; path = "Categories/NSColor+Darken.m"; sourceTree = "<group>"; };
+		CAC8D92419FC5A27007BD04F /* RBLScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBLScrolling.h; sourceTree = "<group>"; };
+		CAC8D92519FC5A27007BD04F /* RBLScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBLScrolling.m; sourceTree = "<group>"; };
+		CAC8D92619FC5A27007BD04F /* RBLTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBLTableView.h; sourceTree = "<group>"; };
+		CAC8D92719FC5A27007BD04F /* RBLTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBLTableView.m; sourceTree = "<group>"; };
 		CADF57B218C6F432006512E3 /* JEFRecording.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecording.h; path = Models/JEFRecording.h; sourceTree = "<group>"; };
 		CADF57B318C6F432006512E3 /* JEFRecording.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFRecording.m; path = Models/JEFRecording.m; sourceTree = "<group>"; };
 		CADF57B518C70081006512E3 /* Jeff.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Jeff.entitlements; sourceTree = "<group>"; };
@@ -277,7 +280,7 @@
 		83593B9212B387F97DA9E104 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				CAB84C71199470B200EA0414 /* RBLTableView */,
+				CAC8D92319FC5A27007BD04F /* Rebel */,
 				CAE8F9C21991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell */,
 				CA1F9909192F0ACB00C3EF33 /* StartAtLoginController */,
 				CAF30B5418D5281100D7BC9D /* INPopoverController */,
@@ -505,13 +508,15 @@
 			name = Recorders;
 			sourceTree = "<group>";
 		};
-		CAB84C71199470B200EA0414 /* RBLTableView */ = {
+		CAC8D92319FC5A27007BD04F /* Rebel */ = {
 			isa = PBXGroup;
 			children = (
-				CAB84C72199470B200EA0414 /* RBLTableView.h */,
-				CAB84C73199470B200EA0414 /* RBLTableView.m */,
+				CAC8D92419FC5A27007BD04F /* RBLScrolling.h */,
+				CAC8D92519FC5A27007BD04F /* RBLScrolling.m */,
+				CAC8D92619FC5A27007BD04F /* RBLTableView.h */,
+				CAC8D92719FC5A27007BD04F /* RBLTableView.m */,
 			);
-			path = RBLTableView;
+			path = Rebel;
 			sourceTree = "<group>";
 		};
 		CADF57B018C6DE4D006512E3 /* Strings */ = {
@@ -794,13 +799,13 @@
 			files = (
 				CA875EFC18B9974C009FC997 /* JEFSelectionView.m in Sources */,
 				CADF57B418C6F432006512E3 /* JEFRecording.m in Sources */,
-				CAB84C74199470B200EA0414 /* RBLTableView.m in Sources */,
 				CA455B7718B84ED200F9A541 /* JEFConverter.m in Sources */,
 				CAA79EAC192A725800A4299F /* JEFQuartzRecorder.m in Sources */,
 				CAF3913119F565BD009D5D9A /* JEFColoredButtonCell.m in Sources */,
 				CA7A1D991991E9FF008DA733 /* JEFCreditsTextView.m in Sources */,
 				CA455B7B18B882DB00F9A541 /* NSFileManager+Temporary.m in Sources */,
 				CA6E31B019E4D45E00C4B906 /* Mixpanel.m in Sources */,
+				CAC8D92919FC5A27007BD04F /* RBLTableView.m in Sources */,
 				CA455B3F18B83EB900F9A541 /* JEFAppDelegate.m in Sources */,
 				CAF30B6218D5281100D7BC9D /* INPopoverParentWindow.m in Sources */,
 				CAF30B6318D5281100D7BC9D /* INPopoverWindow.m in Sources */,
@@ -815,6 +820,7 @@
 				CAF30B6118D5281100D7BC9D /* INPopoverController.m in Sources */,
 				CAE8F9C71991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m in Sources */,
 				CA4D988418D6D2A900EFE4FD /* JEFRecordingCellView.m in Sources */,
+				CAC8D92819FC5A27007BD04F /* RBLScrolling.m in Sources */,
 				CAF30B6418D5281100D7BC9D /* INPopoverWindowFrame.m in Sources */,
 				CAF3913619F566F4009D5D9A /* JEFColoredButton.m in Sources */,
 				CAB77D4D19E5E2CF0049B6D8 /* JEFAppController.m in Sources */,
