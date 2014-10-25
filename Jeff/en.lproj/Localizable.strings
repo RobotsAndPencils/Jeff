@@ -13,8 +13,7 @@
 
 "PreferencesDropboxExplanationUnlink" = "Unlinking Dropbox won't delete any of your GIFs, but you'll need to link your account again to see them in Jeff.";
 "PreferencesDropboxExplanationLink" = "If you had any recordings before unlinking your Dropbox account, they'll still be in the Apps folder inside Dropbox.";
-"PreferencesCreditsHTML" = "Jeff is made with love by <a href=\"http://www.robotsandpencils.com\">Robots and Pencils</a>.";
-"PreferencesOpenSourceCreditsFormatHTML" = "Jeff is made with the help of some open source projects and you can learn more <a href=\"https://robotsandpencils.com/jeff/acknowledgements/%@.html\">here</a>.";
+"PreferencesCreditsHTML" = "Jeff is made with love by Robots and Pencils";
 
 "RecordingsTableViewEmptyStateMessage" = "Click the Record button above to, uh, record something.";
 "RecordingsTableViewEmptyStateSelectionShortcutFormat" = "You can also press %@ to record a selection.";
