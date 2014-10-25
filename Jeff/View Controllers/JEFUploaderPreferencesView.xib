@@ -6,11 +6,9 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="JEFUploaderPreferencesViewController">
             <connections>
-                <outlet property="creditTextView" destination="bqm-Y6-XGK" id="QFO-fj-2FW"/>
                 <outlet property="dropboxLinkExplanationLabel" destination="QDP-oW-vRd" id="Nfk-79-oBM"/>
                 <outlet property="emailButton" destination="m6v-vx-ix3" id="CDb-tZ-tHd"/>
                 <outlet property="linkButton" destination="cv6-7q-eI0" id="EnA-T7-Y4f"/>
-                <outlet property="openSourceCreditTextView" destination="Vmj-dQ-QLg" id="uyB-Ch-qCq"/>
                 <outlet property="recordScreenShortcutView" destination="Rzu-ZG-ibH" id="Lso-h4-Oqe"/>
                 <outlet property="recordSelectionShortcutView" destination="mT5-FQ-Xyi" id="33r-4P-Nft"/>
                 <outlet property="tweetButton" destination="M2x-Cq-sIp" id="2yd-oZ-X8c"/>
@@ -105,99 +103,14 @@
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </box>
-                <scrollView verticalHuggingPriority="750" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDd-kn-slv">
-                    <rect key="frame" x="9" y="131" width="304" height="24"/>
-                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="Bvi-PN-Pyp">
-                        <rect key="frame" x="1" y="1" width="223" height="133"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView editable="NO" importsGraphics="NO" verticallyResizable="NO" baseWritingDirection="leftToRight" findStyle="panel" allowsNonContiguousLayout="YES" linkDetection="YES" spellingCorrection="YES" id="bqm-Y6-XGK" customClass="JEFCreditsTextView">
-                                <rect key="frame" x="0.0" y="0.0" width="223" height="133"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                <size key="minSize" width="304" height="24"/>
-                                <size key="maxSize" width="481" height="10000000"/>
-                                <attributedString key="textStorage">
-                                    <fragment content="Jeff is with love made by Robots and Pencils.">
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <size key="minSize" width="304" height="24"/>
-                                <size key="maxSize" width="481" height="10000000"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                    </clipView>
-                    <constraints>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="288" id="69v-Zt-IK7"/>
-                        <constraint firstAttribute="height" constant="24" id="dKI-5p-XAj"/>
-                    </constraints>
-                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="6VC-gz-KgY">
-                        <rect key="frame" x="-100" y="-100" width="87" height="18"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </scroller>
-                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="R3t-5s-dAR">
-                        <rect key="frame" x="224" y="1" width="15" height="133"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </scroller>
-                </scrollView>
-                <scrollView verticalHuggingPriority="750" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdJ-5L-JEq">
-                    <rect key="frame" x="9" y="46" width="304" height="40"/>
-                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="gbJ-Rw-lOJ">
-                        <rect key="frame" x="1" y="1" width="223" height="133"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView editable="NO" importsGraphics="NO" verticallyResizable="NO" baseWritingDirection="leftToRight" findStyle="panel" allowsNonContiguousLayout="YES" linkDetection="YES" spellingCorrection="YES" id="Vmj-dQ-QLg" customClass="JEFCreditsTextView">
-                                <rect key="frame" x="0.0" y="0.0" width="223" height="133"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                <size key="minSize" width="304" height="40"/>
-                                <size key="maxSize" width="481" height="10000000"/>
-                                <attributedString key="textStorage">
-                                    <fragment content="Jeff is made with the help of some open source projects and you can learn more here.">
-                                        <attributes>
-                                            <font key="NSFont" size="12" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <font key="NSOriginalFont" size="12" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <size key="minSize" width="304" height="40"/>
-                                <size key="maxSize" width="481" height="10000000"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                    </clipView>
-                    <constraints>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="288" id="iuF-QO-Zxs"/>
-                        <constraint firstAttribute="height" constant="40" id="ubb-t1-dbz"/>
-                    </constraints>
-                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="ISM-hh-saT">
-                        <rect key="frame" x="-100" y="-100" width="87" height="18"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </scroller>
-                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="rbd-oO-Xcr">
-                        <rect key="frame" x="224" y="1" width="15" height="133"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </scroller>
-                </scrollView>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m6v-vx-ix3">
-                    <rect key="frame" x="8" y="99" width="176" height="32"/>
-                    <buttonCell key="cell" type="push" title="Tell us nice things" bezelStyle="rounded" image="Envelope" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UVc-5r-Jj8">
+                    <rect key="frame" x="129" y="72" width="184" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="dsJ-V5-u5V"/>
+                    </constraints>
+                    <buttonCell key="cell" type="bevel" title="jefftheapp@robotsandpencils.com" bezelStyle="rounded" alignment="left" controlSize="small" state="on" imageScaling="proportionallyDown" inset="2" id="UVc-5r-Jj8">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="smallSystem"/>
                     </buttonCell>
                     <connections>
                         <action selector="sendEmail:" target="-2" id="OjK-EP-4a8"/>
@@ -232,44 +145,68 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M2x-Cq-sIp">
-                    <rect key="frame" x="184" y="99" width="117" height="32"/>
-                    <buttonCell key="cell" type="push" title="lol email" bezelStyle="rounded" image="Twitter" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tmG-eV-CAZ">
+                    <rect key="frame" x="12" y="72" width="301" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="Jjj-dh-F6i"/>
+                    </constraints>
+                    <buttonCell key="cell" type="bevel" title="@jefftheapp" bezelStyle="rounded" imagePosition="left" alignment="left" controlSize="small" state="on" imageScaling="proportionallyDown" inset="2" id="tmG-eV-CAZ">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="smallSystem"/>
                     </buttonCell>
                     <connections>
                         <action selector="sendTweet:" target="-2" id="g7g-uB-4OI"/>
                     </connections>
                 </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="xjK-i4-kgn">
+                    <rect key="frame" x="12" y="38" width="180" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="SX2-DD-oxr"/>
+                    </constraints>
+                    <buttonCell key="cell" type="bevel" title="Open Source Acknowledgements" bezelStyle="rounded" alignment="left" controlSize="small" state="on" imageScaling="proportionallyDown" inset="2" id="PhM-e6-DEm">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="smallSystem"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="openOpenSourceAcknowledgements:" target="-2" id="nzI-jU-cIC"/>
+                    </connections>
+                </button>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QRU-pJ-JOW">
+                    <rect key="frame" x="12" y="98" width="280" height="17"/>
+                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Jeff is made with love by Robots and Pencils" id="2BU-NO-cpo">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="A1q-ak-pz7" secondAttribute="bottom" constant="24" id="57q-jm-Ui8"/>
                 <constraint firstItem="QDP-oW-vRd" firstAttribute="top" secondItem="cv6-7q-eI0" secondAttribute="bottom" constant="8" id="6A0-TJ-YEF"/>
-                <constraint firstItem="m6v-vx-ix3" firstAttribute="top" secondItem="yDd-kn-slv" secondAttribute="bottom" constant="4" id="7RT-Xm-2xg"/>
                 <constraint firstAttribute="trailing" secondItem="QDP-oW-vRd" secondAttribute="trailing" constant="12" id="CN7-cp-jBZ"/>
                 <constraint firstItem="cv6-7q-eI0" firstAttribute="leading" secondItem="QDP-oW-vRd" secondAttribute="leading" id="EYK-NW-Hy6"/>
                 <constraint firstItem="A1q-ak-pz7" firstAttribute="centerY" secondItem="9GO-j4-2p9" secondAttribute="centerY" id="FkI-WD-1ir"/>
                 <constraint firstItem="5VW-Vw-VWb" firstAttribute="leading" secondItem="wzT-7z-QAM" secondAttribute="leading" constant="12" id="JH8-Jx-tea"/>
+                <constraint firstItem="A1q-ak-pz7" firstAttribute="leading" secondItem="wzT-7z-QAM" secondAttribute="leading" constant="14" id="Jcq-LZ-wAM"/>
+                <constraint firstAttribute="trailing" secondItem="M2x-Cq-sIp" secondAttribute="trailing" constant="12" id="JhG-Ac-zbB"/>
                 <constraint firstItem="9GO-j4-2p9" firstAttribute="leading" secondItem="5Ky-Kb-Irl" secondAttribute="trailing" constant="8" id="LDg-4c-xTG"/>
-                <constraint firstItem="A1q-ak-pz7" firstAttribute="top" secondItem="pdJ-5L-JEq" secondAttribute="bottom" constant="8" id="NQg-dT-hev"/>
-                <constraint firstItem="yDd-kn-slv" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jrp-Yj-84y" secondAttribute="bottom" constant="45" id="OAO-0k-xGa"/>
-                <constraint firstItem="pdJ-5L-JEq" firstAttribute="leading" secondItem="A1q-ak-pz7" secondAttribute="leading" constant="-5" id="R67-RC-UZT"/>
-                <constraint firstItem="M2x-Cq-sIp" firstAttribute="centerY" secondItem="m6v-vx-ix3" secondAttribute="centerY" id="RY7-Nj-RP1"/>
+                <constraint firstItem="jrp-Yj-84y" firstAttribute="leading" secondItem="M2x-Cq-sIp" secondAttribute="leading" id="LFK-6q-Vjx"/>
+                <constraint firstAttribute="trailing" secondItem="m6v-vx-ix3" secondAttribute="trailing" constant="12" id="ME8-8E-r39"/>
                 <constraint firstItem="cv6-7q-eI0" firstAttribute="top" secondItem="5VW-Vw-VWb" secondAttribute="bottom" constant="20" id="SLA-Rk-iGq"/>
                 <constraint firstAttribute="trailing" secondItem="9GO-j4-2p9" secondAttribute="trailing" constant="8" id="T9B-XI-vIw"/>
+                <constraint firstItem="M2x-Cq-sIp" firstAttribute="top" secondItem="QRU-pJ-JOW" secondAttribute="bottom" constant="4" id="WLT-9v-ndh"/>
                 <constraint firstItem="5VW-Vw-VWb" firstAttribute="top" secondItem="wzT-7z-QAM" secondAttribute="top" constant="82" id="WWf-6M-TLN"/>
                 <constraint firstItem="jrp-Yj-84y" firstAttribute="top" secondItem="QDP-oW-vRd" secondAttribute="bottom" constant="20" id="aIi-lQ-Bx8"/>
-                <constraint firstItem="jrp-Yj-84y" firstAttribute="leading" secondItem="yDd-kn-slv" secondAttribute="leading" constant="3" id="cv5-SA-leT"/>
-                <constraint firstItem="pdJ-5L-JEq" firstAttribute="trailing" secondItem="yDd-kn-slv" secondAttribute="trailing" id="grH-Ic-yYt"/>
+                <constraint firstItem="QRU-pJ-JOW" firstAttribute="leading" secondItem="jrp-Yj-84y" secondAttribute="leading" constant="2" id="bDj-VB-SkU"/>
+                <constraint firstItem="m6v-vx-ix3" firstAttribute="centerY" secondItem="M2x-Cq-sIp" secondAttribute="centerY" id="eCh-mN-ZTr"/>
                 <constraint firstItem="cv6-7q-eI0" firstAttribute="leading" secondItem="5VW-Vw-VWb" secondAttribute="leading" id="h6X-R5-uWa"/>
-                <constraint firstItem="pdJ-5L-JEq" firstAttribute="top" secondItem="m6v-vx-ix3" secondAttribute="bottom" constant="20" id="iHt-g0-cNe"/>
-                <constraint firstItem="m6v-vx-ix3" firstAttribute="leading" secondItem="yDd-kn-slv" secondAttribute="leading" constant="5" id="jpB-Qe-Rpw"/>
-                <constraint firstItem="jrp-Yj-84y" firstAttribute="trailing" secondItem="yDd-kn-slv" secondAttribute="trailing" id="keq-G0-IEV"/>
+                <constraint firstItem="xjK-i4-kgn" firstAttribute="leading" secondItem="M2x-Cq-sIp" secondAttribute="leading" id="lUv-9J-bD7"/>
+                <constraint firstItem="QRU-pJ-JOW" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jrp-Yj-84y" secondAttribute="bottom" constant="40" id="nCf-wV-sIm"/>
                 <constraint firstItem="jrp-Yj-84y" firstAttribute="leading" secondItem="cv6-7q-eI0" secondAttribute="leading" id="qsu-ej-va3"/>
                 <constraint firstAttribute="trailing" secondItem="jrp-Yj-84y" secondAttribute="trailing" constant="12" id="rCU-aK-gcW"/>
-                <constraint firstItem="m6v-vx-ix3" firstAttribute="leading" secondItem="pdJ-5L-JEq" secondAttribute="leading" constant="5" id="rjI-4g-ZHJ"/>
+                <constraint firstItem="xjK-i4-kgn" firstAttribute="leading" secondItem="wzT-7z-QAM" secondAttribute="leading" constant="12" id="sMW-Ho-dI2"/>
+                <constraint firstItem="xjK-i4-kgn" firstAttribute="top" secondItem="M2x-Cq-sIp" secondAttribute="bottom" constant="12" id="yl8-Xu-GXO"/>
+                <constraint firstItem="A1q-ak-pz7" firstAttribute="top" secondItem="xjK-i4-kgn" secondAttribute="bottom" id="z38-LV-pCx"/>
                 <constraint firstItem="5Ky-Kb-Irl" firstAttribute="centerY" secondItem="9GO-j4-2p9" secondAttribute="centerY" id="zVC-hP-MIu"/>
-                <constraint firstItem="M2x-Cq-sIp" firstAttribute="leading" secondItem="m6v-vx-ix3" secondAttribute="trailing" constant="12" id="znl-bu-iy6"/>
             </constraints>
             <point key="canvasLocation" x="308.5" y="279"/>
         </view>
@@ -279,8 +216,4 @@
             </userDefinedRuntimeAttributes>
         </customObject>
     </objects>
-    <resources>
-        <image name="Envelope" width="19.862068176269531" height="19.862068176269531"/>
-        <image name="Twitter" width="19.862068176269531" height="19.862068176269531"/>
-    </resources>
 </document>

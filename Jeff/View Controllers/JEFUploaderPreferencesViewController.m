@@ -22,7 +22,6 @@
 @property (nonatomic, weak) IBOutlet NSTextField *versionLabel;
 @property (nonatomic, weak) IBOutlet MASShortcutView *recordScreenShortcutView;
 @property (nonatomic, weak) IBOutlet MASShortcutView *recordSelectionShortcutView;
-@property (nonatomic, strong) IBOutlet NSTextView *openSourceCreditTextView;
 @property (nonatomic, strong) IBOutlet NSTextView *creditTextView;
 @property (nonatomic, weak) IBOutlet NSButton *emailButton;
 @property (nonatomic, weak) IBOutlet NSButton *tweetButton;
@@ -61,18 +60,15 @@
         [[Mixpanel sharedInstance] track:@"Change Shortcut" properties:@{ @"Name": @"Record Screen", @"Value": keyCodeString }];
     };
 
-    // Initialize rich text credit views
-    [self setupTextView:self.creditTextView withHTMLString:NSLocalizedString(@"PreferencesCreditsHTML", nil) fontSize:[NSFont systemFontSize] color:[NSColor labelColor]];
+    // Initialize credit view
+    self.creditTextView.string = NSLocalizedString(@"PreferencesCreditsHTML", nil);
 
+    // Initialize version label
     NSBundle *mainBundle = [NSBundle mainBundle];
     NSString *version = mainBundle.infoDictionary[@"CFBundleShortVersionString"];
     NSString *build = mainBundle.infoDictionary[@"CFBundleVersion"];
-    NSString *formattedVersionString = [NSString stringWithFormat:@"%@b%@", version, build];
-    NSString *openSourceCreditsHTML = [NSString stringWithFormat:NSLocalizedString(@"PreferencesOpenSourceCreditsFormatHTML", @"A format string that needs the version string of the app in the format %d.%db%d"), formattedVersionString];
-    [self setupTextView:self.openSourceCreditTextView withHTMLString:openSourceCreditsHTML fontSize:[NSFont smallSystemFontSize] color:[NSColor secondaryLabelColor]];
 
-    // Initialize version label
-    self.versionLabel.stringValue = [NSString stringWithFormat:@"You've got Jeff version %@ (Build %@)", version, build];
+    self.versionLabel.stringValue = [NSString stringWithFormat:@"You've got version %@ (Build %@)", version, build];
 }
 
 
@@ -136,6 +132,16 @@
     [twitterService performWithItems:nil];
 }
 
+- (IBAction)openOpenSourceAcknowledgements:(id)sender {
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    NSString *version = mainBundle.infoDictionary[@"CFBundleShortVersionString"];
+    NSString *build = mainBundle.infoDictionary[@"CFBundleVersion"];
+    NSString *formattedVersionString = [NSString stringWithFormat:@"%@b%@", version, build];
+
+    NSURL *acknowledgementsURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://robotsandpencils.com/jeff/acknowledgements/%@.html", formattedVersionString]];
+    [[NSWorkspace sharedWorkspace] openURL:acknowledgementsURL];
+}
+
 - (IBAction)quit:(id)sender {
     [NSApp terminate:self];
 }
@@ -145,16 +151,6 @@
 }
 
 #pragma mark Private
-
-- (void)setupTextView:(NSTextView *)view withHTMLString:(NSString *)htmlString fontSize:(CGFloat)fontSize color:(NSColor *)color {
-    NSData *htmlData = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
-    NSMutableAttributedString *attributedCredits = [[NSMutableAttributedString alloc] initWithHTML:htmlData documentAttributes:NULL];
-    NSDictionary *attributes = @{ NSFontAttributeName : [NSFont systemFontOfSize:fontSize], NSForegroundColorAttributeName: color };
-    [attributedCredits addAttributes:attributes range:NSMakeRange(0, attributedCredits.string.length - 1)];
-    view.linkTextAttributes = @{ NSForegroundColorAttributeName: color, NSCursorAttributeName: [NSCursor pointingHandCursor] };
-    view.textStorage.attributedString = attributedCredits;
-
-}
 
 - (void)updateLinkButton {
     if ([DBAccountManager sharedManager].linkedAccount) {
