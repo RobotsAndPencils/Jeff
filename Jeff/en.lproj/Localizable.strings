@@ -14,7 +14,7 @@
 "PreferencesDropboxExplanationUnlink" = "Unlinking Dropbox won't delete any of your GIFs, but you'll need to link your account again to see them in Jeff.";
 "PreferencesDropboxExplanationLink" = "If you had any recordings before unlinking your Dropbox account, they'll still be in the Apps folder inside Dropbox.";
 "PreferencesCreditsHTML" = "Jeff is made with love by <a href=\"http://www.robotsandpencils.com\">Robots and Pencils</a>.";
-"PreferencesOpenSourceCreditsHTML" = "It's also made up of some code written by others: <a href=\"https://github.com/shpakovski/MASShortcut\">MASShortcut</a>, <a href=\"https://github.com/github/Rebel\">Rebel</a>, <a href=\"https://github.com/indragiek/INPopoverController\">INPopoverController</a>, <a href=\"http://www.red-sweater.com/blog/148/what-a-difference-a-cell-makes\">RSVerticallyCenteredTextFieldCell</a> (what a mouthful), <a href=\"https://github.com/facebook/pop\">Pop</a> and <a href=\"http://www.lcdf.org/gifsicle/man.html\">Gifsicle</a>.";
+"PreferencesOpenSourceCreditsFormatHTML" = "Jeff is made with the help of some open source projects and you can learn more <a href=\"https://robotsandpencils.com/jeff/acknowledgements/%@.html\">here</a>.";
 
 "RecordingsTableViewEmptyStateMessage" = "Click the Record button above to, uh, record something.";
 "RecordingsTableViewEmptyStateSelectionShortcutFormat" = "You can also press %@ to record a selection.";

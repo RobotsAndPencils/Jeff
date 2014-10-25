@@ -106,7 +106,7 @@
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </box>
                 <scrollView verticalHuggingPriority="750" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDd-kn-slv">
-                    <rect key="frame" x="9" y="143" width="304" height="24"/>
+                    <rect key="frame" x="9" y="131" width="304" height="24"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="Bvi-PN-Pyp">
                         <rect key="frame" x="1" y="1" width="223" height="133"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -149,7 +149,7 @@
                     </scroller>
                 </scrollView>
                 <scrollView verticalHuggingPriority="750" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdJ-5L-JEq">
-                    <rect key="frame" x="9" y="46" width="304" height="52"/>
+                    <rect key="frame" x="9" y="46" width="304" height="40"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="gbJ-Rw-lOJ">
                         <rect key="frame" x="1" y="1" width="223" height="133"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -158,101 +158,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="223" height="133"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                <size key="minSize" width="304" height="52"/>
+                                <size key="minSize" width="304" height="40"/>
                                 <size key="maxSize" width="481" height="10000000"/>
                                 <attributedString key="textStorage">
-                                    <fragment content="It's also made up of some code written by others: ">
+                                    <fragment content="Jeff is made with the help of some open source projects and you can learn more here.">
                                         <attributes>
-                                            <font key="NSFont" size="11" name="HelveticaNeue"/>
+                                            <font key="NSFont" size="12" name="HelveticaNeue"/>
                                             <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="MASShortcut">
-                                        <attributes>
-                                            <font key="NSFont" size="11" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <url key="NSLink" string="https://github.com/shpakovski/MASShortcut"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
-                                            <integer key="NSUnderline" value="1"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=", ">
-                                        <attributes>
-                                            <font key="NSFont" size="11" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="Rebel">
-                                        <attributes>
-                                            <font key="NSFont" size="11" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <url key="NSLink" string="https://github.com/github/Rebel"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
-                                            <integer key="NSUnderline" value="1"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=", ">
-                                        <attributes>
-                                            <font key="NSFont" size="11" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="INPopoverController">
-                                        <attributes>
-                                            <font key="NSFont" size="11" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <url key="NSLink" string="https://github.com/indragiek/INPopoverController"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
-                                            <integer key="NSUnderline" value="1"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=", ">
-                                        <attributes>
-                                            <font key="NSFont" size="11" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="RSVerticallyCenteredTextFieldCell">
-                                        <attributes>
-                                            <font key="NSFont" size="11" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <url key="NSLink" string="http://www.red-sweater.com/blog/148/what-a-difference-a-cell-makes"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
-                                            <integer key="NSUnderline" value="1"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=" (what a mouthful), Pop and Gifsicle.">
-                                        <attributes>
-                                            <font key="NSFont" size="11" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
+                                            <font key="NSOriginalFont" size="12" name="HelveticaNeue"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
                                                 <tabStops/>
                                             </paragraphStyle>
@@ -261,7 +174,7 @@
                                     </fragment>
                                 </attributedString>
                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <size key="minSize" width="304" height="52"/>
+                                <size key="minSize" width="304" height="40"/>
                                 <size key="maxSize" width="481" height="10000000"/>
                             </textView>
                         </subviews>
@@ -269,7 +182,7 @@
                     </clipView>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="288" id="iuF-QO-Zxs"/>
-                        <constraint firstAttribute="height" constant="52" id="ubb-t1-dbz"/>
+                        <constraint firstAttribute="height" constant="40" id="ubb-t1-dbz"/>
                     </constraints>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="ISM-hh-saT">
                         <rect key="frame" x="-100" y="-100" width="87" height="18"/>
@@ -281,7 +194,7 @@
                     </scroller>
                 </scrollView>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m6v-vx-ix3">
-                    <rect key="frame" x="8" y="111" width="176" height="32"/>
+                    <rect key="frame" x="8" y="99" width="176" height="32"/>
                     <buttonCell key="cell" type="push" title="Tell us nice things" bezelStyle="rounded" image="Envelope" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UVc-5r-Jj8">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -319,7 +232,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M2x-Cq-sIp">
-                    <rect key="frame" x="184" y="111" width="117" height="32"/>
+                    <rect key="frame" x="184" y="99" width="117" height="32"/>
                     <buttonCell key="cell" type="push" title="lol email" bezelStyle="rounded" image="Twitter" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tmG-eV-CAZ">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>

@@ -62,14 +62,17 @@
     };
 
     // Initialize rich text credit views
-    [self setupTextView:self.creditTextView withHTMLStringWithKey:@"PreferencesCreditsHTML" fontSize:[NSFont systemFontSize] color:[NSColor labelColor]];
-    [self setupTextView:self.openSourceCreditTextView withHTMLStringWithKey:@"PreferencesOpenSourceCreditsHTML" fontSize:[NSFont smallSystemFontSize] color:[NSColor secondaryLabelColor]];
+    [self setupTextView:self.creditTextView withHTMLString:NSLocalizedString(@"PreferencesCreditsHTML", nil) fontSize:[NSFont systemFontSize] color:[NSColor labelColor]];
 
-    // Initialize version label
     NSBundle *mainBundle = [NSBundle mainBundle];
     NSString *version = mainBundle.infoDictionary[@"CFBundleShortVersionString"];
-    NSString *buildNumber = mainBundle.infoDictionary[@"CFBundleVersion"];
-    self.versionLabel.stringValue = [NSString stringWithFormat:@"You've got Jeff version %@ (Build %@)", version, buildNumber];
+    NSString *build = mainBundle.infoDictionary[@"CFBundleVersion"];
+    NSString *formattedVersionString = [NSString stringWithFormat:@"%@b%@", version, build];
+    NSString *openSourceCreditsHTML = [NSString stringWithFormat:NSLocalizedString(@"PreferencesOpenSourceCreditsFormatHTML", @"A format string that needs the version string of the app in the format %d.%db%d"), formattedVersionString];
+    [self setupTextView:self.openSourceCreditTextView withHTMLString:openSourceCreditsHTML fontSize:[NSFont smallSystemFontSize] color:[NSColor secondaryLabelColor]];
+
+    // Initialize version label
+    self.versionLabel.stringValue = [NSString stringWithFormat:@"You've got Jeff version %@ (Build %@)", version, build];
 }
 
 
@@ -143,8 +146,7 @@
 
 #pragma mark Private
 
-- (void)setupTextView:(NSTextView *)view withHTMLStringWithKey:(NSString *)key fontSize:(CGFloat)fontSize color:(NSColor *)color {
-    NSString *htmlString = NSLocalizedString(key, @"The HTML string to parse as an attributed string");
+- (void)setupTextView:(NSTextView *)view withHTMLString:(NSString *)htmlString fontSize:(CGFloat)fontSize color:(NSColor *)color {
     NSData *htmlData = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableAttributedString *attributedCredits = [[NSMutableAttributedString alloc] initWithHTML:htmlData documentAttributes:NULL];
     NSDictionary *attributes = @{ NSFontAttributeName : [NSFont systemFontOfSize:fontSize], NSForegroundColorAttributeName: color };
