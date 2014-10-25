@@ -117,6 +117,11 @@
 *  @param completion Completion block that could be called on any thread
 */
 - (void)fetchPublicURLForRecording:(JEFRecording *)recording completion:(void (^)(NSURL *url))completion {
+    if (!recording) {
+        if (completion) completion(nil);
+        return;
+    }
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         DBError *error;
         NSString *link = [[DBFilesystem sharedFilesystem] fetchShareLinkForPath:recording.path shorten:NO error:&error];
@@ -152,6 +157,7 @@
     publishedNotification.title = NSLocalizedString(@"GIFSharedSuccessNotificationTitle", @"The title for the message that the recording was shared");
     publishedNotification.informativeText = NSLocalizedString(@"GIFPasteboardNotificationBody", nil);
     publishedNotification.contentImage = recording.posterFrameImage;
+    publishedNotification.identifier = recording.path.stringValue;
     [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:publishedNotification];
 }
 
@@ -188,6 +194,17 @@
 
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification {
     return YES;
+}
+
+- (void)userNotificationCenter:(NSUserNotificationCenter *)center didActivateNotification:(NSUserNotification *)notification {
+    NSString *path = notification.identifier;
+    NSPredicate *recordingWithPathPredicate = [NSPredicate predicateWithFormat:@"path.stringValue == %@", path];
+    JEFRecording *recording = [self.recordings filteredArrayUsingPredicate:recordingWithPathPredicate].firstObject;
+    if (!recording) return;
+
+    [self fetchPublicURLForRecording:recording completion:^(NSURL *url) {
+        [[NSWorkspace sharedWorkspace] openURL:url];
+    }];
 }
 
 @end
