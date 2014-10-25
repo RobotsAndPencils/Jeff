@@ -68,7 +68,7 @@
     NSString *version = mainBundle.infoDictionary[@"CFBundleShortVersionString"];
     NSString *build = mainBundle.infoDictionary[@"CFBundleVersion"];
 
-    self.versionLabel.stringValue = [NSString stringWithFormat:@"You've got version %@ (Build %@)", version, build];
+    self.versionLabel.stringValue = [NSString stringWithFormat:NSLocalizedString(@"UserFacingVersionStringFormat", @"A string that takes the version and build number as strings to show to the user"), version, build];
 }
 
 

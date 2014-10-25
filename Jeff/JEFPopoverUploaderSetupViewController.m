@@ -34,7 +34,7 @@
     NSBundle *mainBundle = [NSBundle mainBundle];
     NSString *version = mainBundle.infoDictionary[@"CFBundleShortVersionString"];
     NSString *buildNumber = mainBundle.infoDictionary[@"CFBundleVersion"];
-    self.versionLabel.stringValue = [NSString stringWithFormat:@"You've got Jeff version %@ (Build %@)", version, buildNumber];
+    self.versionLabel.stringValue = [NSString stringWithFormat:NSLocalizedString(@"UserFacingVersionStringFormat", @"A string that takes the version and build number as strings to show to the user"), version, buildNumber];
 }
 
 - (void)viewDidAppear {
