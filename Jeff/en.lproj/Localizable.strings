@@ -19,3 +19,5 @@
 "RecordingsTableViewEmptyStateSelectionShortcutFormat" = "You can also press %@ to record a selection.";
 "RecordingsTableViewEmptyStateScreenShortcutFormat" = "You can also press %@ to record the whole screen.";
 "RecordingsTableViewEmptyStateBothShortcutsFormat" = "You can also press %@ to record a selection or %@ for the whole screen.";
+
+"UserFacingVersionStringFormat" = "You've got version %@ (Build %@)";
