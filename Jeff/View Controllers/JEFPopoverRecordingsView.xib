@@ -257,7 +257,7 @@
     </objects>
     <resources>
         <image name="500x500" width="500" height="500"/>
-        <image name="CopyLinkButton" width="16" height="16"/>
+        <image name="CopyLinkButton" width="22" height="22"/>
         <image name="Delete" width="16" height="16"/>
         <image name="NSShareTemplate" width="11" height="16"/>
     </resources>
