@@ -43,6 +43,7 @@
 		CA8B297419F0BE3A00351C9E /* Dropbox.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAC40811199C391900833FAB /* Dropbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CAA79EAC192A725800A4299F /* JEFQuartzRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA79EAB192A725800A4299F /* JEFQuartzRecorder.m */; };
 		CAB110D4192C6C61000A04C0 /* NSEvent+MouseClamped.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB110D3192C6C61000A04C0 /* NSEvent+MouseClamped.m */; };
+		CAB5E84D19FCA3CF00849330 /* NSSharingService+ActivityType.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB5E84C19FCA3CF00849330 /* NSSharingService+ActivityType.m */; };
 		CAB77D4D19E5E2CF0049B6D8 /* JEFAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB77D4C19E5E2CF0049B6D8 /* JEFAppController.m */; };
 		CAC40812199C391900833FAB /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC40811199C391900833FAB /* Dropbox.framework */; };
 		CAC40813199C4CEA00833FAB /* Dropbox.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = CAC40811199C391900833FAB /* Dropbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -187,6 +188,8 @@
 		CAA79EAB192A725800A4299F /* JEFQuartzRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFQuartzRecorder.m; path = Recorders/JEFQuartzRecorder.m; sourceTree = "<group>"; };
 		CAB110D2192C6C61000A04C0 /* NSEvent+MouseClamped.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSEvent+MouseClamped.h"; path = "Categories/NSEvent+MouseClamped.h"; sourceTree = "<group>"; };
 		CAB110D3192C6C61000A04C0 /* NSEvent+MouseClamped.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSEvent+MouseClamped.m"; path = "Categories/NSEvent+MouseClamped.m"; sourceTree = "<group>"; };
+		CAB5E84B19FCA3CF00849330 /* NSSharingService+ActivityType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSSharingService+ActivityType.h"; path = "Categories/NSSharingService+ActivityType.h"; sourceTree = "<group>"; };
+		CAB5E84C19FCA3CF00849330 /* NSSharingService+ActivityType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSSharingService+ActivityType.m"; path = "Categories/NSSharingService+ActivityType.m"; sourceTree = "<group>"; };
 		CAB77D4B19E5E2CF0049B6D8 /* JEFAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFAppController.h; sourceTree = "<group>"; };
 		CAB77D4C19E5E2CF0049B6D8 /* JEFAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFAppController.m; sourceTree = "<group>"; };
 		CAC40811199C391900833FAB /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = Jeff/Frameworks/Dropbox.framework; sourceTree = "<group>"; };
@@ -374,6 +377,7 @@
 				CAF30B4F18D3E31D00D7BC9D /* Views */,
 				CAA79EAD192A725D00A4299F /* Recorders */,
 				83593406A410EF88B08D5442 /* Uploaders */,
+				83593B9212B387F97DA9E104 /* Libraries */,
 				CA455B3D18B83EB900F9A541 /* JEFAppDelegate.h */,
 				CA455B3E18B83EB900F9A541 /* JEFAppDelegate.m */,
 				CAB77D4B19E5E2CF0049B6D8 /* JEFAppController.h */,
@@ -385,7 +389,6 @@
 				CA54FCED196E2DF4000C46CC /* Constants.m */,
 				CA455B4318B83EBA00F9A541 /* Images.xcassets */,
 				CA455B3218B83EB900F9A541 /* Supporting Files */,
-				83593B9212B387F97DA9E104 /* Libraries */,
 			);
 			path = Jeff;
 			sourceTree = "<group>";
@@ -438,6 +441,8 @@
 				CAB110D3192C6C61000A04C0 /* NSEvent+MouseClamped.m */,
 				CAC7AC1419F5784600F44010 /* NSColor+Darken.h */,
 				CAC7AC1519F5784600F44010 /* NSColor+Darken.m */,
+				CAB5E84B19FCA3CF00849330 /* NSSharingService+ActivityType.h */,
+				CAB5E84C19FCA3CF00849330 /* NSSharingService+ActivityType.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -801,6 +806,7 @@
 				CADF57B418C6F432006512E3 /* JEFRecording.m in Sources */,
 				CA455B7718B84ED200F9A541 /* JEFConverter.m in Sources */,
 				CAA79EAC192A725800A4299F /* JEFQuartzRecorder.m in Sources */,
+				CAB5E84D19FCA3CF00849330 /* NSSharingService+ActivityType.m in Sources */,
 				CAF3913119F565BD009D5D9A /* JEFColoredButtonCell.m in Sources */,
 				CA7A1D991991E9FF008DA733 /* JEFCreditsTextView.m in Sources */,
 				CA455B7B18B882DB00F9A541 /* NSFileManager+Temporary.m in Sources */,

@@ -21,3 +21,5 @@
 "RecordingsTableViewEmptyStateBothShortcutsFormat" = "You can also press %@ to record a selection or %@ for the whole screen.";
 
 "UserFacingVersionStringFormat" = "You've got version %@ (Build %@)";
+
+"TwitterByline" = "Recorded by @jefftheapp";

@@ -19,6 +19,8 @@
 #import "JEFRecordingCellView.h"
 #import "Constants.h"
 #import "RBKCommonUtils.h"
+#import "NSFileManager+Temporary.h"
+#import "NSSharingService+ActivityType.h"
 
 static void *PopoverContentViewControllerContext = &PopoverContentViewControllerContext;
 
@@ -121,7 +123,11 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
     [self.recordingsManager fetchPublicURLForRecording:recording completion:^(NSURL *url) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSSharingServicePicker *sharePicker = [[NSSharingServicePicker alloc] initWithItems:@[ [url absoluteString] ]];
+            NSString *path = [[NSFileManager defaultManager] jef_createTemporaryFileWithExtension:@"gif"];
+            [recording.data writeToFile:path atomically:YES];
+            NSURL *temporaryFileURL = [NSURL URLWithString:[@"file://" stringByAppendingString:path]];
+
+            NSSharingServicePicker *sharePicker = [[NSSharingServicePicker alloc] initWithItems:@[ url, temporaryFileURL ]];
             sharePicker.delegate = self;
             [sharePicker showRelativeToRect:button.bounds ofView:button preferredEdge:NSMinYEdge];
         });
@@ -277,14 +283,34 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (NSArray *)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker sharingServicesForItems:(NSArray *)items proposedSharingServices:(NSArray *)proposedServices {
     NSMutableArray *services = [proposedServices mutableCopy];
-    NSString *urlString = items[0];
+    NSURL *url = items[0];
+
     NSSharingService *markdownURLService = [[NSSharingService alloc] initWithTitle:@"Copy Markdown" image:[NSImage imageNamed:@"MarkdownMark"] alternateImage:[NSImage imageNamed:@"MarkdownMark"] handler:^{
         NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
         [pasteboard clearContents];
-        [pasteboard setString:[NSString stringWithFormat:@"![A GIF by Jeff](%@)", urlString] forType:NSStringPboardType];
+        [pasteboard setString:[NSString stringWithFormat:@"![](%@)", url.absoluteString] forType:NSStringPboardType];
         [self displayCopiedUserNotification];
     }];
     [services addObject:markdownURLService];
+
+    // The Twitter share service doesn't normally support animated GIFs and instead turns it into a still JPEG in the tweet
+    // This replaces the stock Twitter share functionality by sharing the direct url and a byline instead of the image data
+    NSSharingService *twitterService = [NSSharingService sharingServiceNamed:NSSharingServiceNamePostOnTwitter];
+    NSArray *twitterShareItems = @[ url, NSLocalizedString(@"TwitterByline", "Recorded by @jefftheapp") ];
+    if ([twitterService canPerformWithItems:twitterShareItems]) {
+        NSSharingService *twitterURLService = [[NSSharingService alloc] initWithTitle:twitterService.title image:twitterService.image alternateImage:twitterService.alternateImage handler:^{
+            [twitterService performWithItems:twitterShareItems];
+        }];
+
+        NSSharingService *existingTwitterService = [services filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"jef_activityType == %@", @"com.apple.share.Twitter.post"]].firstObject;
+        if (existingTwitterService) {
+            [services replaceObjectAtIndex:[services indexOfObject:existingTwitterService] withObject:twitterURLService];
+        }
+        else {
+            [services addObject:twitterURLService];
+        }
+    }
+
     return services;
 }
 
