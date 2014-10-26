@@ -23,24 +23,13 @@
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cv6-7q-eI0">
-                    <rect key="frame" x="6" y="356" width="136" height="32"/>
+                    <rect key="frame" x="95" y="390" width="136" height="32"/>
                     <buttonCell key="cell" type="push" title="Unlink Dropbox" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0kx-by-kCD">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
                         <action selector="toggleLinkDropbox:" target="-2" id="4Up-zq-jWc"/>
-                    </connections>
-                </button>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="5VW-Vw-VWb">
-                    <rect key="frame" x="10" y="402" width="143" height="18"/>
-                    <buttonCell key="cell" type="check" title="Launch Jeff at login" bezelStyle="regularSquare" imagePosition="left" inset="2" id="BJ5-Yv-KiW">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="toggleLaunchAtLogin:" target="-2" id="eKW-sC-yoJ"/>
-                        <binding destination="EZ0-Sx-so2" name="value" keyPath="startAtLogin" id="EpA-Zs-cBf"/>
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A1q-ak-pz7">
@@ -52,7 +41,7 @@
                     </textFieldCell>
                 </textField>
                 <box autoresizesSubviews="NO" title="Shortcuts" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="jrp-Yj-84y">
-                    <rect key="frame" x="9" y="208" width="307" height="85"/>
+                    <rect key="frame" x="9" y="222" width="307" height="85"/>
                     <view key="contentView">
                         <rect key="frame" x="1" y="1" width="305" height="69"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -117,15 +106,15 @@
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QDP-oW-vRd">
-                    <rect key="frame" x="10" y="313" width="305" height="42"/>
-                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Unlinking Dropbox won't delete any of your GIFs, but you'll need to link your account again to see them in Jeff." id="hic-qX-iAU">
+                    <rect key="frame" x="6" y="361" width="313" height="28"/>
+                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="center" title="Unlinking Dropbox won't delete any of your GIFs, but you'll need to link your account again to see them in Jeff." id="hic-qX-iAU">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Ky-Kb-Irl">
-                    <rect key="frame" x="246" y="17" width="25" height="25"/>
+                    <rect key="frame" x="242" y="17" width="25" height="25"/>
                     <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5Ff-K6-tPM">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -135,7 +124,7 @@
                     </connections>
                 </button>
                 <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9GO-j4-2p9">
-                    <rect key="frame" x="277" y="18" width="40" height="25"/>
+                    <rect key="frame" x="273" y="18" width="40" height="25"/>
                     <buttonCell key="cell" type="roundTextured" title="Quit" bezelStyle="texturedRounded" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="n4m-90-Xt5">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -145,7 +134,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M2x-Cq-sIp">
-                    <rect key="frame" x="12" y="72" width="301" height="22"/>
+                    <rect key="frame" x="12" y="72" width="66" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="Jjj-dh-F6i"/>
                     </constraints>
@@ -171,39 +160,48 @@
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QRU-pJ-JOW">
-                    <rect key="frame" x="12" y="98" width="280" height="17"/>
+                    <rect key="frame" x="23" y="98" width="280" height="17"/>
                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Jeff is made with love by Robots and Pencils" id="2BU-NO-cpo">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="5VW-Vw-VWb">
+                    <rect key="frame" x="10" y="325" width="143" height="18"/>
+                    <buttonCell key="cell" type="check" title="Launch Jeff at login" bezelStyle="regularSquare" imagePosition="left" inset="2" id="BJ5-Yv-KiW">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="toggleLaunchAtLogin:" target="-2" id="eKW-sC-yoJ"/>
+                        <binding destination="EZ0-Sx-so2" name="value" keyPath="startAtLogin" id="EpA-Zs-cBf"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="A1q-ak-pz7" secondAttribute="bottom" constant="24" id="57q-jm-Ui8"/>
                 <constraint firstItem="QDP-oW-vRd" firstAttribute="top" secondItem="cv6-7q-eI0" secondAttribute="bottom" constant="8" id="6A0-TJ-YEF"/>
-                <constraint firstAttribute="trailing" secondItem="QDP-oW-vRd" secondAttribute="trailing" constant="12" id="CN7-cp-jBZ"/>
-                <constraint firstItem="cv6-7q-eI0" firstAttribute="leading" secondItem="QDP-oW-vRd" secondAttribute="leading" id="EYK-NW-Hy6"/>
+                <constraint firstAttribute="centerX" secondItem="cv6-7q-eI0" secondAttribute="centerX" id="9Sc-ER-0PB"/>
+                <constraint firstAttribute="trailing" secondItem="QDP-oW-vRd" secondAttribute="trailing" constant="8" id="CN7-cp-jBZ"/>
+                <constraint firstItem="5VW-Vw-VWb" firstAttribute="leading" secondItem="wzT-7z-QAM" secondAttribute="leading" constant="12" id="Drq-kU-T9T"/>
+                <constraint firstItem="jrp-Yj-84y" firstAttribute="leading" secondItem="5VW-Vw-VWb" secondAttribute="leading" id="F8C-kj-Zjq"/>
                 <constraint firstItem="A1q-ak-pz7" firstAttribute="centerY" secondItem="9GO-j4-2p9" secondAttribute="centerY" id="FkI-WD-1ir"/>
-                <constraint firstItem="5VW-Vw-VWb" firstAttribute="leading" secondItem="wzT-7z-QAM" secondAttribute="leading" constant="12" id="JH8-Jx-tea"/>
-                <constraint firstItem="A1q-ak-pz7" firstAttribute="leading" secondItem="wzT-7z-QAM" secondAttribute="leading" constant="14" id="Jcq-LZ-wAM"/>
-                <constraint firstAttribute="trailing" secondItem="M2x-Cq-sIp" secondAttribute="trailing" constant="12" id="JhG-Ac-zbB"/>
+                <constraint firstItem="9GO-j4-2p9" firstAttribute="trailing" secondItem="m6v-vx-ix3" secondAttribute="trailing" id="Hr2-7R-d7A"/>
                 <constraint firstItem="9GO-j4-2p9" firstAttribute="leading" secondItem="5Ky-Kb-Irl" secondAttribute="trailing" constant="8" id="LDg-4c-xTG"/>
                 <constraint firstItem="jrp-Yj-84y" firstAttribute="leading" secondItem="M2x-Cq-sIp" secondAttribute="leading" id="LFK-6q-Vjx"/>
-                <constraint firstAttribute="trailing" secondItem="m6v-vx-ix3" secondAttribute="trailing" constant="12" id="ME8-8E-r39"/>
-                <constraint firstItem="cv6-7q-eI0" firstAttribute="top" secondItem="5VW-Vw-VWb" secondAttribute="bottom" constant="20" id="SLA-Rk-iGq"/>
-                <constraint firstAttribute="trailing" secondItem="9GO-j4-2p9" secondAttribute="trailing" constant="8" id="T9B-XI-vIw"/>
+                <constraint firstItem="cv6-7q-eI0" firstAttribute="top" secondItem="wzT-7z-QAM" secondAttribute="top" constant="82" id="MEY-ZB-MRt"/>
+                <constraint firstItem="jrp-Yj-84y" firstAttribute="top" secondItem="5VW-Vw-VWb" secondAttribute="bottom" constant="20" id="NIw-j8-eaU"/>
+                <constraint firstAttribute="centerX" secondItem="QRU-pJ-JOW" secondAttribute="centerX" id="Omg-xW-VfX"/>
+                <constraint firstItem="QDP-oW-vRd" firstAttribute="leading" secondItem="wzT-7z-QAM" secondAttribute="leading" constant="8" id="RkG-OB-jh6"/>
+                <constraint firstAttribute="trailing" secondItem="9GO-j4-2p9" secondAttribute="trailing" constant="12" id="T9B-XI-vIw"/>
                 <constraint firstItem="M2x-Cq-sIp" firstAttribute="top" secondItem="QRU-pJ-JOW" secondAttribute="bottom" constant="4" id="WLT-9v-ndh"/>
-                <constraint firstItem="5VW-Vw-VWb" firstAttribute="top" secondItem="wzT-7z-QAM" secondAttribute="top" constant="82" id="WWf-6M-TLN"/>
-                <constraint firstItem="jrp-Yj-84y" firstAttribute="top" secondItem="QDP-oW-vRd" secondAttribute="bottom" constant="20" id="aIi-lQ-Bx8"/>
-                <constraint firstItem="QRU-pJ-JOW" firstAttribute="leading" secondItem="jrp-Yj-84y" secondAttribute="leading" constant="2" id="bDj-VB-SkU"/>
+                <constraint firstItem="xjK-i4-kgn" firstAttribute="leading" secondItem="A1q-ak-pz7" secondAttribute="leading" constant="-2" id="db9-D4-bko"/>
                 <constraint firstItem="m6v-vx-ix3" firstAttribute="centerY" secondItem="M2x-Cq-sIp" secondAttribute="centerY" id="eCh-mN-ZTr"/>
-                <constraint firstItem="cv6-7q-eI0" firstAttribute="leading" secondItem="5VW-Vw-VWb" secondAttribute="leading" id="h6X-R5-uWa"/>
+                <constraint firstItem="5VW-Vw-VWb" firstAttribute="top" secondItem="QDP-oW-vRd" secondAttribute="bottom" constant="20" id="hu7-yF-bZT"/>
                 <constraint firstItem="xjK-i4-kgn" firstAttribute="leading" secondItem="M2x-Cq-sIp" secondAttribute="leading" id="lUv-9J-bD7"/>
                 <constraint firstItem="QRU-pJ-JOW" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jrp-Yj-84y" secondAttribute="bottom" constant="40" id="nCf-wV-sIm"/>
-                <constraint firstItem="jrp-Yj-84y" firstAttribute="leading" secondItem="cv6-7q-eI0" secondAttribute="leading" id="qsu-ej-va3"/>
                 <constraint firstAttribute="trailing" secondItem="jrp-Yj-84y" secondAttribute="trailing" constant="12" id="rCU-aK-gcW"/>
-                <constraint firstItem="xjK-i4-kgn" firstAttribute="leading" secondItem="wzT-7z-QAM" secondAttribute="leading" constant="12" id="sMW-Ho-dI2"/>
                 <constraint firstItem="xjK-i4-kgn" firstAttribute="top" secondItem="M2x-Cq-sIp" secondAttribute="bottom" constant="12" id="yl8-Xu-GXO"/>
                 <constraint firstItem="A1q-ak-pz7" firstAttribute="top" secondItem="xjK-i4-kgn" secondAttribute="bottom" id="z38-LV-pCx"/>
                 <constraint firstItem="5Ky-Kb-Irl" firstAttribute="centerY" secondItem="9GO-j4-2p9" secondAttribute="centerY" id="zVC-hP-MIu"/>
