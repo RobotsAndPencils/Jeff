@@ -359,13 +359,17 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 }
 
 - (void)hideInstructions {
-    [NSAnimationContext currentContext].duration = 0.1;
-    self.infoContainer.animator.alphaValue = 0.0;
+    POPBasicAnimation *hideInstructionsAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
+    hideInstructionsAnimation.duration = 0.1;
+    hideInstructionsAnimation.toValue = @0;
+    [self.infoContainer.layer pop_addAnimation:hideInstructionsAnimation forKey:@"opacity"];
 }
 
 - (void)showRecordButton {
-    [NSAnimationContext currentContext].duration = 0.1;
-    self.confirmRectButton.animator.alphaValue = 1.0;
+    POPBasicAnimation *showRecordButtonAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
+    showRecordButtonAnimation.duration = 0.1;
+    showRecordButtonAnimation.toValue = @1;
+    [self.confirmRectButton.layer pop_addAnimation:showRecordButtonAnimation forKey:@"opacity"];
 }
 
 - (void)switchRecordToStopButtonState:(BOOL)stop {
@@ -385,6 +389,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 
     // We're not going to animate the layer, but cornerRadius is the key to the animateable property (pre-defined struct) we want
     POPBasicAnimation *recordButtonCornerRadiusAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerCornerRadius];
+    recordButtonCornerRadiusAnimation.duration = 0.2;
     recordButtonCornerRadiusAnimation.toValue = stop ? @(5) : @(CGRectGetHeight(self.confirmRectButton.frame) / 2.0);
     [self.confirmRectButton pop_addAnimation:recordButtonCornerRadiusAnimation forKey:@"cornerRadius"];
 
@@ -414,11 +419,13 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     }];
     POPBasicAnimation *recordButtonSizeAnimation = [POPBasicAnimation animation];
     recordButtonSizeAnimation.property = viewSizeAnimatableProperty;
+    recordButtonSizeAnimation.duration = 0.2;
     recordButtonSizeAnimation.toValue = stop ? [NSValue valueWithSize:CGSizeMake(60, 32)] : [NSValue valueWithSize:CGSizeMake(100, 32)];
     [self.confirmRectButton pop_addAnimation:recordButtonSizeAnimation forKey:@"size"];
 
     POPBasicAnimation *recordButtonOriginAnimation = [POPBasicAnimation animation];
     recordButtonOriginAnimation.property = viewOriginAnimatableProperty;
+    recordButtonOriginAnimation.duration = 0.2;
     CGPoint origin = CGPointZero;
     if (stop) {
         origin = CGPointMake(CGRectGetMinX(self.confirmRectButton.frame) + 20, CGRectGetMinY(self.confirmRectButton.frame));
