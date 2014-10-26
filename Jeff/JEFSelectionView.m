@@ -114,6 +114,18 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
     return self;
 }
 
+- (void)viewDidMoveToSuperview {
+    if (!self.superview) return;
+
+    [super viewDidMoveToSuperview];
+    self.overlayLayer.opacity = 0;
+
+    POPBasicAnimation *opacityAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
+    opacityAnimation.duration = 0.3;
+    opacityAnimation.toValue = @1;
+    [self.overlayLayer pop_addAnimation:opacityAnimation forKey:@"opacity"];
+}
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
