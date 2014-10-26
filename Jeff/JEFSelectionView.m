@@ -89,7 +89,7 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
         [_infoContainer addSubview:infoTextField];
 
         _overlayLayer = [CAShapeLayer layer];
-        _overlayLayer.fillColor = [NSColor colorWithCalibratedWhite:0.5 alpha:0.5].CGColor;
+        _overlayLayer.fillColor = [NSColor colorWithCalibratedWhite:0.0 alpha:0.5].CGColor;
         [self.layer addSublayer:_overlayLayer];
         [self updateOverlayPath];
 
