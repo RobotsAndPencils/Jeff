@@ -149,7 +149,12 @@ typedef NS_ENUM(NSInteger, JEFHandleIndex) {
 }
 
 - (void)cancelOperation:(id)sender {
-    [self.delegate selectionViewDidCancel:self];
+    if (self.hasConfirmedSelection) {
+        [self stopRecording:nil];
+    }
+    else {
+        [self.delegate selectionViewDidCancel:self];
+    }
 }
 
 - (void)keyDown:(NSEvent *)theEvent {
