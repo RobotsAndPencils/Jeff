@@ -92,7 +92,7 @@
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </box>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m6v-vx-ix3">
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m6v-vx-ix3" customClass="JEFHoverStateButton">
                     <rect key="frame" x="129" y="72" width="184" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="dsJ-V5-u5V"/>
@@ -101,6 +101,14 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
                     </buttonCell>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleHoverColor">
+                            <color key="value" red="0.16862745100000001" green="0.4941176471" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleDownColor">
+                            <color key="value" red="0.074445635080000003" green="0.19282802939999999" blue="0.45213723179999998" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="sendEmail:" target="-2" id="OjK-EP-4a8"/>
                     </connections>
@@ -133,7 +141,7 @@
                         <action selector="quit:" target="-2" id="LSf-xF-skp"/>
                     </connections>
                 </button>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M2x-Cq-sIp">
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M2x-Cq-sIp" customClass="JEFHoverStateButton">
                     <rect key="frame" x="12" y="72" width="66" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="Jjj-dh-F6i"/>
@@ -142,11 +150,19 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
                     </buttonCell>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleHoverColor">
+                            <color key="value" red="0.16862745100000001" green="0.4941176471" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleDownColor">
+                            <color key="value" red="0.074445635080000003" green="0.19282802939999999" blue="0.45213723179999998" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="sendTweet:" target="-2" id="g7g-uB-4OI"/>
                     </connections>
                 </button>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="xjK-i4-kgn">
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="xjK-i4-kgn" customClass="JEFHoverStateButton">
                     <rect key="frame" x="12" y="38" width="180" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="SX2-DD-oxr"/>
@@ -155,6 +171,14 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
                     </buttonCell>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleHoverColor">
+                            <color key="value" red="0.16862745100000001" green="0.4941176471" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleDownColor">
+                            <color key="value" red="0.074445635080000003" green="0.19282802939999999" blue="0.45213723179999998" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="openOpenSourceAcknowledgements:" target="-2" id="nzI-jU-cIC"/>
                     </connections>
