@@ -43,6 +43,7 @@
 		CA8B297419F0BE3A00351C9E /* Dropbox.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAC40811199C391900833FAB /* Dropbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CAA79EAC192A725800A4299F /* JEFQuartzRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA79EAB192A725800A4299F /* JEFQuartzRecorder.m */; };
 		CAB110D4192C6C61000A04C0 /* NSEvent+MouseClamped.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB110D3192C6C61000A04C0 /* NSEvent+MouseClamped.m */; };
+		CAB45FD619FEB171002BC029 /* JEFHoverStateButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB45FD519FEB171002BC029 /* JEFHoverStateButton.m */; };
 		CAB5E84D19FCA3CF00849330 /* NSSharingService+ActivityType.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB5E84C19FCA3CF00849330 /* NSSharingService+ActivityType.m */; };
 		CAB77D4D19E5E2CF0049B6D8 /* JEFAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB77D4C19E5E2CF0049B6D8 /* JEFAppController.m */; };
 		CAC40812199C391900833FAB /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC40811199C391900833FAB /* Dropbox.framework */; };
@@ -188,6 +189,8 @@
 		CAA79EAB192A725800A4299F /* JEFQuartzRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFQuartzRecorder.m; path = Recorders/JEFQuartzRecorder.m; sourceTree = "<group>"; };
 		CAB110D2192C6C61000A04C0 /* NSEvent+MouseClamped.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSEvent+MouseClamped.h"; path = "Categories/NSEvent+MouseClamped.h"; sourceTree = "<group>"; };
 		CAB110D3192C6C61000A04C0 /* NSEvent+MouseClamped.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSEvent+MouseClamped.m"; path = "Categories/NSEvent+MouseClamped.m"; sourceTree = "<group>"; };
+		CAB45FD419FEB171002BC029 /* JEFHoverStateButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFHoverStateButton.h; path = Views/JEFHoverStateButton.h; sourceTree = "<group>"; };
+		CAB45FD519FEB171002BC029 /* JEFHoverStateButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFHoverStateButton.m; path = Views/JEFHoverStateButton.m; sourceTree = "<group>"; };
 		CAB5E84B19FCA3CF00849330 /* NSSharingService+ActivityType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSSharingService+ActivityType.h"; path = "Categories/NSSharingService+ActivityType.h"; sourceTree = "<group>"; };
 		CAB5E84C19FCA3CF00849330 /* NSSharingService+ActivityType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSSharingService+ActivityType.m"; path = "Categories/NSSharingService+ActivityType.m"; sourceTree = "<group>"; };
 		CAB77D4B19E5E2CF0049B6D8 /* JEFAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFAppController.h; sourceTree = "<group>"; };
@@ -589,6 +592,8 @@
 				CA7A1D981991E9FF008DA733 /* JEFCreditsTextView.m */,
 				CAF3913419F566F4009D5D9A /* JEFColoredButton.h */,
 				CAF3913519F566F4009D5D9A /* JEFColoredButton.m */,
+				CAB45FD419FEB171002BC029 /* JEFHoverStateButton.h */,
+				CAB45FD519FEB171002BC029 /* JEFHoverStateButton.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -802,6 +807,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAB45FD619FEB171002BC029 /* JEFHoverStateButton.m in Sources */,
 				CA875EFC18B9974C009FC997 /* JEFSelectionView.m in Sources */,
 				CADF57B418C6F432006512E3 /* JEFRecording.m in Sources */,
 				CA455B7718B84ED200F9A541 /* JEFConverter.m in Sources */,
