@@ -30,6 +30,7 @@
 		CA455B7B18B882DB00F9A541 /* NSFileManager+Temporary.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B7A18B882DB00F9A541 /* NSFileManager+Temporary.m */; };
 		CA4BB84819F0B52A00CA04FB /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC40811199C391900833FAB /* Dropbox.framework */; };
 		CA4D988418D6D2A900EFE4FD /* JEFRecordingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4D988318D6D2A900EFE4FD /* JEFRecordingCellView.m */; };
+		CA54D2B819FECF6800BCF468 /* JEFMouseEventButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CA54D2B719FECF6800BCF468 /* JEFMouseEventButton.m */; };
 		CA54FCEE196E2DF4000C46CC /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = CA54FCED196E2DF4000C46CC /* Constants.m */; };
 		CA571B1C1936E371005E9C46 /* JEFSelectionOverlayWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = CA571B1B1936E371005E9C46 /* JEFSelectionOverlayWindow.m */; };
 		CA677E9E19F613C90087000A /* JEFUploaderPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA677E9D19F613C90087000A /* JEFUploaderPreferencesView.xib */; };
@@ -169,6 +170,8 @@
 		CA455B7A18B882DB00F9A541 /* NSFileManager+Temporary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileManager+Temporary.m"; path = "Categories/NSFileManager+Temporary.m"; sourceTree = "<group>"; };
 		CA4D988218D6D2A900EFE4FD /* JEFRecordingCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecordingCellView.h; path = Views/JEFRecordingCellView.h; sourceTree = "<group>"; };
 		CA4D988318D6D2A900EFE4FD /* JEFRecordingCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFRecordingCellView.m; path = Views/JEFRecordingCellView.m; sourceTree = "<group>"; };
+		CA54D2B619FECF6800BCF468 /* JEFMouseEventButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFMouseEventButton.h; path = Views/JEFMouseEventButton.h; sourceTree = "<group>"; };
+		CA54D2B719FECF6800BCF468 /* JEFMouseEventButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFMouseEventButton.m; path = Views/JEFMouseEventButton.m; sourceTree = "<group>"; };
 		CA54FCEA196E2B50000C46CC /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		CA54FCED196E2DF4000C46CC /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		CA571B1A1936E371005E9C46 /* JEFSelectionOverlayWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFSelectionOverlayWindow.h; path = Windows/JEFSelectionOverlayWindow.h; sourceTree = "<group>"; };
@@ -594,6 +597,8 @@
 				CAF3913519F566F4009D5D9A /* JEFColoredButton.m */,
 				CAB45FD419FEB171002BC029 /* JEFHoverStateButton.h */,
 				CAB45FD519FEB171002BC029 /* JEFHoverStateButton.m */,
+				CA54D2B619FECF6800BCF468 /* JEFMouseEventButton.h */,
+				CA54D2B719FECF6800BCF468 /* JEFMouseEventButton.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -819,6 +824,7 @@
 				CA6E31B019E4D45E00C4B906 /* Mixpanel.m in Sources */,
 				CAC8D92919FC5A27007BD04F /* RBLTableView.m in Sources */,
 				CA455B3F18B83EB900F9A541 /* JEFAppDelegate.m in Sources */,
+				CA54D2B819FECF6800BCF468 /* JEFMouseEventButton.m in Sources */,
 				CAF30B6218D5281100D7BC9D /* INPopoverParentWindow.m in Sources */,
 				CAF30B6318D5281100D7BC9D /* INPopoverWindow.m in Sources */,
 				CAF30B4518D3D76F00D7BC9D /* JEFUploaderPreferencesViewController.m in Sources */,

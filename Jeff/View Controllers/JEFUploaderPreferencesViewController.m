@@ -14,7 +14,7 @@
 #import <MASShortcut/MASShortcutView+UserDefaults.h>
 #import "Mixpanel.h"
 #import "Constants.h"
-
+#import "JEFMouseEventButton.h"
 
 @interface JEFUploaderPreferencesViewController ()
 
@@ -26,6 +26,7 @@
 @property (nonatomic, weak) IBOutlet NSButton *emailButton;
 @property (nonatomic, weak) IBOutlet NSButton *tweetButton;
 @property (nonatomic, weak) IBOutlet NSTextField *dropboxLinkExplanationLabel;
+@property (nonatomic, weak) IBOutlet JEFMouseEventButton *robotsAndPencilsButton;
 
 @end
 
@@ -42,6 +43,17 @@
     }];
     [self updateLinkButton];
     [self updateLinkExplanationLabel];
+
+    self.robotsAndPencilsButton.mouseEnterHandler = ^(JEFMouseEventButton *button, NSEvent *theEvent) {
+        if (button.isEnabled) {
+            [[NSCursor pointingHandCursor] push];
+        }
+    };
+    self.robotsAndPencilsButton.mouseExitHandler = ^(JEFMouseEventButton *button, NSEvent *theEvent) {
+        if (button.isEnabled) {
+            [NSCursor pop];
+        }
+    };
 
     // Initialize MASShortcut views
     self.recordScreenShortcutView.associatedUserDefaultsKey = JEFRecordScreenShortcutKey;
@@ -148,6 +160,10 @@
 
 - (IBAction)showFAQ:(id)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://robotsandpencils.com/jeff#faq"]];
+}
+
+- (IBAction)openRobotsAndPencilsHomepage:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://robotsandpencils.com"]];
 }
 
 #pragma mark Private
