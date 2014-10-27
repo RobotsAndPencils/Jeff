@@ -47,11 +47,17 @@
 - (void)mouseEntered:(NSEvent *)theEvent {
     [super mouseEntered:theEvent];
     [self updateTitleColor:self.titleHoverColor];
+    if (self.isEnabled) {
+        [[NSCursor pointingHandCursor] push];
+    }
 }
 
 - (void)mouseExited:(NSEvent *)theEvent {
     [super mouseExited:theEvent];
     [self updateTitleColor:self.titleColor];
+    if (self.isEnabled) {
+        [NSCursor pop];
+    }
 }
 
 - (void)mouseDown:(NSEvent *)theEvent {
@@ -62,6 +68,9 @@
 - (void)mouseUp:(NSEvent *)theEvent {
     [self updateTitleColor:self.titleColor];
     [super mouseUp:theEvent];
+    if (self.isEnabled) {
+        [NSCursor pop];
+    }
 }
 
 #pragma mark - Private
