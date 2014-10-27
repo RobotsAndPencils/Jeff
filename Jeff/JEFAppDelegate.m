@@ -87,8 +87,8 @@
 
 - (void)registerDefaults {
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"selectedUploader": @(JEFUploaderTypeDropbox),
-                                                               JEFRecordScreenShortcutKey: [MASShortcut shortcutWithKeyCode:kVK_ANSI_5 modifierFlags:NSCommandKeyMask | NSShiftKeyMask].data,
-                                                               JEFRecordSelectionShortcutKey: [MASShortcut shortcutWithKeyCode:kVK_ANSI_6 modifierFlags:NSCommandKeyMask | NSShiftKeyMask].data
+                                                               JEFRecordScreenShortcutKey: [MASShortcut shortcutWithKeyCode:kVK_ANSI_6 modifierFlags:NSCommandKeyMask | NSShiftKeyMask].data,
+                                                               JEFRecordSelectionShortcutKey: [MASShortcut shortcutWithKeyCode:kVK_ANSI_5 modifierFlags:NSCommandKeyMask | NSShiftKeyMask].data
                                                                }];
 }
 
