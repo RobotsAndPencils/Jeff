@@ -21,16 +21,6 @@
                             <visualEffectView wantsLayer="YES" appearanceType="vibrantLight" blendingMode="withinWindow" material="titlebar" state="followsWindowActiveState" maskImage="RecordingsHeaderMask" translatesAutoresizingMaskIntoConstraints="NO" id="M8f-DG-79k" userLabel="Header Container View">
                                 <rect key="frame" x="0.0" y="438" width="325" height="62"/>
                                 <subviews>
-                                    <button wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fat-ca-lbR" userLabel="Quit Button">
-                                        <rect key="frame" x="8" y="17" width="30" height="17"/>
-                                        <buttonCell key="cell" type="bevel" title="Quit" bezelStyle="regularSquare" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="ofr-6m-ocm">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="quit:" target="czx-q9-v5M" id="Cci-NB-n5n"/>
-                                        </connections>
-                                    </button>
                                     <button wantsLayer="YES" verticalHuggingPriority="750" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="z9i-Az-Oxc" userLabel="Back Button">
                                         <rect key="frame" x="38" y="13" width="25" height="25"/>
                                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="Back Chevron" imagePosition="only" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="z1L-tS-FCY">
@@ -41,10 +31,6 @@
                                             <action selector="hidePreferencesMenu:" target="czx-q9-v5M" id="CIh-l6-z7g"/>
                                         </connections>
                                     </button>
-                                    <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="peH-Y4-Nbb" userLabel="Left Button Separator">
-                                        <rect key="frame" x="46" y="0.0" width="1" height="48"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="PopoverButtonSeperator" id="zpa-xC-0ir"/>
-                                    </imageView>
                                     <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="5f0-mj-EWi">
                                         <rect key="frame" x="149" y="17" width="27" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" title="Jeff" id="Lwo-z8-7IZ">
@@ -74,12 +60,11 @@
                                             <action selector="recordSelection:" target="czx-q9-v5M" id="gbt-jA-jqd"/>
                                         </connections>
                                     </button>
-                                    <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hNM-Ou-Xat" userLabel="Right Button Separator">
-                                        <rect key="frame" x="278" y="0.0" width="1" height="48"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="PopoverButtonSeperator" id="5V3-4l-vht"/>
-                                    </imageView>
                                     <button wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HFB-N6-MP2" userLabel="Preferences Button">
                                         <rect key="frame" x="287" y="18" width="30" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="dSg-c6-npk"/>
+                                        </constraints>
                                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="NSActionTemplate" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="WlW-JJ-qrc">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -92,21 +77,14 @@
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="5f0-mj-EWi" secondAttribute="centerX" id="12x-66-HJ2"/>
                                     <constraint firstAttribute="centerY" secondItem="z9i-Az-Oxc" secondAttribute="centerY" constant="-6" id="8Jr-ux-LHh"/>
-                                    <constraint firstAttribute="centerY" secondItem="fat-ca-lbR" secondAttribute="centerY" constant="-6" id="BwS-yf-GM9"/>
                                     <constraint firstAttribute="centerY" secondItem="Uuo-KH-W1L" secondAttribute="centerY" constant="-6" id="Hc6-hP-jME"/>
                                     <constraint firstAttribute="height" constant="62" id="NBd-5m-yv9"/>
-                                    <constraint firstItem="peH-Y4-Nbb" firstAttribute="leading" secondItem="fat-ca-lbR" secondAttribute="trailing" constant="8" id="Ph3-8H-DdH"/>
-                                    <constraint firstAttribute="bottom" secondItem="hNM-Ou-Xat" secondAttribute="bottom" id="Py5-G2-5Sp"/>
                                     <constraint firstAttribute="centerY" secondItem="HFB-N6-MP2" secondAttribute="centerY" constant="-6" id="ZnW-8V-KJY"/>
-                                    <constraint firstItem="fat-ca-lbR" firstAttribute="leading" secondItem="M8f-DG-79k" secondAttribute="leading" constant="8" id="drF-JP-SMh"/>
                                     <constraint firstAttribute="trailing" secondItem="HFB-N6-MP2" secondAttribute="trailing" constant="8" id="j7s-bQ-gCF"/>
                                     <constraint firstItem="z9i-Az-Oxc" firstAttribute="leading" secondItem="M8f-DG-79k" secondAttribute="leading" constant="38" id="jBT-e8-cAY"/>
                                     <constraint firstAttribute="centerX" secondItem="QCX-5M-k3c" secondAttribute="centerX" id="k9Q-tb-l1x"/>
-                                    <constraint firstAttribute="bottom" secondItem="peH-Y4-Nbb" secondAttribute="bottom" id="kRu-8i-aOd"/>
                                     <constraint firstAttribute="centerY" secondItem="QCX-5M-k3c" secondAttribute="centerY" constant="-6" id="lJu-bW-SlA"/>
-                                    <constraint firstItem="HFB-N6-MP2" firstAttribute="width" secondItem="fat-ca-lbR" secondAttribute="width" id="mGN-wb-Bjc"/>
                                     <constraint firstAttribute="centerY" secondItem="5f0-mj-EWi" secondAttribute="centerY" constant="-6" id="rDE-Kb-1XZ"/>
-                                    <constraint firstItem="HFB-N6-MP2" firstAttribute="leading" secondItem="hNM-Ou-Xat" secondAttribute="trailing" constant="8" id="sbj-YF-MVu"/>
                                     <constraint firstAttribute="centerX" secondItem="Uuo-KH-W1L" secondAttribute="centerX" constant="-100" id="yxx-E1-tcG"/>
                                 </constraints>
                             </visualEffectView>
@@ -127,13 +105,10 @@
                         <outlet property="contentContainerView" destination="OJS-DN-gfc" id="5Zk-Ia-FHy"/>
                         <outlet property="headerContainerView" destination="M8f-DG-79k" id="dsa-JU-mKN"/>
                         <outlet property="jeffLabel" destination="5f0-mj-EWi" id="HTj-tl-NLw"/>
-                        <outlet property="leftButtonSeparator" destination="peH-Y4-Nbb" id="7RP-fD-MC2"/>
                         <outlet property="preferencesButton" destination="HFB-N6-MP2" id="rLP-QQ-PYO"/>
                         <outlet property="preferencesLabel" destination="Uuo-KH-W1L" id="Jk9-cF-QRW"/>
                         <outlet property="preferencesLabelCenterXConstraint" destination="yxx-E1-tcG" id="F2A-Aa-QY2"/>
-                        <outlet property="quitButton" destination="fat-ca-lbR" id="9A4-ww-jLn"/>
                         <outlet property="recordSelectionButton" destination="QCX-5M-k3c" id="ytb-fm-pmA"/>
-                        <outlet property="rightButtonSeparatorImageView" destination="hNM-Ou-Xat" id="Yea-tx-1Rd"/>
                         <outlet property="view" destination="ZcF-bW-QvF" id="eQX-90-OI9"/>
                     </connections>
                 </viewController>
@@ -145,7 +120,6 @@
     <resources>
         <image name="Back Chevron" width="25" height="25"/>
         <image name="NSActionTemplate" width="14" height="14"/>
-        <image name="PopoverButtonSeperator" width="1" height="48"/>
         <image name="Record" width="16" height="16"/>
         <image name="RecordingsHeaderMask" width="325" height="62"/>
     </resources>

@@ -11,6 +11,7 @@
 #import "JEFAppController.h"
 #import "JEFRecordingsManager.h"
 #import <Dropbox/DBAccountManager.h>
+#import <libextobjc/EXTKeyPathCoding.h>
 
 NSString *const JEFOpenPopoverNotification = @"JEFOpenPopoverNotification";
 NSString *const JEFClosePopoverNotification = @"JEFClosePopoverNotification";
@@ -25,6 +26,7 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
 @property (strong, nonatomic) INPopoverController *popover;
 @property (strong, nonatomic) id popoverTransiencyMonitor;
 @property (strong, nonatomic) NSMutableArray *observers;
+@property (strong, nonatomic) JEFRecordingsManager *recordingsManager;
 
 @end
 
@@ -35,6 +37,7 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
     if (!self) return nil;
 
     _observers = [NSMutableArray array];
+    _recordingsManager = [[JEFRecordingsManager alloc] init];
 
     [self setupStatusItem];
     [self setupPopover];
@@ -52,6 +55,8 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
     [self.observers addObject:[[NSNotificationCenter defaultCenter] addObserverForName:JEFSetStatusViewRecordingNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         [weakSelf setStatusItemActionRecord:YES];
     }]];
+
+    [self.recordingsManager addObserver:self forKeyPath:@keypath(self.recordingsManager, totalUploadProgress.fractionCompleted) options:0 context:NULL];
 
     // If Dropbox isn't set up yet, prompt the user by displaying the popover
     BOOL dropboxLinked = ([DBAccountManager sharedManager].linkedAccount != nil);
@@ -71,9 +76,20 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
     }
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (self.recordingsManager.totalUploadProgress) {
+        // Images are sequenced 1-31
+        NSInteger imageNumber = (NSInteger)floor(self.recordingsManager.totalUploadProgress.fractionCompleted * 30.0) + 1;
+        self.statusItem.button.image = [NSImage imageNamed:[NSString stringWithFormat:@"jeff_menu_ic_uploading_%ld", imageNumber]];
+    }
+    else {
+        [self setStatusItemActionRecord:YES];
+    }
+}
+
 - (void)setupStatusItem {
     self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
-    self.statusItem.button.image = [NSImage imageNamed:@"StatusItemTemplate"];
+    self.statusItem.button.image = [NSImage imageNamed:@"Menu Bar Normal Icon"];
     self.statusItem.button.target = self;
     [self setStatusItemActionRecord:YES];
 }
@@ -81,7 +97,7 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
 - (void)setupPopover {
     self.popover = [[INPopoverController alloc] init];
     JEFPopoverContentViewController *popoverController = [[NSStoryboard storyboardWithName:@"JEFPopoverStoryboard" bundle:nil] instantiateInitialController];
-    popoverController.recordingsManager = [[JEFRecordingsManager alloc] init];
+    popoverController.recordingsManager = self.recordingsManager;
     self.popover.contentViewController = popoverController;
     self.popover.animates = NO;
     self.popover.closesWhenApplicationBecomesInactive = YES;
@@ -120,11 +136,11 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
 
 - (void)setStatusItemActionRecord:(BOOL)record {
     if (record) {
-        self.statusItem.button.image = [NSImage imageNamed:@"StatusItemTemplate"];
+        self.statusItem.button.image = [NSImage imageNamed:@"Menu Bar Normal Icon"];
         self.statusItem.button.action = @selector(showPopover:);
     }
     else {
-        self.statusItem.button.image = [NSImage imageNamed:NSImageNameStopProgressTemplate];
+        self.statusItem.button.image = [NSImage imageNamed:@"Menu Bar Stop Icon"];
         self.statusItem.button.action = @selector(stopRecording:);
     }
 }
