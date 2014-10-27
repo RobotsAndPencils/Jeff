@@ -41,21 +41,27 @@
                     </textFieldCell>
                 </textField>
                 <box autoresizesSubviews="NO" title="Shortcuts" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="jrp-Yj-84y">
-                    <rect key="frame" x="9" y="222" width="307" height="85"/>
+                    <rect key="frame" x="9" y="220" width="307" height="87"/>
                     <view key="contentView">
-                        <rect key="frame" x="1" y="1" width="305" height="69"/>
+                        <rect key="frame" x="1" y="1" width="305" height="71"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vDZ-4U-VVc">
-                                <rect key="frame" x="16" y="41" width="96" height="17"/>
+                                <rect key="frame" x="16" y="16" width="96" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Record Screen" id="Qmb-gd-2jG">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="Rzu-ZG-ibH" customClass="MASShortcutView">
+                                <rect key="frame" x="132" y="12" width="151" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="gWO-AG-3Ov"/>
+                                </constraints>
+                            </customView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="U5d-eI-dCG">
-                                <rect key="frame" x="16" y="16" width="110" height="17"/>
+                                <rect key="frame" x="16" y="43" width="110" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Record Selection" id="1Nl-Ra-jdM">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -63,29 +69,23 @@
                                 </textFieldCell>
                             </textField>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="mT5-FQ-Xyi" customClass="MASShortcutView">
-                                <rect key="frame" x="132" y="11" width="151" height="25"/>
+                                <rect key="frame" x="132" y="39" width="151" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="FY1-Fv-3p4"/>
-                                </constraints>
-                            </customView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="Rzu-ZG-ibH" customClass="MASShortcutView">
-                                <rect key="frame" x="132" y="37" width="151" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="gWO-AG-3Ov"/>
                                 </constraints>
                             </customView>
                         </subviews>
                     </view>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="U5d-eI-dCG" secondAttribute="bottom" constant="13" id="0V0-xU-Ryq"/>
                         <constraint firstAttribute="trailing" secondItem="Rzu-ZG-ibH" secondAttribute="trailing" constant="20" id="2tI-jZ-vBB"/>
+                        <constraint firstItem="U5d-eI-dCG" firstAttribute="top" secondItem="jrp-Yj-84y" secondAttribute="top" constant="26" id="Dzt-2w-9Nc"/>
                         <constraint firstItem="vDZ-4U-VVc" firstAttribute="leading" secondItem="jrp-Yj-84y" secondAttribute="leading" constant="16" id="FYb-Ok-46n"/>
                         <constraint firstItem="mT5-FQ-Xyi" firstAttribute="leading" secondItem="U5d-eI-dCG" secondAttribute="trailing" constant="8" id="HRJ-uL-A9w"/>
                         <constraint firstItem="Rzu-ZG-ibH" firstAttribute="leading" secondItem="vDZ-4U-VVc" secondAttribute="trailing" constant="22" id="JXo-et-2id"/>
                         <constraint firstItem="Rzu-ZG-ibH" firstAttribute="centerY" secondItem="vDZ-4U-VVc" secondAttribute="centerY" id="L3M-ku-icT"/>
-                        <constraint firstItem="U5d-eI-dCG" firstAttribute="top" secondItem="vDZ-4U-VVc" secondAttribute="bottom" constant="8" id="VxW-ZC-Hic"/>
-                        <constraint firstItem="U5d-eI-dCG" firstAttribute="centerY" secondItem="mT5-FQ-Xyi" secondAttribute="centerY" constant="-1" id="Xnr-BT-k3Y"/>
-                        <constraint firstItem="vDZ-4U-VVc" firstAttribute="top" secondItem="jrp-Yj-84y" secondAttribute="top" constant="26" id="lZE-je-5Pj"/>
+                        <constraint firstItem="U5d-eI-dCG" firstAttribute="centerY" secondItem="mT5-FQ-Xyi" secondAttribute="centerY" id="Xnr-BT-k3Y"/>
+                        <constraint firstItem="vDZ-4U-VVc" firstAttribute="top" secondItem="U5d-eI-dCG" secondAttribute="bottom" constant="10" id="aRd-eQ-8NQ"/>
+                        <constraint firstAttribute="bottom" secondItem="vDZ-4U-VVc" secondAttribute="bottom" constant="13" id="jYb-Jo-ofD"/>
                         <constraint firstItem="Rzu-ZG-ibH" firstAttribute="width" secondItem="mT5-FQ-Xyi" secondAttribute="width" id="my1-XH-Y5A"/>
                         <constraint firstItem="U5d-eI-dCG" firstAttribute="leading" secondItem="jrp-Yj-84y" secondAttribute="leading" constant="16" id="pUZ-V9-4UK"/>
                     </constraints>
