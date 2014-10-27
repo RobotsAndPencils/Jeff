@@ -9,6 +9,7 @@
 
 @property (nonatomic, strong, readonly) NSArray *recordings;
 @property (nonatomic, assign, readonly) BOOL isDoingInitialSync;
+@property (nonatomic, strong, readonly) NSProgress *totalUploadProgress;
 
 - (void)setupDropboxFilesystem;
 

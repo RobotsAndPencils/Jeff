@@ -39,10 +39,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 
 // Header Outlets
 @property (weak, nonatomic) IBOutlet NSVisualEffectView *headerContainerView;
-@property (weak, nonatomic) IBOutlet NSButton *quitButton;
 @property (weak, nonatomic) IBOutlet JEFColoredButton *recordSelectionButton;
-@property (weak, nonatomic) IBOutlet NSImageView *rightButtonSeparatorImageView;
-@property (weak, nonatomic) IBOutlet NSImageView *leftButtonSeparator;
 @property (weak, nonatomic) IBOutlet NSButton *preferencesButton;
 @property (weak, nonatomic) IBOutlet NSButton *backButton;
 @property (weak, nonatomic) IBOutlet NSTextField *preferencesLabel;
@@ -184,18 +181,15 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 }
 
 - (void)updatePreferencesHeaderState:(JEFPopoverContent)popoverContent immediately:(BOOL)immediately {
-    POPBasicAnimation *quitOpacityAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
     POPBasicAnimation *recordOpacityAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
     POPBasicAnimation *backPositionXAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayoutConstraintConstant];
     POPBasicAnimation *preferencesLabelPositionXAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayoutConstraintConstant];
     POPBasicAnimation *backOpacityAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
     POPBasicAnimation *preferencesLabelOpacityAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
-    POPBasicAnimation *rightButtonSeparatorOpacityAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
     POPBasicAnimation *preferencesButtonOpacityAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
-    POPBasicAnimation *leftButtonSeparatorOpacityAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
     POPBasicAnimation *jeffLabelOpacityAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
 
-    NSArray *animations = @[ quitOpacityAnimation, recordOpacityAnimation, backPositionXAnimation, preferencesLabelPositionXAnimation, backOpacityAnimation, preferencesLabelOpacityAnimation, rightButtonSeparatorOpacityAnimation, preferencesButtonOpacityAnimation, leftButtonSeparatorOpacityAnimation, jeffLabelOpacityAnimation ];
+    NSArray *animations = @[ recordOpacityAnimation, backPositionXAnimation, preferencesLabelPositionXAnimation, backOpacityAnimation, preferencesLabelOpacityAnimation, preferencesButtonOpacityAnimation, jeffLabelOpacityAnimation ];
 
     if (immediately) {
         for (POPBasicAnimation *animation in animations) {
@@ -205,69 +199,54 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 
     switch (popoverContent) {
         case JEFPopoverContentSetup:
-            quitOpacityAnimation.toValue = @0;
             recordOpacityAnimation.toValue = @0;
             backPositionXAnimation.toValue = @38;
             preferencesLabelPositionXAnimation.toValue = @(-CGRectGetWidth(self.view.frame) / 2.0 - CGRectGetWidth(self.preferencesLabel.frame) / 2.0);
             backOpacityAnimation.toValue = @0;
             preferencesLabelOpacityAnimation.toValue = @0;
-            rightButtonSeparatorOpacityAnimation.toValue = @0;
             preferencesButtonOpacityAnimation.toValue = @0;
-            leftButtonSeparatorOpacityAnimation.toValue = @0;
             jeffLabelOpacityAnimation.toValue = @1;
             break;
         case JEFPopoverContentRecordings:
-            quitOpacityAnimation.toValue = @0;
             recordOpacityAnimation.toValue = @1;
             backPositionXAnimation.toValue = @38;
             preferencesLabelPositionXAnimation.toValue = @(-CGRectGetWidth(self.view.frame) / 2.0 - CGRectGetWidth(self.preferencesLabel.frame) / 2.0);
             backOpacityAnimation.toValue = @0;
             preferencesLabelOpacityAnimation.toValue = @0;
-            rightButtonSeparatorOpacityAnimation.toValue = @0;
             preferencesButtonOpacityAnimation.toValue = @1;
-            leftButtonSeparatorOpacityAnimation.toValue = @0;
             jeffLabelOpacityAnimation.toValue = @0;
             break;
         case JEFPopoverContentPreferences:
-            quitOpacityAnimation.toValue = @0;
             recordOpacityAnimation.toValue = @0;
             backPositionXAnimation.toValue = @8;
             preferencesLabelPositionXAnimation.toValue = @0;
             backOpacityAnimation.toValue = @1;
             preferencesLabelOpacityAnimation.toValue = @1;
-            rightButtonSeparatorOpacityAnimation.toValue = @0;
             preferencesButtonOpacityAnimation.toValue = @0;
-            leftButtonSeparatorOpacityAnimation.toValue = @0;
             jeffLabelOpacityAnimation.toValue = @0;
             break;
     }
 
-    [self.quitButton.layer pop_addAnimation:quitOpacityAnimation forKey:@"opacity"];
     [self.recordSelectionButton.layer pop_addAnimation:recordOpacityAnimation forKey:@"opacity"];
     [self.backButtonCenterXConstraint pop_addAnimation:backPositionXAnimation forKey:@"positionX"];
     [self.preferencesLabelCenterXConstraint pop_addAnimation:preferencesLabelPositionXAnimation forKey:@"positionX"];
     [self.backButton.layer pop_addAnimation:backOpacityAnimation forKey:@"opacity"];
     [self.preferencesLabel.layer pop_addAnimation:preferencesLabelOpacityAnimation forKey:@"opacity"];
-    [self.rightButtonSeparatorImageView.layer pop_addAnimation:rightButtonSeparatorOpacityAnimation forKey:@"opacity"];
     [self.preferencesButton.layer pop_addAnimation:preferencesButtonOpacityAnimation forKey:@"opacity"];
-    [self.leftButtonSeparator.layer pop_addAnimation:leftButtonSeparatorOpacityAnimation forKey:@"opacity"];
     [self.jeffLabel.layer pop_addAnimation:jeffLabelOpacityAnimation forKey:@"opacity"];
 
     switch (popoverContent) {
         case JEFPopoverContentSetup:
-            self.quitButton.enabled = NO;
             self.recordSelectionButton.enabled = YES;
             self.preferencesButton.enabled = YES;
             self.backButton.enabled = NO;
             break;
         case JEFPopoverContentRecordings:
-            self.quitButton.enabled = NO;
             self.recordSelectionButton.enabled = YES;
             self.preferencesButton.enabled = YES;
             self.backButton.enabled = NO;
             break;
         case JEFPopoverContentPreferences:
-            self.quitButton.enabled = NO;
             self.recordSelectionButton.enabled = NO;
             self.preferencesButton.enabled = NO;
             self.backButton.enabled = YES;
