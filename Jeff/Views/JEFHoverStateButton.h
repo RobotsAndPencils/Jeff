@@ -6,7 +6,9 @@
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-@interface JEFHoverStateButton : NSButton
+#import "JEFMouseEventButton.h"
+
+@interface JEFHoverStateButton : JEFMouseEventButton
 
 @property (nonatomic, strong) NSColor *titleColor;
 @property (nonatomic, strong) NSColor *titleHoverColor;

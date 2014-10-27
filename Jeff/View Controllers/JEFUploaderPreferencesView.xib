@@ -11,6 +11,7 @@
                 <outlet property="linkButton" destination="cv6-7q-eI0" id="EnA-T7-Y4f"/>
                 <outlet property="recordScreenShortcutView" destination="Rzu-ZG-ibH" id="Lso-h4-Oqe"/>
                 <outlet property="recordSelectionShortcutView" destination="mT5-FQ-Xyi" id="33r-4P-Nft"/>
+                <outlet property="robotsAndPencilsButton" destination="NtL-B4-vTQ" id="CMZ-4y-230"/>
                 <outlet property="tweetButton" destination="M2x-Cq-sIp" id="2yd-oZ-X8c"/>
                 <outlet property="versionLabel" destination="A1q-ak-pz7" id="pok-bM-MVe"/>
                 <outlet property="view" destination="wzT-7z-QAM" id="WHs-Zx-cLl"/>
@@ -202,8 +203,19 @@
                         <binding destination="EZ0-Sx-so2" name="value" keyPath="startAtLogin" id="EpA-Zs-cBf"/>
                     </connections>
                 </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="NtL-B4-vTQ" customClass="JEFMouseEventButton">
+                    <rect key="frame" x="100" y="123" width="125" height="73"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="R&amp;P Logo" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="0Ol-yj-EBs">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="openRobotsAndPencilsHomepage:" target="-2" id="s7x-0V-5AB"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
+                <constraint firstAttribute="centerX" secondItem="NtL-B4-vTQ" secondAttribute="centerX" id="0OT-VX-ZUd"/>
                 <constraint firstAttribute="bottom" secondItem="A1q-ak-pz7" secondAttribute="bottom" constant="24" id="57q-jm-Ui8"/>
                 <constraint firstItem="QDP-oW-vRd" firstAttribute="top" secondItem="cv6-7q-eI0" secondAttribute="bottom" constant="8" id="6A0-TJ-YEF"/>
                 <constraint firstAttribute="centerX" secondItem="cv6-7q-eI0" secondAttribute="centerX" id="9Sc-ER-0PB"/>
@@ -223,9 +235,10 @@
                 <constraint firstItem="xjK-i4-kgn" firstAttribute="leading" secondItem="A1q-ak-pz7" secondAttribute="leading" constant="-2" id="db9-D4-bko"/>
                 <constraint firstItem="m6v-vx-ix3" firstAttribute="centerY" secondItem="M2x-Cq-sIp" secondAttribute="centerY" id="eCh-mN-ZTr"/>
                 <constraint firstItem="5VW-Vw-VWb" firstAttribute="top" secondItem="QDP-oW-vRd" secondAttribute="bottom" constant="20" id="hu7-yF-bZT"/>
+                <constraint firstItem="NtL-B4-vTQ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jrp-Yj-84y" secondAttribute="bottom" constant="25" id="l5F-Jx-4IL"/>
                 <constraint firstItem="xjK-i4-kgn" firstAttribute="leading" secondItem="M2x-Cq-sIp" secondAttribute="leading" id="lUv-9J-bD7"/>
-                <constraint firstItem="QRU-pJ-JOW" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jrp-Yj-84y" secondAttribute="bottom" constant="40" id="nCf-wV-sIm"/>
                 <constraint firstAttribute="trailing" secondItem="jrp-Yj-84y" secondAttribute="trailing" constant="12" id="rCU-aK-gcW"/>
+                <constraint firstItem="QRU-pJ-JOW" firstAttribute="top" secondItem="NtL-B4-vTQ" secondAttribute="bottom" constant="8" id="yiL-iV-Y8J"/>
                 <constraint firstItem="xjK-i4-kgn" firstAttribute="top" secondItem="M2x-Cq-sIp" secondAttribute="bottom" constant="12" id="yl8-Xu-GXO"/>
                 <constraint firstItem="A1q-ak-pz7" firstAttribute="top" secondItem="xjK-i4-kgn" secondAttribute="bottom" id="z38-LV-pCx"/>
                 <constraint firstItem="5Ky-Kb-Irl" firstAttribute="centerY" secondItem="9GO-j4-2p9" secondAttribute="centerY" id="zVC-hP-MIu"/>
@@ -238,4 +251,7 @@
             </userDefinedRuntimeAttributes>
         </customObject>
     </objects>
+    <resources>
+        <image name="R&amp;P Logo" width="125" height="73"/>
+    </resources>
 </document>

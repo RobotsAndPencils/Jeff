@@ -8,12 +8,6 @@
 
 #import "JEFHoverStateButton.h"
 
-@interface JEFHoverStateButton ()
-
-@property (nonatomic, strong) NSTrackingArea *hoverTrackingArea;
-
-@end
-
 @implementation JEFHoverStateButton
 
 #pragma mark - Lifecycle
@@ -22,8 +16,8 @@
     self = [super initWithCoder:coder];
     if (!self) return nil;
 
-    [self setupDefaults];
-    [self createTrackingArea];
+    [self setupDefaultColors];
+    [self setupMouseEventHandlers];
 
     return self;
 }
@@ -32,59 +26,44 @@
     self = [super initWithFrame:frameRect];
     if (!self) return nil;
 
-    [self setupDefaults];
-    [self createTrackingArea];
+    [self setupDefaultColors];
+    [self setupMouseEventHandlers];
 
     return self;
 }
 
-- (void)dealloc {
-    [self removeTrackingArea:self.hoverTrackingArea];
-}
-
-#pragma mark - Mouse Events
-
-- (void)mouseEntered:(NSEvent *)theEvent {
-    [super mouseEntered:theEvent];
-    [self updateTitleColor:self.titleHoverColor];
-    if (self.isEnabled) {
-        [[NSCursor pointingHandCursor] push];
-    }
-}
-
-- (void)mouseExited:(NSEvent *)theEvent {
-    [super mouseExited:theEvent];
-    [self updateTitleColor:self.titleColor];
-    if (self.isEnabled) {
-        [NSCursor pop];
-    }
-}
-
-- (void)mouseDown:(NSEvent *)theEvent {
-    [self updateTitleColor:self.titleDownColor];
-    [super mouseDown:theEvent];
-}
-
-- (void)mouseUp:(NSEvent *)theEvent {
-    [self updateTitleColor:self.titleColor];
-    [super mouseUp:theEvent];
-    if (self.isEnabled) {
-        [NSCursor pop];
-    }
-}
-
 #pragma mark - Private
 
-- (void)setupDefaults {
+- (void)setupDefaultColors {
     self.titleColor = [NSColor controlTextColor];
     self.titleHoverColor = [NSColor selectedControlTextColor];
     self.titleDownColor = [NSColor selectedControlTextColor];
 }
 
-- (void)createTrackingArea {
-    NSTrackingAreaOptions focusTrackingAreaOptions = NSTrackingActiveInActiveApp | NSTrackingMouseEnteredAndExited | NSTrackingAssumeInside | NSTrackingInVisibleRect;
-    self.hoverTrackingArea = [[NSTrackingArea alloc] initWithRect:self.bounds options:focusTrackingAreaOptions owner:self userInfo:nil];
-    [self addTrackingArea:self.hoverTrackingArea];
+- (void)setupMouseEventHandlers {
+    __weak __typeof(self) weakSelf = self;
+
+    self.mouseEnterHandler = ^(JEFMouseEventButton *button, NSEvent *theEvent) {
+        [weakSelf updateTitleColor:weakSelf.titleHoverColor];
+        if (button.isEnabled) {
+            [[NSCursor pointingHandCursor] push];
+        }
+    };
+    self.mouseExitHandler = ^(JEFMouseEventButton *button, NSEvent *theEvent) {
+        [weakSelf updateTitleColor:weakSelf.titleColor];
+        if (button.isEnabled) {
+            [NSCursor pop];
+        }
+    };
+    self.mouseDownHandler = ^(JEFMouseEventButton *button, NSEvent *theEvent) {
+        [weakSelf updateTitleColor:weakSelf.titleDownColor];
+    };
+    self.mouseUpHandler = ^(JEFMouseEventButton *button, NSEvent *theEvent) {
+        [weakSelf updateTitleColor:weakSelf.titleColor];
+        if (button.isEnabled) {
+            [NSCursor pop];
+        }
+    };
 }
 
 - (void)updateTitleColor:(NSColor *)color {
