@@ -52,7 +52,7 @@
                                                 <subviews>
                                                     <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="249" verticalCompressionResistancePriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="4It-IS-v7G" userLabel="Preview Image View" customClass="JEFScaleToFillImageView">
                                                         <rect key="frame" x="0.0" y="0.0" width="325" height="200"/>
-                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="500x500" id="3dK-hT-Qdd"/>
+                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="3dK-hT-Qdd"/>
                                                     </imageView>
                                                     <visualEffectView appearanceType="vibrantLight" blendingMode="withinWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="nW7-FR-CwG" userLabel="Info Container Visual Effect View">
                                                         <rect key="frame" x="0.0" y="0.0" width="325" height="30"/>
@@ -256,7 +256,6 @@
         </view>
     </objects>
     <resources>
-        <image name="500x500" width="500" height="500"/>
         <image name="CopyLinkButton" width="22" height="22"/>
         <image name="Delete" width="16" height="16"/>
         <image name="NSShareTemplate" width="11" height="16"/>
