@@ -4,10 +4,15 @@
 //
 
 #import "JEFRecording.h"
+
+#import <tgmath.h>
+#import <libextobjc/EXTKeyPathCoding.h>
+
 #import "JEFRecordingsManager.h"
 #import "JEFDropboxUploader.h"
 #import "RBKCommonUtils.h"
-#import <libextobjc/EXTKeyPathCoding.h>
+
+static void *JEFRecordingsManagerContext = &JEFRecordingsManagerContext;
 
 @interface JEFRecordingsManager () <NSUserNotificationCenterDelegate>
 
@@ -15,6 +20,8 @@
 @property (nonatomic, assign, readwrite) BOOL isDoingInitialSync;
 // In order to prevent a "deep-filter" when loading recordings in loadRecordings triggered by a FS change, we keep track of the file info objects that have been opened in order to prevent the DB SDK spewing errors about trying to open a file more than once. By deep-filter I mean, when we have a fileInfo object we'd like to open, if we didn't keep track of those in a set (for fast membership checks) specifically, then we'd need to iterate over all of the recordings and check equality with their file info objects to see if we should open it.
 @property (nonatomic, strong) NSMutableSet *openRecordingPaths;
+@property (nonatomic, strong, readwrite) NSProgress *totalUploadProgress;
+@property (nonatomic, strong) NSMutableDictionary *recordingUploadProgresses;
 
 @end
 
@@ -27,11 +34,37 @@
     [NSUserNotificationCenter defaultUserNotificationCenter].delegate = self;
     _recordings = @[ ];
     _openRecordingPaths = [NSMutableSet set];
+    _recordingUploadProgresses = [NSMutableDictionary dictionary];
 
     [self setupDropboxFilesystem];
     [self loadRecordings];
 
+    [self addObserver:self forKeyPath:@keypath(self, totalUploadProgress.fractionCompleted) options:0 context:JEFRecordingsManagerContext];
+
     return self;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (context != JEFRecordingsManagerContext) {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        return;
+    }
+
+    if ([keyPath isEqualToString:@keypath(JEFRecording.new, progress)]) {
+        JEFRecording *recording = (JEFRecording *)object;
+        NSProgress *recordingProgress = self.recordingUploadProgresses[recording.path];
+        if (recordingProgress) {
+            recordingProgress.completedUnitCount = (NSInteger)floor(recording.progress * 100.0);
+        }
+    }
+    else if ([keyPath isEqualToString:@keypath(self, totalUploadProgress.fractionCompleted)]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.totalUploadProgress.fractionCompleted == 1.0) {
+                [self.recordingUploadProgresses removeAllObjects];
+                self.totalUploadProgress = nil;
+            }
+        });
+    }
 }
 
 - (void)dealloc {
@@ -72,12 +105,29 @@
         [[self mutableArrayValueForKey:@keypath(self, recordings)] insertObject:recording atIndex:0];
         [self.openRecordingPaths addObject:recording.path.stringValue];
 
+        // Setup upload progress to be tracked overall, including multiple concurrent uploads
+        if (!self.totalUploadProgress) {
+            self.totalUploadProgress = [NSProgress progressWithTotalUnitCount:100];
+        }
+        else {
+            self.totalUploadProgress.totalUnitCount += 100;
+        }
+
+        [self.totalUploadProgress becomeCurrentWithPendingUnitCount:100];
+        // Track double 0.0-1.0 as integer 0-100 work units
+        NSProgress *recordingProgress = [NSProgress progressWithTotalUnitCount:100];
+        [recording addObserver:self forKeyPath:@keypath(recording, progress) options:0 context:JEFRecordingsManagerContext];
+        self.recordingUploadProgresses[recording.path] = recordingProgress;
+        [self.totalUploadProgress resignCurrent];
+
         __weak __typeof(self) weakSelf = self;
         recording.uploadHandler = ^(JEFRecording *uploadedRecording) {
             [weakSelf copyURLStringToPasteboard:uploadedRecording completion:^{
                 [weakSelf displaySharedUserNotificationForRecording:uploadedRecording];
             }];
             if (completion) completion(uploadedRecording);
+            [uploadedRecording removeObserver:self forKeyPath:@keypath(uploadedRecording, progress)];
+            [self.recordingUploadProgresses removeObjectForKey:uploadedRecording.path];
         };
     }];
 }

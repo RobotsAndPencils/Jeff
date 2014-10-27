@@ -1,17 +1,14 @@
 {
   "images" : [
     {
-      "idiom" : "universal"
-    },
-    {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "StatusItemTemplate.png"
+      "filename" : "jeff_menu_ic_uploading_21.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "StatusItemTemplate@2x.png"
+      "filename" : "jeff_menu_ic_uploading_21@2x.png"
     },
     {
       "idiom" : "universal",
