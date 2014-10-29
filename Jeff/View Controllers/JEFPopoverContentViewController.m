@@ -57,7 +57,6 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 
 // Recording
 @property (strong, nonatomic) NSMutableArray *overlayWindows;
-@property (strong, nonatomic) JEFQuartzRecorder *recorder;
 @property (assign, nonatomic, getter=isShowingSelection) BOOL showingSelection;
 @property (strong, nonatomic) id stopRecordingObserver;
 
@@ -71,7 +70,6 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
     [super viewDidLoad];
 
     // Initialize properties
-    self.recorder = [[JEFQuartzRecorder alloc] init];
     self.overlayWindows = [NSMutableArray array];
 
     // Setup observation

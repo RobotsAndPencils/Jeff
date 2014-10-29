@@ -7,9 +7,11 @@
 //
 
 @class JEFRecordingsManager;
+@class JEFQuartzRecorder;
 
 @interface JEFPopoverContentViewController : NSViewController
 
 @property (nonatomic, strong) JEFRecordingsManager *recordingsManager;
+@property (nonatomic, strong) JEFQuartzRecorder *recorder;
 
 @end

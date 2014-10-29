@@ -12,6 +12,7 @@
 #import "JEFRecordingsManager.h"
 #import <Dropbox/DBAccountManager.h>
 #import <libextobjc/EXTKeyPathCoding.h>
+#import "JEFQuartzRecorder.h"
 
 NSString *const JEFOpenPopoverNotification = @"JEFOpenPopoverNotification";
 NSString *const JEFClosePopoverNotification = @"JEFClosePopoverNotification";
@@ -27,6 +28,7 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
 @property (strong, nonatomic) id popoverTransiencyMonitor;
 @property (strong, nonatomic) NSMutableArray *observers;
 @property (strong, nonatomic) JEFRecordingsManager *recordingsManager;
+@property (strong, nonatomic) JEFQuartzRecorder *recorder;
 
 @end
 
@@ -38,6 +40,7 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
 
     _observers = [NSMutableArray array];
     _recordingsManager = [[JEFRecordingsManager alloc] init];
+    _recorder = [[JEFQuartzRecorder alloc] init];
 
     [self setupStatusItem];
     [self setupPopover];
@@ -77,13 +80,13 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if (self.recordingsManager.totalUploadProgress) {
+    if (self.recordingsManager.totalUploadProgress && !self.recorder.isRecording) {
         // Images are sequenced 1-31
         NSInteger imageNumber = (NSInteger)floor(self.recordingsManager.totalUploadProgress.fractionCompleted * 30.0) + 1;
         self.statusItem.button.image = [NSImage imageNamed:[NSString stringWithFormat:@"jeff_menu_ic_uploading_%ld", imageNumber]];
     }
     else {
-        [self setStatusItemActionRecord:YES];
+        [self setStatusItemActionRecord:!self.recorder.isRecording];
     }
 }
 
@@ -97,6 +100,7 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
 - (void)setupPopover {
     self.popover = [[INPopoverController alloc] init];
     JEFPopoverContentViewController *popoverController = [[NSStoryboard storyboardWithName:@"JEFPopoverStoryboard" bundle:nil] instantiateInitialController];
+    popoverController.recorder = self.recorder;
     popoverController.recordingsManager = self.recordingsManager;
     self.popover.contentViewController = popoverController;
     self.popover.animates = NO;
