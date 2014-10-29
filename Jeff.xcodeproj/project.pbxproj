@@ -54,6 +54,7 @@
 		CAC8D92919FC5A27007BD04F /* RBLTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC8D92719FC5A27007BD04F /* RBLTableView.m */; };
 		CADF57B418C6F432006512E3 /* JEFRecording.m in Sources */ = {isa = PBXBuildFile; fileRef = CADF57B318C6F432006512E3 /* JEFRecording.m */; };
 		CAE64D701A02A9B500845E7B /* Auxiliary Binary.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = CAE64D6F1A02A9B500845E7B /* Auxiliary Binary.entitlements */; };
+		CAE64D4E1A014F1900845E7B /* NSMutableArray+JEFSortedInsert.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE64D4D1A014F1900845E7B /* NSMutableArray+JEFSortedInsert.m */; };
 		CAE8F9C61991CBFF00F24D4C /* MIT-License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CAE8F9C31991CBFF00F24D4C /* MIT-License.rtf */; };
 		CAE8F9C71991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE8F9C51991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m */; };
 		CAEC3FB61964D3FA004FDA19 /* JEFPopoverUploaderSetupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAEC3FB51964D3FA004FDA19 /* JEFPopoverUploaderSetupViewController.xib */; };
@@ -215,6 +216,8 @@
 		CADF57B518C70081006512E3 /* Jeff.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Jeff.entitlements; sourceTree = "<group>"; };
 		CAE40E16196F6715002901BD /* JEFRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JEFRecorder.h; path = Recorders/JEFRecorder.h; sourceTree = "<group>"; };
 		CAE64D6F1A02A9B500845E7B /* Auxiliary Binary.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Auxiliary Binary.entitlements"; sourceTree = "<group>"; };
+		CAE64D4C1A014F1900845E7B /* NSMutableArray+JEFSortedInsert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+JEFSortedInsert.h"; path = "Categories/NSMutableArray+JEFSortedInsert.h"; sourceTree = "<group>"; };
+		CAE64D4D1A014F1900845E7B /* NSMutableArray+JEFSortedInsert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+JEFSortedInsert.m"; path = "Categories/NSMutableArray+JEFSortedInsert.m"; sourceTree = "<group>"; };
 		CAE8F9C31991CBFF00F24D4C /* MIT-License.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "MIT-License.rtf"; sourceTree = "<group>"; };
 		CAE8F9C41991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
 		CAE8F9C51991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
@@ -455,6 +458,8 @@
 				CAC7AC1519F5784600F44010 /* NSColor+Darken.m */,
 				CAB5E84B19FCA3CF00849330 /* NSSharingService+ActivityType.h */,
 				CAB5E84C19FCA3CF00849330 /* NSSharingService+ActivityType.m */,
+				CAE64D4C1A014F1900845E7B /* NSMutableArray+JEFSortedInsert.h */,
+				CAE64D4D1A014F1900845E7B /* NSMutableArray+JEFSortedInsert.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -866,6 +871,7 @@
 				CA4D988418D6D2A900EFE4FD /* JEFRecordingCellView.m in Sources */,
 				CAC8D92819FC5A27007BD04F /* RBLScrolling.m in Sources */,
 				CAF30B6418D5281100D7BC9D /* INPopoverWindowFrame.m in Sources */,
+				CAE64D4E1A014F1900845E7B /* NSMutableArray+JEFSortedInsert.m in Sources */,
 				CAF3913619F566F4009D5D9A /* JEFColoredButton.m in Sources */,
 				CAB77D4D19E5E2CF0049B6D8 /* JEFAppController.m in Sources */,
 				CA082AFF1A046377003913AD /* JEFRecordingsTableViewDataSource.m in Sources */,

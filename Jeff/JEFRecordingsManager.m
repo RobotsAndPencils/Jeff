@@ -11,6 +11,7 @@
 #import "JEFRecordingsManager.h"
 #import "JEFDropboxUploader.h"
 #import "RBKCommonUtils.h"
+#import "NSMutableArray+JEFSortedInsert.h"
 
 static void *JEFRecordingsManagerContext = &JEFRecordingsManagerContext;
 
@@ -73,10 +74,10 @@ static void *JEFRecordingsManagerContext = &JEFRecordingsManagerContext;
 
 #pragma mark - JEFRecordingsDataSource
 
-#warning - Naive implementation, this should insert the recording at it's final sorted destination
 - (void)addRecording:(JEFRecording *)recording {
     NSMutableArray *recordings = [self mutableArrayValueForKey:@keypath(self, recordings)];
-    [recordings addObject:recording];
+    NSSortDescriptor *dateDescendingDescriptor = [[NSSortDescriptor alloc] initWithKey:@keypath(JEFRecording.new, createdAt) ascending:NO];
+    [recordings jef_insertObject:recording sortedUsingDescriptors:@[ dateDescendingDescriptor ]];
 }
 
 - (void)removeRecording:(JEFRecording *)recording {
@@ -113,7 +114,7 @@ static void *JEFRecordingsManagerContext = &JEFRecordingsManagerContext;
 
         recording.posterFrameImage = posterFrameImage;
 
-        [[self mutableArrayValueForKey:@keypath(self, recordings)] insertObject:recording atIndex:0];
+        [self addRecording:recording];
         [self.openRecordingPaths addObject:recording.path.stringValue];
 
         // Setup upload progress to be tracked overall, including multiple concurrent uploads
@@ -163,10 +164,6 @@ static void *JEFRecordingsManagerContext = &JEFRecordingsManagerContext;
             [self.openRecordingPaths addObject:fileInfo.path.stringValue];
         }
     }
-
-    NSMutableArray *mutableRecordings = [self mutableArrayValueForKey:@keypath(self, recordings)];
-    NSSortDescriptor *dateDescendingDescriptor = [[NSSortDescriptor alloc] initWithKey:@keypath(JEFRecording.new, createdAt) ascending:NO];
-    [mutableRecordings sortUsingDescriptors:@[ dateDescendingDescriptor ]];
 }
 
 /**
