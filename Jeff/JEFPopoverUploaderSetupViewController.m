@@ -58,6 +58,7 @@
 }
 
 - (IBAction)showSetupHelp:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://robotsandpencils.com/jeff#faq"]];
 }
 
 #pragma mark Private
