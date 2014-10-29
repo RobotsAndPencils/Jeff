@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		427E998F6E1D9AAAC52FA738 /* libPods-JeffTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE16058ADECD7238FD2B58 /* libPods-JeffTests.a */; };
 		8359322E52C5BFFB013B4AC7 /* JEFDropboxUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 835935E41B797539819CFB36 /* JEFDropboxUploader.m */; };
 		8359376F55CC63D6FE3DE740 /* JEFPopoverUploaderSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83593B5EA5926018F6E2110D /* JEFPopoverUploaderSetupViewController.m */; };
 		83593B01FC89BA3C5EC32E7C /* JEFRecordingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83593370A12DC3B1E44F01F4 /* JEFRecordingsManager.m */; };
@@ -258,7 +257,6 @@
 			files = (
 				CA455B4C18B83EBA00F9A541 /* Cocoa.framework in Frameworks */,
 				CA455B4B18B83EBA00F9A541 /* XCTest.framework in Frameworks */,
-				427E998F6E1D9AAAC52FA738 /* libPods-JeffTests.a in Frameworks */,
 				CA4BB84819F0B52A00CA04FB /* Dropbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
