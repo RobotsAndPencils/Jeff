@@ -52,6 +52,7 @@
 		CAC8D92819FC5A27007BD04F /* RBLScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC8D92519FC5A27007BD04F /* RBLScrolling.m */; };
 		CAC8D92919FC5A27007BD04F /* RBLTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC8D92719FC5A27007BD04F /* RBLTableView.m */; };
 		CADF57B418C6F432006512E3 /* JEFRecording.m in Sources */ = {isa = PBXBuildFile; fileRef = CADF57B318C6F432006512E3 /* JEFRecording.m */; };
+		CAE64D701A02A9B500845E7B /* Auxiliary Binary.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = CAE64D6F1A02A9B500845E7B /* Auxiliary Binary.entitlements */; };
 		CAE8F9C61991CBFF00F24D4C /* MIT-License.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CAE8F9C31991CBFF00F24D4C /* MIT-License.rtf */; };
 		CAE8F9C71991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE8F9C51991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m */; };
 		CAEC3FB61964D3FA004FDA19 /* JEFPopoverUploaderSetupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAEC3FB51964D3FA004FDA19 /* JEFPopoverUploaderSetupViewController.xib */; };
@@ -208,6 +209,7 @@
 		CADF57B318C6F432006512E3 /* JEFRecording.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFRecording.m; path = Models/JEFRecording.m; sourceTree = "<group>"; };
 		CADF57B518C70081006512E3 /* Jeff.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Jeff.entitlements; sourceTree = "<group>"; };
 		CAE40E16196F6715002901BD /* JEFRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JEFRecorder.h; path = Recorders/JEFRecorder.h; sourceTree = "<group>"; };
+		CAE64D6F1A02A9B500845E7B /* Auxiliary Binary.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Auxiliary Binary.entitlements"; sourceTree = "<group>"; };
 		CAE8F9C31991CBFF00F24D4C /* MIT-License.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "MIT-License.rtf"; sourceTree = "<group>"; };
 		CAE8F9C41991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
 		CAE8F9C51991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 			isa = PBXGroup;
 			children = (
 				CADF57B518C70081006512E3 /* Jeff.entitlements */,
+				CAE64D6F1A02A9B500845E7B /* Auxiliary Binary.entitlements */,
 				CA571B191936E34D005E9C46 /* Windows */,
 				CAF30B4118D3D73E00D7BC9D /* View Controllers */,
 				CADF57B118C6F3E7006512E3 /* Models */,
@@ -634,6 +637,7 @@
 				CA4C528A18C828CC00C5EAE4 /* Copy Frameworks */,
 				CAB1334D1999B2350099CD56 /* Copy Launcher */,
 				CAF30B4018D3CF4A00D7BC9D /* Sign Launcher */,
+				CAE64D711A02A9F800845E7B /* Add Entitlements to Gifsicle */,
 			);
 			buildRules = (
 			);
@@ -741,6 +745,7 @@
 				CAEC3FB61964D3FA004FDA19 /* JEFPopoverUploaderSetupViewController.xib in Resources */,
 				CA455B4418B83EBA00F9A541 /* Images.xcassets in Resources */,
 				CA455B3C18B83EB900F9A541 /* Credits.rtf in Resources */,
+				CAE64D701A02A9B500845E7B /* Auxiliary Binary.entitlements in Resources */,
 				CA455B4218B83EBA00F9A541 /* MainMenu.xib in Resources */,
 				CA677E9E19F613C90087000A /* JEFUploaderPreferencesView.xib in Resources */,
 				CAE8F9C61991CBFF00F24D4C /* MIT-License.rtf in Resources */,
@@ -788,6 +793,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		CAE64D711A02A9F800845E7B /* Add Entitlements to Gifsicle */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Add Entitlements to Gifsicle";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = "/usr/bin/env ruby";
+			shellScript = "Dir.chdir ENV['BUILT_PRODUCTS_DIR']\n\n# These tools are copied directly to the built products directory in a previous copy files build phase:\ntools = ['gifsicle']\ncert = ENV['CODE_SIGN_IDENTITY']\n\n# The base identifier for the tools:\nidentifier_base = 'com.robotsandpencils.Jeff.tools'\n\n# The path to the auxiliary executable entitlements file:\nentitlements = File.join(ENV['PROJECT_DIR'], 'Jeff', 'Auxiliary Binary.entitlements')\n\ntools.each do |tool|\n    full_path = File.join('Jeff.app/Contents/Resources', tool)\n\n    # The full (new) identifier for the executable:\n    identifier = identifier_base + '.' + tool\n\n    # Use the codesign tool to embed a new signature and entitlements:\n    system('codesign', '--entitlements', entitlements, '-i', identifier, '--force', '-s', cert, full_path)\nend";
 		};
 		CAF30B4018D3CF4A00D7BC9D /* Sign Launcher */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -993,7 +1012,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application: Robots and Pencils Inc. (PBH8V487HB)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Robots and Pencils Inc. (PBH8V487HB)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DROPBOX_CALLBACK_URI = "db-iugqsnjvza6fuub";
 				DROPBOX_KEY = iugqsnjvza6fuub;
@@ -1031,7 +1050,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application: Robots and Pencils Inc. (PBH8V487HB)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Robots and Pencils Inc. (PBH8V487HB)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DROPBOX_CALLBACK_URI = "db-nc3dkk8verxcjg7";
 				DROPBOX_KEY = nc3dkk8verxcjg7;
@@ -1146,7 +1165,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application: Robots and Pencils Inc. (PBH8V487HB)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Robots and Pencils Inc. (PBH8V487HB)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DROPBOX_CALLBACK_URI = "db-iugqsnjvza6fuub";
 				DROPBOX_KEY = iugqsnjvza6fuub;
