@@ -124,6 +124,10 @@
                 RBKLog(@"Error loading thumbnail: %@", openError);
                 return;
             }
+            if (!thumbFile.status.cached) {
+                self.isFetchingPosterFrame = NO;
+                return;
+            }
 
             NSData *thumbData = [thumbFile readData:NULL];
             NSImage *thumbImage = [[NSImage alloc] initWithData:thumbData];

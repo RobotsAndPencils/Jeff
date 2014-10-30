@@ -150,6 +150,10 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     NSButton *button = (NSButton *)sender;
     JEFRecording *recording = ((NSTableCellView *)button.superview.superview).objectValue;
 
+    if (!recording || !recording.path || RBKIsEmpty(recording.path.stringValue)) {
+        return;
+    }
+
     DBError *error;
     BOOL success = [[DBFilesystem sharedFilesystem] deletePath:recording.path error:&error];
     if (!success) {
@@ -197,6 +201,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 }
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+    if (row > self.recordingsManager.recordings.count - 1) return nil;
     return self.recordingsManager.recordings[row];
 }
 
