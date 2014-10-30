@@ -39,6 +39,8 @@
 	<string>${DROPBOX_KEY}</string>
 	<key>Dropbox Secret</key>
 	<string>${DROPBOX_SECRET}</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.productivity</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>LSUIElement</key>
