@@ -99,7 +99,7 @@ static void *JEFRecordingCellViewContext = &JEFRecordingCellViewContext;
         progress = [[object valueForKeyPath:@"objectValue.progress"] floatValue] * 100;
         statusString = [NSString stringWithFormat:@"Uploading: %.0f%%", progress];
     }
-    else if (isFetchingPosterFrame) {
+    else if (isFetchingPosterFrame || !((JEFRecording *)self.objectValue).posterFrameImage) {
         statusString = @"Loading thumbnail...";
     }
 
@@ -116,7 +116,7 @@ static void *JEFRecordingCellViewContext = &JEFRecordingCellViewContext;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.syncStatusContainerView.layer pop_addAnimation:containerOpacityAnimation forKey:@"opacity"];
         self.statusLabel.stringValue = statusString;
-        if (isFetchingPosterFrame) {
+        if (isFetchingPosterFrame || !((JEFRecording *)self.objectValue).posterFrameImage) {
             self.syncStatusLabelVerticalSpaceConstraint.constant = 0;
         }
         else {

@@ -125,17 +125,21 @@
                 return;
             }
             if (!thumbFile.status.cached) {
-                self.isFetchingPosterFrame = NO;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.isFetchingPosterFrame = NO;
+                });
                 return;
             }
 
+
             NSData *thumbData = [thumbFile readData:NULL];
             NSImage *thumbImage = [[NSImage alloc] initWithData:thumbData];
-
             [thumbFile close];
 
-            self.posterFrameImage = thumbImage;
-            self.isFetchingPosterFrame = NO;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.posterFrameImage = thumbImage;
+                self.isFetchingPosterFrame = NO;
+            });
         });
     }
     return _posterFrameImage;
