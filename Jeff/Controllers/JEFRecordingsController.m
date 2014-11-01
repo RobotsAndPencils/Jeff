@@ -121,10 +121,6 @@ static void *JEFRecordingsControllerContext = &JEFRecordingsControllerContext;
     [self.recordingsRepo addRecording:recording];
 }
 
-- (void)syncingService:(id<JEFSyncingService>)syncingService removedRecording:(JEFRecording *)recording {
-    [self.recordingsRepo removeRecording:recording];
-}
-
 #pragma mark - Notifications
 
 - (void)displaySharedUserNotificationForRecording:(NSNotification *)notification {
