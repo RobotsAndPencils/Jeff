@@ -139,6 +139,8 @@
 		83593BB07DFAFBD9106DD41E /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		83593E3E69C23122FB40765D /* JEFUploaderProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFUploaderProtocol.h; path = ../JEFUploaderProtocol.h; sourceTree = "<group>"; };
 		83593F946B55E6E3610A19A4 /* JEFDropboxUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFDropboxUploader.h; sourceTree = "<group>"; };
+		CA082AF91A045DBC003913AD /* JEFRecordingsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecordingsDataSource.h; path = Models/JEFRecordingsDataSource.h; sourceTree = "<group>"; };
+		CA082AFC1A045F5F003913AD /* JEFSyncingService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFSyncingService.h; sourceTree = "<group>"; };
 		CA1F98FF192F0A5F00C3EF33 /* JeffLauncher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JeffLauncher.xcodeproj; path = JeffLauncher/JeffLauncher.xcodeproj; sourceTree = "<group>"; };
 		CA1F990A192F0ACB00C3EF33 /* StartAtLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartAtLoginController.h; sourceTree = "<group>"; };
 		CA1F990B192F0ACB00C3EF33 /* StartAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartAtLoginController.m; sourceTree = "<group>"; };
@@ -546,6 +548,8 @@
 				CADF57B318C6F432006512E3 /* JEFRecording.m */,
 				83593370A12DC3B1E44F01F4 /* JEFRecordingsManager.m */,
 				83593B4EEE534ED769A58AA8 /* JEFRecordingsManager.h */,
+				CA082AF91A045DBC003913AD /* JEFRecordingsDataSource.h */,
+				CA082AFC1A045F5F003913AD /* JEFSyncingService.h */,
 			);
 			name = Models;
 			sourceTree = "<group>";
