@@ -11,3 +11,9 @@ NSString *const JEFRecordSelectionShortcutKey = @"RecordSelectionShortcut";
 
 NSString *const JEFRecordingWasSharedNotification = @"JEFRecordingWasSharedNotification";
 NSString *const JEFSyncingServiceAccountStateChanged = @"JEFSyncingServiceAccountStateChanged";
+NSString *const JEFOpenPopoverNotification = @"JEFOpenPopoverNotification";
+NSString *const JEFClosePopoverNotification = @"JEFClosePopoverNotification";
+NSString *const JEFStartRecordingNotification = @"JEFStartRecordingNotification";
+NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
+NSString *const JEFSetStatusViewNotRecordingNotification = @"JEFSetStatusViewNotRecordingNotification";
+NSString *const JEFSetStatusViewRecordingNotification = @"JEFSetStatusViewRecordingNotification";
