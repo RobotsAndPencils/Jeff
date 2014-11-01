@@ -6,23 +6,21 @@
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-#import "JEFPopoverContentViewController.h"
-#import "INPopoverController.h"
 #import "JEFAppController.h"
-#import "JEFDropboxRepository.h"
+
 #import <Dropbox/DBAccountManager.h>
 #import <libextobjc/EXTKeyPathCoding.h>
+#import "INPopoverController.h"
+
+#import "JEFDropboxRepository.h"
+#import "JEFPopoverContentViewController.h"
 #import "JEFQuartzRecorder.h"
 #import "JEFDropboxService.h"
 #import "JEFRecordingsController.h"
 #import "JEFRecordingsRepository.h"
 #import "JEFDropboxRepository.h"
+#import "Constants.h"
 
-NSString *const JEFOpenPopoverNotification = @"JEFOpenPopoverNotification";
-NSString *const JEFClosePopoverNotification = @"JEFClosePopoverNotification";
-NSString *const JEFSetStatusViewNotRecordingNotification = @"JEFSetStatusViewNotRecordingNotification";
-NSString *const JEFSetStatusViewRecordingNotification = @"JEFSetStatusViewRecordingNotification";
-NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
 CGFloat const JEFPopoverVerticalOffset = -3.0;
 
 @interface JEFAppController ()
