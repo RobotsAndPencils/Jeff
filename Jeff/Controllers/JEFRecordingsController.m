@@ -8,15 +8,20 @@
 
 #import "JEFRecordingsController.h"
 
+#import <libextobjc/EXTKeyPathCoding.h>
+
 #import "JEFRecording.h"
 #import "JEFSyncingService.h"
 #import "JEFRecordingsRepository.h"
 #import "Constants.h"
 
+static void *JEFRecordingsControllerContext = &JEFRecordingsControllerContext;
+
 @interface JEFRecordingsController () <NSUserNotificationCenterDelegate, JEFSyncingServiceDelegate>
 
 @property (nonatomic, strong) id<JEFSyncingService> syncingService;
-@property (nonatomic, strong) id<JEFRecordingsRepository> recordingsRepo;
+@property (nonatomic, strong) NSObject<JEFRecordingsRepository> *recordingsRepo;
+@property (nonatomic, strong, readwrite) NSArray *recordings;
 
 @end
 
@@ -35,18 +40,44 @@
     [NSUserNotificationCenter defaultUserNotificationCenter].delegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displaySharedUserNotificationForRecording:) name:JEFRecordingWasSharedNotification object:nil];
 
+    [self.recordingsRepo addObserver:self forKeyPath:@keypath(self.recordingsRepo, recordings) options:NSKeyValueObservingOptionInitial context:JEFRecordingsControllerContext];
+
     return self;
 }
 
-#pragma mark - Properties
-
-
-- (NSArray *)recordings {
-    return self.recordingsRepo.recordings;
+- (void)dealloc {
+    [self.recordingsRepo removeObserver:self forKeyPath:@"recordings"];
 }
 
-+ (NSSet *)keyPathsForValuesAffectingRecordings {
-    return [NSSet setWithObject:@"recordingsRepo.recordings"];
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (context != JEFRecordingsControllerContext) {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        return;
+    }
+
+    if ([keyPath isEqualToString:@keypath(self.recordingsRepo, recordings)]) {
+        NSKeyValueChange changeKind = [change[NSKeyValueChangeKindKey] integerValue];
+        NSIndexSet *indexes = change[NSKeyValueChangeIndexesKey];
+        switch (changeKind) {
+            case NSKeyValueChangeSetting:
+                self.recordings = [object valueForKeyPath:keyPath];
+                break;
+            case NSKeyValueChangeReplacement: {
+                NSArray *objects = [[object valueForKeyPath:keyPath] objectsAtIndexes:indexes];
+                [[self mutableArrayValueForKey:@"recordings"] replaceObjectsAtIndexes:indexes withObjects:objects];
+                break;
+            }
+            case NSKeyValueChangeInsertion: {
+                NSArray *objects = [[object valueForKeyPath:keyPath] objectsAtIndexes:indexes];
+                [[self mutableArrayValueForKey:@"recordings"] insertObjects:objects atIndexes:indexes];
+                break;
+            }
+            case NSKeyValueChangeRemoval: {
+                [[self mutableArrayValueForKey:@"recordings"] removeObjectsAtIndexes:indexes];
+                break;
+            }
+        }
+    }
 }
 
 #pragma mark - Public
