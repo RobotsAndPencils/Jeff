@@ -3,9 +3,12 @@
 // Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
+#import "JEFRecordingsDataSource.h"
+#import "JEFSyncingService.h"
+
 @class JEFRecording;
 
-@interface JEFRecordingsManager : NSObject
+@interface JEFRecordingsManager : NSObject <JEFRecordingsDataSource, JEFSyncingService>
 
 @property (nonatomic, strong, readonly) NSArray *recordings;
 @property (nonatomic, assign, readonly) BOOL isDoingInitialSync;
