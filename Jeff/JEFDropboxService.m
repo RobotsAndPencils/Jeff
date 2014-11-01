@@ -22,6 +22,7 @@ typedef void (^JEFUploaderCompletionBlock)(BOOL, JEFRecording *, NSError *);
 @property (nonatomic, strong) NSMutableDictionary *recordingUploadProgresses;
 @property (nonatomic, assign, readwrite) BOOL isDoingInitialSync;
 
+
 @end
 
 @implementation JEFDropboxService
@@ -33,7 +34,6 @@ typedef void (^JEFUploaderCompletionBlock)(BOOL, JEFRecording *, NSError *);
     _recordingUploadProgresses = [NSMutableDictionary dictionary];
 
     [self addObserver:self forKeyPath:@keypath(self, totalUploadProgress.fractionCompleted) options:0 context:JEFRecordingsManagerContext];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupDropboxFilesystem) name:JEFSyncingServiceAccountStateChanged object:nil];
 
     return self;
 }
@@ -154,29 +154,6 @@ typedef void (^JEFUploaderCompletionBlock)(BOOL, JEFRecording *, NSError *);
     }];
 }
 
-- (void)loadRecordings {
-    DBFilesystem *sharedFilesystem = [DBFilesystem sharedFilesystem];
-    BOOL isShutdown = sharedFilesystem.isShutDown;
-    BOOL notFinishedSyncing = !sharedFilesystem.completedFirstSync;
-    if (isShutdown || notFinishedSyncing) return;
-
-    DBError *listError;
-    NSArray *files = [sharedFilesystem listFolder:[DBPath root] error:&listError];
-    if (listError) {
-        RBKLog(@"Error listing files: %@", listError);
-        return;
-    }
-    for (DBFileInfo *fileInfo in files) {
-#warning
-//        if ([self.openRecordingPaths containsObject:fileInfo.path.stringValue]) continue;
-        JEFRecording *newRecording = [JEFRecording recordingWithFileInfo:fileInfo];
-        if (newRecording && [self.delegate respondsToSelector:@selector(syncingService:addedRecording:)]) {
-            [self.delegate syncingService:self addedRecording:newRecording];
-        }
-    }
-}
-
-
 #pragma mark Private
 
 - (void)uploadGIF:(NSURL *)url withName:(NSString *)name completion:(JEFUploaderCompletionBlock)completion {
@@ -197,24 +174,6 @@ typedef void (^JEFUploaderCompletionBlock)(BOOL, JEFRecording *, NSError *);
 
     JEFRecording *recording = [JEFRecording recordingWithNewFile:newFile];
     if (completion) completion(YES, recording, nil);
-}
-
-- (void)setupDropboxFilesystem {
-    DBAccount *account = [DBAccountManager sharedManager].linkedAccount;
-    BOOL alreadyHaveFilesystem = [[DBFilesystem sharedFilesystem].account isEqual:account];
-    if (account && !alreadyHaveFilesystem) {
-        DBFilesystem *filesystem = [[DBFilesystem alloc] initWithAccount:account];
-        [DBFilesystem setSharedFilesystem:filesystem];
-    }
-
-    [[DBFilesystem sharedFilesystem] addObserver:self block:^{
-        [self loadRecordings];
-
-        BOOL stateIsSyncing = [DBFilesystem sharedFilesystem].status.download.inProgress;
-#warning
-//        BOOL hasRecordings = self.recordings.count > 0;
-//        self.isDoingInitialSync = stateIsSyncing && !hasRecordings;
-    }];
 }
 
 @end

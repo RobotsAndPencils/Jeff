@@ -29,6 +29,5 @@
 
 @optional
 - (void)syncingService:(id<JEFSyncingService>)syncingService addedRecording:(JEFRecording *)recording;
-- (void)syncingService:(id<JEFSyncingService>)syncingService removedRecording:(JEFRecording *)recording;
 
 @end

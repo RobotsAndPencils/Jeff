@@ -11,6 +11,7 @@
 #import "JEFDropboxRepository.h"
 #import "RBKCommonUtils.h"
 #import "NSMutableArray+JEFSortedInsert.h"
+#import "Constants.h"
 
 
 @interface JEFDropboxRepository ()
@@ -30,6 +31,8 @@
     _recordings = @[ ];
     _openRecordingPaths = [NSMutableSet set];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupDropboxFilesystem) name:JEFSyncingServiceAccountStateChanged object:nil];
+
     return self;
 }
 
@@ -39,6 +42,8 @@
     NSMutableArray *recordings = [self mutableArrayValueForKey:@keypath(self, recordings)];
     NSSortDescriptor *dateDescendingDescriptor = [[NSSortDescriptor alloc] initWithKey:@keypath(JEFRecording.new, createdAt) ascending:NO];
     [recordings jef_insertObject:recording sortedUsingDescriptors:@[ dateDescendingDescriptor ]];
+
+    [self.openRecordingPaths addObject:recording.path.stringValue];
 }
 
 - (void)removeRecording:(JEFRecording *)recording {
@@ -49,6 +54,42 @@
 
     if (!recording.path || RBKIsEmpty(recording.path.stringValue)) return;
     [self.openRecordingPaths removeObject:recording.path.stringValue];
+}
+
+- (void)loadRecordings {
+    DBFilesystem *sharedFilesystem = [DBFilesystem sharedFilesystem];
+    BOOL isShutdown = sharedFilesystem.isShutDown;
+    BOOL notFinishedSyncing = !sharedFilesystem.completedFirstSync;
+    if (isShutdown || notFinishedSyncing) return;
+
+    DBError *listError;
+    NSArray *files = [sharedFilesystem listFolder:[DBPath root] error:&listError];
+    if (listError) {
+        RBKLog(@"Error listing files: %@", listError);
+        return;
+    }
+    for (DBFileInfo *fileInfo in files) {
+        if ([self.openRecordingPaths containsObject:fileInfo.path.stringValue]) continue;
+        JEFRecording *newRecording = [JEFRecording recordingWithFileInfo:fileInfo];
+        [self addRecording:newRecording];
+    }
+}
+
+- (void)setupDropboxFilesystem {
+    DBAccount *account = [DBAccountManager sharedManager].linkedAccount;
+    BOOL alreadyHaveFilesystem = [[DBFilesystem sharedFilesystem].account isEqual:account];
+    if (account && !alreadyHaveFilesystem) {
+        DBFilesystem *filesystem = [[DBFilesystem alloc] initWithAccount:account];
+        [DBFilesystem setSharedFilesystem:filesystem];
+    }
+
+    [[DBFilesystem sharedFilesystem] addObserver:self block:^{
+        [self loadRecordings];
+
+        BOOL stateIsSyncing = [DBFilesystem sharedFilesystem].status.download.inProgress;
+        BOOL hasRecordings = self.recordings.count > 0;
+//        self.isDoingInitialSync = stateIsSyncing && !hasRecordings;
+    }];
 }
 
 @end
