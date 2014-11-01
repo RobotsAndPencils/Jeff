@@ -28,6 +28,7 @@
 #import "Constants.h"
 #import "JEFColoredButton.h"
 #import "RBKCommonUtils.h"
+#import "JEFRecordingsTableViewDataSource.h"
 
 typedef NS_ENUM(NSInteger, JEFPopoverContent) {
     JEFPopoverContentSetup = 0,
@@ -101,6 +102,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 
     self.recordingsViewController = [[JEFPopoverRecordingsViewController alloc] initWithNibName:@"JEFPopoverRecordingsView" bundle:nil];
     self.recordingsViewController.recordingsManager = self.recordingsManager;
+    self.recordingsViewController.recordingsTableViewDataSource = [[JEFRecordingsTableViewDataSource alloc] initWithRepo:self.recordingsManager];
     self.recordingsViewController.contentInsets = NSEdgeInsetsMake(CGRectGetHeight(self.headerContainerView.frame) - 20, 0, 0, 0);
     [self addChildViewController:self.recordingsViewController];
 
