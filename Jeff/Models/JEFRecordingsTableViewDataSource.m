@@ -8,28 +8,32 @@
 
 #import "JEFRecordingsTableViewDataSource.h"
 
+#import "JEFRecordingsProvider.h"
+
 @interface JEFRecordingsTableViewDataSource ()
 
-@property (nonatomic, strong) id<JEFRecordingsRepo> repo;
+@property (nonatomic, strong) id<JEFRecordingsProvider> provider;
 
 @end
 
 @implementation JEFRecordingsTableViewDataSource
 
-- (instancetype)initWithRepo:(id<JEFRecordingsRepo>)repo {
+- (instancetype)initWithRecordingsProvider:(id<JEFRecordingsProvider>)provider {
     self = [super init];
     if (!self) return nil;
-    self.repo = repo;
+
+    self.provider = provider;
+
     return self;
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    return self.repo.recordings.count;
+    return self.provider.recordings.count;
 }
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    if (row > self.repo.recordings.count - 1 || row < 0) return nil;
-    return self.repo.recordings[row];
+    if (row > self.provider.recordings.count - 1 || row < 0) return nil;
+    return self.provider.recordings[row];
 }
 
 @end

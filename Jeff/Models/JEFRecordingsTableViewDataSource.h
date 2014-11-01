@@ -6,12 +6,11 @@
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-#import "JEFRecordingsManager.h"
-#import "JEFRecordingsRepo.h"
+@protocol JEFRecordingsProvider;
 
 @interface JEFRecordingsTableViewDataSource : NSObject <NSTableViewDataSource>
 
-- (instancetype)initWithRepo:(id<JEFRecordingsRepo>)repo;
+- (instancetype)initWithRecordingsProvider:(id<JEFRecordingsProvider>)repo;
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView;
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row;

@@ -8,3 +8,6 @@
 
 NSString *const JEFRecordScreenShortcutKey = @"RecordScreenShortcut";
 NSString *const JEFRecordSelectionShortcutKey = @"RecordSelectionShortcut";
+
+NSString *const JEFRecordingWasSharedNotification = @"JEFRecordingWasSharedNotification";
+NSString *const JEFSyncingServiceAccountStateChanged = @"JEFSyncingServiceAccountStateChanged";
