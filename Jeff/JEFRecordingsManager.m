@@ -71,14 +71,25 @@ static void *JEFRecordingsManagerContext = &JEFRecordingsManagerContext;
     [[DBFilesystem sharedFilesystem] removeObserver:self];
 }
 
-#pragma mark Recordings
+#pragma mark - JEFRecordingsDataSource
 
-- (void)removeRecordingAtIndex:(NSUInteger)recordingIndex {
+#warning - Naive implementation, this should insert the recording at it's final sorted destination
+- (void)addRecording:(JEFRecording *)recording {
     NSMutableArray *recordings = [self mutableArrayValueForKey:@keypath(self, recordings)];
-    JEFRecording *recording = recordings[recordingIndex];
-    [recordings removeObjectAtIndex:recordingIndex];
+    [recordings addObject:recording];
+}
+
+- (void)removeRecording:(JEFRecording *)recording {
+    if (!recording) return;
+
+    NSMutableArray *recordings = [self mutableArrayValueForKey:@keypath(self, recordings)];
+    [recordings removeObject:recording];
+
+    if (!recording.path || RBKIsEmpty(recording.path.stringValue)) return;
     [self.openRecordingPaths removeObject:recording.path.stringValue];
 }
+
+#pragma mark - JEFSyncingService
 
 - (void)uploadNewRecordingWithGIFURL:(NSURL *)gifURL posterFrameURL:(NSURL *)posterFrameURL completion:(void (^)(JEFRecording *))completion {
     NSImage *posterFrameImage;
@@ -144,18 +155,16 @@ static void *JEFRecordingsManagerContext = &JEFRecordingsManagerContext;
         RBKLog(@"Error listing files: %@", listError);
         return;
     }
-    NSMutableArray *recordings = [NSMutableArray array];
     for (DBFileInfo *fileInfo in files) {
         if ([self.openRecordingPaths containsObject:fileInfo.path.stringValue]) continue;
         JEFRecording *newRecording = [JEFRecording recordingWithFileInfo:fileInfo];
         if (newRecording) {
-            [recordings addObject:newRecording];
+            [self addRecording:newRecording];
             [self.openRecordingPaths addObject:fileInfo.path.stringValue];
         }
     }
 
     NSMutableArray *mutableRecordings = [self mutableArrayValueForKey:@keypath(self, recordings)];
-    [mutableRecordings addObjectsFromArray:recordings];
     NSSortDescriptor *dateDescendingDescriptor = [[NSSortDescriptor alloc] initWithKey:@keypath(JEFRecording.new, createdAt) ascending:NO];
     [mutableRecordings sortUsingDescriptors:@[ dateDescendingDescriptor ]];
 }

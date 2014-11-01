@@ -21,6 +21,7 @@
 #import "RBKCommonUtils.h"
 #import "NSFileManager+Temporary.h"
 #import "NSSharingService+ActivityType.h"
+#import "JEFRecordingsTableViewDataSource.h"
 
 static void *PopoverContentViewControllerContext = &PopoverContentViewControllerContext;
 
@@ -50,6 +51,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     // Display the green + bubble cursor when dragging into something that accepts the drag
     [self.tableView setDraggingSourceOperationMask:NSDragOperationCopy forLocal:NO];
     self.tableView.enclosingScrollView.contentInsets = self.contentInsets;
+    self.tableView.dataSource = self.recordingsTableViewDataSource;
 
     self.dropboxSyncingContainerView.layer.opacity = 0.0;
     [self.dropboxSyncingProgressIndicator startAnimation:nil];
@@ -161,8 +163,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
         return;
     }
 
-    NSInteger recordingIndex = [self.recordingsManager.recordings indexOfObject:recording];
-    [self.recordingsManager removeRecordingAtIndex:recordingIndex];
+    [self.recordingsManager removeRecording:recording];
 
     [[Mixpanel sharedInstance] track:@"Delete Recording"];
 }
@@ -193,16 +194,6 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     [view setup];
 
     return view;
-}
-
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    NSInteger count = self.recordingsManager.recordings.count;
-    return count;
-}
-
-- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    if (row > self.recordingsManager.recordings.count - 1) return nil;
-    return self.recordingsManager.recordings[row];
 }
 
 #pragma mark - NSTableView Drag and Drop

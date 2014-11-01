@@ -11,6 +11,7 @@
 		8359376F55CC63D6FE3DE740 /* JEFPopoverUploaderSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83593B5EA5926018F6E2110D /* JEFPopoverUploaderSetupViewController.m */; };
 		83593B01FC89BA3C5EC32E7C /* JEFRecordingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83593370A12DC3B1E44F01F4 /* JEFRecordingsManager.m */; };
 		83593BA6023A48A43B1002E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83593BD28BA68D2EAD12CF1C /* Localizable.strings */; };
+		CA082AFF1A046377003913AD /* JEFRecordingsTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = CA082AFE1A046377003913AD /* JEFRecordingsTableViewDataSource.m */; };
 		CA1F990C192F0ACB00C3EF33 /* StartAtLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1F990B192F0ACB00C3EF33 /* StartAtLoginController.m */; };
 		CA455B2C18B83EB900F9A541 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA455B2B18B83EB900F9A541 /* Cocoa.framework */; };
 		CA455B3618B83EB900F9A541 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CA455B3418B83EB900F9A541 /* InfoPlist.strings */; };
@@ -139,8 +140,10 @@
 		83593BB07DFAFBD9106DD41E /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		83593E3E69C23122FB40765D /* JEFUploaderProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFUploaderProtocol.h; path = ../JEFUploaderProtocol.h; sourceTree = "<group>"; };
 		83593F946B55E6E3610A19A4 /* JEFDropboxUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFDropboxUploader.h; sourceTree = "<group>"; };
-		CA082AF91A045DBC003913AD /* JEFRecordingsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecordingsDataSource.h; path = Models/JEFRecordingsDataSource.h; sourceTree = "<group>"; };
 		CA082AFC1A045F5F003913AD /* JEFSyncingService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFSyncingService.h; sourceTree = "<group>"; };
+		CA082AFD1A046377003913AD /* JEFRecordingsTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecordingsTableViewDataSource.h; path = Models/JEFRecordingsTableViewDataSource.h; sourceTree = "<group>"; };
+		CA082AFE1A046377003913AD /* JEFRecordingsTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFRecordingsTableViewDataSource.m; path = Models/JEFRecordingsTableViewDataSource.m; sourceTree = "<group>"; };
+		CA082B001A046478003913AD /* JEFRecordingsRepo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecordingsRepo.h; path = Models/JEFRecordingsRepo.h; sourceTree = "<group>"; };
 		CA1F98FF192F0A5F00C3EF33 /* JeffLauncher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JeffLauncher.xcodeproj; path = JeffLauncher/JeffLauncher.xcodeproj; sourceTree = "<group>"; };
 		CA1F990A192F0ACB00C3EF33 /* StartAtLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartAtLoginController.h; sourceTree = "<group>"; };
 		CA1F990B192F0ACB00C3EF33 /* StartAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartAtLoginController.m; sourceTree = "<group>"; };
@@ -548,8 +551,10 @@
 				CADF57B318C6F432006512E3 /* JEFRecording.m */,
 				83593370A12DC3B1E44F01F4 /* JEFRecordingsManager.m */,
 				83593B4EEE534ED769A58AA8 /* JEFRecordingsManager.h */,
-				CA082AF91A045DBC003913AD /* JEFRecordingsDataSource.h */,
+				CA082AFD1A046377003913AD /* JEFRecordingsTableViewDataSource.h */,
+				CA082AFE1A046377003913AD /* JEFRecordingsTableViewDataSource.m */,
 				CA082AFC1A045F5F003913AD /* JEFSyncingService.h */,
+				CA082B001A046478003913AD /* JEFRecordingsRepo.h */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -863,6 +868,7 @@
 				CAF30B6418D5281100D7BC9D /* INPopoverWindowFrame.m in Sources */,
 				CAF3913619F566F4009D5D9A /* JEFColoredButton.m in Sources */,
 				CAB77D4D19E5E2CF0049B6D8 /* JEFAppController.m in Sources */,
+				CA082AFF1A046377003913AD /* JEFRecordingsTableViewDataSource.m in Sources */,
 				CA455B3818B83EB900F9A541 /* main.m in Sources */,
 				8359322E52C5BFFB013B4AC7 /* JEFDropboxUploader.m in Sources */,
 				CAC7AC1619F5784600F44010 /* NSColor+Darken.m in Sources */,

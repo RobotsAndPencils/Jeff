@@ -6,14 +6,16 @@
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-#import "JEFRecordingsDataSource.h"
+#import "JEFRecordingsRepo.h"
 #import "JEFSyncingService.h"
+#import "JEFRecordingsTableViewDataSource.h"
 
 @class JEFRecordingsManager;
 
 @interface JEFPopoverRecordingsViewController : NSViewController
 
-@property (nonatomic, strong) NSObject<JEFRecordingsDataSource, JEFSyncingService> *recordingsManager;
+@property (nonatomic, strong) NSObject<JEFRecordingsRepo, JEFSyncingService> *recordingsManager;
+@property (nonatomic, strong) JEFRecordingsTableViewDataSource *recordingsTableViewDataSource;
 @property (nonatomic, assign) NSEdgeInsets contentInsets;
 
 @end
