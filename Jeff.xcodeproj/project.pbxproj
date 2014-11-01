@@ -13,6 +13,7 @@
 		CA082AFF1A046377003913AD /* JEFRecordingsTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = CA082AFE1A046377003913AD /* JEFRecordingsTableViewDataSource.m */; };
 		CA15EB0E1A046BFE00B017A6 /* JEFDropboxService.m in Sources */ = {isa = PBXBuildFile; fileRef = CA15EB0D1A046BFE00B017A6 /* JEFDropboxService.m */; };
 		CA15EB141A0538AD00B017A6 /* JEFRecordingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA15EB131A0538AD00B017A6 /* JEFRecordingsController.m */; };
+		CA15EB1C1A05667B00B017A6 /* JEFDropboxRepositoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA15EB1B1A05667B00B017A6 /* JEFDropboxRepositoryTests.m */; };
 		CA1F990C192F0ACB00C3EF33 /* StartAtLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1F990B192F0ACB00C3EF33 /* StartAtLoginController.m */; };
 		CA455B2C18B83EB900F9A541 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA455B2B18B83EB900F9A541 /* Cocoa.framework */; };
 		CA455B3618B83EB900F9A541 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CA455B3418B83EB900F9A541 /* InfoPlist.strings */; };
@@ -148,6 +149,7 @@
 		CA15EB121A0538AD00B017A6 /* JEFRecordingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecordingsController.h; path = Controllers/JEFRecordingsController.h; sourceTree = "<group>"; };
 		CA15EB131A0538AD00B017A6 /* JEFRecordingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JEFRecordingsController.m; path = Controllers/JEFRecordingsController.m; sourceTree = "<group>"; };
 		CA15EB181A05423D00B017A6 /* JEFRecordingsProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFRecordingsProvider.h; path = Models/JEFRecordingsProvider.h; sourceTree = "<group>"; };
+		CA15EB1B1A05667B00B017A6 /* JEFDropboxRepositoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFDropboxRepositoryTests.m; sourceTree = "<group>"; };
 		CA1F98FF192F0A5F00C3EF33 /* JeffLauncher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JeffLauncher.xcodeproj; path = JeffLauncher/JeffLauncher.xcodeproj; sourceTree = "<group>"; };
 		CA1F990A192F0ACB00C3EF33 /* StartAtLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartAtLoginController.h; sourceTree = "<group>"; };
 		CA1F990B192F0ACB00C3EF33 /* StartAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartAtLoginController.m; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				CA455B5518B83EBA00F9A541 /* JEFRecordingTests.m */,
+				CA15EB1B1A05667B00B017A6 /* JEFDropboxRepositoryTests.m */,
 				CA455B5018B83EBA00F9A541 /* Supporting Files */,
 			);
 			path = JeffTests;
@@ -894,6 +897,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA15EB1C1A05667B00B017A6 /* JEFDropboxRepositoryTests.m in Sources */,
 				CA455B5618B83EBA00F9A541 /* JEFRecordingTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
