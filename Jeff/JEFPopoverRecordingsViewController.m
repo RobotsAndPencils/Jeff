@@ -7,7 +7,7 @@
 //
 
 #import "JEFPopoverRecordingsViewController.h"
-#import "JEFRecordingsManager.h"
+#import "JEFDropboxRepository.h"
 
 #import <MASShortcut/MASShortcut+UserDefaults.h>
 #import <Dropbox/Dropbox.h>
@@ -57,8 +57,8 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     [self.dropboxSyncingProgressIndicator startAnimation:nil];
 
     // If we get the initial value for recordings then we end up getting the same initial value (with n initial recordings) as both a setting change and a insertion change, and that doesn't work when using insertRowsAtIndexes:withAnimation:, so we just rely on reloadData in viewDidAppear instead.
-    [self.recordingsManager addObserver:self forKeyPath:@keypath(self.recordingsManager, recordings) options:0 context:PopoverContentViewControllerContext];
-    [self.recordingsManager addObserver:self forKeyPath:@keypath(self.recordingsManager, isDoingInitialSync) options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
+    [self.recordingsController addObserver:self forKeyPath:@keypath(self.recordingsController, recordings) options:0 context:PopoverContentViewControllerContext];
+    [self.recordingsController addObserver:self forKeyPath:@keypath(self.recordingsController, isSyncing) options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:[@"values." stringByAppendingString:JEFRecordScreenShortcutKey] options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:[@"values." stringByAppendingString:JEFRecordSelectionShortcutKey] options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
 }
@@ -71,7 +71,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (void)dealloc {
     [[DBFilesystem sharedFilesystem] removeObserver:self];
-    [self.recordingsManager removeObserver:self forKeyPath:@keypath(self.recordingsManager, recordings)];
+    [self.recordingsController removeObserver:self forKeyPath:@keypath(self.recordingsController, recordings)];
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:[@"values." stringByAppendingString:JEFRecordScreenShortcutKey] context:PopoverContentViewControllerContext];
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:[@"values." stringByAppendingString:JEFRecordSelectionShortcutKey] context:PopoverContentViewControllerContext];
 }
@@ -82,7 +82,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
         return;
     }
 
-    if ([keyPath isEqualToString:@keypath(self.recordingsManager, recordings)]) {
+    if ([keyPath isEqualToString:@keypath(self.recordingsController, recordings)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self updateEmptyStateView];
 
@@ -103,7 +103,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
         });
     }
 
-    if ([keyPath isEqualToString:@keypath(self.recordingsManager, isDoingInitialSync)]) {
+    if ([keyPath isEqualToString:@keypath(self.recordingsController, isSyncing)]) {
         BOOL isDoingInitialSync = [[object valueForKeyPath:keyPath] boolValue];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self updateDropboxSyncingView:isDoingInitialSync];
@@ -123,7 +123,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     NSButton *button = (NSButton *)sender;
     JEFRecording *recording = ((NSTableCellView *)button.superview.superview).objectValue;
 
-    [self.recordingsManager fetchPublicURLForRecording:recording completion:^(NSURL *url) {
+    [self.recordingsController fetchPublicURLForRecording:recording completion:^(NSURL *url) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSString *path = [[NSFileManager defaultManager] jef_createTemporaryFileWithExtension:@"gif"];
             [recording.data writeToFile:path atomically:YES];
@@ -141,7 +141,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     JEFRecording *recording = ((NSTableCellView *)button.superview.superview).objectValue;
 
     __weak __typeof(self) weakSelf = self;
-    [self.recordingsManager copyURLStringToPasteboard:recording completion:^{
+    [self.recordingsController copyURLStringToPasteboard:recording completion:^{
         [weakSelf displayCopiedUserNotification];
     }];
 
@@ -163,7 +163,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
         return;
     }
 
-    [self.recordingsManager removeRecording:recording];
+    [self.recordingsController removeRecording:recording];
 
     [[Mixpanel sharedInstance] track:@"Delete Recording"];
 }
@@ -172,9 +172,9 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (void)didDoubleClickRow:(NSTableView *)sender {
     NSInteger clickedRow = sender.selectedRow;
-    JEFRecording *recording = self.recordingsManager.recordings[clickedRow];
+    JEFRecording *recording = self.recordingsController.recordings[clickedRow];
 
-    [self.recordingsManager fetchPublicURLForRecording:recording completion:^(NSURL *url) {
+    [self.recordingsController fetchPublicURLForRecording:recording completion:^(NSURL *url) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSWorkspace sharedWorkspace] openURL:url];
         });
@@ -200,7 +200,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (BOOL)tableView:(NSTableView *)tableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
     // Only one recording can be dragged/selected at a time
-    JEFRecording *draggedRecording = self.recordingsManager.recordings[rowIndexes.firstIndex];
+    JEFRecording *draggedRecording = self.recordingsController.recordings[rowIndexes.firstIndex];
     [pboard declareTypes:@[ NSCreateFileContentsPboardType(@"gif"), NSFilesPromisePboardType, NSPasteboardTypeString ] owner:self];
     [pboard setData:draggedRecording.data forType:NSCreateFileContentsPboardType(@"gif")];
     [pboard setPropertyList:@[ draggedRecording.path.stringValue.pathExtension ] forType:NSFilesPromisePboardType];
@@ -210,7 +210,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 }
 
 - (NSArray *)tableView:(NSTableView *)tableView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedRowsWithIndexes:(NSIndexSet *)indexSet {
-    JEFRecording *draggedRecording = self.recordingsManager.recordings[indexSet.firstIndex];
+    JEFRecording *draggedRecording = self.recordingsController.recordings[indexSet.firstIndex];
     [draggedRecording.data writeToFile:[dropDestination.path stringByAppendingPathComponent:draggedRecording.path.stringValue] atomically:YES];
     [[Mixpanel sharedInstance] track:@"Drag Recording"];
     return @[ draggedRecording.path.stringValue ];
@@ -254,7 +254,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 }
 
 - (void)updateEmptyStateView {
-    BOOL hasRecordings = self.recordingsManager.recordings.count > 0;
+    BOOL hasRecordings = self.recordingsController.recordings.count > 0;
     POPSpringAnimation *anim = [self.emptyStateCenterXConstraint pop_animationForKey:@"centerX"];
     if (anim) return;
 
@@ -311,7 +311,6 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 }
 
 - (void)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker didChooseSharingService:(NSSharingService *)service {
-    // rdar://18754049 This is getting called when the NSSharingServicePicker is dismissed without selecting a picker
     if (!service) return;
     NSString *title = (service.title && service.title.length > 0) ? service.title : @"Unknown";
     RBKLog(@"%@", title);

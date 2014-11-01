@@ -1,48 +1,45 @@
 //
-// Created by Brandon Evans on 14-10-20.
-// Copyright (c) 2014 Brandon Evans. All rights reserved.
+//  JEFDropboxService.m
+//  Jeff
+//
+//  Created by Brandon Evans on 2014-10-31.
+//  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-#import "JEFRecording.h"
+#import "JEFDropboxService.h"
 
-#import <tgmath.h>
 #import <libextobjc/EXTKeyPathCoding.h>
+#import <RoboKit/RBKCommonUtils.h>
 
-#import "JEFRecordingsManager.h"
-#import "JEFDropboxUploader.h"
-#import "RBKCommonUtils.h"
-#import "NSMutableArray+JEFSortedInsert.h"
+#import "Constants.h"
 
 static void *JEFRecordingsManagerContext = &JEFRecordingsManagerContext;
+typedef void (^JEFUploaderCompletionBlock)(BOOL, JEFRecording *, NSError *);
 
-@interface JEFRecordingsManager () <NSUserNotificationCenterDelegate>
+@interface JEFDropboxService ()
 
-@property (nonatomic, strong, readwrite) NSArray *recordings;
-@property (nonatomic, assign, readwrite) BOOL isDoingInitialSync;
-// In order to prevent a "deep-filter" when loading recordings in loadRecordings triggered by a FS change, we keep track of the file info objects that have been opened in order to prevent the DB SDK spewing errors about trying to open a file more than once. By deep-filter I mean, when we have a fileInfo object we'd like to open, if we didn't keep track of those in a set (for fast membership checks) specifically, then we'd need to iterate over all of the recordings and check equality with their file info objects to see if we should open it.
-@property (nonatomic, strong) NSMutableSet *openRecordingPaths;
 @property (nonatomic, strong, readwrite) NSProgress *totalUploadProgress;
 @property (nonatomic, strong) NSMutableDictionary *recordingUploadProgresses;
+@property (nonatomic, assign, readwrite) BOOL isDoingInitialSync;
 
 @end
 
-@implementation JEFRecordingsManager
+@implementation JEFDropboxService
 
 - (instancetype)init {
     self = [super init];
     if (!self) return nil;
 
-    [NSUserNotificationCenter defaultUserNotificationCenter].delegate = self;
-    _recordings = @[ ];
-    _openRecordingPaths = [NSMutableSet set];
     _recordingUploadProgresses = [NSMutableDictionary dictionary];
 
-    [self setupDropboxFilesystem];
-    [self loadRecordings];
-
     [self addObserver:self forKeyPath:@keypath(self, totalUploadProgress.fractionCompleted) options:0 context:JEFRecordingsManagerContext];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupDropboxFilesystem) name:JEFSyncingServiceAccountStateChanged object:nil];
 
     return self;
+}
+
+- (void)dealloc {
+    [[DBFilesystem sharedFilesystem] removeObserver:self];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -68,37 +65,13 @@ static void *JEFRecordingsManagerContext = &JEFRecordingsManagerContext;
     }
 }
 
-- (void)dealloc {
-    [[DBFilesystem sharedFilesystem] removeObserver:self];
-}
-
-#pragma mark - JEFRecordingsDataSource
-
-- (void)addRecording:(JEFRecording *)recording {
-    NSMutableArray *recordings = [self mutableArrayValueForKey:@keypath(self, recordings)];
-    NSSortDescriptor *dateDescendingDescriptor = [[NSSortDescriptor alloc] initWithKey:@keypath(JEFRecording.new, createdAt) ascending:NO];
-    [recordings jef_insertObject:recording sortedUsingDescriptors:@[ dateDescendingDescriptor ]];
-}
-
-- (void)removeRecording:(JEFRecording *)recording {
-    if (!recording) return;
-
-    NSMutableArray *recordings = [self mutableArrayValueForKey:@keypath(self, recordings)];
-    [recordings removeObject:recording];
-
-    if (!recording.path || RBKIsEmpty(recording.path.stringValue)) return;
-    [self.openRecordingPaths removeObject:recording.path.stringValue];
-}
-
-#pragma mark - JEFSyncingService
-
 - (void)uploadNewRecordingWithGIFURL:(NSURL *)gifURL posterFrameURL:(NSURL *)posterFrameURL completion:(void (^)(JEFRecording *))completion {
     NSImage *posterFrameImage;
     if ([[NSFileManager defaultManager] fileExistsAtPath:posterFrameURL.path]) {
         posterFrameImage = [[NSImage alloc] initWithContentsOfFile:posterFrameURL.path];
     }
 
-    [[self uploader] uploadGIF:gifURL withName:gifURL.path.lastPathComponent completion:^(BOOL succeeded, JEFRecording *recording, NSError *error) {
+    [self uploadGIF:gifURL withName:gifURL.path.lastPathComponent completion:^(BOOL succeeded, JEFRecording *recording, NSError *error) {
         if (error || !succeeded) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSAlert *alert = [[NSAlert alloc] init];
@@ -114,8 +87,9 @@ static void *JEFRecordingsManagerContext = &JEFRecordingsManagerContext;
 
         recording.posterFrameImage = posterFrameImage;
 
-        [self addRecording:recording];
-        [self.openRecordingPaths addObject:recording.path.stringValue];
+        if ([self.delegate respondsToSelector:@selector(syncingService:addedRecording:)]) {
+            [self.delegate syncingService:self addedRecording:recording];
+        }
 
         // Setup upload progress to be tracked overall, including multiple concurrent uploads
         if (!self.totalUploadProgress) {
@@ -135,7 +109,7 @@ static void *JEFRecordingsManagerContext = &JEFRecordingsManagerContext;
         __weak __typeof(self) weakSelf = self;
         recording.uploadHandler = ^(JEFRecording *uploadedRecording) {
             [weakSelf copyURLStringToPasteboard:uploadedRecording completion:^{
-                [weakSelf displaySharedUserNotificationForRecording:uploadedRecording];
+                [[NSNotificationCenter defaultCenter] postNotificationName:JEFRecordingWasSharedNotification object:uploadedRecording];
             }];
             if (completion) completion(uploadedRecording);
             [uploadedRecording removeObserver:self forKeyPath:@keypath(uploadedRecording, progress)];
@@ -144,34 +118,6 @@ static void *JEFRecordingsManagerContext = &JEFRecordingsManagerContext;
     }];
 }
 
-- (void)loadRecordings {
-    DBFilesystem *sharedFilesystem = [DBFilesystem sharedFilesystem];
-    BOOL isShutdown = sharedFilesystem.isShutDown;
-    BOOL notFinishedSyncing = !sharedFilesystem.completedFirstSync;
-    if (isShutdown || notFinishedSyncing) return;
-
-    DBError *listError;
-    NSArray *files = [sharedFilesystem listFolder:[DBPath root] error:&listError];
-    if (listError) {
-        RBKLog(@"Error listing files: %@", listError);
-        return;
-    }
-    for (DBFileInfo *fileInfo in files) {
-        if ([self.openRecordingPaths containsObject:fileInfo.path.stringValue]) continue;
-        JEFRecording *newRecording = [JEFRecording recordingWithFileInfo:fileInfo];
-        if (newRecording) {
-            [self addRecording:newRecording];
-            [self.openRecordingPaths addObject:fileInfo.path.stringValue];
-        }
-    }
-}
-
-/**
-*  If the recording is not finished uploading then the URL will be to Dropbox's public preview page instead of a direct link to the GIF
-*
-*  @param recording  The recording to fetch the public URL for
-*  @param completion Completion block that could be called on any thread
-*/
 - (void)fetchPublicURLForRecording:(JEFRecording *)recording completion:(void (^)(NSURL *url))completion {
     if (!recording) {
         if (completion) completion(nil);
@@ -208,25 +154,49 @@ static void *JEFRecordingsManagerContext = &JEFRecordingsManagerContext;
     }];
 }
 
-- (void)displaySharedUserNotificationForRecording:(JEFRecording *)recording {
-    NSUserNotification *publishedNotification = [[NSUserNotification alloc] init];
-    publishedNotification.title = NSLocalizedString(@"GIFSharedSuccessNotificationTitle", @"The title for the message that the recording was shared");
-    publishedNotification.informativeText = NSLocalizedString(@"GIFPasteboardNotificationBody", nil);
-    publishedNotification.contentImage = recording.posterFrameImage;
-    publishedNotification.identifier = recording.path.stringValue;
-    [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:publishedNotification];
+- (void)loadRecordings {
+    DBFilesystem *sharedFilesystem = [DBFilesystem sharedFilesystem];
+    BOOL isShutdown = sharedFilesystem.isShutDown;
+    BOOL notFinishedSyncing = !sharedFilesystem.completedFirstSync;
+    if (isShutdown || notFinishedSyncing) return;
+
+    DBError *listError;
+    NSArray *files = [sharedFilesystem listFolder:[DBPath root] error:&listError];
+    if (listError) {
+        RBKLog(@"Error listing files: %@", listError);
+        return;
+    }
+    for (DBFileInfo *fileInfo in files) {
+#warning
+//        if ([self.openRecordingPaths containsObject:fileInfo.path.stringValue]) continue;
+        JEFRecording *newRecording = [JEFRecording recordingWithFileInfo:fileInfo];
+        if (newRecording && [self.delegate respondsToSelector:@selector(syncingService:addedRecording:)]) {
+            [self.delegate syncingService:self addedRecording:newRecording];
+        }
+    }
 }
+
 
 #pragma mark Private
 
-- (id <JEFUploaderProtocol>)uploader {
-    enum JEFUploaderType uploaderType = (enum JEFUploaderType)[[NSUserDefaults standardUserDefaults] integerForKey:@"selectedUploader"];
-    switch (uploaderType) {
-        case JEFUploaderTypeDropbox:
-        case JEFUploaderTypeDepositBox:
-        default:
-            return [JEFDropboxUploader uploader];
+- (void)uploadGIF:(NSURL *)url withName:(NSString *)name completion:(JEFUploaderCompletionBlock)completion {
+    DBPath *filePath = [[DBPath root] childPath:url.lastPathComponent];
+    DBError *error;
+    DBFile *newFile = [[DBFilesystem sharedFilesystem] createFile:filePath error:&error];
+    if (!newFile || error) {
+        if (completion) completion(NO, nil, error);
+        return;
     }
+
+    NSData *fileData = [NSData dataWithContentsOfURL:url];
+    BOOL success = [newFile writeData:fileData error:&error];
+    if (!success && error) {
+        if (completion) completion(NO, nil, error);
+        return;
+    }
+
+    JEFRecording *recording = [JEFRecording recordingWithNewFile:newFile];
+    if (completion) completion(YES, recording, nil);
 }
 
 - (void)setupDropboxFilesystem {
@@ -241,25 +211,9 @@ static void *JEFRecordingsManagerContext = &JEFRecordingsManagerContext;
         [self loadRecordings];
 
         BOOL stateIsSyncing = [DBFilesystem sharedFilesystem].status.download.inProgress;
-        BOOL hasRecordings = self.recordings.count > 0;
-        self.isDoingInitialSync = stateIsSyncing && !hasRecordings;
-    }];
-}
-
-#pragma mark - NSUserNotificationCenterDelegate
-
-- (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification {
-    return YES;
-}
-
-- (void)userNotificationCenter:(NSUserNotificationCenter *)center didActivateNotification:(NSUserNotification *)notification {
-    NSString *path = notification.identifier;
-    NSPredicate *recordingWithPathPredicate = [NSPredicate predicateWithFormat:@"path.stringValue == %@", path];
-    JEFRecording *recording = [self.recordings filteredArrayUsingPredicate:recordingWithPathPredicate].firstObject;
-    if (!recording) return;
-
-    [self fetchPublicURLForRecording:recording completion:^(NSURL *url) {
-        [[NSWorkspace sharedWorkspace] openURL:url];
+#warning
+//        BOOL hasRecordings = self.recordings.count > 0;
+//        self.isDoingInitialSync = stateIsSyncing && !hasRecordings;
     }];
 }
 

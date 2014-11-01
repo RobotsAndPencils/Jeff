@@ -1,31 +1,33 @@
 //
-// Created by Brandon Evans on 14-10-20.
-// Copyright (c) 2014 Brandon Evans. All rights reserved.
+//  JEFDropboxService.h
+//  Jeff
+//
+//  Created by Brandon Evans on 2014-10-31.
+//  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-#import "JEFRecordingsRepo.h"
 #import "JEFSyncingService.h"
 
-@class JEFRecording;
-
-@interface JEFRecordingsManager : NSObject <JEFRecordingsRepo, JEFSyncingService>
-
-#pragma mark - JEFRecordingsRepo;
-
-@property (nonatomic, strong, readonly) NSArray *recordings;
-- (void)addRecording:(JEFRecording *)recording;
-- (void)removeRecording:(JEFRecording *)recordingIndex;
+@interface JEFDropboxService : NSObject <JEFSyncingService>
 
 #pragma mark - JEFSyncingService
 
 @property (nonatomic, assign, readonly) BOOL isDoingInitialSync;
 @property (nonatomic, strong, readonly) NSProgress *totalUploadProgress;
+@property (nonatomic, weak) id<JEFSyncingServiceDelegate> delegate;
+
 - (void)uploadNewRecordingWithGIFURL:(NSURL *)gifURL posterFrameURL:(NSURL *)posterFrameURL completion:(void (^)(JEFRecording *))completion;
+
+/**
+*  If the recording is not finished uploading then the URL will be to Dropbox's public preview page instead of a direct link to the GIF
+*
+*  @param recording  The recording to fetch the public URL for
+*  @param completion Completion block that could be called on any thread
+*/
 - (void)fetchPublicURLForRecording:(JEFRecording *)recording completion:(void (^)(NSURL *url))completion;
+
 - (void)copyURLStringToPasteboard:(JEFRecording *)recording completion:(void (^)())completion;
 
 - (void)setupDropboxFilesystem;
-
-- (void)displaySharedUserNotificationForRecording:(JEFRecording *)recording;
 
 @end

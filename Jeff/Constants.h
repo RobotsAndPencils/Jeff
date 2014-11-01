@@ -11,6 +11,9 @@
 extern NSString *const JEFRecordScreenShortcutKey;
 extern NSString *const JEFRecordSelectionShortcutKey;
 
+extern NSString *const JEFRecordingWasSharedNotification;
+extern NSString *const JEFSyncingServiceAccountStateChanged;
+
 static inline CGFloat constrain(CGFloat value, CGFloat min, CGFloat max) {
     return fmin(fmax(value, min), max);
 }
