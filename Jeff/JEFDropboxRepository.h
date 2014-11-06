@@ -13,6 +13,8 @@
 #pragma mark - JEFRecordingsRepository
 
 @property (nonatomic, strong, readonly) NSArray *recordings;
+@property (nonatomic, assign, readonly) BOOL isDoingInitialSync;
+
 - (void)addRecording:(JEFRecording *)recording;
 - (void)removeRecording:(JEFRecording *)recordingIndex;
 

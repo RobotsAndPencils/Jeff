@@ -58,7 +58,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
     // If we get the initial value for recordings then we end up getting the same initial value (with n initial recordings) as both a setting change and a insertion change, and that doesn't work when using insertRowsAtIndexes:withAnimation:, so we just rely on reloadData in viewDidAppear instead.
     [self.recordingsController addObserver:self forKeyPath:@keypath(self.recordingsController, recordings) options:0 context:PopoverContentViewControllerContext];
-    [self.recordingsController addObserver:self forKeyPath:@keypath(self.recordingsController, isSyncing) options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
+    [self.recordingsController addObserver:self forKeyPath:@keypath(self.recordingsController, isDoingInitialSync) options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:[@"values." stringByAppendingString:JEFRecordScreenShortcutKey] options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:[@"values." stringByAppendingString:JEFRecordSelectionShortcutKey] options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
 }
@@ -103,7 +103,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
         });
     }
 
-    if ([keyPath isEqualToString:@keypath(self.recordingsController, isSyncing)]) {
+    if ([keyPath isEqualToString:@keypath(self.recordingsController, isDoingInitialSync)]) {
         BOOL isDoingInitialSync = [[object valueForKeyPath:keyPath] boolValue];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self updateDropboxSyncingView:isDoingInitialSync];

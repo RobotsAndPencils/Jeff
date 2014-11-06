@@ -17,6 +17,8 @@
 @interface JEFDropboxRepository ()
 
 @property (nonatomic, strong, readwrite) NSArray *recordings;
+@property (nonatomic, assign, readwrite) BOOL isDoingInitialSync;
+
 // In order to prevent a "deep-filter" when loading recordings in loadRecordings triggered by a FS change, we keep track of the file info objects that have been opened in order to prevent the DB SDK spewing errors about trying to open a file more than once. By deep-filter I mean, when we have a fileInfo object we'd like to open, if we didn't keep track of those in a set (for fast membership checks) specifically, then we'd need to iterate over all of the recordings and check equality with their file info objects to see if we should open it.
 @property (nonatomic, strong) NSMutableSet *openRecordingPaths;
 
@@ -88,7 +90,7 @@
 
         BOOL stateIsSyncing = [DBFilesystem sharedFilesystem].status.download.inProgress;
         BOOL hasRecordings = self.recordings.count > 0;
-//        self.isDoingInitialSync = stateIsSyncing && !hasRecordings;
+        self.isDoingInitialSync = stateIsSyncing && !hasRecordings;
     }];
 }
 

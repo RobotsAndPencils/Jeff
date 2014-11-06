@@ -13,7 +13,6 @@
 @protocol JEFSyncingService <NSObject>
 
 @required
-@property (nonatomic, assign, readonly) BOOL isDoingInitialSync;
 @property (nonatomic, strong, readonly) NSProgress *totalUploadProgress;
 
 - (void)uploadNewRecordingWithGIFURL:(NSURL *)gifURL posterFrameURL:(NSURL *)posterFrameURL completion:(void (^)(JEFRecording *))completion;

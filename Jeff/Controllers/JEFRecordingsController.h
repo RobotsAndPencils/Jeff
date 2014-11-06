@@ -15,7 +15,7 @@
 @interface JEFRecordingsController : NSObject <JEFRecordingsProvider>
 
 @property (nonatomic, strong, readonly) NSArray *recordings;
-@property (nonatomic, assign, readonly) BOOL isSyncing;
+@property (nonatomic, assign, readonly) BOOL isDoingInitialSync;
 
 - (instancetype)initWithSyncingService:(id<JEFSyncingService>)syncingService recordingsRepo:(id<JEFRecordingsRepository>)recordingsRepo;
 
