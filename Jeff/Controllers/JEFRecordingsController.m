@@ -80,6 +80,16 @@ static void *JEFRecordingsControllerContext = &JEFRecordingsControllerContext;
     }
 }
 
+#pragma mark - Properties
+
+- (BOOL)isDoingInitialSync {
+    return self.recordingsRepo.isDoingInitialSync;
+}
+
++ (NSSet *)keyPathsForValuesAffectingIsDoingInitialSync {
+    return [NSSet setWithObject:@"recordingsRepo.isDoingInitialSync"];
+}
+
 #pragma mark - Public
 
 - (void)uploadNewGIFAtURL:(NSURL *)gifURL posterFrameURL:(NSURL *)posterFrameURL completion:(void (^)(JEFRecording *))completion {

@@ -12,7 +12,6 @@
 
 #pragma mark - JEFSyncingService
 
-@property (nonatomic, assign, readonly) BOOL isDoingInitialSync;
 @property (nonatomic, strong, readonly) NSProgress *totalUploadProgress;
 @property (nonatomic, weak) id<JEFSyncingServiceDelegate> delegate;
 
@@ -27,7 +26,5 @@
 - (void)fetchPublicURLForRecording:(JEFRecording *)recording completion:(void (^)(NSURL *url))completion;
 
 - (void)copyURLStringToPasteboard:(JEFRecording *)recording completion:(void (^)())completion;
-
-- (void)setupDropboxFilesystem;
 
 @end
