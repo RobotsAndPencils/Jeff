@@ -6,10 +6,8 @@
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface JEFConverter : NSObject
 
-+ (void)convertFramesAtURL:(NSURL *)framesURL completion:(void (^)(NSURL *))completion;
+- (void)convertFramesAtURL:(NSURL *)framesURL completion:(void (^)(NSURL *))completion;
 
 @end
