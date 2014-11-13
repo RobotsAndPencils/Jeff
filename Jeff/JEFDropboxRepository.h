@@ -16,6 +16,6 @@
 @property (nonatomic, assign, readonly) BOOL isDoingInitialSync;
 
 - (void)addRecording:(JEFRecording *)recording;
-- (void)removeRecording:(JEFRecording *)recordingIndex;
+- (void)removeRecording:(JEFRecording *)recording;
 
 @end
