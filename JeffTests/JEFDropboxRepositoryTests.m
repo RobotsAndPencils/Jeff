@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import <XCTest/XCTest.h>
+#import <objc/runtime.h>
+#import <OCMock/OCMock.h>
 
 #import "JEFDropboxRepository.h"
 
@@ -25,12 +27,15 @@
 }
 
 - (void)testAddingAndRemovingRecordings {
-    JEFRecording *recording = [[JEFRecording alloc] init];
+    JEFRecording *recording = [JEFRecording recordingWithNewFile:nil];
+    id recordingMock = OCMPartialMock(recording);
+    DBPath *path = [[DBPath alloc] initWithString:@"lol.gif"];
+    OCMStub([recordingMock path]).andReturn(path);
 
     XCTAssertEqual(self.dropboxRepository.recordings.count, 0, @"");
-    [self.dropboxRepository addRecording:recording];
+    [self.dropboxRepository addRecording:recordingMock];
     XCTAssertEqual(self.dropboxRepository.recordings.count, 1, @"");
-    [self.dropboxRepository removeRecording:recording];
+    [self.dropboxRepository removeRecording:recordingMock];
     XCTAssertEqual(self.dropboxRepository.recordings.count, 0, @"");
 }
 
