@@ -46,6 +46,7 @@ static void *JEFRecordingsControllerContext = &JEFRecordingsControllerContext;
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:JEFRecordingWasSharedNotification object:nil];
     [self.recordingsRepo removeObserver:self forKeyPath:@"recordings"];
 }
 
