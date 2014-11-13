@@ -112,8 +112,8 @@ typedef void (^JEFUploaderCompletionBlock)(BOOL, JEFRecording *, NSError *);
                 [[NSNotificationCenter defaultCenter] postNotificationName:JEFRecordingWasSharedNotification object:uploadedRecording];
             }];
             if (completion) completion(uploadedRecording);
-            [uploadedRecording removeObserver:self forKeyPath:@keypath(uploadedRecording, progress)];
-            [self.recordingUploadProgresses removeObjectForKey:uploadedRecording.path];
+            [uploadedRecording removeObserver:weakSelf forKeyPath:@keypath(uploadedRecording, progress)];
+            [weakSelf.recordingUploadProgresses removeObjectForKey:uploadedRecording.path];
         };
     }];
 }
