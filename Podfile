@@ -8,3 +8,7 @@ pod 'MASShortcut', :git => "git@github.com:RobotsAndPencils/MASShortcut.git", :b
 pod 'pop', '~> 1.0'
 pod 'RoboKit', :git => 'git@github.com:RobotsAndPencils/RoboKit.git'
 pod 'libextobjc/EXTKeyPathCoding'
+
+target 'JeffTests' do
+    pod 'OCMock', '~> 3.1'
+end
