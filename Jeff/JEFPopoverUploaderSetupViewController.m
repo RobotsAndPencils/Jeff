@@ -11,6 +11,7 @@
 #import <Dropbox/Dropbox.h>
 
 #import "JEFAppController.h"
+#import "Constants.h"
 
 @interface JEFPopoverUploaderSetupViewController ()
 
