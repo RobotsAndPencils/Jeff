@@ -78,7 +78,9 @@
     for (DBFileInfo *fileInfo in files) {
         if ([self.openRecordingPaths containsObject:fileInfo.path.stringValue]) continue;
         JEFRecording *newRecording = [JEFRecording recordingWithFileInfo:fileInfo];
-        [self addRecording:newRecording];
+        if (newRecording) {
+            [self addRecording:newRecording];
+        }
     }
 }
 

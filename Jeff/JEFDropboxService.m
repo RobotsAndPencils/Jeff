@@ -21,7 +21,7 @@ typedef void (^JEFUploaderCompletionBlock)(BOOL, JEFRecording *, NSError *);
 @property (nonatomic, strong, readwrite) NSProgress *totalUploadProgress;
 @property (nonatomic, strong) NSMutableDictionary *recordingUploadProgresses;
 @property (nonatomic, assign, readwrite) BOOL isDoingInitialSync;
-
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
 @end
 
@@ -32,6 +32,8 @@ typedef void (^JEFUploaderCompletionBlock)(BOOL, JEFRecording *, NSError *);
     if (!self) return nil;
 
     _recordingUploadProgresses = [NSMutableDictionary dictionary];
+    _dateFormatter = [[NSDateFormatter alloc] init];
+    _dateFormatter.dateFormat = @"MMM d, yyyy, h.mm.ss.SS a";
 
     [self addObserver:self forKeyPath:@keypath(self, totalUploadProgress.fractionCompleted) options:0 context:JEFRecordingsManagerContext];
 
@@ -71,7 +73,7 @@ typedef void (^JEFUploaderCompletionBlock)(BOOL, JEFRecording *, NSError *);
         posterFrameImage = [[NSImage alloc] initWithContentsOfFile:posterFrameURL.path];
     }
 
-    [self uploadGIF:gifURL withName:gifURL.path.lastPathComponent completion:^(BOOL succeeded, JEFRecording *recording, NSError *error) {
+    [self uploadGIF:gifURL withName:[self gifFilenameForCurrentDateTime] completion:^(BOOL succeeded, JEFRecording *recording, NSError *error) {
         if (error || !succeeded) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSAlert *alert = [[NSAlert alloc] init];
@@ -157,7 +159,7 @@ typedef void (^JEFUploaderCompletionBlock)(BOOL, JEFRecording *, NSError *);
 #pragma mark Private
 
 - (void)uploadGIF:(NSURL *)url withName:(NSString *)name completion:(JEFUploaderCompletionBlock)completion {
-    DBPath *filePath = [[DBPath root] childPath:url.lastPathComponent];
+    DBPath *filePath = [[DBPath root] childPath:name];
     DBError *error;
     DBFile *newFile = [[DBFilesystem sharedFilesystem] createFile:filePath error:&error];
     if (!newFile || error) {
@@ -174,6 +176,11 @@ typedef void (^JEFUploaderCompletionBlock)(BOOL, JEFRecording *, NSError *);
 
     JEFRecording *recording = [JEFRecording recordingWithNewFile:newFile];
     if (completion) completion(YES, recording, nil);
+}
+
+- (NSString *)gifFilenameForCurrentDateTime {
+    NSString *filename = [NSLocalizedString(@"RecordingFilenamePrefix", @"Prefix for new GIF filenames") stringByAppendingString:[[self.dateFormatter stringFromDate:[NSDate date]] stringByAppendingPathExtension:@"gif"]];
+    return filename;
 }
 
 @end

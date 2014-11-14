@@ -23,3 +23,5 @@
 "UserFacingVersionStringFormat" = "You've got version %@ (Build %@)";
 
 "TwitterByline" = "Recorded by @jefftheapp";
+
+"RecordingFilenamePrefix" = "Jeff Recording - ";
