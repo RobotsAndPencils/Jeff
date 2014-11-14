@@ -38,6 +38,11 @@
     return self;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:JEFSyncingServiceAccountStateChanged object:nil];
+    [[DBFilesystem sharedFilesystem] removeObserver:self];
+}
+
 #pragma mark - JEFRecordingsDataSource
 
 - (void)addRecording:(JEFRecording *)recording {
@@ -85,12 +90,13 @@
         [DBFilesystem setSharedFilesystem:filesystem];
     }
 
+    __weak __typeof(self) weakSelf = self;
     [[DBFilesystem sharedFilesystem] addObserver:self block:^{
-        [self loadRecordings];
+        [weakSelf loadRecordings];
 
         BOOL stateIsSyncing = [DBFilesystem sharedFilesystem].status.download.inProgress;
-        BOOL hasRecordings = self.recordings.count > 0;
-        self.isDoingInitialSync = stateIsSyncing && !hasRecordings;
+        BOOL hasRecordings = weakSelf.recordings.count > 0;
+        weakSelf.isDoingInitialSync = stateIsSyncing && !hasRecordings;
     }];
 }
 
