@@ -39,7 +39,7 @@ typedef void (^JEFUploaderCompletionBlock)(BOOL, JEFRecording *, NSError *);
 }
 
 - (void)dealloc {
-    [[DBFilesystem sharedFilesystem] removeObserver:self];
+    [self removeObserver:self forKeyPath:@keypath(self, totalUploadProgress.fractionCompleted) context:JEFRecordingsManagerContext];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
