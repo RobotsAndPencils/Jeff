@@ -20,6 +20,7 @@ static void *JEFRecordingsControllerContext = &JEFRecordingsControllerContext;
 @interface JEFRecordingsController () <NSUserNotificationCenterDelegate, JEFSyncingServiceDelegate>
 
 @property (nonatomic, strong) id<JEFSyncingService> syncingService;
+// NSObject * instead of id because self is added as an observer in initWith...
 @property (nonatomic, strong) NSObject<JEFRecordingsRepository> *recordingsRepo;
 @property (nonatomic, strong, readwrite) NSArray *recordings;
 
