@@ -60,6 +60,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 @property (strong, nonatomic) NSMutableArray *overlayWindows;
 @property (assign, nonatomic, getter=isShowingSelection) BOOL showingSelection;
 @property (strong, nonatomic) id stopRecordingObserver;
+@property (strong, nonatomic) JEFConverter *converter;
 
 @end
 
@@ -72,6 +73,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 
     // Initialize properties
     self.overlayWindows = [NSMutableArray array];
+    self.converter = [[JEFConverter alloc] init];
 
     // Setup observation
     [[DBAccountManager sharedManager] addObserver:self block:^(DBAccount *account) {
@@ -289,7 +291,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 
     __weak __typeof(self) weakSelf = self;
     [self.recorder recordScreen:[NSScreen mainScreen] completion:^(NSURL *framesURL) {
-        [JEFConverter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
+        [self.converter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
             NSError *framesError;
             NSArray *frames = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:framesURL includingPropertiesForKeys:nil options:0 error:&framesError];
             if (!frames && framesError) {
@@ -509,7 +511,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
             }
             NSURL *firstFrameURL = frames.firstObject;
 
-            [JEFConverter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
+            [self.converter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
                 [self.recordingsController uploadNewGIFAtURL:gifURL posterFrameURL:firstFrameURL completion:^(JEFRecording *recording) {
                     [[Mixpanel sharedInstance] track:@"Create Recording"];
                     [[Mixpanel sharedInstance].people increment:@"Recordings" by:@1];
