@@ -17,7 +17,7 @@
 
 #import "JEFRecording.h"
 #import "JEFQuartzRecorder.h"
-#import "JEFRecordingsManager.h"
+#import "JEFRecordingsController.h"
 #import "JEFConverter.h"
 #import "JEFAppController.h"
 #import "JEFSelectionOverlayWindow.h"
@@ -28,6 +28,7 @@
 #import "Constants.h"
 #import "JEFColoredButton.h"
 #import "RBKCommonUtils.h"
+#import "JEFRecordingsTableViewDataSource.h"
 
 typedef NS_ENUM(NSInteger, JEFPopoverContent) {
     JEFPopoverContentSetup = 0,
@@ -100,7 +101,8 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
     [self addChildViewController:self.uploaderSetupViewController];
 
     self.recordingsViewController = [[JEFPopoverRecordingsViewController alloc] initWithNibName:@"JEFPopoverRecordingsView" bundle:nil];
-    self.recordingsViewController.recordingsManager = self.recordingsManager;
+    self.recordingsViewController.recordingsController = self.recordingsController;
+    self.recordingsViewController.recordingsTableViewDataSource = [[JEFRecordingsTableViewDataSource alloc] initWithRecordingsProvider:self.recordingsController];
     self.recordingsViewController.contentInsets = NSEdgeInsetsMake(CGRectGetHeight(self.headerContainerView.frame) - 20, 0, 0, 0);
     [self addChildViewController:self.recordingsViewController];
 
@@ -122,6 +124,8 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 
 - (void)viewDidAppear {
     [super viewDidAppear];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:JEFSyncingServiceAccountStateChanged object:nil];
 
     // If preferences was shown before the popover closed, keep it shown when re-opening
     if (self.popoverContent == JEFPopoverContentPreferences) return;
@@ -293,7 +297,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
             }
             NSURL *firstFrameURL = frames.firstObject;
 
-            [weakSelf.recordingsManager uploadNewRecordingWithGIFURL:gifURL posterFrameURL:firstFrameURL completion:^(JEFRecording *recording) {
+            [weakSelf.recordingsController uploadNewGIFAtURL:gifURL posterFrameURL:firstFrameURL completion:^(JEFRecording *recording) {
                 [[Mixpanel sharedInstance] track:@"Create Recording"];
                 [[Mixpanel sharedInstance].people increment:@"Recordings" by:@1];
             }];
@@ -334,9 +338,8 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
                     break;
             }
 
-            __weak __typeof(self) weakSelf = self;
             [self transitionFromViewController:currentChildViewController toViewController:self.recordingsViewController options:transition completionHandler:^() {
-                [weakSelf.recordingsManager setupDropboxFilesystem];
+                [[NSNotificationCenter defaultCenter] postNotificationName:JEFSyncingServiceAccountStateChanged object:nil];
                 [self.recordingsViewController viewDidAppear]; // This shouldn't be called manually, but it's not called when it's shown. Need to investigate more to file a radar.
             }];
 
@@ -507,7 +510,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
             NSURL *firstFrameURL = frames.firstObject;
 
             [JEFConverter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
-                [self.recordingsManager uploadNewRecordingWithGIFURL:gifURL posterFrameURL:firstFrameURL completion:^(JEFRecording *recording) {
+                [self.recordingsController uploadNewGIFAtURL:gifURL posterFrameURL:firstFrameURL completion:^(JEFRecording *recording) {
                     [[Mixpanel sharedInstance] track:@"Create Recording"];
                     [[Mixpanel sharedInstance].people increment:@"Recordings" by:@1];
                 }];

@@ -6,11 +6,15 @@
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-@class JEFRecordingsManager;
+#import "JEFRecordingsController.h"
+#import "JEFRecordingsTableViewDataSource.h"
+
+@class JEFDropboxRepository;
 
 @interface JEFPopoverRecordingsViewController : NSViewController
 
-@property (nonatomic, strong) JEFRecordingsManager *recordingsManager;
+@property (nonatomic, strong) JEFRecordingsController *recordingsController;
+@property (nonatomic, strong) JEFRecordingsTableViewDataSource *recordingsTableViewDataSource;
 @property (nonatomic, assign) NSEdgeInsets contentInsets;
 
 @end

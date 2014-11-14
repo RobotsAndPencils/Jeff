@@ -179,7 +179,6 @@
                                     </tableColumn>
                                 </tableColumns>
                                 <connections>
-                                    <outlet property="dataSource" destination="-2" id="q2G-jH-knU"/>
                                     <outlet property="delegate" destination="-2" id="4ET-gW-6fi"/>
                                 </connections>
                             </tableView>
