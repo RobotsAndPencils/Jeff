@@ -129,7 +129,16 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
             [recording.data writeToFile:path atomically:YES];
             NSURL *temporaryFileURL = [NSURL URLWithString:[@"file://" stringByAppendingString:path]];
 
-            NSSharingServicePicker *sharePicker = [[NSSharingServicePicker alloc] initWithItems:@[ url, temporaryFileURL ]];
+            // Be extra-sure that these are non-nil before adding to the array
+            NSMutableArray *items = [NSMutableArray new];
+            if (url) {
+                [items addObject:url];
+            }
+            if (temporaryFileURL) {
+                [items addObject:temporaryFileURL];
+            }
+
+            NSSharingServicePicker *sharePicker = [[NSSharingServicePicker alloc] initWithItems:[items copy]];
             sharePicker.delegate = self;
             [sharePicker showRelativeToRect:button.bounds ofView:button preferredEdge:NSMinYEdge];
         });
