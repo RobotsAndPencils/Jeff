@@ -76,6 +76,11 @@
         return;
     }
     for (DBFileInfo *fileInfo in files) {
+        // Skip files with trivially invalid paths
+        if (RBKIsEmpty(fileInfo.path.stringValue)) continue;
+        // Skip non-GIFs
+        if ([[[NSURL alloc] initFileURLWithPath:fileInfo.path.stringValue].pathExtension caseInsensitiveCompare:@"gif"] != NSOrderedSame) continue;
+        // Skip GIFs that are already open
         if ([self.openRecordingPaths containsObject:fileInfo.path.stringValue]) continue;
         JEFRecording *newRecording = [JEFRecording recordingWithFileInfo:fileInfo];
         if (newRecording) {
