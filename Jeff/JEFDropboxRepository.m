@@ -63,20 +63,25 @@
     [self.openRecordingPaths removeObject:recording.path.stringValue];
 }
 
-- (void)loadRecordings {
-    DBFilesystem *sharedFilesystem = [DBFilesystem sharedFilesystem];
-    BOOL isShutdown = sharedFilesystem.isShutDown;
-    BOOL notFinishedSyncing = !sharedFilesystem.completedFirstSync;
+- (void)loadRecordings:(DBFilesystem *)filesystem {
+    BOOL isShutdown = filesystem.isShutDown;
+    BOOL notFinishedSyncing = !filesystem.completedFirstSync;
     if (isShutdown || notFinishedSyncing) return;
 
     DBError *listError;
-    NSArray *files = [sharedFilesystem listFolder:[DBPath root] error:&listError];
+    NSArray *files = [filesystem listFolder:[DBPath root] error:&listError];
     if (listError) {
         RBKLog(@"Error listing files: %@", listError);
         return;
     }
     for (DBFileInfo *fileInfo in files) {
+        // Skip files with trivially invalid paths
+        if (RBKIsEmpty(fileInfo.path.stringValue)) continue;
+        // Skip non-GIFs
+        if ([[[NSURL alloc] initFileURLWithPath:fileInfo.path.stringValue].pathExtension caseInsensitiveCompare:@"gif"] != NSOrderedSame) continue;
+        // Skip GIFs that are already open
         if ([self.openRecordingPaths containsObject:fileInfo.path.stringValue]) continue;
+
         JEFRecording *newRecording = [JEFRecording recordingWithFileInfo:fileInfo];
         if (newRecording) {
             [self addRecording:newRecording];
@@ -94,7 +99,7 @@
 
     __weak __typeof(self) weakSelf = self;
     [[DBFilesystem sharedFilesystem] addObserver:self block:^{
-        [weakSelf loadRecordings];
+        [weakSelf loadRecordings:[DBFilesystem sharedFilesystem]];
 
         BOOL stateIsSyncing = [DBFilesystem sharedFilesystem].status.download.inProgress;
         BOOL hasRecordings = weakSelf.recordings.count > 0;
