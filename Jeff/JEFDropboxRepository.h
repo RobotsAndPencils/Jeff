@@ -4,6 +4,7 @@
 //
 
 #import "JEFRecordingsRepository.h"
+#import "JEFRecordingsProvider.h"
 #import "JEFSyncingService.h"
 
 @class JEFRecording;
