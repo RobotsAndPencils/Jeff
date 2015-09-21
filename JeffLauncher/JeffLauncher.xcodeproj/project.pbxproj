@@ -204,7 +204,7 @@
 				ORGANIZATIONNAME = "Robots and Pencils";
 				TargetAttributes = {
 					CADB5F0318E3D71900832B7A = {
-						DevelopmentTeam = Z2R9WCWER2;
+						DevelopmentTeam = PBH8V487HB;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 1;
@@ -388,7 +388,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = JeffLauncher/JeffLauncher.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JeffLauncher/JeffLauncher-Prefix.pch";
@@ -405,7 +404,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = JeffLauncher/JeffLauncher.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JeffLauncher/JeffLauncher-Prefix.pch";
