@@ -31,18 +31,24 @@
 
 - (void)convertFramesAtURL:(NSURL *)framesURL completion:(void (^)(NSURL *))completion {
     NSInteger hundredthsOfASecondDelay = (NSInteger)floor(1.0/20.0 * 100);
-    NSDictionary *arguments = @{ @"delay": @(hundredthsOfASecondDelay).stringValue, @"loop": [NSNull null], @"colors": @(256).stringValue };
 
-    NSArray *filenames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:framesURL.absoluteString error:NULL];
-    filenames = [filenames sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        return [obj1 compare:obj2 options:NSNumericSearch];
+    NSError *contentsOfDirectoryError;
+    NSArray *filenames = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:framesURL includingPropertiesForKeys:@[] options:NSDirectoryEnumerationSkipsHiddenFiles error:&contentsOfDirectoryError];
+    if (!filenames) {
+        RBKLog(@"Error enumerating contents of still frame directory: %@", contentsOfDirectoryError);
+    }
+    // Sort files by numeric suffix
+    filenames = [filenames sortedArrayUsingComparator:^NSComparisonResult(NSURL *obj1, NSURL *obj2) {
+        return [obj1.absoluteString compare:obj2.absoluteString options:NSNumericSearch];
     }];
+    filenames = [filenames valueForKeyPath:@"path"];
 
     dispatch_async(self.queue, ^{
+        NSDictionary *arguments = @{ @"delay": @(hundredthsOfASecondDelay).stringValue, @"loop": [NSNull null], @"colors": @(256).stringValue };
         NSURL *outputURL = [self launchGifsicleAtPath:framesURL.absoluteString arguments:arguments filenames:filenames];
 
         NSString *temporaryGIFFilename = @"jeff_temp_gif.gif";
-        NSURL *temporaryGIFURL = [NSURL URLWithString:[@"file://" stringByAppendingString:[framesURL.absoluteString stringByAppendingPathComponent:temporaryGIFFilename]]];
+        NSURL *temporaryGIFURL = [framesURL URLByAppendingPathComponent:temporaryGIFFilename];
 
         // In order for the second gifsicle task to have access to the temporary GIF it needs to be in a place with common sandbox permissions, which is in the main sandbox
         NSError *error;
@@ -50,7 +56,7 @@
         if (error) {
             RBKLog(@"Error copying GIF to temporary location: %@", error.localizedDescription);
         }
-        outputURL = [self launchGifsicleAtPath:framesURL.absoluteString arguments:@{ @"optimize": @"3" } filenames:@[ temporaryGIFFilename ]];
+        outputURL = [self launchGifsicleAtPath:framesURL.absoluteString arguments:@{ @"optimize": @"3" } filenames:@[ temporaryGIFURL.path ]];
 
         NSError *removeError;
         [[NSFileManager defaultManager] removeItemAtURL:temporaryGIFURL error:&removeError];
@@ -72,7 +78,6 @@
 
     NSTask *gifsicleTask = [[NSTask alloc] init];
     gifsicleTask.launchPath = [[NSBundle mainBundle] pathForResource:@"gifsicle" ofType:nil];
-    gifsicleTask.currentDirectoryPath = path;
 
     NSArray *argumentsArray = [self argumentsArrayFromDictionary:arguments];
     argumentsArray = [argumentsArray arrayByAddingObjectsFromArray:filenames];
