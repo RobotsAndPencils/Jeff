@@ -11,6 +11,7 @@
 #import <libextobjc/EXTKeyPathCoding.h>
 #import <RoboKit/RBKCommonUtils.h>
 
+#import "NSError+Jeff.h"
 #import "Constants.h"
 
 static void *JEFRecordingsManagerContext = &JEFRecordingsManagerContext;
@@ -162,7 +163,10 @@ typedef void (^JEFUploaderCompletionBlock)(BOOL, JEFRecording *, NSError *);
     DBPath *filePath = [[DBPath root] childPath:name];
     DBError *error;
     DBFile *newFile = [[DBFilesystem sharedFilesystem] createFile:filePath error:&error];
-    if (!newFile || error) {
+    if (!newFile) {
+        if (!error) {
+            error = [DBError fileCreationError];
+        }
         if (completion) completion(NO, nil, error);
         return;
     }
