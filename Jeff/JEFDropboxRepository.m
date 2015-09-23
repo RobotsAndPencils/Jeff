@@ -33,6 +33,8 @@
     _recordings = @[ ];
     _openRecordingPaths = [NSMutableSet set];
 
+    [self setupDropboxFilesystem];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupDropboxFilesystem) name:JEFSyncingServiceAccountStateChanged object:nil];
 
     return self;
