@@ -1,0 +1,17 @@
+{
+  "name": "MASShortcut",
+  "version": "1.2.3",
+  "summary": "Modern framework for managing global keyboard shortcuts compatible with Mac App Store",
+  "homepage": "https://github.com/sonoramac/MASShortcut",
+  "authors": {
+    "Vadim Shpakovski": "vadim@shpakovski.com"
+  },
+  "license": "BSD 2-clause",
+  "source": {
+    "git": "git@github.com:shpakovski/MASShortcut.git",
+    "tag": "1.2.3"
+  },
+  "source_files": "*.{h,m}",
+  "frameworks": "Carbon",
+  "requires_arc": true
+}

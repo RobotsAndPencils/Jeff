@@ -1,0 +1,1 @@
+ROBOKIT_OTHER_LDFLAGS = -framework "Cocoa" -framework "Foundation"
