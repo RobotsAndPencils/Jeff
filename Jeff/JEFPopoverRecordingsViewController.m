@@ -180,7 +180,11 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 #pragma mark - NSTableViewDelegate
 
 - (void)didDoubleClickRow:(NSTableView *)sender {
-    NSInteger clickedRow = sender.selectedRow;
+    NSInteger clickedRow = sender.clickedRow;
+    if (clickedRow < 0 || clickedRow > self.recordingsController.recordings.count - 1) {
+        return;
+    }
+    
     JEFRecording *recording = self.recordingsController.recordings[clickedRow];
 
     [self.recordingsController fetchPublicURLForRecording:recording completion:^(NSURL *url) {
