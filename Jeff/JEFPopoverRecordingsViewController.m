@@ -61,6 +61,8 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     [self.recordingsController addObserver:self forKeyPath:@keypath(self.recordingsController, isDoingInitialSync) options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:[@"values." stringByAppendingString:JEFRecordScreenShortcutKey] options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:[@"values." stringByAppendingString:JEFRecordSelectionShortcutKey] options:NSKeyValueObservingOptionInitial context:PopoverContentViewControllerContext];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteRecording:) name:@"JEFDeleteRecordingNotification" object:nil];
 }
 
 - (void)viewDidAppear {
@@ -74,6 +76,7 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     [self.recordingsController removeObserver:self forKeyPath:@keypath(self.recordingsController, recordings)];
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:[@"values." stringByAppendingString:JEFRecordScreenShortcutKey] context:PopoverContentViewControllerContext];
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self forKeyPath:[@"values." stringByAppendingString:JEFRecordSelectionShortcutKey] context:PopoverContentViewControllerContext];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"JEFDeleteRecordingNotification" object:nil];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -155,6 +158,25 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     }];
 
     [[Mixpanel sharedInstance] track:@"Copy Link"];
+}
+
+- (void)deleteRecording:(NSNotification *)notification {
+    JEFRecording *recording = notification.object;
+    if (!recording || !recording.path || RBKIsEmpty(recording.path.stringValue)) {
+        return;
+    }
+
+    DBError *error;
+    BOOL success = [[DBFilesystem sharedFilesystem] deletePath:recording.path error:&error];
+    if (!success) {
+        RBKLog(@"Error deleting recording: %@", error);
+        return;
+    }
+    recording.deleted = YES;
+
+    [self.recordingsController removeRecording:recording];
+
+    [[Mixpanel sharedInstance] track:@"Delete Recording"];
 }
 
 #pragma mark - NSTableViewDelegate
@@ -246,26 +268,6 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (void)updateDropboxSyncingView:(BOOL)visible {
     self.dropboxSyncingContainerView.hidden = !visible;
-}
-
-- (IBAction)deleteRecording:(id)sender {
-    NSButton *button = (NSButton *)sender;
-    JEFRecording *recording = ((NSTableCellView *)button.superview.superview).objectValue;
-
-    if (!recording || !recording.path || RBKIsEmpty(recording.path.stringValue)) {
-        return;
-    }
-
-    DBError *error;
-    BOOL success = [[DBFilesystem sharedFilesystem] deletePath:recording.path error:&error];
-    if (!success) {
-        RBKLog(@"Error deleting recording: %@", error);
-        return;
-    }
-
-    [self.recordingsController removeRecording:recording];
-
-    [[Mixpanel sharedInstance] track:@"Delete Recording"];
 }
 
 #pragma mark - NSSharingServicePickerDelegate

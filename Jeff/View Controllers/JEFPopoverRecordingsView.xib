@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A388a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="JEFPopoverRecordingsViewController">
@@ -28,9 +28,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView wantsLayer="YES" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="200" viewBased="YES" id="MQ6-Mz-nyH" customClass="RBLTableView">
+                                <rect key="frame" x="0.0" y="0.0" width="326" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="1" height="1"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
                                     <tableColumn width="325" minWidth="40" maxWidth="1000" id="prl-zX-qfX">
@@ -108,7 +109,7 @@
                                                                     <font key="font" metaFont="system"/>
                                                                 </buttonCell>
                                                                 <connections>
-                                                                    <action selector="deleteRecording:" target="-2" id="ooH-NC-9kS"/>
+                                                                    <action selector="deleteRecording:" target="Hyu-Hf-Cds" id="D8a-vk-3DR"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -141,10 +142,22 @@
                                                                     <constraint firstAttribute="width" constant="100" id="HJf-cQ-31P"/>
                                                                 </constraints>
                                                             </progressIndicator>
+                                                            <button wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7HH-76-XFk" userLabel="Cancel Button">
+                                                                <rect key="frame" x="220" y="91" width="17" height="18"/>
+                                                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="NSStopProgressFreestandingTemplate" imagePosition="only" alignment="center" inset="2" id="xC7-qz-Z44">
+                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                    <font key="font" metaFont="smallSystemBold"/>
+                                                                </buttonCell>
+                                                                <connections>
+                                                                    <action selector="deleteRecording:" target="Hyu-Hf-Cds" id="Us4-eo-LJ6"/>
+                                                                </connections>
+                                                            </button>
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstAttribute="centerX" secondItem="2Zv-da-qr5" secondAttribute="centerX" id="2mJ-3G-YDK"/>
                                                             <constraint firstItem="n2f-rC-qYm" firstAttribute="centerY" secondItem="2Zv-da-qr5" secondAttribute="centerY" constant="-26" id="8y1-a0-6bW"/>
+                                                            <constraint firstItem="7HH-76-XFk" firstAttribute="leading" secondItem="n2f-rC-qYm" secondAttribute="trailing" constant="8" id="DSN-L6-OFP"/>
+                                                            <constraint firstItem="7HH-76-XFk" firstAttribute="centerY" secondItem="n2f-rC-qYm" secondAttribute="centerY" id="QvN-s1-zBZ"/>
                                                             <constraint firstItem="n2f-rC-qYm" firstAttribute="centerX" secondItem="2Zv-da-qr5" secondAttribute="centerX" id="SJW-Tx-V8K"/>
                                                             <constraint firstAttribute="centerY" secondItem="n2f-rC-qYm" secondAttribute="centerY" id="uge-Zm-H6f"/>
                                                         </constraints>
@@ -164,6 +177,7 @@
                                                     <constraint firstItem="ehu-xK-uYs" firstAttribute="leading" secondItem="Hyu-Hf-Cds" secondAttribute="leading" id="yCY-7A-G6b"/>
                                                 </constraints>
                                                 <connections>
+                                                    <outlet property="cancelButton" destination="7HH-76-XFk" id="EcE-L7-1hR"/>
                                                     <outlet property="imageView" destination="4It-IS-v7G" id="JcE-rN-Blv"/>
                                                     <outlet property="infoContainerVisualEffectView" destination="nW7-FR-CwG" id="u5w-ld-UTl"/>
                                                     <outlet property="linkButton" destination="fF6-Gn-aas" id="IlE-vt-xmd"/>
@@ -258,5 +272,6 @@
         <image name="CopyLinkButton" width="22" height="22"/>
         <image name="Delete" width="16" height="16"/>
         <image name="NSShareTemplate" width="11" height="16"/>
+        <image name="NSStopProgressFreestandingTemplate" width="14" height="14"/>
     </resources>
 </document>
