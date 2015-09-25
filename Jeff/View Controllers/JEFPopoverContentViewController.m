@@ -127,8 +127,6 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 - (void)viewDidAppear {
     [super viewDidAppear];
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:JEFSyncingServiceAccountStateChanged object:nil];
-
     // If preferences was shown before the popover closed, keep it shown when re-opening
     if (self.popoverContent == JEFPopoverContentPreferences) return;
     // Otherwise update the type of the VC for the current account state
