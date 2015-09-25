@@ -6,7 +6,7 @@ PODS:
   - MASShortcut (1.2.3)
   - OCMock (3.1.1)
   - pop (1.0.8)
-  - RoboKit (0.3.3)
+  - RoboKit (0.3.6)
 
 DEPENDENCIES:
   - HockeySDK-Mac (~> 2.1.0)
@@ -23,12 +23,17 @@ EXTERNAL SOURCES:
   RoboKit:
     :git: git@github.com:RobotsAndPencils/RoboKit.git
 
+CHECKOUT OPTIONS:
+  RoboKit:
+    :commit: 6429cba42397ab61b592aa4152573c10862d17b0
+    :git: git@github.com:RobotsAndPencils/RoboKit.git
+
 SPEC CHECKSUMS:
   HockeySDK-Mac: c9a7743fbe181e1a1dd027043d708d65ce4c2726
   libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
   MASShortcut: baaf44a587b4c5fed4d68d9457c4aa02218ec64c
   OCMock: a73f69963a8a542b0b343e2617650e4dca0cbbc2
   pop: bb773ae2c791ca2629de13b347e7a8b450fa6a57
-  RoboKit: 0d6a9b2c1d18a9b9b4778431baf1f2f24395034e
+  RoboKit: 15aea97275f20477ded4a7c76433fecdd3b6322a
 
 COCOAPODS: 0.38.2
