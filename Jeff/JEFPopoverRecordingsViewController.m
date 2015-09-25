@@ -157,26 +157,6 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     [[Mixpanel sharedInstance] track:@"Copy Link"];
 }
 
-- (IBAction)deleteRecording:(id)sender {
-    NSButton *button = (NSButton *)sender;
-    JEFRecording *recording = ((NSTableCellView *)button.superview.superview).objectValue;
-
-    if (!recording || !recording.path || RBKIsEmpty(recording.path.stringValue)) {
-        return;
-    }
-
-    DBError *error;
-    BOOL success = [[DBFilesystem sharedFilesystem] deletePath:recording.path error:&error];
-    if (!success) {
-        RBKLog(@"Error deleting recording: %@", error);
-        return;
-    }
-
-    [self.recordingsController removeRecording:recording];
-
-    [[Mixpanel sharedInstance] track:@"Delete Recording"];
-}
-
 #pragma mark - NSTableViewDelegate
 
 - (void)didDoubleClickRow:(NSTableView *)sender {
@@ -207,26 +187,6 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
     [view setup];
 
     return view;
-}
-
-#pragma mark - NSTableView Drag and Drop
-
-- (BOOL)tableView:(NSTableView *)tableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
-    // Only one recording can be dragged/selected at a time
-    JEFRecording *draggedRecording = self.recordingsController.recordings[rowIndexes.firstIndex];
-    [pboard declareTypes:@[ NSCreateFileContentsPboardType(@"gif"), NSFilesPromisePboardType, NSPasteboardTypeString ] owner:self];
-    [pboard setData:draggedRecording.data forType:NSCreateFileContentsPboardType(@"gif")];
-    [pboard setPropertyList:@[ draggedRecording.path.stringValue.pathExtension ] forType:NSFilesPromisePboardType];
-    [pboard setString:draggedRecording.path.stringValue forType:NSPasteboardTypeString];
-
-    return YES;
-}
-
-- (NSArray *)tableView:(NSTableView *)tableView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedRowsWithIndexes:(NSIndexSet *)indexSet {
-    JEFRecording *draggedRecording = self.recordingsController.recordings[indexSet.firstIndex];
-    [draggedRecording.data writeToFile:[dropDestination.path stringByAppendingPathComponent:draggedRecording.path.stringValue] atomically:YES];
-    [[Mixpanel sharedInstance] track:@"Drag Recording"];
-    return @[ draggedRecording.path.stringValue ];
 }
 
 #pragma mark - Private
@@ -286,6 +246,26 @@ static void *PopoverContentViewControllerContext = &PopoverContentViewController
 
 - (void)updateDropboxSyncingView:(BOOL)visible {
     self.dropboxSyncingContainerView.hidden = !visible;
+}
+
+- (IBAction)deleteRecording:(id)sender {
+    NSButton *button = (NSButton *)sender;
+    JEFRecording *recording = ((NSTableCellView *)button.superview.superview).objectValue;
+
+    if (!recording || !recording.path || RBKIsEmpty(recording.path.stringValue)) {
+        return;
+    }
+
+    DBError *error;
+    BOOL success = [[DBFilesystem sharedFilesystem] deletePath:recording.path error:&error];
+    if (!success) {
+        RBKLog(@"Error deleting recording: %@", error);
+        return;
+    }
+
+    [self.recordingsController removeRecording:recording];
+
+    [[Mixpanel sharedInstance] track:@"Delete Recording"];
 }
 
 #pragma mark - NSSharingServicePickerDelegate
