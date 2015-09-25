@@ -2,9 +2,8 @@ CLANG_CXX_LANGUAGE_STANDARD = c++11
 CLANG_CXX_LIBRARY = libc++
 FRAMEWORK_SEARCH_PATHS = "$(PODS_ROOT)/HockeySDK-Mac/HockeySDK-Mac" $(inherited) "$(DEVELOPER_LIBRARY_DIR)/Frameworks" "$(PLATFORM_DIR)/Developer/Library/Frameworks"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/HockeySDK-Mac" "${PODS_ROOT}/Headers/Public/MASShortcut" "${PODS_ROOT}/Headers/Public/OCMock" "${PODS_ROOT}/Headers/Public/RoboKit" "${PODS_ROOT}/Headers/Public/libextobjc" "${PODS_ROOT}/Headers/Public/pop"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/HockeySDK-Mac" "${PODS_ROOT}/Headers/Public/HockeySDK-Mac/HockeySDK" "${PODS_ROOT}/Headers/Public/MASShortcut" "${PODS_ROOT}/Headers/Public/OCMock" "${PODS_ROOT}/Headers/Public/RoboKit" "${PODS_ROOT}/Headers/Public/libextobjc" "${PODS_ROOT}/Headers/Public/pop"
 LD_RUNPATH_SEARCH_PATHS = @loader_path/../Frameworks
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/HockeySDK-Mac" -isystem "${PODS_ROOT}/Headers/Public/MASShortcut" -isystem "${PODS_ROOT}/Headers/Public/OCMock" -isystem "${PODS_ROOT}/Headers/Public/RoboKit" -isystem "${PODS_ROOT}/Headers/Public/libextobjc" -isystem "${PODS_ROOT}/Headers/Public/pop"
-OTHER_LDFLAGS = -ObjC -l"Pods-JeffTests-HockeySDK-Mac" -l"Pods-JeffTests-MASShortcut" -l"Pods-JeffTests-OCMock" -l"Pods-JeffTests-RoboKit" -l"Pods-JeffTests-libextobjc" -l"Pods-JeffTests-pop" -l"c++" -framework "Carbon" -framework "Cocoa" -framework "Foundation" -framework "HockeySDK" -framework "XCTest"
-OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/HockeySDK-Mac" -isystem "${PODS_ROOT}/Headers/Public/HockeySDK-Mac/HockeySDK" -isystem "${PODS_ROOT}/Headers/Public/MASShortcut" -isystem "${PODS_ROOT}/Headers/Public/OCMock" -isystem "${PODS_ROOT}/Headers/Public/RoboKit" -isystem "${PODS_ROOT}/Headers/Public/libextobjc" -isystem "${PODS_ROOT}/Headers/Public/pop"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"MASShortcut" -l"OCMock" -l"RoboKit" -l"c++" -l"libextobjc" -l"pop" -framework "Carbon" -framework "Cocoa" -framework "Foundation" -framework "HockeySDK" -framework "XCTest"
 PODS_ROOT = ${SRCROOT}/Pods
