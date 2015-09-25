@@ -19,6 +19,8 @@
 #import <Cocoa/Cocoa.h>
 
 /*
- * Check if device is retina
+ * Check if device is retina or retina HD
  */
-#define IS_RETINA() ([[NSScreen mainScreen] backingScaleFactor] == 2.0)
+#define IS_RETINA() ([[UIScreen mainScreen] scale] == 2.0)
+#define IS_RETINA_HD() ([[UIScreen mainScreen] scale] == 3.0)
+#define SINGLE_PIXEL_LINE_WIDTH() (1.0 / [[UIScreen mainScreen] scale])

@@ -1,6 +1,6 @@
 {
   "name": "RoboKit",
-  "version": "0.3.3",
+  "version": "0.3.6",
   "summary": "RoboKit is a small collection of utilities and categories.",
   "homepage": "https://github.com/RobotsAndPencils/RoboKit",
   "license": {
@@ -14,7 +14,7 @@
   },
   "source": {
     "git": "https://github.com/RobotsAndPencils/RoboKit.git",
-    "tag": "0.3.3"
+    "tag": "0.3.6"
   },
   "platforms": {
     "osx": "10.9",

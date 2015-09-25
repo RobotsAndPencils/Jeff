@@ -9,7 +9,10 @@ RoboKit is collection of categories that we've found useful and potentially reus
 ### Cocoapods
 RoboKit is not yet in the cocoapods Add the following to your podfile
 
-`pod 'RoboKit', :git => 'git@github.com:RobotsAndPencils/RoboKit.git'`
+```
+source 'git@github.com:RobotsAndPencils/RNPPrivateSpecs.git'
+pod 'RoboKit'
+```
 
 ### Manual
 1. Add RoboKit.xcodeproj to your project 
