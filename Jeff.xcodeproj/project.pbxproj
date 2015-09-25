@@ -16,6 +16,7 @@
 		CA15EB141A0538AD00B017A6 /* JEFRecordingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA15EB131A0538AD00B017A6 /* JEFRecordingsController.m */; };
 		CA15EB1C1A05667B00B017A6 /* JEFDropboxRepositoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA15EB1B1A05667B00B017A6 /* JEFDropboxRepositoryTests.m */; };
 		CA1F990C192F0ACB00C3EF33 /* StartAtLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1F990B192F0ACB00C3EF33 /* StartAtLoginController.m */; };
+		CA283ECD1BB3665300466106 /* NSError+Jeff.m in Sources */ = {isa = PBXBuildFile; fileRef = CA283ECC1BB3665300466106 /* NSError+Jeff.m */; };
 		CA455B2C18B83EB900F9A541 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA455B2B18B83EB900F9A541 /* Cocoa.framework */; };
 		CA455B3618B83EB900F9A541 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CA455B3418B83EB900F9A541 /* InfoPlist.strings */; };
 		CA455B3818B83EB900F9A541 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA455B3718B83EB900F9A541 /* main.m */; };
@@ -157,6 +158,8 @@
 		CA1F98FF192F0A5F00C3EF33 /* JeffLauncher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JeffLauncher.xcodeproj; path = JeffLauncher/JeffLauncher.xcodeproj; sourceTree = "<group>"; };
 		CA1F990A192F0ACB00C3EF33 /* StartAtLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartAtLoginController.h; sourceTree = "<group>"; };
 		CA1F990B192F0ACB00C3EF33 /* StartAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartAtLoginController.m; sourceTree = "<group>"; };
+		CA283ECB1BB3665300466106 /* NSError+Jeff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSError+Jeff.h"; path = "Categories/NSError+Jeff.h"; sourceTree = "<group>"; };
+		CA283ECC1BB3665300466106 /* NSError+Jeff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSError+Jeff.m"; path = "Categories/NSError+Jeff.m"; sourceTree = "<group>"; };
 		CA455B2818B83EB900F9A541 /* Jeff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jeff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA455B2B18B83EB900F9A541 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		CA455B2E18B83EB900F9A541 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -476,6 +479,8 @@
 				CAB5E84C19FCA3CF00849330 /* NSSharingService+ActivityType.m */,
 				CAE64D4C1A014F1900845E7B /* NSMutableArray+JEFSortedInsert.h */,
 				CAE64D4D1A014F1900845E7B /* NSMutableArray+JEFSortedInsert.m */,
+				CA283ECB1BB3665300466106 /* NSError+Jeff.h */,
+				CA283ECC1BB3665300466106 /* NSError+Jeff.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -920,6 +925,7 @@
 				CA1F990C192F0ACB00C3EF33 /* StartAtLoginController.m in Sources */,
 				CAF30B6118D5281100D7BC9D /* INPopoverController.m in Sources */,
 				CAE8F9C71991CBFF00F24D4C /* RSVerticallyCenteredTextFieldCell.m in Sources */,
+				CA283ECD1BB3665300466106 /* NSError+Jeff.m in Sources */,
 				CA4D988418D6D2A900EFE4FD /* JEFRecordingCellView.m in Sources */,
 				CAC8D92819FC5A27007BD04F /* RBLScrolling.m in Sources */,
 				CAF30B6418D5281100D7BC9D /* INPopoverWindowFrame.m in Sources */,

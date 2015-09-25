@@ -87,7 +87,7 @@
     self.captureTimer = nil;
     self.isRecording = NO;
     
-    if (self.completion) self.completion([NSURL URLWithString:self.path]);
+    if (self.completion) self.completion([NSURL fileURLWithPath:self.path]);
 }
 
 #pragma mark Private

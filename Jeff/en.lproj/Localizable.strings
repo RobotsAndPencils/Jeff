@@ -7,6 +7,8 @@
 "GIFPasteboardNotificationBody" = "The direct URL is ready to be pasted.";
 "UploadFailedAlertTitle" = "Jeff couldn't upload your GIF";
 
+"DBErrorFileCreation" = "Something went wrong when Jeff tried to add your new recording to your Dropbox account.";
+
 "RecordSelectionInfo" = "Click and drag over the part of the screen that you want Jeff to record.";
 "RecordButtonTitle" = "Record";
 "StopButtonTitle" = "Stop";

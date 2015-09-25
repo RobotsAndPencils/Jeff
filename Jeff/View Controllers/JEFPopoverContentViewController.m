@@ -503,6 +503,18 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
         [self.recorder recordRect:localQuartzRect screen:selectedScreen completion:^(NSURL *framesURL) {
             [self.overlayWindows makeObjectsPerformSelector:@selector(close)];
             [self.overlayWindows removeAllObjects];
+            
+            if (!framesURL) {
+                RBKLog(@"URL for recording frames is nil, bailing on conversion.");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSAlert *alert = [[NSAlert alloc] init];
+                    alert.messageText = NSLocalizedString(@"UploadFailedAlertTitle", @"The title for the message that the recording upload failed");
+                    [alert addButtonWithTitle:@"OK"];
+                    alert.informativeText = @"There was an issue saving the GIF frames that were recorded. Try restarting Jeff to fix this issue.";
+                    [alert runModal];
+                });
+                return;
+            }
 
             NSError *framesError;
             NSArray *frames = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:framesURL includingPropertiesForKeys:nil options:0 error:&framesError];
