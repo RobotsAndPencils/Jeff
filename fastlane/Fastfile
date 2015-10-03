@@ -1,0 +1,59 @@
+# vim: autoindent tabstop=2 shiftwidth=2 expandtab softtabstop=2 filetype=ruby
+fastlane_version "1.30.2"
+default_platform :mac
+
+platform :mac do
+  before_all do
+    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
+  end
+
+  lane :test do
+    xctest(
+      workspace: "Jeff",
+      scheme: "Jeff",
+      configuration: "Debug"
+    )
+  end
+
+  desc "Submit a new Beta Build to HockeyApp"
+  lane :beta do
+    ensure_git_status_clean
+    increment_build_number
+
+    xcarchive(
+      workspace: "Jeff.xcworkspace",
+      scheme: "Jeff",
+      configuration: "Beta Release"
+    ) 
+
+    # Create zip of app and dSYM for HockeyApp
+    sh "zip -r ../Jeff.app.zip ../Jeff.xcarchive/Products/Applications/Jeff.app"
+    dsym_zip
+    
+    # hockey(
+    #   api_token: "",
+    #   ipa: "Jeff.app.zip"
+    # )
+
+    # Cleanup build artifacts
+    sh "rm -r ../Jeff.xcarchive ../Jeff.app.zip ../Jeff.app.dSYM.zip"
+
+    build_number = get_build_number(xcodeproj: "Jeff.xcodeproj")
+    version_number = get_version_number(xcodeproj: "Jeff.xcodeproj")
+    commit_version_bump message: "Bump build number to #{build_number}", xcodeproj: "Jeff.xcodeproj"
+    add_git_tag tag: "#{version_number}b#{build_number}"
+  end
+
+  after_all do |lane|
+    #slack(
+    #  message: "Successfully deployed new version of Jeff to HockeyApp."
+    #)
+  end
+
+  error do |lane, exception|
+    #slack(
+    #  message: exception.message,
+    #  success: false
+    #)
+  end
+end

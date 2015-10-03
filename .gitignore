@@ -22,3 +22,5 @@ DerivedData
 *.swp
 
 .idea
+
+fastlane/report.xml
