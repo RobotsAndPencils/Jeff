@@ -1089,7 +1089,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Robots and Pencils Inc. (PBH8V487HB)";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				DROPBOX_CALLBACK_URI = "db-***REMOVED***";
 				DROPBOX_KEY = ***REMOVED***;
@@ -1128,7 +1128,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Robots and Pencils Inc. (PBH8V487HB)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				DROPBOX_CALLBACK_URI = "db-***REMOVED***";
 				DROPBOX_KEY = ***REMOVED***;
@@ -1248,7 +1248,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Robots and Pencils Inc. (PBH8V487HB)";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				DROPBOX_CALLBACK_URI = "db-***REMOVED***";
 				DROPBOX_KEY = ***REMOVED***;
@@ -1311,7 +1311,7 @@
 				CA6E319F19E4CD3300C4B906 /* Beta Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		CA455B5918B83EBA00F9A541 /* Build configuration list for PBXNativeTarget "Jeff" */ = {
 			isa = XCConfigurationList;
@@ -1321,7 +1321,7 @@
 				CA6E31A019E4CD3300C4B906 /* Beta Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		CA455B5C18B83EBA00F9A541 /* Build configuration list for PBXNativeTarget "JeffTests" */ = {
 			isa = XCConfigurationList;
@@ -1331,7 +1331,7 @@
 				CA6E31A119E4CD3300C4B906 /* Beta Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
