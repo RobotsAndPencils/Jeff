@@ -467,7 +467,7 @@
 				CADB5F3418E3D71900832B7A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		CADB5F3518E3D71900832B7A /* Build configuration list for PBXNativeTarget "JeffLauncher" */ = {
 			isa = XCConfigurationList;
@@ -476,7 +476,7 @@
 				CADB5F3718E3D71900832B7A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		CADB5F3818E3D71900832B7A /* Build configuration list for PBXNativeTarget "JeffLauncherTests" */ = {
 			isa = XCConfigurationList;
@@ -485,7 +485,7 @@
 				CADB5F3A18E3D71900832B7A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
