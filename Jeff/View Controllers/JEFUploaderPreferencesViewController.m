@@ -141,7 +141,7 @@
     if (!twitterService || ![twitterService canPerformWithItems:nil]) return;
 
     twitterService.recipients = @[ @"jefftheapp" ];
-    [twitterService performWithItems:nil];
+    [twitterService performWithItems:@[]];
 }
 
 - (IBAction)openOpenSourceAcknowledgements:(id)sender {
