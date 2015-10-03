@@ -14,6 +14,13 @@ static void *JEFRecordingCellViewContext = &JEFRecordingCellViewContext;
 
 @interface JEFRecordingCellView ()
 
+@property (nonatomic, weak) IBOutlet NSVisualEffectView *infoContainerVisualEffectView;
+@property (nonatomic, weak) IBOutlet NSButton *cancelButton;
+@property (nonatomic, weak) IBOutlet NSTextField *statusLabel;
+@property (nonatomic, weak) IBOutlet NSProgressIndicator *progressIndicator;
+@property (nonatomic, weak) IBOutlet NSVisualEffectView *syncStatusContainerView;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *syncStatusLabelVerticalSpaceConstraint;
+
 @property (nonatomic, assign) BOOL isSetup;
 
 @end
@@ -125,7 +132,14 @@ static void *JEFRecordingCellViewContext = &JEFRecordingCellViewContext;
         self.progressIndicator.hidden = !isUploading;
         self.progressIndicator.doubleValue = progress;
         self.imageView.image = posterFrameImage;
+        self.cancelButton.hidden = !isUploading;
     });
+}
+
+#pragma mark - Actions
+
+- (IBAction)deleteRecording:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"JEFDeleteRecordingNotification" object:self.objectValue];
 }
 
 @end

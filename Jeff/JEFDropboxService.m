@@ -37,12 +37,14 @@ typedef void (^JEFUploaderCompletionBlock)(BOOL, JEFRecording *, NSError *);
     _dateFormatter.dateFormat = @"MMM d, yyyy, h.mm.ss.SS a";
 
     [self addObserver:self forKeyPath:@keypath(self, totalUploadProgress.fractionCompleted) options:0 context:JEFRecordingsManagerContext];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteRecording:) name:@"JEFDeleteRecordingNotification" object:nil];
 
     return self;
 }
 
 - (void)dealloc {
     [self removeObserver:self forKeyPath:@keypath(self, totalUploadProgress.fractionCompleted) context:JEFRecordingsManagerContext];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"JEFDeleteRecordingNotification" object:nil];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -111,6 +113,11 @@ typedef void (^JEFUploaderCompletionBlock)(BOOL, JEFRecording *, NSError *);
 
         __weak __typeof(self) weakSelf = self;
         recording.uploadHandler = ^(JEFRecording *uploadedRecording) {
+            if (RBKIsEmpty(recording.path.stringValue) || recording.deleted) {
+                // Recording was deleted or cancelled
+                return;
+            }
+
             [weakSelf copyURLStringToPasteboard:uploadedRecording completion:^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:JEFRecordingWasSharedNotification object:uploadedRecording];
             }];
@@ -173,7 +180,7 @@ typedef void (^JEFUploaderCompletionBlock)(BOOL, JEFRecording *, NSError *);
 
     NSData *fileData = [NSData dataWithContentsOfURL:url];
     BOOL success = [newFile writeData:fileData error:&error];
-    if (!success && error) {
+    if (!success) {
         if (completion) completion(NO, nil, error);
         return;
     }
@@ -185,6 +192,21 @@ typedef void (^JEFUploaderCompletionBlock)(BOOL, JEFRecording *, NSError *);
 - (NSString *)gifFilenameForCurrentDateTime {
     NSString *filename = [NSLocalizedString(@"RecordingFilenamePrefix", @"Prefix for new GIF filenames") stringByAppendingString:[[self.dateFormatter stringFromDate:[NSDate date]] stringByAppendingPathExtension:@"gif"]];
     return filename;
+}
+
+- (void)deleteRecording:(NSNotification *)notification {
+    JEFRecording *recording = notification.object;
+    if (!recording) {
+        return;
+    }
+
+    // Complete the upload progress and remove it
+    [recording removeObserver:self forKeyPath:@keypath(recording, progress) context:JEFRecordingsManagerContext];
+    NSProgress *recordingProgress = self.recordingUploadProgresses[recording.path];
+    if (recordingProgress) {
+        recordingProgress.completedUnitCount = recordingProgress.totalUnitCount;
+    }
+    [self.recordingUploadProgresses removeObjectForKey:recording.path];
 }
 
 @end
