@@ -98,6 +98,8 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
     self.recordSelectionButton.cornerRadius = CGRectGetHeight(self.recordSelectionButton.frame) / 2.0;
     [self setStyleForButton:self.recordSelectionButton];
 
+    self.headerContainerView.material = NSVisualEffectMaterialTitlebar;
+
     // Setup child view controllers
     self.uploaderSetupViewController = [[JEFPopoverUploaderSetupViewController alloc] init];
     [self addChildViewController:self.uploaderSetupViewController];
