@@ -6,19 +6,21 @@
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-#import "JEFPopoverContentViewController.h"
-#import "INPopoverController.h"
 #import "JEFAppController.h"
-#import "JEFRecordingsManager.h"
+
 #import <Dropbox/DBAccountManager.h>
 #import <libextobjc/EXTKeyPathCoding.h>
-#import "JEFQuartzRecorder.h"
+#import "INPopoverController.h"
 
-NSString *const JEFOpenPopoverNotification = @"JEFOpenPopoverNotification";
-NSString *const JEFClosePopoverNotification = @"JEFClosePopoverNotification";
-NSString *const JEFSetStatusViewNotRecordingNotification = @"JEFSetStatusViewNotRecordingNotification";
-NSString *const JEFSetStatusViewRecordingNotification = @"JEFSetStatusViewRecordingNotification";
-NSString *const JEFStopRecordingNotification = @"JEFStopRecordingNotification";
+#import "JEFDropboxRepository.h"
+#import "JEFPopoverContentViewController.h"
+#import "JEFQuartzRecorder.h"
+#import "JEFDropboxService.h"
+#import "JEFRecordingsController.h"
+#import "JEFRecordingsRepository.h"
+#import "JEFDropboxRepository.h"
+#import "Constants.h"
+
 CGFloat const JEFPopoverVerticalOffset = -3.0;
 
 @interface JEFAppController ()
@@ -27,7 +29,9 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
 @property (strong, nonatomic) INPopoverController *popover;
 @property (strong, nonatomic) id popoverTransiencyMonitor;
 @property (strong, nonatomic) NSMutableArray *observers;
-@property (strong, nonatomic) JEFRecordingsManager *recordingsManager;
+@property (strong, nonatomic) JEFRecordingsController *recordingsController;
+@property (strong, nonatomic) NSObject<JEFSyncingService> *syncingService;
+@property (strong, nonatomic) id<JEFRecordingsRepository> recordingsRepository;
 @property (strong, nonatomic) JEFQuartzRecorder *recorder;
 
 @end
@@ -39,7 +43,9 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
     if (!self) return nil;
 
     _observers = [NSMutableArray array];
-    _recordingsManager = [[JEFRecordingsManager alloc] init];
+    _syncingService = [[JEFDropboxService alloc] init];
+    _recordingsRepository = [[JEFDropboxRepository alloc] init];
+    _recordingsController = [[JEFRecordingsController alloc] initWithSyncingService:_syncingService recordingsRepo:_recordingsRepository];
     _recorder = [[JEFQuartzRecorder alloc] init];
 
     [self setupStatusItem];
@@ -59,7 +65,7 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
         [weakSelf setStatusItemActionRecord:YES];
     }]];
 
-    [self.recordingsManager addObserver:self forKeyPath:@keypath(self.recordingsManager, totalUploadProgress.fractionCompleted) options:0 context:NULL];
+    [self.syncingService addObserver:self forKeyPath:@keypath(self.syncingService, totalUploadProgress.fractionCompleted) options:0 context:NULL];
 
     // If Dropbox isn't set up yet, prompt the user by displaying the popover
     BOOL dropboxLinked = ([DBAccountManager sharedManager].linkedAccount != nil);
@@ -77,12 +83,13 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
     for (id observer in self.observers) {
         [[NSNotificationCenter defaultCenter] removeObserver:observer];
     }
+    [self.syncingService removeObserver:self forKeyPath:@keypath(self.syncingService, totalUploadProgress.fractionCompleted)];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if (self.recordingsManager.totalUploadProgress && !self.recorder.isRecording) {
+    if (self.syncingService.totalUploadProgress && !self.recorder.isRecording) {
         // Images are sequenced 1-31
-        NSInteger imageNumber = (NSInteger)floor(self.recordingsManager.totalUploadProgress.fractionCompleted * 30.0) + 1;
+        NSInteger imageNumber = (NSInteger)floor(self.syncingService.totalUploadProgress.fractionCompleted * 30.0) + 1;
         self.statusItem.button.image = [NSImage imageNamed:[NSString stringWithFormat:@"jeff_menu_ic_uploading_%ld", imageNumber]];
     }
     else {
@@ -101,7 +108,7 @@ CGFloat const JEFPopoverVerticalOffset = -3.0;
     self.popover = [[INPopoverController alloc] init];
     JEFPopoverContentViewController *popoverController = [[NSStoryboard storyboardWithName:@"JEFPopoverStoryboard" bundle:nil] instantiateInitialController];
     popoverController.recorder = self.recorder;
-    popoverController.recordingsManager = self.recordingsManager;
+    popoverController.recordingsController = self.recordingsController;
     self.popover.contentViewController = popoverController;
     self.popover.animates = NO;
     self.popover.closesWhenApplicationBecomesInactive = YES;

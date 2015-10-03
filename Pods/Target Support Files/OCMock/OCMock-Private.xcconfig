@@ -1,0 +1,7 @@
+#include "OCMock.xcconfig"
+FRAMEWORK_SEARCH_PATHS = ${OCMOCK_FRAMEWORK_SEARCH_PATHS}
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/OCMock" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/HockeySDK-Mac" "${PODS_ROOT}/Headers/Public/HockeySDK-Mac/HockeySDK" "${PODS_ROOT}/Headers/Public/MASShortcut" "${PODS_ROOT}/Headers/Public/OCMock" "${PODS_ROOT}/Headers/Public/RoboKit" "${PODS_ROOT}/Headers/Public/libextobjc" "${PODS_ROOT}/Headers/Public/pop"
+OTHER_LDFLAGS = ${OCMOCK_OTHER_LDFLAGS}
+PODS_ROOT = ${SRCROOT}
+SKIP_INSTALL = YES

@@ -1,7 +1,0 @@
-#include "Pods-HockeySDK-Mac.xcconfig"
-FRAMEWORK_SEARCH_PATHS = ${PODS_HOCKEYSDK_MAC_FRAMEWORK_SEARCH_PATHS}
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/HockeySDK-Mac" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/HockeySDK-Mac" "${PODS_ROOT}/Headers/Public/MASShortcut" "${PODS_ROOT}/Headers/Public/RoboKit" "${PODS_ROOT}/Headers/Public/libextobjc" "${PODS_ROOT}/Headers/Public/pop"
-LD_RUNPATH_SEARCH_PATHS = ${PODS_HOCKEYSDK_MAC_LD_RUNPATH_SEARCH_PATHS}
-OTHER_LDFLAGS = ${PODS_HOCKEYSDK_MAC_OTHER_LDFLAGS} -ObjC
-PODS_ROOT = ${SRCROOT}

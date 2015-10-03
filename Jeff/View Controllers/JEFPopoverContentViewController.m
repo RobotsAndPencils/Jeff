@@ -17,7 +17,7 @@
 
 #import "JEFRecording.h"
 #import "JEFQuartzRecorder.h"
-#import "JEFRecordingsManager.h"
+#import "JEFRecordingsController.h"
 #import "JEFConverter.h"
 #import "JEFAppController.h"
 #import "JEFSelectionOverlayWindow.h"
@@ -28,6 +28,7 @@
 #import "Constants.h"
 #import "JEFColoredButton.h"
 #import "RBKCommonUtils.h"
+#import "JEFRecordingsTableViewDataSource.h"
 
 typedef NS_ENUM(NSInteger, JEFPopoverContent) {
     JEFPopoverContentSetup = 0,
@@ -59,6 +60,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 @property (strong, nonatomic) NSMutableArray *overlayWindows;
 @property (assign, nonatomic, getter=isShowingSelection) BOOL showingSelection;
 @property (strong, nonatomic) id stopRecordingObserver;
+@property (strong, nonatomic) JEFConverter *converter;
 
 @end
 
@@ -71,6 +73,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 
     // Initialize properties
     self.overlayWindows = [NSMutableArray array];
+    self.converter = [[JEFConverter alloc] init];
 
     // Setup observation
     [[DBAccountManager sharedManager] addObserver:self block:^(DBAccount *account) {
@@ -95,12 +98,15 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
     self.recordSelectionButton.cornerRadius = CGRectGetHeight(self.recordSelectionButton.frame) / 2.0;
     [self setStyleForButton:self.recordSelectionButton];
 
+    self.headerContainerView.material = NSVisualEffectMaterialTitlebar;
+
     // Setup child view controllers
     self.uploaderSetupViewController = [[JEFPopoverUploaderSetupViewController alloc] init];
     [self addChildViewController:self.uploaderSetupViewController];
 
     self.recordingsViewController = [[JEFPopoverRecordingsViewController alloc] initWithNibName:@"JEFPopoverRecordingsView" bundle:nil];
-    self.recordingsViewController.recordingsManager = self.recordingsManager;
+    self.recordingsViewController.recordingsController = self.recordingsController;
+    self.recordingsViewController.recordingsTableViewDataSource = [[JEFRecordingsTableViewDataSource alloc] initWithRecordingsProvider:self.recordingsController];
     self.recordingsViewController.contentInsets = NSEdgeInsetsMake(CGRectGetHeight(self.headerContainerView.frame) - 20, 0, 0, 0);
     [self addChildViewController:self.recordingsViewController];
 
@@ -285,7 +291,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
 
     __weak __typeof(self) weakSelf = self;
     [self.recorder recordScreen:[NSScreen mainScreen] completion:^(NSURL *framesURL) {
-        [JEFConverter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
+        [self.converter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
             NSError *framesError;
             NSArray *frames = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:framesURL includingPropertiesForKeys:nil options:0 error:&framesError];
             if (!frames && framesError) {
@@ -293,7 +299,7 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
             }
             NSURL *firstFrameURL = frames.firstObject;
 
-            [weakSelf.recordingsManager uploadNewRecordingWithGIFURL:gifURL posterFrameURL:firstFrameURL completion:^(JEFRecording *recording) {
+            [weakSelf.recordingsController uploadNewGIFAtURL:gifURL posterFrameURL:firstFrameURL completion:^(JEFRecording *recording) {
                 [[Mixpanel sharedInstance] track:@"Create Recording"];
                 [[Mixpanel sharedInstance].people increment:@"Recordings" by:@1];
             }];
@@ -334,9 +340,8 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
                     break;
             }
 
-            __weak __typeof(self) weakSelf = self;
             [self transitionFromViewController:currentChildViewController toViewController:self.recordingsViewController options:transition completionHandler:^() {
-                [weakSelf.recordingsManager setupDropboxFilesystem];
+                [[NSNotificationCenter defaultCenter] postNotificationName:JEFSyncingServiceAccountStateChanged object:nil];
                 [self.recordingsViewController viewDidAppear]; // This shouldn't be called manually, but it's not called when it's shown. Need to investigate more to file a radar.
             }];
 
@@ -498,6 +503,18 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
         [self.recorder recordRect:localQuartzRect screen:selectedScreen completion:^(NSURL *framesURL) {
             [self.overlayWindows makeObjectsPerformSelector:@selector(close)];
             [self.overlayWindows removeAllObjects];
+            
+            if (!framesURL) {
+                RBKLog(@"URL for recording frames is nil, bailing on conversion.");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSAlert *alert = [[NSAlert alloc] init];
+                    alert.messageText = NSLocalizedString(@"UploadFailedAlertTitle", @"The title for the message that the recording upload failed");
+                    [alert addButtonWithTitle:@"OK"];
+                    alert.informativeText = @"There was an issue saving the GIF frames that were recorded. Try restarting Jeff to fix this issue.";
+                    [alert runModal];
+                });
+                return;
+            }
 
             NSError *framesError;
             NSArray *frames = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:framesURL includingPropertiesForKeys:nil options:0 error:&framesError];
@@ -506,8 +523,8 @@ typedef NS_ENUM(NSInteger, JEFPopoverContent) {
             }
             NSURL *firstFrameURL = frames.firstObject;
 
-            [JEFConverter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
-                [self.recordingsManager uploadNewRecordingWithGIFURL:gifURL posterFrameURL:firstFrameURL completion:^(JEFRecording *recording) {
+            [self.converter convertFramesAtURL:framesURL completion:^(NSURL *gifURL) {
+                [self.recordingsController uploadNewGIFAtURL:gifURL posterFrameURL:firstFrameURL completion:^(JEFRecording *recording) {
                     [[Mixpanel sharedInstance] track:@"Create Recording"];
                     [[Mixpanel sharedInstance].people increment:@"Recordings" by:@1];
                 }];

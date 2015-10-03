@@ -87,7 +87,7 @@
     self.captureTimer = nil;
     self.isRecording = NO;
     
-    if (self.completion) self.completion([NSURL URLWithString:self.path]);
+    if (self.completion) self.completion([NSURL fileURLWithPath:self.path]);
 }
 
 #pragma mark Private
@@ -116,7 +116,7 @@
     CGImageRef compositeImageRef = CGBitmapContextCreateImage(context);
     
     NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:compositeImageRef];
-    NSData *gifData = [imageRep representationUsingType:NSGIFFileType properties:nil];
+    NSData *gifData = [imageRep representationUsingType:NSGIFFileType properties:@{}];
     NSString *filename = [self.path stringByAppendingPathComponent:[NSString stringWithFormat:@"JeffFrame%ld.gif", self.frameCount]];
     [gifData writeToFile:filename atomically:NO];
 
