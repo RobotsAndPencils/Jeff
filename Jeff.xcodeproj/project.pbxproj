@@ -1091,6 +1091,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 13;
 				DROPBOX_CALLBACK_URI = "db-iugqsnjvza6fuub";
 				DROPBOX_KEY = iugqsnjvza6fuub;
 				DROPBOX_SECRET = pucvuohcbvte3z8;
@@ -1112,6 +1113,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wall";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1130,6 +1132,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 13;
 				DROPBOX_CALLBACK_URI = "db-nc3dkk8verxcjg7";
 				DROPBOX_KEY = nc3dkk8verxcjg7;
 				DROPBOX_SECRET = f3wi20oyuk4hl3i;
@@ -1154,6 +1157,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wall";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1250,6 +1254,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 13;
 				DROPBOX_CALLBACK_URI = "db-iugqsnjvza6fuub";
 				DROPBOX_KEY = iugqsnjvza6fuub;
 				DROPBOX_SECRET = pucvuohcbvte3z8;
@@ -1274,6 +1279,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wall";
 				WRAPPER_EXTENSION = app;
 			};
