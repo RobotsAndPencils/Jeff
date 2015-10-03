@@ -714,7 +714,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = JEF;
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Brandon Evans";
 				TargetAttributes = {
 					CA455B2718B83EB900F9A541 = {
@@ -1024,6 +1024,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -1108,6 +1109,7 @@
 				INFOPLIST_FILE = "Jeff/Jeff-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MIXPANEL_TOKEN = 7b2541ad61657673ae4503d8fbf87972;
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WARNING_CFLAGS = "-Wall";
@@ -1149,6 +1151,7 @@
 				INFOPLIST_FILE = "Jeff/Jeff-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MIXPANEL_TOKEN = 1356a1a6c978dac9c0a8a47449b8081e;
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WARNING_CFLAGS = "-Wall";
@@ -1174,6 +1177,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "JeffTests/JeffTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "ca.brandonevans.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -1194,6 +1198,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jeff/Jeff-Prefix.pch";
 				INFOPLIST_FILE = "JeffTests/JeffTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "ca.brandonevans.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -1266,6 +1271,7 @@
 				INFOPLIST_FILE = "Jeff/Jeff-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MIXPANEL_TOKEN = 7b2541ad61657673ae4503d8fbf87972;
+				PRODUCT_BUNDLE_IDENTIFIER = "${BUNDLE_ID}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WARNING_CFLAGS = "-Wall";
@@ -1287,6 +1293,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jeff/Jeff-Prefix.pch";
 				INFOPLIST_FILE = "JeffTests/JeffTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "ca.brandonevans.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
