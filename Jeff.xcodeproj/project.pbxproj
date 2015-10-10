@@ -1091,7 +1091,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DROPBOX_CALLBACK_URI = "db-iugqsnjvza6fuub";
 				DROPBOX_KEY = iugqsnjvza6fuub;
 				DROPBOX_SECRET = pucvuohcbvte3z8;
@@ -1133,7 +1133,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DROPBOX_CALLBACK_URI = "db-nc3dkk8verxcjg7";
 				DROPBOX_KEY = nc3dkk8verxcjg7;
 				DROPBOX_SECRET = f3wi20oyuk4hl3i;
@@ -1256,7 +1256,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DROPBOX_CALLBACK_URI = "db-iugqsnjvza6fuub";
 				DROPBOX_KEY = iugqsnjvza6fuub;
 				DROPBOX_SECRET = pucvuohcbvte3z8;
