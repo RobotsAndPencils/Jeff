@@ -4,18 +4,11 @@ default_platform :mac
 
 platform :mac do
   before_all do
-    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
+    # jeff-dev
+    ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
   end
 
-  lane :test do
-    xctest(
-      workspace: "Jeff",
-      scheme: "Jeff",
-      configuration: "Debug"
-    )
-  end
-
-  desc "Submit a new Beta Build to HockeyApp"
+  desc "Build and submit a new beta build to HockeyApp"
   lane :beta do
     ensure_git_status_clean
     increment_build_number
@@ -24,16 +17,18 @@ platform :mac do
       workspace: "Jeff.xcworkspace",
       scheme: "Jeff",
       configuration: "Beta Release"
-    ) 
+    )
 
     # Create zip of app and dSYM for HockeyApp
     sh "zip -r ../Jeff.app.zip ../Jeff.xcarchive/Products/Applications/Jeff.app"
     dsym_zip
     
-    # hockey(
-    #   api_token: "",
-    #   ipa: "Jeff.app.zip"
-    # )
+    hockey(
+      api_token: "c959aff72a154ec89b24d4ba2b76dd8a",
+      ipa: "Jeff.app.zip",
+      public_identifier: "fc5eb937bcf6acbfd098ba02d7d633a8",
+      notify: "0"
+    )
 
     # Cleanup build artifacts
     sh "rm -r ../Jeff.xcarchive ../Jeff.app.zip ../Jeff.app.dSYM.zip"
@@ -42,18 +37,27 @@ platform :mac do
     version_number = get_version_number(xcodeproj: "Jeff.xcodeproj")
     commit_version_bump message: "Bump build number to #{build_number}", xcodeproj: "Jeff.xcodeproj"
     add_git_tag tag: "#{version_number}b#{build_number}"
+
+    slack(
+      message: "Successfully deployed new version of Jeff to HockeyApp. <#{ENV['HOCKEY_DOWNLOAD_LINK']}|Download>"
+    )
   end
 
-  after_all do |lane|
-    #slack(
-    #  message: "Successfully deployed new version of Jeff to HockeyApp."
-    #)
+  desc "Archive a new release build for the App Store"
+  lane :appstore do
+    ensure_git_status_clean
+
+    xcarchive(
+      workspace: "Jeff.xcworkspace",
+      scheme: "Jeff",
+      configuration: "Release"
+    )
   end
 
   error do |lane, exception|
-    #slack(
-    #  message: exception.message,
-    #  success: false
-    #)
+    slack(
+      message: exception.message,
+      success: false
+    )
   end
 end
