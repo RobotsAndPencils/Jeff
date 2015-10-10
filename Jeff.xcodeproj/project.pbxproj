@@ -1170,6 +1170,7 @@
 			baseConfigurationReference = 0ACCB37977B5E518B84DEC97 /* Pods-JeffTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Jeff.app/Contents/MacOS/Jeff";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -1195,6 +1196,7 @@
 			baseConfigurationReference = 2BFE03296FF7A1A8535A661C /* Pods-JeffTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Jeff.app/Contents/MacOS/Jeff";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -1293,6 +1295,7 @@
 			baseConfigurationReference = FE5FFFFDEB292A076F9221E4 /* Pods-JeffTests.beta release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Jeff.app/Contents/MacOS/Jeff";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
