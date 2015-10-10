@@ -36,7 +36,8 @@ platform :mac do
     build_number = get_build_number(xcodeproj: "Jeff.xcodeproj")
     version_number = get_version_number(xcodeproj: "Jeff.xcodeproj")
     commit_version_bump message: "Bump build number to #{build_number}", xcodeproj: "Jeff.xcodeproj"
-    add_git_tag tag: "#{version_number}b#{build_number}"
+    tag = "#{version_number}b#{build_number}"
+    sh "git tag -a -m '#{tag}' '#{tag}'"
 
     slack(
       message: "Successfully deployed new version of Jeff to HockeyApp. <#{ENV['HOCKEY_DOWNLOAD_LINK']}|Download>"
