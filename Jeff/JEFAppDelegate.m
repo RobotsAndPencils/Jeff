@@ -69,7 +69,8 @@
 }
 
 - (void)setupHockeyApp {
-    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"7651f7d7bbfce57dca36b225029130f2"];
+    NSString *hockeyAppIdentifier = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"HockeyApp Identifier"];
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:hockeyAppIdentifier];
     [[BITHockeyManager sharedHockeyManager] startManager];
     [BITHockeyManager sharedHockeyManager].crashManager.autoSubmitCrashReport = YES;
 }
