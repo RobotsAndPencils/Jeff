@@ -113,7 +113,7 @@ typedef void (^JEFUploaderCompletionBlock)(BOOL, JEFRecording *, NSError *);
 
         __weak __typeof(self) weakSelf = self;
         recording.uploadHandler = ^(JEFRecording *uploadedRecording) {
-            if (RBKIsEmpty(recording.path.stringValue) || recording.deleted) {
+            if (RBKIsEmpty(uploadedRecording.path.stringValue) || uploadedRecording.deleted) {
                 // Recording was deleted or cancelled
                 return;
             }
@@ -122,8 +122,11 @@ typedef void (^JEFUploaderCompletionBlock)(BOOL, JEFRecording *, NSError *);
                 [[NSNotificationCenter defaultCenter] postNotificationName:JEFRecordingWasSharedNotification object:uploadedRecording];
             }];
             if (completion) completion(uploadedRecording);
-            [uploadedRecording removeObserver:weakSelf forKeyPath:@keypath(uploadedRecording, progress)];
-            [weakSelf.recordingUploadProgresses removeObjectForKey:uploadedRecording.path];
+            NSProgress *uploadedRecordingProgress = self.recordingUploadProgresses[uploadedRecording.path];
+            if (uploadedRecordingProgress) {
+                [uploadedRecording removeObserver:weakSelf forKeyPath:@keypath(uploadedRecording, progress)];
+                [weakSelf.recordingUploadProgresses removeObjectForKey:uploadedRecording.path];
+            }
         };
     }];
 }
@@ -201,12 +204,12 @@ typedef void (^JEFUploaderCompletionBlock)(BOOL, JEFRecording *, NSError *);
     }
 
     // Complete the upload progress and remove it
-    [recording removeObserver:self forKeyPath:@keypath(recording, progress) context:JEFRecordingsManagerContext];
     NSProgress *recordingProgress = self.recordingUploadProgresses[recording.path];
     if (recordingProgress) {
+        [recording removeObserver:self forKeyPath:@keypath(recording, progress) context:JEFRecordingsManagerContext];
         recordingProgress.completedUnitCount = recordingProgress.totalUnitCount;
+        [self.recordingUploadProgresses removeObjectForKey:recording.path];
     }
-    [self.recordingUploadProgresses removeObjectForKey:recording.path];
 }
 
 @end
