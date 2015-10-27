@@ -22,6 +22,7 @@ typedef void(^JEFRecordingUploadHandler)(JEFRecording *);
 @property (nonatomic, strong, readonly) NSDate *createdAt;
 @property (nonatomic, assign, readonly) BOOL isFetchingPosterFrame;
 @property (nonatomic, copy) JEFRecordingUploadHandler uploadHandler;
+@property (nonatomic, assign) BOOL deleted;
 
 /**
  *  readwrite so that a temporary thumbnail can be set on new recordings before they're finished syncing

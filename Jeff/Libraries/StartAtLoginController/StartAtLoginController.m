@@ -126,8 +126,12 @@
     [self didChangeValueForKey:@keypath(self, startAtLogin)];
 }
 
+// clang warns that the _enabled ivar isn't referenced in this setter, which is correct. It does get set in setStartAtLogin: though, so the warning isn't helping and that's why it's being ignored.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-property-ivar"
 - (void)setEnabled:(BOOL)enabled {
     self.startAtLogin = enabled;
 }
+#pragma clang diagnostic pop
 
 @end

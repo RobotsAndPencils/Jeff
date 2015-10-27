@@ -1,0 +1,63 @@
+# vim: autoindent tabstop=2 shiftwidth=2 expandtab softtabstop=2 filetype=ruby
+fastlane_version "1.30.2"
+default_platform :mac
+
+platform :mac do
+  before_all do
+    # jeff-dev
+    ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
+  end
+
+  desc "Build and submit a new beta build to HockeyApp"
+  lane :beta do
+    ensure_git_status_clean
+    increment_build_number
+
+    xcarchive(
+      workspace: "Jeff.xcworkspace",
+      scheme: "Jeff",
+      configuration: "Beta Release"
+    )
+
+    # Create zip of app and dSYM for HockeyApp
+    sh "zip -r ../Jeff.app.zip ../Jeff.xcarchive/Products/Applications/Jeff.app"
+    dsym_zip
+    
+    # Upload to HockeyApp manually since the built-in action doesn't seem to work
+    # token = "261dcfc8af7f4033835a2f421481f978"
+    # json_string = sh "curl -s -F \"status=1\" -F \"notify=0\" -F \"ipa=@../Jeff.app.zip\" -F \"dsym=@../Jeff.app.dSYM.zip\" -H \"X-HockeyAppToken: #{token}\" \"https://rink.hockeyapp.net/api/2/apps/fc5eb937bcf6acbfd098ba02d7d633a8/app_versions/upload\""
+    # json = JSON.parse(json_string)
+    # download_link = json["public_url"]
+
+    # Cleanup build artifacts
+    # sh "rm -r ../Jeff.xcarchive ../Jeff.app.zip ../Jeff.app.dSYM.zip"
+
+    # build_number = get_build_number(xcodeproj: "Jeff.xcodeproj")
+    # version_number = get_version_number(xcodeproj: "Jeff.xcodeproj")
+    # commit_version_bump message: "Bump build number to #{build_number}", xcodeproj: "Jeff.xcodeproj"
+    # tag = "#{version_number}b#{build_number}"
+    # sh "git tag -a -m '#{tag}' '#{tag}'"
+
+    # slack(
+    #   message: "Successfully deployed new version of Jeff to HockeyApp. <#{download_link}|Download>"
+    # )
+  end
+
+  desc "Archive a new release build for the App Store"
+  lane :appstore do
+    ensure_git_status_clean
+
+    xcarchive(
+      workspace: "Jeff.xcworkspace",
+      scheme: "Jeff",
+      configuration: "Release"
+    )
+  end
+
+  error do |lane, exception|
+    # slack(
+    #   message: exception.message,
+    #   success: false
+    # )
+  end
+end

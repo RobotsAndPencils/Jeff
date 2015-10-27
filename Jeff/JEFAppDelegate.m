@@ -14,7 +14,6 @@
 #import <MASShortcut/MASShortcut.h>
 
 #import "JEFAppController.h"
-#import "JEFUploaderProtocol.h"
 #import "Constants.h"
 
 @interface JEFAppDelegate () <BITHockeyManagerDelegate>
@@ -70,7 +69,8 @@
 }
 
 - (void)setupHockeyApp {
-    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"7651f7d7bbfce57dca36b225029130f2"];
+    NSString *hockeyAppIdentifier = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"HockeyApp Identifier"];
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:hockeyAppIdentifier];
     [[BITHockeyManager sharedHockeyManager] startManager];
     [BITHockeyManager sharedHockeyManager].crashManager.autoSubmitCrashReport = YES;
 }
@@ -86,8 +86,7 @@
 }
 
 - (void)registerDefaults {
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"selectedUploader": @(JEFUploaderTypeDropbox),
-                                                               JEFRecordScreenShortcutKey: [MASShortcut shortcutWithKeyCode:kVK_ANSI_6 modifierFlags:NSCommandKeyMask | NSShiftKeyMask].data,
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{ JEFRecordScreenShortcutKey: [MASShortcut shortcutWithKeyCode:kVK_ANSI_6 modifierFlags:NSCommandKeyMask | NSShiftKeyMask].data,
                                                                JEFRecordSelectionShortcutKey: [MASShortcut shortcutWithKeyCode:kVK_ANSI_5 modifierFlags:NSCommandKeyMask | NSShiftKeyMask].data
                                                                }];
 }

@@ -2,9 +2,8 @@ CLANG_CXX_LANGUAGE_STANDARD = c++11
 CLANG_CXX_LIBRARY = libc++
 FRAMEWORK_SEARCH_PATHS = "$(PODS_ROOT)/HockeySDK-Mac/HockeySDK-Mac"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/HockeySDK-Mac" "${PODS_ROOT}/Headers/Public/MASShortcut" "${PODS_ROOT}/Headers/Public/RoboKit" "${PODS_ROOT}/Headers/Public/libextobjc" "${PODS_ROOT}/Headers/Public/pop"
-LD_RUNPATH_SEARCH_PATHS = @loader_path/../Frameworks
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/HockeySDK-Mac" -isystem "${PODS_ROOT}/Headers/Public/MASShortcut" -isystem "${PODS_ROOT}/Headers/Public/RoboKit" -isystem "${PODS_ROOT}/Headers/Public/libextobjc" -isystem "${PODS_ROOT}/Headers/Public/pop"
-OTHER_LDFLAGS = -ObjC -l"Pods-HockeySDK-Mac" -l"Pods-MASShortcut" -l"Pods-RoboKit" -l"Pods-libextobjc" -l"Pods-pop" -l"c++" -framework "Carbon" -framework "Cocoa" -framework "Foundation" -framework "HockeySDK"
-OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/HockeySDK-Mac" "${PODS_ROOT}/Headers/Public/HockeySDK-Mac/HockeySDK" "${PODS_ROOT}/Headers/Public/MASShortcut" "${PODS_ROOT}/Headers/Public/OCMock" "${PODS_ROOT}/Headers/Public/RoboKit" "${PODS_ROOT}/Headers/Public/libextobjc" "${PODS_ROOT}/Headers/Public/pop"
+LD_RUNPATH_SEARCH_PATHS = @executable_path/../Frameworks
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/HockeySDK-Mac" -isystem "${PODS_ROOT}/Headers/Public/HockeySDK-Mac/HockeySDK" -isystem "${PODS_ROOT}/Headers/Public/MASShortcut" -isystem "${PODS_ROOT}/Headers/Public/OCMock" -isystem "${PODS_ROOT}/Headers/Public/RoboKit" -isystem "${PODS_ROOT}/Headers/Public/libextobjc" -isystem "${PODS_ROOT}/Headers/Public/pop"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"MASShortcut" -l"RoboKit" -l"c++" -l"libextobjc" -l"pop" -framework "Carbon" -framework "Cocoa" -framework "Foundation" -framework "HockeySDK"
 PODS_ROOT = ${SRCROOT}/Pods

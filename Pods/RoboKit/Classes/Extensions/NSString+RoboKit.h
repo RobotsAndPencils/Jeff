@@ -18,10 +18,14 @@
 
 @interface NSString (NSString_RoboKit)
 
-+ (NSString *)RBK_md5HashForString:(NSString *)input;
-+ (NSString *)RBK_sha1HashForString:(NSString*)input;
++ (NSString *)RBK_md5HashForString:(NSString *)input; // should not be used for cryptographic purposes
++ (NSString *)RBK_sha1HashForString:(NSString *)input; // should not be used for cryptographic purposes
 
-+ (NSString *)RBK_uuidString;
++ (NSString *)RBK_sha256HashForString:(NSString *)input;
++ (NSString *)RBK_sha384HashForString:(NSString *)input;
++ (NSString *)RBK_sha512HashForString:(NSString *)input;
+
++ (NSString *)RBK_uuidString DEPRECATED_ATTRIBUTE; // consider [[NSUUID UUID] UUIDString] for iOS 6+
 + (NSString *)RBK_documentsDirectory;
 
 + (NSString *)RBK_loremIpsumString;

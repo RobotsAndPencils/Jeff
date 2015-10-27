@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Brandon Evans. All rights reserved.
 //
 
-@class JEFRecordingsManager;
+@class JEFRecordingsController;
 @class JEFQuartzRecorder;
 
 @interface JEFPopoverContentViewController : NSViewController
 
-@property (nonatomic, strong) JEFRecordingsManager *recordingsManager;
+@property (nonatomic, strong) JEFRecordingsController *recordingsController;
 @property (nonatomic, strong) JEFQuartzRecorder *recorder;
 
 @end
