@@ -2,6 +2,8 @@
 
 Record your screen as a GIF and share it anywhere with Dropbox.
 
+<img src="https://magnum.travis-ci.com/RobotsAndPencils/Jeff.svg?token=TsaPYdGYanrQeXcqDg9h" />
+
 <img src="JeffIcon@2x.png" width="256" height="256" />
 
 ## Requirements
