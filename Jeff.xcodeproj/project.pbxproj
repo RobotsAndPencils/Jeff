@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		83593174C727EF68976897D6 /* JEFConverterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83593ED6E55C500C7654490A /* JEFConverterTests.m */; };
 		8359322E52C5BFFB013B4AC7 /* JEFDropboxUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 835935E41B797539819CFB36 /* JEFDropboxUploader.m */; };
 		8359376F55CC63D6FE3DE740 /* JEFPopoverUploaderSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83593B5EA5926018F6E2110D /* JEFPopoverUploaderSetupViewController.m */; };
 		83593B01FC89BA3C5EC32E7C /* JEFRecordingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83593370A12DC3B1E44F01F4 /* JEFRecordingsManager.m */; };
@@ -138,6 +139,7 @@
 		83593B5EA5926018F6E2110D /* JEFPopoverUploaderSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFPopoverUploaderSetupViewController.m; sourceTree = "<group>"; };
 		83593BB07DFAFBD9106DD41E /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		83593E3E69C23122FB40765D /* JEFUploaderProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JEFUploaderProtocol.h; path = ../JEFUploaderProtocol.h; sourceTree = "<group>"; };
+		83593ED6E55C500C7654490A /* JEFConverterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JEFConverterTests.m; sourceTree = "<group>"; };
 		83593F946B55E6E3610A19A4 /* JEFDropboxUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JEFDropboxUploader.h; sourceTree = "<group>"; };
 		CA1F98FF192F0A5F00C3EF33 /* JeffLauncher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JeffLauncher.xcodeproj; path = JeffLauncher/JeffLauncher.xcodeproj; sourceTree = "<group>"; };
 		CA1F990A192F0ACB00C3EF33 /* StartAtLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartAtLoginController.h; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 			children = (
 				CA455B5518B83EBA00F9A541 /* JEFRecordingTests.m */,
 				CA455B5018B83EBA00F9A541 /* Supporting Files */,
+				83593ED6E55C500C7654490A /* JEFConverterTests.m */,
 			);
 			path = JeffTests;
 			sourceTree = "<group>";
@@ -873,6 +876,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA455B5618B83EBA00F9A541 /* JEFRecordingTests.m in Sources */,
+				83593174C727EF68976897D6 /* JEFConverterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
