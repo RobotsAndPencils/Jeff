@@ -22,6 +22,7 @@ static void *JEFRecordingsManagerContext = &JEFRecordingsManagerContext;
 @property (nonatomic, strong) NSMutableSet *openRecordingPaths;
 @property (nonatomic, strong, readwrite) NSProgress *totalUploadProgress;
 @property (nonatomic, strong) NSMutableDictionary *recordingUploadProgresses;
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
 @end
 
@@ -35,6 +36,8 @@ static void *JEFRecordingsManagerContext = &JEFRecordingsManagerContext;
     _recordings = @[ ];
     _openRecordingPaths = [NSMutableSet set];
     _recordingUploadProgresses = [NSMutableDictionary dictionary];
+    _dateFormatter = [[NSDateFormatter alloc] init];
+    _dateFormatter.dateFormat = @"MMMM dd, yyyy, h/mm/ss.SS a";
 
     [self setupDropboxFilesystem];
     [self loadRecordings];
@@ -80,13 +83,17 @@ static void *JEFRecordingsManagerContext = &JEFRecordingsManagerContext;
     [self.openRecordingPaths removeObject:recording.path.stringValue];
 }
 
+- (NSString *)gifFilenameForCurrentDateTime {
+    return [[self.dateFormatter stringFromDate:[NSDate date]] stringByAppendingPathExtension:@"gif"];
+}
+
 - (void)uploadNewRecordingWithGIFURL:(NSURL *)gifURL posterFrameURL:(NSURL *)posterFrameURL completion:(void (^)(JEFRecording *))completion {
     NSImage *posterFrameImage;
     if ([[NSFileManager defaultManager] fileExistsAtPath:posterFrameURL.path]) {
         posterFrameImage = [[NSImage alloc] initWithContentsOfFile:posterFrameURL.path];
     }
 
-    [[self uploader] uploadGIF:gifURL withName:gifURL.path.lastPathComponent completion:^(BOOL succeeded, JEFRecording *recording, NSError *error) {
+    [[self uploader] uploadGIF:gifURL withName:[self gifFilenameForCurrentDateTime] completion:^(BOOL succeeded, JEFRecording *recording, NSError *error) {
         if (error || !succeeded) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSAlert *alert = [[NSAlert alloc] init];

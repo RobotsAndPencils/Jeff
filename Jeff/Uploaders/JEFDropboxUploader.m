@@ -35,7 +35,7 @@
 }
 
 - (void)uploadGIF:(NSURL *)url withName:(NSString *)name completion:(JEFUploaderCompletionBlock)completion {
-    DBPath *filePath = [[DBPath root] childPath:url.lastPathComponent];
+    DBPath *filePath = [[DBPath root] childPath:name];
     DBError *error;
     DBFile *newFile = [[DBFilesystem sharedFilesystem] createFile:filePath error:&error];
     if (!newFile || error) {
