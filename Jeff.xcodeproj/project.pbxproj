@@ -1014,9 +1014,9 @@
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Robots and Pencils Inc. (PBH8V487HB)";
 				COMBINE_HIDPI_IMAGES = YES;
-				DROPBOX_CALLBACK_URI = "db-***REMOVED***";
-				DROPBOX_KEY = ***REMOVED***;
-				DROPBOX_SECRET = ***REMOVED***;
+				DROPBOX_CALLBACK_URI = "***REMOVED***";
+				DROPBOX_KEY = "***REMOVED***";
+				DROPBOX_SECRET = "***REMOVED***";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
@@ -1031,7 +1031,7 @@
 				GCC_WARN_SHADOW = YES;
 				INFOPLIST_FILE = "Jeff/Jeff-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MIXPANEL_TOKEN = ***REMOVED***;
+				MIXPANEL_TOKEN = "***REMOVED***";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WARNING_CFLAGS = "-Wall";
@@ -1052,9 +1052,9 @@
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Robots and Pencils Inc. (PBH8V487HB)";
 				COMBINE_HIDPI_IMAGES = YES;
-				DROPBOX_CALLBACK_URI = "db-***REMOVED***";
-				DROPBOX_KEY = ***REMOVED***;
-				DROPBOX_SECRET = ***REMOVED***;
+				DROPBOX_CALLBACK_URI = "***REMOVED***";
+				DROPBOX_KEY = "***REMOVED***";
+				DROPBOX_SECRET = "***REMOVED***";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
@@ -1072,7 +1072,7 @@
 				GCC_WARN_SHADOW = YES;
 				INFOPLIST_FILE = "Jeff/Jeff-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MIXPANEL_TOKEN = ***REMOVED***;
+				MIXPANEL_TOKEN = "***REMOVED***";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WARNING_CFLAGS = "-Wall";
@@ -1169,9 +1169,9 @@
 				CODE_SIGN_ENTITLEMENTS = Jeff/Jeff.entitlements;
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Robots and Pencils Inc. (PBH8V487HB)";
 				COMBINE_HIDPI_IMAGES = YES;
-				DROPBOX_CALLBACK_URI = "db-***REMOVED***";
-				DROPBOX_KEY = ***REMOVED***;
-				DROPBOX_SECRET = ***REMOVED***;
+				DROPBOX_CALLBACK_URI = "***REMOVED***";
+				DROPBOX_KEY = "***REMOVED***";
+				DROPBOX_SECRET = "***REMOVED***";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/**",
@@ -1189,7 +1189,7 @@
 				GCC_WARN_SHADOW = YES;
 				INFOPLIST_FILE = "Jeff/Jeff-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MIXPANEL_TOKEN = ***REMOVED***;
+				MIXPANEL_TOKEN = "***REMOVED***";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WARNING_CFLAGS = "-Wall";
