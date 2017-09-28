@@ -19,7 +19,7 @@ Record your screen as a GIF and share it anywhere with Dropbox.
 
 ## License
 
-Copyright 2014 Robots and Pencils. All rights reserved.
+Copyright 2017 Robots and Pencils. All rights reserved.
 
 Open source code sourced with CocoaPods have their licenses automatically included in the [CocoaPods acknowledgments](Pods/Target%20Support%20Files/Pods/Pods-acknowledgements.markdown) file.
 Open source code from other sources are placed in [Libraries](Jeff/Libraries) and include the licenses in their respective folders.
