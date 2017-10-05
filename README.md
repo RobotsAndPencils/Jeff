@@ -11,7 +11,7 @@ Record your screen as a GIF and share it anywhere with Dropbox.
 
 ## Contact
 
-<a href="http://www.robotsandpencils.com"><img src="RNPLogo@2x.png" width="153" height="74" /></a>
+<a href="http://www.robotsandpencils.com"><img src="R&PLogo.png" width="153" height="74" /></a>
 
 ## Maintainers
 
